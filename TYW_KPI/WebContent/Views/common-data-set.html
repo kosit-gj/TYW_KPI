@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Common Data Set | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/common-data-set.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="wrapper wrapper-content">
+		<div class="container">
+			<div id="includePage" class="ng-view ng-scope">
+				<!--  nav bar -->
+				<div class="row wrapper border-bottom  page-heading" id="naviTitle">
+					<!-- 	style="display: none;" -->
+
+					<div class="col-lg-12">
+						<div id="slide_status"></div>
+						<ol class="breadcrumb">
+							<li><a href="#/"><i class="fa fa-home "></i> Home</a></li>
+							<li><i class="fa fa-gears"></i> System Management</li>
+							<li class="active"><strong id="naviLabelMenu"><i
+									class="fa fa-share-alt"></i> Common Data Set </strong></li>
+						</ol>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<!-- start--row -->
+
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Advance Search</h5>
+							</div>
+
+							<div class="ibox-content">
+								<div class="row">
+									<div class="col-sm-12">
+
+										<div class="form-inline">
+											<div class="form-group p-xxs">
+												<label class="">Appraisal
+													Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <select
+													data-toggle="tooltip" title="Appraisal Level"
+													class="input form-control input-sm" id="app_lv"
+													name="app_lv">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>ระดับปฏิบัติการ</option>
+													<option>HR</option>
+												</select>
+											</div>
+											<div class="form-group p-xxs">
+												<label class="">CDS
+													Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <input
+													data-toggle="tooltip" title="CDS Name"
+													class="form-control input-sm" placeholder="CDS Name"
+													type="text" id="cds_name" name="cds_name">
+
+											</div>
+											<div class="form-group pull-right p-xxs">
+
+												<button type="button" class="btn btn-info input-sm"
+													name="btnSearchAdvance" id="btnSearchAdvance">
+													<i class="fa fa-search"></i>&nbsp;Search
+												</button>
+
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<!-- content end -->
+						</div>
+
+					</div>
+
+				</div>
+				<!-- end--row -->
+				
+				
+				<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox-title">
+				<h5>Common Data Set List</h5>
+			</div>
+
+
+			<div class="ibox-content">
+
+				<div class="row">
+					<div class="col-sm-12">
+						<button type="button" class="btn btn-primary"
+							id="btnAddCommonDataSet" data-target="#ModalCommonData"
+							data-toggle="modal">
+							<i class="fa fa-plus-square"></i>&nbsp;Add CDS
+						</button>
+					</div>
+
+
+				</div>
+
+
+				<!-- start table -->
+				<!-- pagination start -->
+				<div class="row">
+					<div class="col-sm-9 col-xs-12 m-b-xs">
+
+						<p class="pagination_top"></p>
+
+					</div>
+
+					<div class="col-sm-2 col-xs-9 object-right paging-text">Results
+						per page</div>
+					<div class="col-sm-1 col-xs-3 p-b-xxs">
+
+						<select name="account" id='countPaginationTop'
+							class="form-control input-sm countPagination">
+							<option>10</option>
+							<option>20</option>
+							<option>50</option>
+							<option>100</option>
+						</select>
+
+					</div>
+				</div>
+				<!-- pagination end -->
+
+				<div class="table-responsive">
+					<table class="table table-striped" id="tableCommonDataSet">
+						<thead>
+							<tr>
+								<th style='width: 25%'>CDS Name</th>
+								<th style='width: 35%'>Appraisal Level</th>
+								<th style='width: 15%; text-align: center;'>IsSQL</th>
+								<th style='width: 15%; text-align: center;'>IsActive</th>
+								<th style='width: 10%; text-align: center;'>Manage</th>
+							</tr>
+						</thead>
+						<tbody id="listCommonDataSet">
+										<tr>
+											<td>SR</td>
+											<td>ระดีบจัดการ</td>
+											<td class='objectCenter'><input disabled type='checkbox' name='is_sql' id='is_sql' checked value='1'></td>
+											<td class='objectCenter'><input disabled type='checkbox' name='is_active' id='is_active' checked value='1'></td>
+											<td class='objectCenter'>
+												<i class="fa fa-cog font-gear popover-edit-del" data-html="true"
+												data-toggle="popover" data-placement="top"
+												data-content="<button class='btn btn-warning btn-xs edit' id='1'
+												data-target=#ModalCommonData data-toggle='modal'>Edit
+												</button>&nbsp;
+												<button id='1' class='btn btn-danger btn-xs del'>Delete</button>"></i>
+											</td>
+										</tr>
+						</tbody>
+					</table>
+
+
+				</div>
+				<!-- pagination start -->
+				<div class="row">
+					<div class="col-sm-9 col-xs-12 m-b-xs">
+
+						<p class="pagination_bottom"></p>
+
+					</div>
+
+					<div class="col-sm-2 col-xs-9 object-right paging-text">Results
+						per page</div>
+					<div class="col-sm-1 col-xs-3 p-b-xxs">
+
+						<select name="account" id='countPaginationBottom'
+							class="form-control input-sm countPagination">
+							<option>10</option>
+							<option>20</option>
+							<option>50</option>
+							<option>100</option>
+						</select>
+
+					</div>
+				</div>
+				<!-- pagination end -->
+
+				<!-- end table -->
+			</div>
+			<!-- content end -->
+		</div>
+	</div>
+
+
+
+
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal Start Edit -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalCommonData" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <!-- <i class="fa fa-laptop modal-icon"></i> -->
+                <h4 class="modal-title" id="modalTitleRole">ADD Common Data Set</h4>
+                <!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription">ADD Common Data Set</span> </h2>
+                <hr>
+                
+                <!-- form start -->
+					<div class="form-horizontal">
+						<div class="form-group">
+						<div class="col-lg-4 col-xs-4 form-inline">
+								<div class="form-group m-n">
+									<label class="form-label-cds">CDS Name: </label>&nbsp;
+									<span class='redFont p-t-xs'>*</span>
+								</div>
+							
+							</div>
+<!-- 							<label class="col-lg-4 form-label-cds">CDS Name:<span class='redFont form-label-cds'>*</span></label> -->
+							<div class="col-lg-6">
+								<input type="text" class="form-control input-sm " placeholder="" id="f_cds_name">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-xs-5 form-inline">
+								<div class="form-group m-n">
+									<label class="form-label-cds">CDS Description: </label>&nbsp;
+									<span class='redFont p-t-xs'>*</span>
+								</div>
+							
+							</div>
+<!-- 							<label class="col-lg-4 form-label-cds">CDS Description:<span class='redFont'>*</span></label> -->
+							<div class="col-lg-6">
+								<input type="text" class="form-control input-sm " placeholder="" id="f_cds_description">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-xs-5 form-inline">
+								<div class="form-group m-n">
+									<label class="form-label-cds">Appraisal Level: </label>&nbsp;
+									<span class='redFont p-t-xs'>*</span>
+								</div>
+							
+							</div>
+<!-- 							<label class="col-lg-4 form-label-cds">Appraisal Level: <span class='redFont'>*</span></label> -->
+							<div class="col-lg-6">
+								<select class="input form-control input-sm"  id="f_app_lv" name="f_app_lv">
+	                				<option>ระดับบริหาร</option>
+									<option>ระดับการจัดการ</option>
+									<option>ระดับบังคับบัญชา</option>
+									<option>ระดับเจ้าหน้าที่</option>
+									<option>ระดับปฏิบัติการ</option>
+									<option>HR</option>
+						</select>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-xs-4 form-inline">
+								<div class="form-group m-n">
+									<label class="form-label-cds">Connection: </label>&nbsp;
+									<span class='redFont p-t-xs'>*</span>
+								</div>
+							
+							</div>
+<!-- 							<label class="col-lg-4 form-label-cds">Connection: <span class='redFont'>*</span></label> -->
+							<div class="col-lg-6">
+								<select class="input form-control input-sm"  id="f_app_lv" name="f_app_lv">
+	                				<option>ระดับบริหาร</option>
+									<option>ระดับการจัดการ</option>
+									<option>ระดับบังคับบัญชา</option>
+									<option>ระดับเจ้าหน้าที่</option>
+									<option>ระดับปฏิบัติการ</option>
+									<option>HR</option>
+								</select>
+							</div>
+
+						</div>
+						
+						<div class="form-group">
+							<label class="col-lg-4 hidden-xs form-label-cds">&nbsp;</label>
+							<div class="col-lg-6">
+								<div class="checkbox checkbox-inline">
+
+									<input id="checkboxIsSQL" name="checkboxIsSQL" type="checkbox"
+										value=""> <label for="checkboxIsSQL">IsSQL</label>
+								</div>
+							</div>
+
+						</div>
+						
+						<div class="form-group">
+							<div class="col-lg-4 col-md-2 col-xs-5 form-inline">
+								<div class="form-group m-n">
+									<label class="form-label-cds">
+										SQL: &nbsp;
+									</label>
+									<button class="btn btn-xs btn-white " type="button" id="btnExecute">Execute</button>&nbsp;
+									<span class='redFont p-b-xs p-t-xs'>*</span>
+								</div>
+							
+							</div>
+<!-- 							<label class="col-lg-4 col-md-2 col-xs-5  form-label-cds form-inline"> -->
+<!-- 								SQL: &nbsp;<button class="btn btn-xs btn-white " type="button" id="btnExecute">Execute</button><span class='redFont p-b-xs'>*</span> -->
+<!-- 							</label> -->
+							<div class="col-lg-6 col-xs-12">
+								<textarea id="txtSQL" class="form-control input-contact-textinput" placeholder="" style="height: 95px;"></textarea>
+							</div>
+
+						</div>
+						
+						
+						<div class="form-group">
+						<div class="col-lg-4 col-xs-4 form-inline">
+								<div class="form-group m-n">
+									<label class="form-label-cds">Sample Data: </label>&nbsp;
+									<span class='redFont p-t-xs'>*</span>
+								</div>
+							
+							</div>
+<!-- 							<label class="col-lg-4 form-label-cds"> -->
+<!-- 								Sample Data: <span class='redFont '>*</span> -->
+<!-- 							</label> -->
+							<div class="col-lg-6">
+								<textarea id="txtSampleData" class="form-control input-contact-textinput" placeholder="" style="height: 110px;"></textarea>
+							</div>
+
+						</div>
+						
+						<div class="form-group">
+						
+							<label class="col-lg-4 hidden-xs form-label-cds">&nbsp;</label>
+							<div class="col-lg-6">
+								<div class="checkbox checkbox-inline">
+
+									<input id="checkboxIsActive" name="checkboxIsActive"  type="checkbox" value="">
+		             				<label for="checkboxIsActive">IsActive</label>
+								</div>
+							</div>
+
+						</div>
+						
+						
+						
+					</div>
+
+
+					<!-- form End -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="id" id="id" value="">
+   				<input type="hidden" name="action" id="action" value="add">
+   				
+   				<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
+   				<button class="btn btn-success" type="button" id="btnAddAnother">Save & Add Another</button>
+                <button data-dismiss="modal" class="btn btn-danger btnCancle" type="button">Cancel</button>
+                <div class="alert alert-warning" id="information" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+	<!-- Modal End Edit -->
+	<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
+		class="modal inmodal in" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label>Confirm to Delete Data?</label>
+						</div>
+					</div>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
+
+
+
+
+
+
+
+
+	<!-- Mainly scripts -->
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+			var jQuery_1_1_3 = $.noConflict(true);
+		</script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     <!-- table data start -->
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- table data end -->
+    
+    <!-- load angular fame work start-->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <!-- load angular fame work end -->
+    
+    
+    <script src="../js/jquery.mloading.js"></script>
+    
+    <!-- <script src="../Controller/common-data-set.js"></script> -->
+
+</body>
+</html>

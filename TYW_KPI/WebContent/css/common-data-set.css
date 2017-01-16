@@ -1,0 +1,95 @@
+body{
+	background-color: #f3f3f4;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+	color: black;
+	
+}
+
+.p-t-xxs{
+ padding-top :5px;
+}
+.p-t-xs{
+ padding-top :10px;
+}
+.p-b-xxs{
+ padding-bottom :5px;
+}
+.p-b-xs{
+ padding-bottom :10px;
+}
+
+.btn-primary {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #ffffff;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary.active:focus {
+  background-color: #1da58a;
+  border-color: #1da58a;
+  color: #FFFFFF;
+}
+.form-horizontal .form-group {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: 0px;
+}
+
+.form-input-cds{
+	float:left;
+	width: 300px;
+	/* 425 */
+}
+.form-label-cds{
+	margin-bottom: 0;
+    padding-top: 7px;
+    text-align: left;
+}
+.font-gear{
+	font-size: 25px;
+	cursor:pointer;
+	color: #993399;
+}
+
+.input-contact-cds{
+	width:70px;
+	padding-top: 0px;
+} 
+
+.input-inline-table-cds{
+	height:23px;
+/* 	padding: 0px; */
+	padding-top: 0px;
+}
+.input-contact-textinput {
+	
+    height: 120px;
+    resize: none;
+}
+.form-label-common-data-set-manual{
+	float:left;
+	padding-top: 1px;
+	width:95px;
+}
+.form-input-cds-title{
+	float:left;
+	width: 100px;
+}
+.form-input-cds-address{
+	float:left;
+	width: 200px;
+}
+#ui-datepicker-div ,.ui-datepicker { z-index: 99999 !important; }
+
