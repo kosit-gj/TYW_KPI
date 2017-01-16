@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Appraisal Data | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/appraisal-data.css" rel="stylesheet">
+    
+</head>
+<body>
+
+	<div class="wrapper wrapper-content">
+		<div class="container">
+			<div id="includePage" class="ng-view ng-scope">
+				<!--  nav bar -->
+				<div class="row wrapper border-bottom  page-heading" id="naviTitle">
+					<!-- 	style="display: none;" -->
+
+					<div class="col-lg-12">
+						<div id="slide_status"></div>
+						<ol class="breadcrumb">
+							<li><a href="#/"><i class="fa fa-home "></i> Home</a></li>
+							<li><i class="fa fa-gears"></i> System Management</li>
+							<li class="active"><strong id="naviLabelMenu"><i
+									class="fa fa-share-alt"></i> Appraisal Data </strong></li>
+						</ol>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<!-- start--row -->
+
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Advance Search</h5>
+							</div>
+
+							<div class="ibox-content">
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-3 p-t-xxs">Structure</label>
+											<div class="col-lg-8">
+												<select data-toggle="tooltip" title="Structure"
+													class="input form-control input-sm col-lg-9"
+													id="paramStructure" name="paramStructure">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 p-t-xxs">Appraisal Level</label>
+											<div class="col-lg-8">
+												<select data-toggle="tooltip" title="Appraisal Level"
+													class="input form-control input-sm col-lg-9"
+													id="paramAppLv" name="paramAppLv">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+										</div>
+
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 p-t-xxs">Appraisal Item</label>
+											<div class="col-lg-8">
+												<select data-toggle="tooltip" title="Appraisal Item"
+													class="input form-control input-sm col-lg-9"
+													id="paramAppItem" name="paramAppItem">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-3 p-t-xxs">Period</label>
+											<div class="col-lg-8">
+												<select data-toggle="tooltip" title="Period"
+													class="input form-control input-sm col-lg-9"
+													id="paramPeriod" name="paramPeriod">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group p-xxs m-b-none">
+											<label class="col-lg-4 p-t-xxs">Employee Name</label>
+											<div class="col-lg-8">
+												<input data-toggle="tooltip" title="Employee Name"
+													class="form-control input-sm" placeholder="Employee Name"
+													type="text" id="paramEmployeeName" name="paramEmployeeName">
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group p-xxs ">
+											<div class="form-group pull-right p-xxs m-b-none">
+												<form id='formExportToExcel' action="" method="post">
+													<button id="importToAppraisalData"
+														class="btn btn-primary btn-sm" type="submit">
+														<i class="fa fa-upload"></i> Import
+													</button>
+												</form>
+
+
+												<!-- 								<div class="fileinput fileinput-new" data-provides="fileinput"> -->
+												<!-- 									<span class="btn btn-default btn-file"><span -->
+												<!-- 										class="fileinput-new">Select file</span> <span -->
+												<!-- 										class="fileinput-exists">Change</span><input type="file" -->
+												<!-- 										name="..." /></span> <span class="fileinput-filename"></span> <a -->
+												<!-- 										href="#" class="close fileinput-exists" -->
+												<!-- 										data-dismiss="fileinput" style="float: none">×</a> -->
+												<!-- 								</div> -->
+
+											</div>
+											<div class="form-group pull-right p-xxs m-b-none">
+												<form id='formExportToExcel' action="" method="post">
+													<button id="exportToExcel" class="btn btn-warning btn-sm"
+														type="submit">
+														<i class="fa fa-download"></i> Download
+													</button>
+												</form>
+
+
+											</div>
+											<div class="form-group pull-right p-xxs m-b-none">
+
+
+												<button type="button" class="btn btn-info input-sm"
+													name="btnSearchAdvance2" id="btnSearchAdvance2">
+													<i class="fa fa-search"></i>&nbsp;Search
+												</button>
+
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+							<!-- content end -->
+						</div>
+
+					</div>
+
+				</div>
+				<!-- end--row -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox-title">
+							<h5>Appraisal Data List</h5>
+						</div>
+
+
+						<div class="ibox-content">
+
+							<!-- start table -->
+							<!-- pagination start -->
+							<div class="row">
+								<div class="col-sm-9 col-xs-12 m-b-xs">
+
+									<p class="pagination_top"></p>
+
+								</div>
+
+								<div class="col-sm-2 col-xs-9 object-right paging-text">Results per
+									page</div>
+								<div class="col-sm-1 col-xs-3 p-b-xxs">
+
+									<select name="account" id='countPaginationTop'
+										class="form-control input-sm countPagination">
+										<option>10</option>
+										<option>20</option>
+										<option>50</option>
+										<option>100</option>
+									</select>
+
+								</div>
+							</div>
+							<!-- pagination end -->
+
+
+
+							<div class="table-responsive">
+								<table class="table table-striped" id="tableAppraisalData">
+									<thead>
+										<tr>
+											<th style='width: auto'>Period</th>
+											<th style='width: auto'>Structure</th>
+											<th style='width: auto'>Appraisal Item</th>
+											<th style='width: auto'>Emp Code</th>
+											<th style='width: auto'>Emp Name</th>
+											<th style='width: auto'>CDS Value</th>
+										</tr>
+									</thead>
+									<tbody id="listAppraisalData">
+										<tr>
+											<td>ประเมินผลการปฏิบัติงานประจำปี 2017 ครั้งที่ 1</td>
+											<td>Work Behavior</td>
+											<td>ลาป่วยตั้งแต่ 10 วันขึ้นไป</td>
+											<td>00004</td>
+											<td>นายสมหมาย จันทร์กะจ่าง</td>
+											<td>10</td>
+										</tr>
+										<tr>
+											<td>ประเมินผลการปฏิบัติงานประจำปี 2017 ครั้งที่ 1</td>
+											<td>Org.</td>
+											<td>ลาป่วยตั้งแต่ 15 วันขึ้นไป</td>
+											<td>00005</td>
+											<td>นายสมหมายมั่น จันทร์กะจ่าง</td>
+											<td>00</td>
+										</tr>
+
+									</tbody>
+								</table>
+
+
+							</div>
+							<!-- pagination start -->
+							<div class="row">
+								<div class="col-sm-9 col-xs-12 m-b-xs">
+
+									<p class="pagination_bottom"></p>
+
+								</div>
+
+								<div class="col-sm-2 col-xs-9 object-right paging-text">Results per
+									page</div>
+								<div class="col-sm-1 col-xs-3 p-b-xxs">
+
+									<select name="account" id='countPaginationBottom'
+										class="form-control input-sm countPagination">
+										<option>10</option>
+										<option>20</option>
+										<option>50</option>
+										<option>100</option>
+									</select>
+
+								</div>
+							</div>
+							<!-- pagination end -->
+
+							
+							<!-- end table -->
+						</div>
+						<!-- content end -->
+					</div>
+				</div>
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!-- Mainly scripts -->
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     <!-- table data start -->
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- table data end -->
+    
+    <!-- load angular fame work start-->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <!-- load angular fame work end -->
+    
+    
+    <script src="../js/jquery.mloading.js"></script>
+    
+    <!-- <script src="../Controller/appraisal-data.js"></script> -->
+
+
+</body>
+</html>
