@@ -17,6 +17,24 @@ body{
 .p-b-xxs{
  padding-bottom :5px;
 }
+.btn-grey{
+	background-color: #777777;
+    border-color: #777777;
+    color: #ffffff;
+}
+.btn-grey:hover,
+.btn-grey:focus,
+.btn-grey:active,
+.btn-grey.active,
+.open .dropdown-toggle.btn-grey,
+.btn-grey:active:focus,
+.btn-grey:active:hover,
+.btn-grey.active:hover,
+.btn-grey.active:focus {
+  background-color: #999999;
+  border-color: #999999;
+  color: #FFFFFF;
+}
 .btn-primary {
     background-color: #1ab394;
     border-color: #1ab394;
