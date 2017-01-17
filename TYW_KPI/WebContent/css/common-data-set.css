@@ -5,6 +5,13 @@ body{
 	color: black;
 	
 }
+.countPagination {
+    width: 92%;
+}
+.popover{
+	width: 123px;
+	
+}
 
 .p-t-xxs{
  padding-top :5px;
