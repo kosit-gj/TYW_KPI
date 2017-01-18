@@ -6,6 +6,9 @@ body{
 	color: black;
 	
 }
+.countPagination {
+    width: 92%;
+}
 
 .p-t-xxs{
  padding-top :5px;
