@@ -15,6 +15,16 @@ $(document).ready(function() {
 	        $("#form_rule_item_all").prop('checked', true);
 	    }
 	});
-	
+
+		$("#fromEmpWSD").datepicker();
+	    $("#fromEmpWSD").datepicker( "option", "dateFormat", "dd-mm-yy" );
+	    $("#fromEmpPED").datepicker();
+	    $("#fromEmpPED").datepicker( "option", "dateFormat", "dd-mm-yy" );
+	    $("#fromEmpAED").datepicker();
+	    $("#fromEmpAED").datepicker( "option", "dateFormat", "dd-mm-yy" );
+	    $(".ui-datepicker").hide();
+
+
+    
 	
 });
