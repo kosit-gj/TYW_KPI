@@ -239,7 +239,16 @@
 										</tr>
 									</thead>
 									<tbody id="listAppraisal">
-
+										<tr>
+											<td><a href="#" id="idEmpCode" data-target='#ModalAppraisal' data-toggle='modal'>000001</a></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+					
 									</tbody>
 								</table>
 
@@ -280,6 +289,464 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal Start Appraisal -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalAppraisal"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog w-95-p" ">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="modalTitleRole">Appraisal</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<h2>
+						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+							id="modalDescription">Appraisal</span>
+					</h2>
+					<hr>
+					
+					
+					<!-- -------------From Employee Start------------- -->
+					<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Employee Information</h5>
+							</div>
+					
+							<div class="ibox-content ibox-content-radius">
+								<div class="row">
+									<div class="col-md-5 col-sm-5 col-xs-12">
+											
+											<label class="col-md-5 col-xs-6 ">Employee code:</label>
+											<label class="col-md-7 col-xs-6 " id="txtEmpCode">000001</label>
+											<label class="col-md-5 col-xs-6 ">Employee Name:</label>
+											<label class="col-md-7 col-xs-6 " id="txtEmpName">Chokanan Nimsuwan</label>
+											<label class="col-md-5 col-xs-6 ">Position:</label>
+											<label class="col-md-7 col-xs-6 " id="txtPosition">Chokanan Nimsuwan</label>
+											<label class="col-md-5 col-xs-6 ">Department:</label>
+											<label class="col-md-7 col-xs-6 " id="txtDepartment">แผนการพัฒนาลูกค้ากรุงเทพและปริมณฑล</label>
+											<label class="col-md-5 col-xs-6 ">Section:</label>
+											<label class="col-md-7 col-xs-6 " id="txtSection">กรุงเทพและปริมณฑล</label>
+									</div>
+									<div class="col-md-5 col-sm-5 col-xs-12">
+											<label class="col-md-5 col-xs-6 ">Chief Employee Code:</label>
+											<label class="col-md-7 col-xs-6 " id="txtChiefEmpCode">000001</label>
+											<label class="col-md-5 col-xs-6 ">Chief Employee Name:</label>
+											<label class="col-md-7 col-xs-6 " id="txtChiefEmpName">Nimsuwan Chokanan</label>
+											<label class="col-md-5 col-xs-6 ">Appraisal Type:</label>
+											<label class="col-md-7 col-xs-6 " id="txtAppraisalType">ประจำปี</label>
+											<label class="col-md-5 col-xs-6 ">Period:</label>
+											<label class="col-md-7 col-xs-6 " id="txtPeriod">ประเมินผลการปฏิบัติงานประจำปี 2517 ครั่งที่ 1</label>
+									</div>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+											<label class="col-xs-12 p-t-xxs text-center ">Grand Total Weigh %</label>
+											<label class="col-xs-12 p-t-xxs text-center " id="txtGrandTotalWeigh" style="font-size: 300%;">87 %</label>
+									
+									</div>
+									
+
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<!-- -------------From Employee Start------------- -->
+				
+				
+				
+				
+					
+					
+					<!-- -------------From Appraisal Start------------- -->
+					<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Appraisal</h5>
+							</div>
+					
+							<div class="ibox-content ibox-content-radius">
+									
+									<!-- -------------Table KPI Start------------- -->
+									<div class="row p-t-xs">
+										<div class="col-lg-12">
+											<div class="ibox float-e-margins">
+												<div class="ibox-title ibox-title-radius">
+													<div class="text-left col-"><h5 style="padding-top: 5px;">KPI</h5></div>
+													<div class="text-right col-">
+														<span style="color: black;font-weight: bold">Total Weight %  </span>
+														<input class="input-xs text-center text-muted" type="text" id="numKPITotalWeight" name="numKPITotalWeight" disabled="disabled" value="50" style="font-weight: bold;">
+													</div>
+												</div>
+
+												<div class="ibox-content ibox-content-radius ">
+													<div class="row">
+														<div class="table-responsive">
+															<table class="table table-striped "
+																id="tableCdsResult" 
+																style="border-color: #dddddd">
+																<thead>
+																	<tr>
+																		<th style='width: auto'>Perspective</th>
+																		<th style='width: auto'>Appraisal Item Name</th>
+																		<th style='width: auto'>Target</th>
+																		<th style='width: auto'>Actual</th>
+																		<th style='width: auto'>Score</th>
+																		<th style='width: auto'>%Weight To</th>
+																		<th style='width: auto'>Weigh Score</th>
+																	</tr>
+																</thead>
+																<tbody id="listAppraisal" >
+																	<tr>
+																		<td>1</td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	
+																</tbody>
+																<tfoot>
+																	<tr>
+																		<td colspan="7" class="text-right" >
+																		<span style="color: black; font-weight: bold">Total</span> 
+																		<input
+																			class="input-xs text-center text-muted" type="text"
+																			id="numKPITotal" name="numTotalWeight"
+																			disabled="disabled" value="50"
+																			style="font-weight: bold;"></td>
+
+																	</tr>
+
+																</tfoot>
+															</table>
+
+
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+									<!-- -------------Table KPI Start------------- -->
+
+								<!-- -------------Table Competency Start------------- -->
+									<div class="row p-t-xs">
+										<div class="col-lg-12">
+											<div class="ibox float-e-margins">
+												<div class="ibox-title ibox-title-radius">
+													<div class="text-left col-"><h5 style="padding-top: 5px;">Competency</h5></div>
+													<div class="text-right col-">
+														<span style="color: black;font-weight: bold">Total Weight %  </span>
+														<input class="input-xs text-center text-muted" type="text" id="numCompetencyTotalWeight" name="numCompetencyTotalWeight" disabled="disabled" value="50" style="font-weight: bold;">
+													</div>
+												</div>
+
+												<div class="ibox-content ibox-content-radius ">
+													<div class="row">
+														<div class="table-responsive">
+															<table class="table table-striped "
+																id="tableCdsResult" 
+																style="border-color: #dddddd">
+																<thead>
+																	<tr>
+																		<th style='width: auto'>Appraisal Item Name</th>
+																		<th style='width: auto'>Target</th>
+																		<th style='width: auto'>Actual</th>
+																		<th style='width: auto'>Score</th>
+																		<th style='width: auto'>%Weight To</th>
+																		<th style='width: auto'>Weigh Score</th>
+																	</tr>
+																</thead>
+																<tbody id="listAppraisal" >
+																	<tr>
+																		<td>1</td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	
+																</tbody>
+																<tfoot>
+																	<tr>
+																		<td colspan="7" class="text-right" >
+																		<span style="color: black; font-weight: bold">Total</span> 
+																		<input
+																			class="input-xs text-center text-muted" type="text"
+																			id="numCompetencyTotal" name="numCompetencyTotal"
+																			disabled="disabled" value="50"
+																			style="font-weight: bold;"></td>
+
+																	</tr>
+
+																</tfoot>
+															</table>
+
+
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+
+									</div>								
+								<!-- -------------Table Competency Start------------- -->								
+								
+								<!-- -------------Table Work Behavior Start------------- -->
+									<div class="row p-t-xs">
+										<div class="col-lg-12">
+											<div class="ibox float-e-margins">
+												<div class="ibox-title ibox-title-radius">
+													<div class="text-left col-"><h5 style="padding-top: 5px;">Work Behavior</h5></div>
+													<div class="text-right col-">
+														<span style="color: black;font-weight: bold">Total Weight %  </span>
+														<input class="input-xs text-center text-muted" type="text" id="numWorkBehaviorWeight" name="numWorkBehaviorWeight" disabled="disabled" value="50" style="font-weight: bold;">
+													</div>
+												</div>
+
+												<div class="ibox-content ibox-content-radius ">
+													<div class="row">
+														<div class="table-responsive">
+															<table class="table table-striped "
+																id="tableCdsResult" 
+																style="border-color: #dddddd">
+																<thead>
+																	<tr>
+																		<th style='width: auto'>Appraisal Item Name</th>
+																		<th style='width: auto'>Max Value</th>
+																		<th style='width: auto'>Actual Value</th>
+																		<th style='width: auto'>Over Value</th>
+																		<th style='width: auto'>Deduct Score/Unit</th>
+																		<th style='width: auto'>Weigh Score</th>
+																	</tr>
+																</thead>
+																<tbody id="listAppraisal" >
+																	<tr>
+																		<td>1</td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	
+																</tbody>
+																<tfoot>
+																	<tr>
+																		<td colspan="7" class="text-right" >
+																		<span style="color: black; font-weight: bold">Total</span> 
+																		<input
+																			class="input-xs text-center text-muted" type="text"
+																			id="numWorkBehaviorTotal" name="numWorkBehaviorTotal"
+																			disabled="disabled" value="50"
+																			style="font-weight: bold;"></td>
+																	</tr>
+
+																</tfoot>
+															</table>
+
+
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+
+									</div>								
+								<!-- -------------Table Work Behavior Start------------- -->	
+
+								<!-- -------------Table Organization Development Start------------- -->
+									<div class="row p-t-xs">
+										<div class="col-lg-12">
+											<div class="ibox float-e-margins">
+												<div class="ibox-title ibox-title-radius">
+													<div class="text-left col-"><h5 style="padding-top: 5px;">Organization Development</h5></div>
+													<div class="text-right col-">
+														<span style="color: black;font-weight: bold">Total Weight %  </span>
+														<input class="input-xs text-center text-muted" type="text" id="numOrgDevWeight" name="numOrgDevWeight" disabled="disabled" value="50" style="font-weight: bold;">
+													</div>
+												</div>
+
+												<div class="ibox-content ibox-content-radius ">
+													<div class="row">
+														<div class="table-responsive">
+															<table class="table table-striped "
+																id="tableCdsResult" 
+																style="border-color: #dddddd">
+																<thead>
+																	<tr>
+																		<th style='width: auto'>Appraisal Item Name</th>
+																		<th style='width: auto'>Max Value</th>
+																		<th style='width: auto'>Actual Value</th>
+																		<th style='width: auto'>Over Value</th>
+																		<th style='width: auto'>Deduct Score/Unit</th>
+																		<th style='width: auto'>Weigh Score</th>
+																	</tr>
+																</thead>
+																<tbody id="listAppraisal" >
+																	<tr>
+																		<td>1</td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	
+																</tbody>
+																<tfoot>
+																	<tr>
+																		<td colspan="7" class="text-right" >
+																		<span style="color: black; font-weight: bold">Total</span> 
+																		<input
+																			class="input-xs text-center text-muted" type="text"
+																			id="numOrgDevTotal" name="numOrgDevTotal"
+																			disabled="disabled" value="50"
+																			style="font-weight: bold;"></td>
+																	</tr>
+
+																</tfoot>
+															</table>
+
+
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+
+									</div>									
+								<!-- -------------Table Organization Development Start------------- -->	
+
+								<!-- -------------Table Disciplinary Punishment Start------------- -->
+									<div class="row p-t-xs">
+										<div class="col-lg-12">
+											<div class="ibox float-e-margins">
+												<div class="ibox-title ibox-title-radius">
+													<div class="text-left col-"><h5 style="padding-top: 5px;">Disciplinary Punishment</h5></div>
+													<div class="text-right col-">
+														<span style="color: black;font-weight: bold">Total Weight %  </span>
+														<input class="input-xs text-center text-muted" type="text" id="numDisPunishmentWeight" name="numDisPunishmentWeight" disabled="disabled" value="50" style="font-weight: bold;">
+													</div>
+												</div>
+
+												<div class="ibox-content ibox-content-radius ">
+													<div class="row">
+														<div class="table-responsive">
+															<table class="table table-striped "
+																id="tableCdsResult" 
+																style="border-color: #dddddd">
+																<thead>
+																	<tr>
+																		<th style='width: auto'>Appraisal Item Name</th>
+																		<th style='width: auto'>Max Value</th>
+																		<th style='width: auto'>Actual Value</th>
+																		<th style='width: auto'>Over Value</th>
+																		<th style='width: auto'>Deduct Score/Unit</th>
+																		<th style='width: auto'>Weigh Score</th>
+																	</tr>
+																</thead>
+																<tbody id="listAppraisal" >
+																	<tr>
+																		<td>1</td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	
+																</tbody>
+																<tfoot>
+																	<tr>
+																		<td colspan="7" class="text-right" >
+																		<span style="color: black; font-weight: bold">Total</span> 
+																		<input
+																			class="input-xs text-center text-muted" type="text"
+																			id="numDisPunishmentTotal" name="numDisPunishmentTotal"
+																			disabled="disabled" value="50"
+																			style="font-weight: bold;"></td>
+																	</tr>
+
+																</tfoot>
+															</table>
+
+
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+
+									</div>									
+								<!-- -------------Table Disciplinary Punishment Start------------- -->	
+
+
+								</div>
+						</div>
+
+					</div>
+
+				</div>
+				<!-- -------------From Appraisal Start------------- -->
+
+		
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+				
+					
+					<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
+					<!-- 				<button class="btn btn-success" type="button" id="btnAddAnother">Save -->
+					<!-- 					& Add Another</button> -->
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+					<div class="alert alert-warning" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" name="id" id="id" value="">
+	<input type="hidden" name="action" id="action" value="add">
+	<!-- Modal End Appraisal -->
 
 
 
