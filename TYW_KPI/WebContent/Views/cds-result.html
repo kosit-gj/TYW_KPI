@@ -55,10 +55,10 @@
 
 							<div class="ibox-content">
 								<div class="row">
-									<div class="col-lg-3">
+									<div class="col-md-3">
 										<div class="form-group p-xxs">
-											<label class="col-lg-3 p-t-xxs">Year</label>
-											<div class="col-lg-7">
+											<label class="col-lg-3 col-md-3 p-t-xxs">Year</label>
+											<div class="col-lg-7 col-md-7">
 												<select data-toggle="tooltip" title="Year"
 													class="input form-control input-sm col-lg-9" id="paramYear"
 													name="paramYear">
@@ -74,10 +74,10 @@
 										</div>
 									</div>
 
-									<div class="col-lg-4">
+									<div class="col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-4 p-t-xxs">Month</label>
-											<div class="col-lg-7">
+											<label class="col-lg-4 col-md-3 p-t-xxs">Month</label>
+											<div class="col-lg-7 col-md-7">
 												<select data-toggle="tooltip" title="Month"
 													class="input form-control input-sm col-lg-9"
 													id="paramMonth" name="paramMonth">
@@ -93,10 +93,10 @@
 										</div>
 
 									</div>
-									<div class="col-lg-5">
+									<div class="col-md-5">
 										<div class="form-group p-xxs">
-											<label class="col-lg-3 p-t-xxs">Appraisal Level</label>
-											<div class="col-lg-9">
+											<label class="col-lg-3 col-md-4 p-t-xxs">Appraisal Level</label>
+											<div class="col-lg-9 col-md-8">
 												<select data-toggle="tooltip" title="Appraisal Level"
 													class="input form-control input-sm col-lg-9"
 													id="paramApp_lv" name="paramApp_lv">
@@ -112,10 +112,10 @@
 										</div>
 									</div>
 
-									<div class="col-lg-3">
+									<div class="col-md-3">
 										<div class="form-group p-xxs">
-											<label class="col-lg-3 p-t-xxs">Position</label>
-											<div class="col-lg-9">
+											<label class="col-lg-3 col-md-3 p-t-xxs">Position</label>
+											<div class="col-lg-9 col-md-9">
 												<input data-toggle="tooltip" title="Position"
 													class="form-control input-sm" placeholder="Position"
 													type="text" id="paramPosition" name="paramPosition">
@@ -123,10 +123,10 @@
 
 										</div>
 									</div>
-									<div class="col-lg-4">
+									<div class="col-md-4">
 										<div class="form-group p-xxs m-b-none">
-											<label class="col-lg-4 p-t-xxs">Employee Name</label>
-											<div class="col-lg-8">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Employee Name</label>
+											<div class="col-lg-8 col-md-7">
 												<input data-toggle="tooltip" title="Employee Name"
 													class="form-control input-sm" placeholder="Employee Name"
 													type="text" id="paramEmpName" name="paramEmpName">
@@ -134,8 +134,8 @@
 
 										</div>
 									</div>
-									<div class="col-lg-5">
-										<div class="form-group p-xxs ">
+									<div class="col-md-5">
+										<div class="form-group ">
 											<div class="form-group pull-right p-xxs m-b-none">
 
 												<button id="importToCdsResult"
@@ -154,7 +154,18 @@
 											</div>
 											<div class="form-group pull-right p-xxs m-b-none">
 												<form id='formExportToExcel' action="" method="post">
-
+												<!--Employee Code
+													CDS ID
+													CDS Name
+													Year
+													Month
+													CDS Value -->
+<!-- 												<input type="hidden" name="employee_Code" id="export_employee_Code" value=""> -->
+<!-- 	                                     		<input type="hidden" name="cds_id" id="export_cds_id" value=""> -->
+<!-- 	                                     		<input type="hidden" name="cds_name" id="export_cds_name" value=""> -->
+<!-- 	                                     		<input type="hidden" name="year" id="export_year" value=""> -->
+<!-- 	                                     		<input type="hidden" name="Month" id="export_Month" value=""> -->
+<!-- 	                                     		<input type="hidden" name="cds_Value" id="export_cds_Value" value=""> -->
 													<button id="exportToExcel" class="btn btn-warning btn-sm"
 														type="submit">
 														<i class="fa fa-download"></i> Download
@@ -315,7 +326,7 @@
     
     <script src="../js/jquery.mloading.js"></script>
     
-    <!-- <script src="../Controller/cMain.js"></script> -->
+     <script src="../Controller/cds-result.js"></script> 
     
     	
     
