@@ -54,33 +54,43 @@
 
 							<div class="ibox-content">
 								<div class="row">
-									<div class="col-sm-12">
-
-										<div class="form-inline">
-											<div class="form-group p-xxs">
-												<label class="">Appraisal
-													Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <select
-													data-toggle="tooltip" title="Appraisal Level"
-													class="input form-control input-sm" id="app_lv"
+									<div class="col-lg-3 col-md-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-4 p-t-xxs">Appraisal</label>
+											<div class="col-lg-7 col-md-7" id="listAppraisalLevelArea">
+												<select data-toggle="tooltip" title="Year"
+													class="input form-control input-sm col-lg-9" id="app_lv"
 													name="app_lv">
 													<option>All</option>
 													<option>ระดับบริหาร</option>
 													<option>ระดับการจัดการ</option>
 													<option>ระดับบังคับบัญชา</option>
 													<option>ระดับเจ้าหน้าที่</option>
-													<option>ระดับปฏิบัติการ</option>
 													<option>HR</option>
 												</select>
 											</div>
-											<div class="form-group p-xxs">
-												<label class="">CDS
-													Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <input
-													data-toggle="tooltip" title="CDS Name"
-													class="form-control input-sm" placeholder="CDS Name"
-													type="text" id="cds_name" name="cds_name">
 
+										</div>
+									</div>
+
+									
+
+									<div class="col-lg-3 col-md-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-4 p-t-xxs">CDS Name</label>
+											<div class="col-lg-8 col-md-8">
+												<input data-toggle="tooltip" title="Position"
+													class="form-control input-sm" placeholder="Position"
+													type="text" id="cds_name" name="cds_name">
 											</div>
-											<div class="form-group pull-right p-xxs">
+
+										</div>
+									</div>
+									
+									<div class="col-lg-6 col-md-4">
+										<div class="form-group p-xxs ">
+											<div class="form-group pull-right  m-b-none">
+
 
 												<button type="button" class="btn btn-info input-sm"
 													name="btnSearchAdvance" id="btnSearchAdvance">
@@ -88,11 +98,12 @@
 												</button>
 
 											</div>
-										</div>
 
+										</div>
 									</div>
 
 								</div>
+								
 
 							</div>
 							<!-- content end -->
@@ -256,7 +267,7 @@
 						<div class="form-group">
 						<div class="col-lg-4 col-xs-4 form-inline">
 								<div class="form-group m-n">
-									<label class="form-label-cds">CDS Description:</label>&nbsp;
+									<label class="form-label-cds">CDS Description:</label>
 <!-- 									<span class='redFont p-t-xs'>*</span> -->
 								</div>
 							
@@ -277,7 +288,7 @@
 							
 							</div>
 <!-- 							<label class="col-lg-4 form-label-cds">Appraisal Level: <span class='redFont'>*</span></label> -->
-							<div class="col-lg-6 col-xs-8">
+							<div class="col-lg-6 col-xs-8" id="listFromAppraisalLevelArea">
 								<select class="input form-control input-sm"  id="f_app_lv" name="f_app_lv">
 	                				<option>ระดับบริหาร</option>
 									<option>ระดับการจัดการ</option>
@@ -298,8 +309,8 @@
 							
 							</div>
 <!-- 							<label class="col-lg-4 form-label-cds">Connection: <span class='redFont'>*</span></label> -->
-							<div class="col-lg-6 col-xs-8">
-								<select class="input form-control input-sm"  id="f_app_lv" name="f_app_lv">
+							<div class="col-lg-6 col-xs-8" id="listConnectionArea">
+								<select class="input form-control input-sm"  id="f_connection" name="f_connection">
 	                				<option>ระดับบริหาร</option>
 									<option>ระดับการจัดการ</option>
 									<option>ระดับบังคับบัญชา</option>
@@ -312,8 +323,8 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-lg-4 hidden-xs form-label-cds">&nbsp;</label>
-							<div class="col-lg-6 col-xs-8">
+							<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-label-cds">&nbsp;</label>
+							<div class="col-lg-6 col-md-8 col-sm-8 col-xs-8">
 								<div class="checkbox checkbox-inline">
 
 									<input id="checkboxIsSQL" name="checkboxIsSQL" type="checkbox"
@@ -324,7 +335,7 @@
 						</div>
 						
 						<div class="form-group">
-							<div class="col-lg-4 col-md-2 col-xs-5 form-inline">
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 form-inline">
 								<div class="form-group m-n">
 									<label class="form-label-cds p-b-xs">
 										SQL: &nbsp;
@@ -337,7 +348,7 @@
 <!-- 							<label class="col-lg-4 col-md-2 col-xs-5  form-label-cds form-inline"> -->
 <!-- 								SQL: &nbsp;<button class="btn btn-xs btn-white " type="button" id="btnExecute">Execute</button><span class='redFont p-b-xs'>*</span> -->
 <!-- 							</label> -->
-							<div class="col-lg-6 col-xs-12">
+							<div class="col-lg-6 col-md-8 col-sm-8 col-xs-12">
 								<textarea id="txtSQL" class="form-control input-contact-textinput" placeholder="" style="height: 95px;"></textarea>
 							</div>
 
@@ -345,7 +356,7 @@
 						
 						
 						<div class="form-group">
-						<div class="col-lg-4 col-xs-4 form-inline">
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-inline">
 								<div class="form-group m-n">
 									<label class="form-label-cds p-b-xs">Sample Data: </label>&nbsp;
 <!-- 									<span class='redFont p-t-xs'>*</span> -->
@@ -355,7 +366,7 @@
 <!-- 							<label class="col-lg-4 form-label-cds"> -->
 <!-- 								Sample Data: <span class='redFont '>*</span> -->
 <!-- 							</label> -->
-							<div class="col-lg-6">
+							<div class="col-lg-6 col-md-8 col-sm-8 col-xs-12">
 								<textarea id="txtSampleData" class="form-control input-contact-textinput" placeholder="" style="height: 110px;"></textarea>
 							</div>
 
@@ -363,8 +374,8 @@
 						
 						<div class="form-group">
 						
-							<label class="col-lg-4 hidden-xs form-label-cds">&nbsp;</label>
-							<div class="col-lg-6">
+							<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-label-cds">&nbsp;</label>
+							<div class="col-lg-6 col-md-8 col-sm-8">
 								<div class="checkbox checkbox-inline">
 
 									<input id="checkboxIsActive" name="checkboxIsActive"  type="checkbox" value="">
