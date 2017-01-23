@@ -56,10 +56,10 @@
 
 							<div class="ibox-content">
 								<div class="row">
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-4 p-t-xxs">Department</label>
-											<div class="col-lg-7">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
+											<div class="col-lg-7 col-md-7">
 												<select data-toggle="tooltip" title="Year"
 													class="input form-control input-sm col-lg-9"
 													id="paramDepartment" name="paramDepartment">
@@ -75,10 +75,10 @@
 										</div>
 									</div>
 
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-3 p-t-xxs">Section</label>
-											<div class="col-lg-7">
+											<label class="col-lg-3 col-md-3 p-t-xxs">Section</label>
+											<div class="col-lg-7 col-md-7">
 												<select data-toggle="tooltip" title="Month"
 													class="input form-control input-sm col-lg-9"
 													id="paramSection" name="paramSection">
@@ -96,10 +96,10 @@
 									</div>
 
 
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-3 p-t-xxs">Position</label>
-											<div class="col-lg-9">
+											<label class="col-lg-3 col-md-3 p-t-xxs">Position</label>
+											<div class="col-lg-9 col-md-9">
 												<input data-toggle="tooltip" title="Position"
 													class="form-control input-sm" placeholder="Position"
 													type="text" id="paramPosition" name="paramPosition">
@@ -107,10 +107,10 @@
 
 										</div>
 									</div>
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs m-b-none">
-											<label class="col-lg-4 p-t-xxs">Employee Name</label>
-											<div class="col-lg-8">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Employee Name</label>
+											<div class="col-lg-8 col-md-7">
 												<input data-toggle="tooltip" title="Employee Name"
 													class="form-control input-sm" placeholder="Employee Name"
 													type="text" id="paramEmpName" name="paramEmpName">
@@ -118,9 +118,9 @@
 
 										</div>
 									</div>
-									<div class="col-lg-8">
-										<div class="form-group p-xxs ">
-											<div class="form-group pull-right p-xxs m-b-none">
+									<div class="col-lg-8 col-md-8">
+										<div class="form-group  ">
+											<div class=" pull-right p-xxs m-b-none">
 												<button id="btnAddRule" type="button"
 													class="btn btn-success btn-sm" data-target="#ModalRule"
 													data-toggle="modal">
@@ -133,7 +133,7 @@
 
 
 
-											<div class="form-group pull-right p-xxs m-b-none">
+											<div class=" pull-right p-xxs m-b-none">
 
 												<button id="importToEmpployee"
 													class="btn btn-primary btn-sm" type="submit">
@@ -149,7 +149,7 @@
 												<!-- 								</div> -->
 
 											</div>
-											<div class="form-group pull-right p-xxs m-b-none">
+											<div class=" pull-right p-xxs m-b-none">
 												<form id='formExportToExcel' action="" method="post">
 
 													<button id="exportToExcel" class="btn btn-warning btn-sm"
@@ -159,7 +159,7 @@
 												</form>
 
 											</div>
-											<div class="form-group pull-right p-xxs m-b-none">
+											<div class=" pull-right p-xxs m-b-none">
 
 
 												<button type="button" class="btn btn-info input-sm"
@@ -196,15 +196,15 @@
 
 							<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-sm-8 col-xs-6 m-b-xs">
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs">
 
 									<p class="pagination_top"></p>
 
 								</div>
 
-								<div class="col-lg-2 col-sm-2 col-xs-4 object-right paging-text">Results
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text">Results
 									per page</div>
-								<div class="col-lg-1 col-sm-2 col-xs-2 p-b-xxs">
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs">
 
 									<select name="account" id='countPaginationTop'
 										class="form-control input-sm countPagination">
@@ -219,7 +219,7 @@
 							<!-- pagination end -->
 							<!-- start table -->
 							<div class="table-responsive">
-								<table class="table table-striped" id="tableRule">
+								<table class="table table-striped" id="tableEmployee">
 									<thead>
 										<tr>
 											<th style='width: auto text-align:center;'>Select</th>
@@ -268,15 +268,15 @@
 
 							<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-sm-8 col-xs-6 m-b-xs">
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs">
 
 									<p class="pagination_bottom"></p>
 
 								</div>
 
-								<div class="col-lg-2 col-sm-2 col-xs-4 object-right paging-text">Results
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text">Results
 									per page</div>
-								<div class="col-lg-1 col-sm-2 col-xs-2 p-b-xxs">
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs">
 
 									<select name="account" id='countPaginationBottom'
 										class="form-control input-sm countPagination">
@@ -335,9 +335,9 @@
 					<hr>
 
 					<!-- form start -->
-					<div class="form-inline p-b-xs">
+					<div class="form-inline p-b-xs" id="txtAssignEmpName">
 						<div class="form-group">
-							<div class="form-group m-n">
+							<div class="form-group m-n " >
 								<label class="form-label-emp">Employee Name: </label>&nbsp; <label
 									id="fromRuleEmpName" class="form-label-emp">สมใจ
 									พร้อมเสมอนะ </label>&nbsp;
@@ -442,7 +442,7 @@
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
+					<button class="btn btn-success" type="button" id="btnEmpSubmit">Save</button>
 					<!-- 				<button class="btn btn-success" type="button" id="btnAddAnother">Save -->
 					<!-- 					& Add Another</button> -->
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
@@ -453,8 +453,6 @@
 			</div>
 		</div>
 	</div>
-	<input type="hidden" name="id" id="id" value="">
-	<input type="hidden" name="action" id="action" value="add">
 	<!-- Modal End Rule -->
 
 
@@ -765,9 +763,7 @@
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
-					<!-- 				<button class="btn btn-success" type="button" id="btnAddAnother">Save -->
-					<!-- 					& Add Another</button> -->
+					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
 					<div class="alert alert-warning" id="information"
@@ -822,7 +818,9 @@
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
-
+	
+<input type="hidden" name="id" id="id" value="">
+<input type="hidden" name="action" id="action" value="add">
 
 
 
