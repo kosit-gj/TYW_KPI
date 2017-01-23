@@ -55,10 +55,10 @@
 
 							<div class="ibox-content">
 								<div class="row">
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-3 p-t-xxs">Structure</label>
-											<div class="col-lg-8">
+											<label class="col-lg-3 col-md-3 p-t-xxs">Structure</label>
+											<div class="col-lg-8 col-md-8">
 												<select data-toggle="tooltip" title="Structure"
 													class="input form-control input-sm col-lg-9"
 													id="paramStructure" name="paramStructure">
@@ -74,10 +74,10 @@
 										</div>
 									</div>
 
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-4 p-t-xxs">Appraisal Level</label>
-											<div class="col-lg-8">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Appraisal Level</label>
+											<div class="col-lg-8 col-md-7">
 												<select data-toggle="tooltip" title="Appraisal Level"
 													class="input form-control input-sm col-lg-9"
 													id="paramAppLv" name="paramAppLv">
@@ -93,10 +93,10 @@
 										</div>
 
 									</div>
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-4 p-t-xxs">Appraisal Item</label>
-											<div class="col-lg-8">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Appraisal Item</label>
+											<div class="col-lg-8 col-md-7">
 												<select data-toggle="tooltip" title="Appraisal Item"
 													class="input form-control input-sm col-lg-9"
 													id="paramAppItem" name="paramAppItem">
@@ -112,10 +112,10 @@
 										</div>
 									</div>
 
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-3 p-t-xxs">Period</label>
-											<div class="col-lg-8">
+											<label class="col-lg-3  col-md-3 p-t-xxs">Period</label>
+											<div class="col-lg-8 col-md-8">
 												<select data-toggle="tooltip" title="Period"
 													class="input form-control input-sm col-lg-9"
 													id="paramPeriod" name="paramPeriod">
@@ -130,10 +130,10 @@
 
 										</div>
 									</div>
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs m-b-none">
-											<label class="col-lg-4 p-t-xxs">Employee Name</label>
-											<div class="col-lg-8">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Employee Name</label>
+											<div class="col-lg-8 col-md-7">
 												<input data-toggle="tooltip" title="Employee Name"
 													class="form-control input-sm" placeholder="Employee Name"
 													type="text" id="paramEmployeeName" name="paramEmployeeName">
@@ -141,10 +141,10 @@
 
 										</div>
 									</div>
-									<div class="col-lg-4">
+									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs ">
 											<div class="form-group pull-right p-xxs m-b-none">
-												<form id='formExportToExcel' action="" method="post">
+												<form id='formImportToAppraisalData' action="" method="post">
 													<button id="importToAppraisalData"
 														class="btn btn-primary btn-sm" type="submit">
 														<i class="fa fa-upload"></i> Import
@@ -164,6 +164,24 @@
 											</div>
 											<div class="form-group pull-right p-xxs m-b-none">
 												<form id='formExportToExcel' action="" method="post">
+												<!--Employee Code
+													Structure ID
+													Structure Name
+													Period ID
+													Period Name
+													Appraisal Item ID
+													Appraisal Item Name
+													Data Value
+													 
+												<input type="hidden" name="employee_Code" id="export_employee_Code" value="">
+	                                     		<input type="hidden" name="structure_id" id="export_structure_id" value="">
+	                                     		<input type="hidden" name="structure_name" id="export_structure_name" value="">
+	                                     		<input type="hidden" name="period_id" id="export_period_id" value="">
+	                                     		<input type="hidden" name="period_name" id="export_period_name" value="">
+	                                     		<input type="hidden" name="appraisal_item_id" id="export_appraisal_item_id" value="">
+	                                     		<input type="hidden" name="appraisal_item_name" id="export_appraisal_item_name" value="">
+	                                     		<input type="hidden" name="data_value" id="export_data_value" value=""> 
+	                                     		-->
 													<button id="exportToExcel" class="btn btn-warning btn-sm"
 														type="submit">
 														<i class="fa fa-download"></i> Download
@@ -176,7 +194,7 @@
 
 
 												<button type="button" class="btn btn-info input-sm"
-													name="btnSearchAdvance2" id="btnSearchAdvance2">
+													name="btnSearchAdvance" id="btnSearchAdvance">
 													<i class="fa fa-search"></i>&nbsp;Search
 												</button>
 
@@ -207,15 +225,15 @@
 							<!-- start table -->
 							<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-sm-8 col-xs-6 m-b-xs">
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs">
 
 									<p class="pagination_top"></p>
 
 								</div>
 
-								<div class="col-lg-2 col-sm-2 col-xs-4 object-right paging-text">Results
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text">Results
 									per page</div>
-								<div class="col-lg-1 col-sm-2 col-xs-2 p-b-xxs">
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs">
 
 									<select name="account" id='countPaginationTop'
 										class="form-control input-sm countPagination">
@@ -268,15 +286,15 @@
 							</div>
 							<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-sm-8 col-xs-6 m-b-xs">
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs">
 
 									<p class="pagination_bottom"></p>
 
 								</div>
 
-								<div class="col-lg-2 col-sm-2 col-xs-4 object-right paging-text">Results
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text">Results
 									per page</div>
-								<div class="col-lg-1 col-sm-2 col-xs-2 p-b-xxs">
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs">
 
 									<select name="account" id='countPaginationBottom'
 										class="form-control input-sm countPagination">
@@ -289,7 +307,6 @@
 								</div>
 							</div>
 							<!-- pagination end -->
-
 							
 							<!-- end table -->
 						</div>
@@ -341,7 +358,7 @@
     
     <script src="../js/jquery.mloading.js"></script>
     
-    <!-- <script src="../Controller/appraisal-data.js"></script> -->
+    <script src="../Controller/appraisal-data.js"></script>
 
 
 </body>
