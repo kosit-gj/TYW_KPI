@@ -1,5 +1,5 @@
 //Global variable
-var galbalDataCDS=[];
+var galbalDataCDSResult=[];
 //IP Server : 171.96.201.146
 var restfulURL="http://171.96.201.146";
 var restfulPathCdsResult=":3001/api/tyw_cds_result/";
@@ -9,11 +9,11 @@ var searchAdvanceFn = function (year,month,app_lv,position,emp_name) {
 //embed parameter start
 	
 	var htmlParam="";
-	htmlParam+="<input type='show' class='paramEmbed' id='param_Year' name='param_Year' value='"+year+"'>";
-	htmlParam+="<input type='show' class='paramEmbed' id='param_Month' name='param_Month' value='"+month+"'>";
-	htmlParam+="<input type='show' class='paramEmbed' id='param_AppLv' name='param_AppLv' value='"+app_lv+"'>";
-	htmlParam+="<input type='show' class='paramEmbed' id='param_Position' name='param_Position' value='"+position+"'>";
-	htmlParam+="<input type='show' class='paramEmbed' id='param_EmpName' name='param_EmpName' value='"+emp_name+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Year' name='param_Year' value='"+year+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Month' name='param_Month' value='"+month+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_AppLv' name='param_AppLv' value='"+app_lv+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Position' name='param_Position' value='"+position+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_EmpName' name='param_EmpName' value='"+emp_name+"'>";
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
@@ -32,8 +32,8 @@ var searchAdvanceFn = function (year,month,app_lv,position,emp_name) {
 		//headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data,status) {
 			listCdsResultFn(data);
-			galbalDataCitizen=data;
-			//paginationSetUpFn(galbalDataCitizen['current_page'],galbalDataCitizen['last_page'],galbalDataCitizen['last_page']);
+			galbalDataCDSResult=data;
+			//paginationSetUpFn(galbalDataCDSResult['current_page'],galbalDataCDSResult['last_page'],galbalDataCDSResult['last_page']);
 			
 		}
 	});
