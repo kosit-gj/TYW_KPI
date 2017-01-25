@@ -59,8 +59,8 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
-											<div class="col-lg-7 col-md-7">
-												<select data-toggle="tooltip" title="Year"
+											<div class="col-lg-7 col-md-7" id="dropDownDepartment">
+												<select data-toggle="tooltip" title="Department"
 													class="input form-control input-sm col-lg-9"
 													id="paramDepartment" name="paramDepartment">
 													<option>All</option>
@@ -78,8 +78,8 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-3 col-md-3 p-t-xxs">Section</label>
-											<div class="col-lg-7 col-md-7">
-												<select data-toggle="tooltip" title="Month"
+											<div class="col-lg-7 col-md-7" id="dropDownSection">
+												<select data-toggle="tooltip" title="Section"
 													class="input form-control input-sm col-lg-9"
 													id="paramSection" name="paramSection">
 													<option>All</option>
@@ -121,10 +121,10 @@
 									<div class="col-lg-8 col-md-8">
 										<div class="form-group  ">
 											<div class=" pull-right p-xxs m-b-none">
-												<button id="btnAddRule" type="button"
-													class="btn btn-success btn-sm" data-target="#ModalRule"
+												<button id="btnAddRole" type="button"
+													class="btn btn-success btn-sm" data-target="#ModalRole"
 													data-toggle="modal">
-													&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Rule&nbsp;&nbsp;
+													&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
 												</button>
 
 
@@ -249,7 +249,7 @@
 											<td></td>
 											<td style="text-align: center"><i
 												data-content="
-												&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalRule data-toggle='modal'&gt;Rule&lt;/button&gt;
+												&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalRole data-toggle='modal'&gt;Role&lt;/button&gt;
 												
 												&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#ModalEditEmp data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"
 												data-placement="top" data-toggle="popover" data-html="true"
@@ -310,9 +310,9 @@
 
 
 
-	<!-- Modal Start Rule -->
+	<!-- Modal Start Role -->
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalRule"
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalRole"
 		class="modal inmodal" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content animated bounceInRight">
@@ -321,7 +321,7 @@
 						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="modalTitleRole">Rule</h4>
+					<h4 class="modal-title" id="modalTitleRole">Role</h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
@@ -339,7 +339,7 @@
 						<div class="form-group">
 							<div class="form-group m-n " >
 								<label class="form-label-emp">Employee Name: </label>&nbsp; <label
-									id="fromRuleEmpName" class="form-label-emp">สมใจ
+									id="fromRoleEmpName" class="form-label-emp">สมใจ
 									พร้อมเสมอนะ </label>&nbsp;
 							</div>
 
@@ -349,7 +349,7 @@
 					<div>
 						<!-- start table -->
 						<div class="table-responsive">
-							<table class="table table-striped" id="formTableRule">
+							<table class="table table-striped" id="formTableRole">
 								<thead>
 									<tr>
 										<th style='width: auto text-align:center;'>Select</th>
@@ -357,77 +357,77 @@
 									</tr>
 								</thead>
 								<tbody id="formListRuld">
-									<tr>
-										<td>
-											<div class="checkbox m-l-sm">
-												<input id="form_rule_item-1" class="from_data_rule"
-													type='checkbox' value="1"> <label> </label>
-											</div>
-										</td>
-										<td>ระดับบริหาร</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="checkbox m-l-sm">
-												<input id="form_rule_item-2" class="from_data_rule"
-													type='checkbox' value="2"> <label> </label>
-											</div>
-										</td>
-										<td>ระดับการจัดการ</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="checkbox m-l-sm">
-												<input id="form_rule_item-3" class="from_data_rule"
-													type='checkbox' value="3"> <label> </label>
-											</div>
+<!-- 									<tr> -->
+<!-- 										<td> -->
+<!-- 											<div class="checkbox m-l-sm"> -->
+<!-- 												<input id="form_role_item-1" class="from_data_role" -->
+<!-- 													type='checkbox' value="1"> <label> </label> -->
+<!-- 											</div> -->
+<!-- 										</td> -->
+<!-- 										<td>ระดับบริหาร</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<td> -->
+<!-- 											<div class="checkbox m-l-sm"> -->
+<!-- 												<input id="form_role_item-2" class="from_data_role" -->
+<!-- 													type='checkbox' value="2"> <label> </label> -->
+<!-- 											</div> -->
+<!-- 										</td> -->
+<!-- 										<td>ระดับการจัดการ</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<td> -->
+<!-- 											<div class="checkbox m-l-sm"> -->
+<!-- 												<input id="form_role_item-3" class="from_data_role" -->
+<!-- 													type='checkbox' value="3"> <label> </label> -->
+<!-- 											</div> -->
 
-										</td>
-										<td>ระดับบังคับบัญชา</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="checkbox m-l-sm">
-												<input id="form_rule_item-4" class="from_data_rule"
-													type='checkbox' value="4"> <label> </label>
-											</div>
+<!-- 										</td> -->
+<!-- 										<td>ระดับบังคับบัญชา</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<td> -->
+<!-- 											<div class="checkbox m-l-sm"> -->
+<!-- 												<input id="form_role_item-4" class="from_data_role" -->
+<!-- 													type='checkbox' value="4"> <label> </label> -->
+<!-- 											</div> -->
 
-										</td>
+<!-- 										</td> -->
 
-										<td>ระดับเจ้าหน้าที่</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="checkbox m-l-sm">
-												<input id="form_rule_item-5" class="from_data_rule"
-													type='checkbox' value="5"> <label> </label>
-											</div>
+<!-- 										<td>ระดับเจ้าหน้าที่</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<td> -->
+<!-- 											<div class="checkbox m-l-sm"> -->
+<!-- 												<input id="form_role_item-5" class="from_data_role" -->
+<!-- 													type='checkbox' value="5"> <label> </label> -->
+<!-- 											</div> -->
 
-										</td>
+<!-- 										</td> -->
 
-										<td>ระดับปฏิบัติการ</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="checkbox m-l-sm">
-												<input id="form_rule_item-6" class="from_data_rule"
-													type='checkbox' value="6"> <label></label>
-											</div>
+<!-- 										<td>ระดับปฏิบัติการ</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<td> -->
+<!-- 											<div class="checkbox m-l-sm"> -->
+<!-- 												<input id="form_role_item-6" class="from_data_role" -->
+<!-- 													type='checkbox' value="6"> <label></label> -->
+<!-- 											</div> -->
 
-										</td>
+<!-- 										</td> -->
 
-										<td>HR</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="checkbox m-l-sm">
-												<input id="form_rule_item_all" class="from_data_rule"
-													type='checkbox' value="all"> <label></label>
-											</div>
+<!-- 										<td>HR</td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<td> -->
+<!-- 											<div class="checkbox m-l-sm"> -->
+<!-- 												<input id="form_role_item_all" class="from_data_role" -->
+<!-- 													type='checkbox' value="all"> <label></label> -->
+<!-- 											</div> -->
 
-										</td>
-										<td>ทุกระดับ</td>
-									</tr>
+<!-- 										</td> -->
+<!-- 										<td>ทุกระดับ</td> -->
+<!-- 									</tr> -->
 
 								</tbody>
 							</table>
@@ -453,7 +453,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal End Rule -->
+	<!-- Modal End Role -->
 
 
 
