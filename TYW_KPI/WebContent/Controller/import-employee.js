@@ -59,7 +59,7 @@ var getDataFn = function(page,rpp){
 			
 			listImportEmployeeFn(data);
 			//total
-			//galbalDataImportEmp=data;
+			galbalDataImportEmp=data;
 			//paginationSetUpFn(galbalDataImportEmp['current_page'],galbalDataImportEmp['last_page'],galbalDataImportEmp['last_page']);
 		}
 	});
@@ -500,7 +500,7 @@ var listAppraisalLevel = function() {
 				htmlTable+="type='checkbox' value=\""+indexEntry["_id"]+"\"> <label> </label>";
 				htmlTable+="</div>";
 				htmlTable+="</td>";
-				htmlTable+="<td>"+indexEntry["appraisal_level_name"]+"</td>";
+				htmlTable+="<td style=\"vertical-align:middle\">"+indexEntry["appraisal_level_name"]+"</td>";
 				htmlTable+="</tr>";
 					
 //				}		
@@ -512,7 +512,7 @@ var listAppraisalLevel = function() {
 			htmlTable+="type='checkbox' value=\all\"> <label> </label>";
 			htmlTable+="</div>";
 			htmlTable+="</td>";
-			htmlTable+="<td>ทุกระดับ</td>";
+			htmlTable+="<td style=\"vertical-align:middle\">ทุกระดับ</td>";
 			htmlTable+="</tr>";
 
 		}
@@ -575,8 +575,63 @@ var dropDownListSection = function(){
 	return html;
 };
 
+
+//set paginate start
+var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
+	if(pageTotal==0){
+		pageTotal=1
+	}
+	$('.pagination_top,.pagination_bottom').off("page");
+	$('.pagination_top,.pagination_bottom').bootpag({
+	    total: pageTotal,//page Total
+	    page: pageIndex,//page index
+	    maxVisible: 5,//จำนวนปุ่ม
+	    leaps: true,
+	    firstLastUse: true,
+	    first: '←',
+	    last: '→',
+	    wrapClass: 'pagination',
+	    activeClass: 'active',
+	    disabledClass: 'disabled',
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    next: 'next',
+	    prev: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first'
+	}).on("page", function(event, num){
+		var rpp=10;
+		if($("#rpp").val()==undefined){
+			rpp=10;
+		}else{
+			rpp=$("#rpp").val();
+		}
+		
+		getDataFn(num,rpp);
+		
+	    $(".pagingNumber").remove();
+	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+	    $("body").append(htmlPageNumber);
+	   
+	}); 
+
+	$(".countPagination").off("change");
+	$(".countPagination").on("change",function(){
+
+		$("#countPaginationTop").val($(this).val());
+		$("#countPaginationBottom").val($(this).val());
+		
+		getDataFn(1,$(this).val());
+		
+		$(".rpp").remove();
+	    var htmlRrp= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+	    $("body").append(htmlRrp);
+	});
+}
+//set paginate end
+
 $(document).ready(function() {
-	
+	paginationSetUpFn(1,1,1);
 	$("#dropDownDepartment").html(dropDownListDepartment());
 	$("#dropDownSection").html(dropDownListSection());
 	$("#btnSearchAdvance").click(function(){

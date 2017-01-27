@@ -1,8 +1,31 @@
 //Global variable
 var galbalDataCDSResult=[];
 //IP Server : 171.96.201.146
-var restfulURL="http://171.96.201.146";
+var restfulURL="http://171.96.200.20";
 var restfulPathCdsResult=":3001/api/tyw_cds_result/";
+
+//------------------- GetData FN Start ---------------------
+var getDataFn = function(page,rpp){
+	$.ajax({
+		url : restfulURL+restfulPathCdsResult,
+		type : "get",
+		dataType : "json",
+		//data:{"page":page,"rpp":rpp},
+		//headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,// w8 data 
+		success : function(data) {
+			
+			listCdsResultFn(data);
+			//total
+			galbalDataCDSResult=data;
+			//paginationSetUpFn(galbalDataCDSResult['current_page'],galbalDataCDSResult['last_page'],galbalDataCDSResult['last_page']);
+		}
+	});
+	
+	
+};
+
+//------------------- GetData FN END ---------------------
 
 //-------------------  Appraisal Data FN ---------------------
 var searchAdvanceFn = function (year,month,app_lv,position,emp_name) {
@@ -63,9 +86,154 @@ var listCdsResultFn = function (data) {
 //-------------------  Appraisal Data FN END ---------------------
 
 
+//-------------------  Drop Down List Month FN Strart ---------------------
+
+var dropDownListMonth = function(){
+	var html="";
+	
+	
+	html+="<select id=\"paramMonth\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Month\" name=\"paramMonth\">";
+	//html+="<option  selected value=''>All</option>";
+	$.ajax ({
+		url:restfulURL+":3001/api/tyw_month" ,
+		type:"get" ,
+		dataType:"json" ,
+		//headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+				//galbalDqsRoleObj=data;
+			$.each(data,function(index,indexEntry){
+//				if(id==indexEntry["txtConnection_id"]){
+//					html+="<option  value="+indexEntry["department_ame"]+">"+indexEntry["department_ame"]+"</option>";			
+//				}else{
+					html+="<option  value="+indexEntry["month"]+">"+indexEntry["month"]+"</option>";	
+//				}		
+			});	
+
+		}
+	});	
+	html+="</select>";
+	return html;
+};
+//-------------------  Drop Down List Month FN END ---------------------
+
+//-------------------  Drop Down List Year FN Strart ---------------------
+
+var dropDownListYear = function(){
+	var html="";
+	
+	
+	html+="<select id=\"paramYear\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Year\" name=\"paramYear\">";
+	//html+="<option  selected value=''>All</option>";
+	$.ajax ({
+		url:restfulURL+":3001/api/tyw_year" ,
+		type:"get" ,
+		dataType:"json" ,
+		//headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+				//galbalDqsRoleObj=data;
+			$.each(data,function(index,indexEntry){
+
+					html+="<option  value="+indexEntry["year"]+">"+indexEntry["year"]+"</option>";	
+		
+			});	
+
+		}
+	});	
+	html+="</select>";
+	return html;
+};
+//-------------------  Drop Down List Year FN END ---------------------
+
+//-------------------  Drop Down List Appraisal Level FN Strart ---------------------
+
+var dropDownListAppraisalLevel = function(){
+	var html="";
+	
+	
+	html+="<select id=\"paramApp_lv\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"paramApp_lv\">";
+	html+="<option  selected value=''>All</option>";
+	$.ajax ({
+		url:restfulURL+":3001/api/tyw_appraisal_level" ,
+		type:"get" ,
+		dataType:"json" ,
+		//headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+				//galbalDqsRoleObj=data;
+			$.each(data,function(index,indexEntry){
+
+					html+="<option  value="+indexEntry["appraisal_level_name"]+">"+indexEntry["appraisal_level_name"]+"</option>";	
+		
+			});	
+
+		}
+	});	
+	html+="</select>";
+	return html;
+};
+//-------------------  Drop Down List Appraisal Level FN END ---------------------
+
+//set paginate start
+var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
+	if(pageTotal==0){
+		pageTotal=1
+	}
+	$('.pagination_top,.pagination_bottom').off("page");
+	$('.pagination_top,.pagination_bottom').bootpag({
+	    total: pageTotal,//page Total
+	    page: pageIndex,//page index
+	    maxVisible: 5,//จำนวนปุ่ม
+	    leaps: true,
+	    firstLastUse: true,
+	    first: '←',
+	    last: '→',
+	    wrapClass: 'pagination',
+	    activeClass: 'active',
+	    disabledClass: 'disabled',
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    next: 'next',
+	    prev: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first'
+	}).on("page", function(event, num){
+		var rpp=10;
+		if($("#rpp").val()==undefined){
+			rpp=10;
+		}else{
+			rpp=$("#rpp").val();
+		}
+		
+		getDataFn(num,rpp);
+		
+	    $(".pagingNumber").remove();
+	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+	    $("body").append(htmlPageNumber);
+	   
+	}); 
+
+	$(".countPagination").off("change");
+	$(".countPagination").on("change",function(){
+
+		$("#countPaginationTop").val($(this).val());
+		$("#countPaginationBottom").val($(this).val());
+		
+		getDataFn(1,$(this).val());
+		
+		$(".rpp").remove();
+	    var htmlRrp= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+	    $("body").append(htmlRrp);
+	});
+}
+//set paginate end
 $(document).ready(function() {
+	paginationSetUpFn(1,1,1)
 	
-	
+	$("#dropDownListYear").html(dropDownListYear());
+	$("#dropDownListMonth").html(dropDownListMonth());
+	$("#dropDownListAppraisalLevel").html(dropDownListAppraisalLevel());
 	$("#btnSearchAdvance").click(function(){
 		
 		searchAdvanceFn(

@@ -1,7 +1,7 @@
 //Global variable
 var galbalDataCDS=[];
 //IP Server : 171.96.201.146
-var restfulURL="http://171.96.201.146";
+var restfulURL="http://171.96.200.20";
 var restfulPathCDS=":3001/api/tyw_common_data_set/";
 
 	//Check Validation
@@ -273,7 +273,7 @@ var updateFn = function () {
 			"cdsName":$("#f_cds_name").val(),
 			"cdsDescription":$("#f_cds_description").val(),
 			"appraisalLevel":$("#f_app_lv").val(),
-			"txtConnection":$("#txtConnection").val(),
+			"txtConnection":$("#f_connection").val(),
 			"isSql":checkboxIsSQL ,
 			"txtSql":$("#txtSql").val(),
 			"isActive":checkboxIsActive
@@ -361,28 +361,24 @@ var insertFn = function (param) {
 
 //--------  Insert  End
 
-//DropDownList Appraisal Level
+// --------------- DropDownList Appraisal Level ----------------
 var dropDownListAppraisalLevel = function(id){
 	//id = f_app_lv
 	//id = app_lv
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input form-control input-sm\" id=\""+id+"\" name=\""+id+"\"";
-	//html+="<option  value=''>All</option>";
+	html+="<select data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input form-control input-sm\" id=\""+id+"\" name=\""+id+"\">";
+	//html+="<option selected value=''>All</option>";
 	$.ajax ({
-		url:restfulURL+restfulPathCDS ,
+		url:restfulURL+":3001/api/tyw_appraisal_level" ,
 		type:"get" ,
 		dataType:"json" ,
-		headers:{Authorization:"Bearer "+tokenID.token},
+		//headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
 				
 				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry["appraisalLevel_id"]){
-					html+="<option selected value="+indexEntry["appraisalLevel"]+">"+indexEntry["appraisalLevel"]+"</option>";			
-				}else{
-					html+="<option  value="+indexEntry["appraisalLevel"]+">"+indexEntry["appraisalLevel"]+"</option>";	
-				}		
+				html+="<option  value="+indexEntry["appraisal_level_name"]+">"+indexEntry["appraisal_level_name"]+"</option>";		
 			});	
 
 		}
@@ -390,27 +386,26 @@ var dropDownListAppraisalLevel = function(id){
 	html+="</select>";
 	return html;
 };
-
-//DropDownList Connection
+ 
+// --------------- DropDownList Connection ---------------
 var dropDownListConnection = function(){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input form-control input-sm\" id=\"f_connection\" name=\"f_connection\"";
+	var htmlTmp="";
+	html+="<select data-toggle=\"tooltip\" title=\"Connection\" class=\"input form-control input-sm\" id=\"f_connection\" name=\"f_connection\">";
 	//html+="<option  value=''>All</option>";
 	$.ajax ({
-		url:restfulURL+restfulPathCDS ,
+		url:restfulURL+":3001/api/tyw_database_connection" ,
 		type:"get" ,
 		dataType:"json" ,
-		headers:{Authorization:"Bearer "+tokenID.token},
+		//headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
 				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry["txtConnection_id"]){
-					html+="<option selected value="+indexEntry["txtConnection"]+">"+indexEntry["txtConnection"]+"</option>";			
-				}else{
-					html+="<option  value="+indexEntry["txtConnection"]+">"+indexEntry["txtConnection"]+"</option>";	
-				}		
+				html+="<option  value="+indexEntry["database_type"]+">"+indexEntry["database_type"]+"</option>";
+				htmlTmp+="<option  value="+indexEntry["database_type"]+">"+indexEntry["database_type"]+"</option>";
 			});	
+			
 
 		}
 	});	
@@ -438,11 +433,70 @@ var executeFn = function (txtSQL) {
 
 		});	
 }
+//set paginate start
+var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
+	if(pageTotal==0){
+		pageTotal=1
+	}
+	$('.pagination_top,.pagination_bottom').off("page");
+	$('.pagination_top,.pagination_bottom').bootpag({
+	    total: pageTotal,//page Total
+	    page: pageIndex,//page index
+	    maxVisible: 5,//จำนวนปุ่ม
+	    leaps: true,
+	    firstLastUse: true,
+	    first: '←',
+	    last: '→',
+	    wrapClass: 'pagination',
+	    activeClass: 'active',
+	    disabledClass: 'disabled',
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    next: 'next',
+	    prev: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first'
+	}).on("page", function(event, num){
+		var rpp=10;
+		if($("#rpp").val()==undefined){
+			rpp=10;
+		}else{
+			rpp=$("#rpp").val();
+		}
+		
+		getDataFn(num,rpp);
+		
+	    $(".pagingNumber").remove();
+	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+	    $("body").append(htmlPageNumber);
+	   
+	}); 
+
+	$(".countPagination").off("change");
+	$(".countPagination").on("change",function(){
+
+		$("#countPaginationTop").val($(this).val());
+		$("#countPaginationBottom").val($(this).val());
+		
+		getDataFn(1,$(this).val());
+		
+		$(".rpp").remove();
+	    var htmlRrp= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+	    $("body").append(htmlRrp);
+	});
+}
+//set paginate end
 
 $(document).ready(function() {
-	
+	paginationSetUpFn(1,1,1);
 	
 	// ------------------- Common Data Set -------------------
+	
+	$("#dropDownListAppraisalLevel").html(dropDownListAppraisalLevel("app_lv"));
+	$("#dropDownListFromAppraisalLevel").html(dropDownListAppraisalLevel("f_app_lv"));
+	$("#dropDownListConnection").html(dropDownListConnection());
+	
+	
 	$("#btnSearchAdvance").click(function(){
 		//alert("2");
 		searchAdvanceFn($("#app_lv").val(),$("#cds_name").val());
