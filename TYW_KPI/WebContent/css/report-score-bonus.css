@@ -42,6 +42,17 @@ body{
 }
 .table-thead-bg{
  background-color: #ffcc33;
+ border-color:#dddddd;
+ color:black;
+}
+.table-tfoot-bg{
+ background-color: #FFFFCC;
+ border-color:#dddddd;
+}
+
+
+th, td {
+    border-color: #dddddd;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -56,3 +67,4 @@ body{
   border-color: #1da58a;
   color: #FFFFFF;
 }
+

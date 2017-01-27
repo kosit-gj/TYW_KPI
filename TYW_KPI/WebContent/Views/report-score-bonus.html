@@ -43,7 +43,7 @@
 					<div class="col-lg-2">
 						<div class="form-group p-xxs">
 							<label class="col-lg-4 p-t-xxs" >Year</label>
-							<div class="col-lg-8">
+							<div class="col-lg-8" id="dropDownListYear">
 								<select data-toggle="tooltip" title="Year"
 									class="input form-control input-sm col-lg-9" id="paramYear"
 									name="paramYear">
@@ -59,7 +59,7 @@
 					<div class="col-lg-3">
 					<div class="form-group p-xxs">
 							<label class="col-lg-5 p-t-xxs">Bonus Period</label>
-							<div class="col-lg-7">
+							<div class="col-lg-7" id="dropDownListBnPeriod">
 								<select data-toggle="tooltip" title="Bonus Period"
 									class="input form-control input-sm col-lg-9" id="paramBnPeriod"
 									name="paramBnPeriod">
@@ -74,7 +74,7 @@
 					<div class="col-lg-3">
 					<div class="form-group p-xxs">
 							<label class="col-lg-4 p-t-xxs">Department</label>
-							<div class="col-lg-8">
+							<div class="col-lg-8" id="dropDownListDepartment">
 								<select data-toggle="tooltip" title="Department"
 									class="input form-control input-sm col-lg-9" id="paramDepartment"
 									name="paramDepartment">
@@ -93,7 +93,7 @@
 					<div class="col-lg-3">
 					<div class="form-group p-xxs">
 							<label class="col-lg-5 p-t-xxs">Position Group</label>
-							<div class="col-lg-7">
+							<div class="col-lg-7" id="dropDownListPsGroup">
 								<select data-toggle="tooltip" title="Position Group"
 									class="input form-control input-sm col-lg-9" id="paramPsGroup"
 									name="paramPsGroup">
@@ -176,27 +176,27 @@
                    	  <div class='col-sm-12'>
 		                <div class="table-responsive">
 		               <!-- table-striped -->
-		               
-		                        <table class="table table-bordered" id="reportSumCusImplementedTable">
-		                            <thead >
+		               			
+		                        <table class="table " id="reportSumCusImplementedTable" style="border-color:#dddddd; " border="1">
+		                            <thead  >
 									
-									<tr  class="table-thead-bg">
-		                                 <th  rowspan=2 class="text-center" style="width:5%"> ลำดับ</th>
-		                                 <th  rowspan=2 class="text-center" style="width:20%"> รายละเอียด</th>
-		                                 <th  rowspan=2 class="text-center" style="width:20%"> &nbsp;</th>
-		                                 <th  rowspan=2 class="text-center" style="width:5%"> รวม<br>100 </th>
+									<tr  class="table-thead-bg"  >
+		                                 <th  rowspan=2 class="text-center" > ลำดับ</th>
+		                                 <th  rowspan=2 class="text-center" style="width:30%"> รายละเอียด</th>
+		                                 <th  rowspan=2 class="text-center" > &nbsp;</th>
+		                                 <th  rowspan=2 class="text-center" > รวม<br>100 </th>
 		                                 <th  colspan=3 class="text-center">
 		                                 	<div class="text-center">
-		                                 		<span> โบนัสจริง ประจำปี&nbsp;&nbsp;</span>
+		                                 		<span> โบนัสจริง ประจำปี&nbsp;</span>
 		                                 		<span id="txtParamYear">2017</span>
-		                                 		<span>&nbsp;&nbsp;</span>
+		                                 		<span></span>
 		                                 		<span id="txtParamBnPeriod">งวดที่ 1</span>
 		                                 	</div>
 		                                 	 
 		                                 </th>
 		                                 
 		                            </tr >
-		                            <tr  class="table-thead-bg">
+		                            <tr  class="table-thead-bg"  >
 		                            	<th style="width:auto" class="text-center"> เงินเดือน</th>
 		                            	<th style="width:auto" class="text-center"> เดือนโบนัส</th>
 		                            	<th style="width:auto" class="text-center"> ยอดโบนัส</th>
@@ -207,7 +207,10 @@
 		                            <tbody id="listDataReport">
 		                            
 		                            
-		                       </tbody>
+		                       		</tbody>
+		                       		<tfoot id="footDataReport" class="table-tfoot-bg">
+		                       		
+		                       		</tfoot>
 		                   </table>
 		               </div>
 		          	</div>
@@ -290,7 +293,7 @@
     
     <script src="../js/jquery.mloading.js"></script>
     
-    <!-- <script src="../Controller/report-score-bonus.js"></script> -->
+    <script src="../Controller/report-score-bonus.js"></script>
 
 
 </body>

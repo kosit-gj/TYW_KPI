@@ -20,7 +20,7 @@
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/tywMain.css" rel="stylesheet">
     <link href="../css/index.css" rel="stylesheet">
-    <link href="../css/report-adjustment-balance-year.css" rel="stylesheet">
+    <link href="../css/report-saraly-adjustment-year.css" rel="stylesheet">
 </head>
 <body>
 
@@ -39,10 +39,10 @@
 
 			<div class="ibox-content">
 				<div class="row">
-					<div class="col-lg-2">
+					<div class="col-lg-2 col-md-2">
 						<div class="form-group p-xxs">
-							<label class="col-lg-4 p-t-xxs" >Year</label>
-							<div class="col-lg-8">
+							<label class="col-lg-4 col-md-4 p-t-xxs" >Year</label>
+							<div class="col-lg-8 col-md-8" id="dropDownListYear">
 								<select data-toggle="tooltip" title="Year"
 									class="input form-control input-sm col-lg-9" id="paramYear"
 									name="paramYear">
@@ -55,13 +55,13 @@
 						</div>
 					</div>
 
-					<div class="col-lg-3">
+					<div class="col-lg-3 col-md-3">
 					<div class="form-group p-xxs">
-							<label class="col-lg-5 p-t-xxs">Bonus Period</label>
-							<div class="col-lg-7">
-								<select data-toggle="tooltip" title="Month"
-									class="input form-control input-sm col-lg-9" id="paramBnPeriod"
-									name="paramBnPeriod">
+							<label class="col-lg-5 col-md-6 p-t-xxs">Bonus Period</label>
+							<div class="col-lg-7 col-md-6" id="dropDownListSalaryPeriod">
+								<select data-toggle="tooltip" title="Salary Period"
+									class="input form-control input-sm col-lg-9" id="paramSalaryPeriod"
+									name="paramSalaryPeriod">
 									<option>งวดที่ 1</option>
 									<option>งวดที่ 2</option>
 								</select>
@@ -70,10 +70,10 @@
 						</div>
 					
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 col-md-3">
 					<div class="form-group p-xxs">
-							<label class="col-lg-4 p-t-xxs">Department</label>
-							<div class="col-lg-8">
+							<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
+							<div class="col-lg-8 col-md-7 " id="dropDownListDepartment">
 								<select data-toggle="tooltip" title="Department"
 									class="input form-control input-sm col-lg-9" id="paramDepartment"
 									name="paramDepartment">
@@ -89,10 +89,10 @@
 						</div>
 					</div>
 					
-					<div class="col-lg-3">
+					<div class="col-lg-3 col-md-3">
 					<div class="form-group p-xxs">
-							<label class="col-lg-5 p-t-xxs">Position Group</label>
-							<div class="col-lg-7">
+							<label class="col-lg-5 col-md-6 p-t-xxs">Position Group</label>
+							<div class="col-lg-7 col-md-6">
 								<select data-toggle="tooltip" title="Position Group"
 									class="input form-control input-sm col-lg-9" id="paramPsGroup"
 									name="paramPsGroup">
@@ -109,7 +109,7 @@
 						</div>
 					</div>
 					
-					<div class="col-lg-1 p-b-xxs">
+					<div class="col-lg-1 col-md-1 p-b-xxs">
 					<div class="form-group p-xxs ">
 	
 							<div class="form-group pull-right  m-b-none">
@@ -117,7 +117,7 @@
 								
 								<button type="button" class="btn btn-grey input-sm"
 									name="btnSearchAdvance" id="btnSearchAdvance">
-									&nbsp;<i class="fa fa-search"></i>&nbsp;View&nbsp;&nbsp;
+									<i class="fa fa-search"></i>&nbsp;View&nbsp;
 								</button>
 
 							</div>
@@ -175,7 +175,7 @@
 		                <div class="table-responsive" style="border-color:#dddddd">
 		               <!-- table-striped -->
 		               
-		                        <table class="table " id="reportSumCusImplementedTable" border="1" style="border-color:#dddddd">
+		                        <table class="table " id="reportSumCusImplementedTable" border="1" style="border-color:#dddddd; ">
 		                            <thead style="border-color:#dddddd" >
 									
 									<tr  class="table-thead-bg" >
@@ -275,7 +275,7 @@
     
     <script src="../js/jquery.mloading.js"></script>
     
-    <!-- <script src="../Controller/report-adjustment-balance-year.js"></script> -->
+    <script src="../Controller/report-saraly-adjustment-year.js"></script> 
 
 
 </body>

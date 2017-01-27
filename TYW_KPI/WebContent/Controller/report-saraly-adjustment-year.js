@@ -1,20 +1,17 @@
 //IP Server : 171.96.201.146
 var restfulURL="http://171.96.200.20";
-var restfulPathReport=":3001/api/tyw_report_score_bonus/";
-
-
+var restfulPathReport=":3001/api/tyw_report_salary_adjustment_year/";
 //-------- SearchFn Start
-var searchAdvanceFn = function (Year,BnPeriod,Department,PsGroup) {
+var searchAdvanceFn = function (Year,SalaryPeriod,Department,PsGroup) {
 	//embed parameter start
 	var htmlParam="";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Year' name='param_Year' value='"+Year+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_SalaryPeriod' name='param_BnPeriod' value='"+BnPeriod+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_SalaryPeriod' name='param_SalaryPeriod' value='"+SalaryPeriod+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Department' name='param_Department' value='"+Department+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_PsGroup' name='param_PsGroup' value='"+PsGroup+"'>";
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
-
 	
 	$.ajax({
 		url : restfulURL+restfulPathReport,
@@ -23,7 +20,7 @@ var searchAdvanceFn = function (Year,BnPeriod,Department,PsGroup) {
 //		data:{
 /*		
 		"department_ame":$("#param_Year").val(),
-		"section_name":$("#param_BnPeriod").val(),
+		"section_name":$("#param_SalaryPeriod").val(),
 		"position_name":$("#param_Department").val(),
 		"emp_name":$("#param_PsGroup").val(),*/
 
@@ -48,11 +45,6 @@ var listReportFn = function(data) {
 	$("#listDataReport").empty();
 	
 	var htmlTable = "";
-	var htmlFootTable = "";
-	var saraly=[];
-	var sumSaraly=0;
-	var totalSaraly=[];
-	var sumTotalSaraly=0;
 
 	$.each(data,function(index,indexEntry) {
 		//console.log();
@@ -60,54 +52,20 @@ var listReportFn = function(data) {
 		
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td class='columnSearch'>"+(index+1)+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["description"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["performance_score"]+"</td>";
-		htmlTable += "<td class='objectCenter'>"+indexEntry["total_performance_score"]+"</td>";
-		htmlTable += "<td class='objectCenter'>"+indexEntry["saraly"]+"</td>";
-		htmlTable += "<td class='objectCenter'>"+indexEntry["bonus"]+"</td>";
-		htmlTable += "<td class='objectCenter'>"+indexEntry["total_saraly"]+"</td>";
+		htmlTable += "<td class='columnSearch'>"+indexEntry["emp_code"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+indexEntry["emp_name"]+"</td>";
+		htmlTable += "<td class='columnSearch'>"+indexEntry["position"]+"</td>";
+		htmlTable += "<td class='columnSearch'>"+indexEntry["salary_old"]+"</td>";
+		htmlTable += "<td class='columnSearch'>"+indexEntry["salary_adjustment"]+"</td>";
+		htmlTable += "<td class='columnSearch'>"+indexEntry["salary_new"]+"</td>";
 		htmlTable += "</tr>";
-		
-		saraly[index]=indexEntry["saraly"];
-		totalSaraly[index]=indexEntry["total_saraly"];
-		
 	});
-	$.each(saraly,function(index){
-		sumSaraly += saraly[index];
-	});
-	$.each(totalSaraly,function(index){
-		sumTotalSaraly += totalSaraly[index];
-	});
-	function addCommas(nStr)
-	{
-	    nStr += '';
-	    x = nStr.split('.');
-	    x1 = x[0];
-	    x2 = x.length > 1 ? '.' + x[1] : '';
-	    var rgx = /(\d+)(\d{3})/;
-	    while (rgx.test(x1)) {
-	        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-	    }
-	    return x1 + x2;
-	}
-	
-	htmlFootTable += "<tr class='rowSearch'>";
-	htmlFootTable += "<td class='objectCenter' colspan=\"3\"><h3>รวมทั้งสิ้น</h3></td>";
-	htmlFootTable += "<td class='objectCenter'></td>";
-	htmlFootTable += "<td class='objectCenter'><h4>"+sumSaraly+"</h4></td>";
-	htmlFootTable += "<td class='objectCenter'></td>";
-	htmlFootTable += "<td class='objectCenter'><h4>"+sumTotalSaraly+"</h4></td>";
-	htmlFootTable += "</tr>";
-	
 	//alert("ผ่าน");
 	$("#listDataReport").html(htmlTable);
-	$("#footDataReport").html(htmlFootTable);
 	
 	
 }
 //--------  ListData  End
-
-
 
 
 //DropDownList Year
@@ -131,11 +89,11 @@ var dropDownListYear = function(){
 	return html;
 };
 
-//DropDownList BnPeriod
-var dropDownListBnPeriod = function(year){
-	//console.log("Year : "+year);
+//DropDownList SalaryPeriod
+var dropDownListSalaryPeriod = function(year){
+	console.log("Year : "+year);
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Bonus Period\" class=\"input form-control input-sm\" id=\"paramBnPeriod\" name=\"paramBnPeriod\" >";
+	html+="<select data-toggle=\"tooltip\" title=\"Salary Period\" class=\"input form-control input-sm\" id=\"paramSalaryPeriod\" name=\"paramSalaryPeriod\" >";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+":3001/api/tyw_year/" ,
@@ -211,29 +169,28 @@ var dropDownListPsGroup = function(){
 
 
 $(document).ready(function() {
+	
 	$("#dropDownListYear").html(dropDownListYear());
-	$("#dropDownListBnPeriod").html(dropDownListBnPeriod($("#paramYear").val()));
+	$("#dropDownListSalaryPeriod").html(dropDownListSalaryPeriod($("#paramYear").val()));
 	$("#dropDownListDepartment").html(dropDownListDepartment());
 	$("#dropDownListPsGroup").html(dropDownListPsGroup());
 	
 	$("#paramYear").change(function(){  
-		$("#dropDownListBnPeriod").html(dropDownListBnPeriod($("#paramYear").val()));
+		$("#dropDownListSalaryPeriod").html(dropDownListSalaryPeriod($("#paramYear").val()));
 	});
+
 	
 	$("#btnSearchAdvance").click(function(){
 		searchAdvanceFn(
 				$("#paramYear").val(),
-				$("#paramBnPeriod").val(),
+				$("#paramSalaryPeriod").val(),
 				$("#paramDepartment").val(),
 				$("#paramPsGroup").val()
 				);
-		document.getElementById('txtParamYear').innerHTML = $("#paramYear").val();
-		document.getElementById('txtParamBnPeriod').innerHTML = $("#paramBnPeriod").val();
 
 		return false;
 	});
 	$("#btnSearchAdvance").click();
-		
 	
 	
 	

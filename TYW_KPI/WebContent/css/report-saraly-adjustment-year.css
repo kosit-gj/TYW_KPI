@@ -50,6 +50,7 @@ padding:10px;
 }
 .table-thead-bg{
  background-color: #ffcc33;
+ color:black;
 }
 .btn-primary:hover,
 .btn-primary:focus,
