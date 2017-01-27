@@ -378,7 +378,7 @@ var dropDownListAppraisalLevel = function(id){
 				
 				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
-				html+="<option  value="+indexEntry["appraisal_level_name"]+">"+indexEntry["appraisal_level_name"]+"</option>";		
+				html+="<option  value="+(index+1)+">"+indexEntry["appraisal_level_name"]+"</option>";		
 			});	
 
 		}
@@ -552,35 +552,43 @@ $(document).ready(function() {
 //		 
 //	});
 	
-	//Auto Complete Cds Name start
-//	$("#cds_name").autocomplete({
-//        source: function (request, response) {
-//        	 $.ajax({
-//				    url:restfulURL+".......",
-//				    type:"get",
-//				    dataType:"json",
-//					//headers:{Authorization:"Bearer "+tokenID.token},
-//					data:{"q":request.term},
-//					async:false,
-//                    error: function (xhr, textStatus, errorThrown) {
-//                        alert('Error: ' + xhr.responseText);
-//                    },
-//				    success:function(data){
-//					
-//						response($.map(data, function (item) {
-//                            return {
-//                                label: item.desc,
-//                                value: item.desc
-//                            }
-//                        }));
-//					
-//				    }
-//				   });
-//        	
-//        }
-//    });
-    
-  //Auto Complete Cds Name end
+
+	
+	//Autocomplete Search Start
+	$("#cds_name").autocomplete({
+        source: function (request, response) {
+        	$.ajax({
+				 url:"http://192.168.1.52/tyw_api/public/cds/auto_cds",
+				 type:"post",
+				 dataType:"json",
+				 headers:{Authorization:"Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS41MlwvdHl3X2FwaVwvcHVibGljXC9zZXNzaW9uIiwiaWF0IjoxNDg1NTExMDY1LCJleHAiOjE0ODU1NDcwNjUsIm5iZiI6MTQ4NTUxMTA2NSwianRpIjoiMGI3MDc2M2YxZDIwNDA1MjQ5OTZjOGFkZGJmNzE3NTgifQ.9ONxtSXN_E0_DjYWoOhX5awFMw2PVeCbc6dbfiFvAYI"},
+//tokenID.token
+//appraisal_level_id,
+//cds_name
+				 data:{"appraisal_level_id":$("#app_lv").val(),"cds_name":request.term},
+				 //async:false,
+                 error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error: ' + xhr.responseText);
+                    },
+				 success:function(data){
+					
+						response($.map(data, function (item) {
+                            return {
+                                label: item.cds_name,
+                                value: item.cds_name
+                            };
+                        }));
+					
+				},
+				beforeSend:function(){
+					$("body").mLoading('hide');	
+				}
+				
+				});
+        }
+    });
+   
+	//Autocomplete Search End
 	
 	
 	
