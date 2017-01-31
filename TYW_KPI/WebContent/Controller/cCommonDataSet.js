@@ -37,14 +37,14 @@ var clearFn = function() {
 	$("#modalDescription").html("Add Common Data Set");
 	$("#f_cds_name").val("");
 	$("#f_cds_description").val("");
-	$("#txtSQL").val("");
-	$("#txtSampleData").val("");
-	$("#txtSampleData").removeAttr("disabled");
+	$("#txt_sql").val("");
+	$("#txt_sample_data").val("");
+	$("#txt_sample_data").removeAttr("disabled");
 	
-	$("#btnExecute").removeAttr("disabled");
+	$("#btn_execute").removeAttr("disabled");
 	
-	$("#checkboxIsSQL").prop("checked",false);
-	$("#checkboxIsActive").prop("checked",false);
+	$("#checkbox_is_sql").prop("checked",false);
+	$("#checkbox_is_active").prop("checked",false);
 	
 	
 	
@@ -57,8 +57,8 @@ var clearFn = function() {
 //--------  GetData Start
 var getDataFn = function(page,rpp){
 	//alert("Page : "+page+" - Rpp : "+rpp);
-	var AppraisalLv= $("#paramAppraisalLv").val();
-	var CdsName= $("#paramCdsId").val();
+	var AppraisalLv= $("#param_Appraisal_Lv").val();
+	var CdsName= $("#param_CDS_Id").val();
 	$.ajax({
 		url : restfulURL+restfulPathCDS,
 		type : "get",
@@ -82,13 +82,13 @@ var getDataFn = function(page,rpp){
 //--------  GetData End
 
 // -------- Search Start
-var searchAdvanceFn = function (AppraisalLv,cds_id) {
+var searchAdvanceFn = function (AppraisalLv,cdsId) {
 	//embed parameter start
 	
 	var htmlParam="";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='paramAppraisalLv' name='paramAppraisalLv' value='"+AppraisalLv+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='paramCdsId' name='paramCdsId' value='"+cds_id+"'>";
-	$(".paramEmbed").remove();
+	htmlParam+="<input type='hidden' class='param_Embed' id='param_Appraisal_Lv' name='param_Appraisal_Lv' value='"+AppraisalLv+"'>";
+	htmlParam+="<input type='hidden' class='param_Embed' id='param_CDS_Id' name='param_CDS_Id' value='"+cdsId+"'>";
+	$(".param_Embed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
 	
@@ -111,30 +111,30 @@ var findOneFn = function(id) {
 			
 			//Appraisal Level
 			//$("#f_app_lv").val(data['appraisal_level_id']);
-			$("#dropDownListFromAppraisalLevel").html(dropDownListAppraisalLevel(data['appraisal_level_id'],"f_app_lv"));
+			$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel(data['appraisal_level_id'],"f_app_lv"));
 			//Connection
 			
 			//$("#f_connection").val(data['connection_id']);
-			$("#dropDownListConnection").html(dropDownListConnection(data['connection_id']));
+			$("#drop_down_list_connection").html(dropDownListConnection(data['connection_id']));
 			
 			//IsSQL
 			if(data['is_sql']==1){
-				$('#checkboxIsSQL').prop('checked', true);
-				$("#btnExecute").removeAttr("disabled");
+				$('#checkbox_is_sql').prop('checked', true);
+				$("#btn_execute").removeAttr("disabled");
 			}else{
-				$('#checkboxIsSQL').prop('checked', false);
-				$("#btnExecute").attr("disabled","disabled");
+				$('#checkbox_is_sql').prop('checked', false);
+				$("#btn_execute").attr("disabled","disabled");
 			}
 			
 			//IsAction
 			if(data['is_active']==1){
-				$('#checkboxIsActive').prop('checked', true);
+				$('#checkbox_is_active').prop('checked', true);
 			}else{
-				$('#checkboxIsActive').prop('checked', false);
+				$('#checkbox_is_active').prop('checked', false);
 			}
 			
-			$("#txtSQL").val(data['cds_sql']);
-			//$("#txtSampleData").val(data['txtSampleData']);
+			$("#txt_sql").val(data['cds_sql']);
+			//$("#txt_sample_data").val(data['txtSampleData']);
 			
 			
 
@@ -153,7 +153,7 @@ var listCommonDataSetFn = function(data) {
 	var IsSQL ="";
 	var IsActive ="";
 	$.each(data,function(index,indexEntry) {
-		console.log(indexEntry["cdsName"]+indexEntry["appraisalLevel"]+indexEntry["isSql"]+indexEntry["isActive"]);
+		//console.log(indexEntry["cdsName"]+indexEntry["appraisalLevel"]+indexEntry["isSql"]+indexEntry["isActive"]);
 		if (indexEntry["is_sql"]== "1"){
 			IsSQL = "<input disabled type='checkbox' name='is_sql' id='is_sql' checked value='1'>";
 		}else if (indexEntry["is_sql"]== "0"){
@@ -194,10 +194,10 @@ var listCommonDataSetFn = function(data) {
 			$(this).parent().parent().parent().children().click();
 			//alert($(this).parent().parent().parent().children().click());
 			$("#btnAddAnother").hide();
-			//$("#txtSampleData").attr("disabled","disabled"); 
+			//$("#txt_sample_data").attr("disabled","disabled"); 
 			clearFn();
 			findOneFn(this.id);
-			//alert($("#checkboxIsSQL:checked").is(":checked"));
+			//alert($("#checkbox_is_sql:checked").is(":checked"));
 			
 			$("#id").val(this.id);
 			$("#action").val("edit");
@@ -251,12 +251,12 @@ var updateFn = function () {
 	var IsSQL = "";
 	var IsAction="";
 	
-	if($("#checkboxIsSQL:checked").is(":checked")){
+	if($("#checkbox_is_sql:checked").is(":checked")){
 		checkboxIsSQL="1";
 	}else{
 		checkboxIsSQL="0";
 	}
-	if($("#checkboxIsActive:checked").is(":checked")){
+	if($("#checkbox_is_active:checked").is(":checked")){
 		checkboxIsActive="1";
 	}else{
 		checkboxIsActive="0";
@@ -272,7 +272,7 @@ var updateFn = function () {
 			"appraisal_level_id":$("#f_app_lv").val(),
 			"connection_id":$("#f_connection").val(),
 			"is_sql":checkboxIsSQL ,
-			"cds_sql":$("#txtSQL").val(),
+			"cds_sql":$("#txt_sql").val(),
 			"is_active":checkboxIsActive
 		},	
 		//headers:{Authorization:"Bearer "+tokenID.token},
@@ -300,12 +300,12 @@ var insertFn = function (param) {
 	 var checkboxIsSQL = "";
 	 var checkboxIsActive = "";
 	 
-	if($("#checkboxIsSQL:checked").is(":checked")){
+	if($("#checkbox_is_sql:checked").is(":checked")){
 		checkboxIsSQL="1";
 	}else{
 		checkboxIsSQL="0";
 	}
-	if($("#checkboxIsActive:checked").is(":checked")){
+	if($("#checkbox_is_active:checked").is(":checked")){
 		checkboxIsActive="1";
 	}else{
 		checkboxIsActive="0";
@@ -321,7 +321,7 @@ var insertFn = function (param) {
 			"appraisal_level_id":$("#f_app_lv").val(),
 			"connection_id":$("#f_connection").val(),
 			"is_sql":checkboxIsSQL ,
-			"cds_sql":$("#txtSQL").val(),
+			"cds_sql":$("#txt_sql").val(),
 			"is_active":checkboxIsActive
 		},	
 		//headers:{Authorization:"Bearer "+tokenID.token},
@@ -340,8 +340,8 @@ var insertFn = function (param) {
 						//alert("saveAndAnother" );
 						getDataFn($("#pageNumber").val(),$("#rpp").val());
 						clearFn();
-						$("#checkboxIsSQL").prop("checked",true);
-						$("#checkboxIsActive").prop("checked",true);
+						$("#checkbox_is_sql").prop("checked",true);
+						$("#checkbox_is_active").prop("checked",true);
 						callFlashSlideInModal("Insert Data is Successfully.");
 					}
 			}else if (data['status'] == "400") {
@@ -429,7 +429,7 @@ var executeFn = function (txtSQL) {
 		success : function(data) {
 			// galbalDqsRoleObj=data;
 			if (data['status'] == "200") {
-				$("#txtSampleData").val(data['txtExecute']);
+				$("#txt_sample_data").val(data['txtExecute']);
 
 			} else if (data['status'] == "400") {
 
@@ -444,19 +444,19 @@ $(document).ready(function() {
 	
 	// ------------------- Common Data Set -------------------
 	
-	$("#dropDownListAppraisalLevel").html(dropDownListAppraisalLevel("","app_lv"));
-	$("#dropDownListFromAppraisalLevel").html(dropDownListAppraisalLevel("","f_app_lv"));
-	$("#dropDownListConnection").html(dropDownListConnection());
+	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel("","app_lv"));
+	$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel("","f_app_lv"));
+	$("#drop_down_list_connection").html(dropDownListConnection());
 	
 	$("#cds_name").val("");
 	$("#cds_id").val("");
-	$("#btnSearchAdvance").click(function(){
+	$("#btn_search_advance").click(function(){
 		///alert($("#cds_name").val().split("-", 1));
 		searchAdvanceFn($("#app_lv").val(),$("#cds_name").val().split("-", 1));
 		
 		return false;
 	});
-	$("#btnSearchAdvance").click();
+	$("#btn_search_advance").click();
 	
 	
 	
@@ -464,8 +464,8 @@ $(document).ready(function() {
 	$("#btnAddCommonDataSet").click(function(){
 		clearFn();
 		$("#btnAddAnother").show();
-		$("#checkboxIsSQL").prop("checked",true);
-		$("#checkboxIsActive").prop("checked",true);
+		$("#checkbox_is_sql").prop("checked",true);
+		$("#checkbox_is_active").prop("checked",true);
 		
 	});
 	
@@ -485,18 +485,18 @@ $(document).ready(function() {
 	$(".btnCancle").click(function() {
 		clearFn();
 	});
-	$("#checkboxIsSQL").change(function name() {
-		if($("#checkboxIsSQL:checked").is(":checked")){
-			$("#btnExecute").removeAttr("disabled");
+	$("#checkbox_is_sql").change(function name() {
+		if($("#checkbox_is_sql:checked").is(":checked")){
+			$("#btn_execute").removeAttr("disabled");
 			//executeFn();
 		}else{
-			$("#btnExecute").attr("disabled","disabled");
+			$("#btn_execute").attr("disabled","disabled");
 		}
 	});
 	
-//	$("#btnExecute").attr("disabled","disabled");
-//	 $("#btnExecute").click(function () {
-//		if ($("#checkboxIsSQL:checked").is(":checked")) {
+//	$("#btn_execute").attr("disabled","disabled");
+//	 $("#btn_execute").click(function () {
+//		if ($("#checkbox_is_sql:checked").is(":checked")) {
 //			alert("Execute");
 //			//executeFn();
 //		} else {
