@@ -103,4 +103,11 @@ body{
 }
 #ui-datepicker-div ,.ui-datepicker { z-index: 99999 !important; }
 
-s
+.from_data_role, .selectEmpCheckbox{
+	cursor: pointer;
+	height: 17px;
+	width: 17px;
+}
+.checkbox label, .radio label {
+    cursor:default;
+}

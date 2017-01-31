@@ -1,8 +1,14 @@
 //Global variable
 var galbalDataImportEmp=[];
-//IP Server : 171.96.201.146
-var restfulURL="http://171.96.200.20";
-var restfulPathImportEmployee=":3001/api/tyw_import_employee/";
+var restfulPathImportEmployee="/tyw_api/public/import_employee";
+var restfulPathRole="/tyw_api/public/import_employee/role_list";
+
+var restfulPathDropDownDepartment="/tyw_api/public/import_employee/dep_list";
+var restfulPathDropDownSection="/tyw_api/public/import_employee/sec_list";
+
+var restfulPathPositionAutocomplete="/tyw_api/public/import_employee/auto_position_name";
+var restfulPathEmployeeAutocomplete="/tyw_api/public/import_employee/auto_employee_name";
+
 //Check Validation Start
 var validationFn = function(data){
 	var validate="";
@@ -16,25 +22,25 @@ var validationFn = function(data){
 
 //--------  Clear Start 
 var clearFn = function() {
-	$("#fromEmpEmpCode").val("");
-	$("#fromEmpEmpName").val("");
-	$("#fromEmpWSD").val("");
-	$("#fromEmpPED").val("");
-	$("#fromEmpAED").val("");
-	$("#fromEmpDepartmentCode").val("");
-	$("#fromEmpDepartmentName").val("");
-	$("#fromEmpSectionCode").val("");
-	$("#fromEmpSectionName").val("");
-	$("#fromEmpPositionCode").val("");
-	$("#fromEmpPositionName").val("");
-	$("#fromEmpPositionGroup").val("");
-	$("#fromEmpSupEmpCode").val("");
-	$("#fromEmpEmail").val("");
-	$("#fromEmpSalary").val("");
-	$("#fromEmpErpUser").val("");
+	$("#from_emp_code").val("");
+	$("#from_emp_name").val("");
+	$("#from_emp_wsd").val("");
+	$("#from_emp_ped").val("");
+	$("#from_emp_aed").val("");
+	$("#from_department_code").val("");
+	$("#from_department_name").val("");
+	$("#from_section_code").val("");
+	$("#from_section_name").val("");
+	$("#from_position_code").val("");
+	$("#from_position_name").val("");
+	$("#from_position_group").val("");
+	$("#from_sup_emp_code").val("");
+	$("#from_emp_email").val("");
+	$("#from_emp_salary").val("");
+	$("#from_emp_erp_user").val("");
 	
-	$("#checkboxIsCorporateKPI").prop("checked",false);
-	$("#checkboxIsActive").prop("checked",false);
+	$("#from_checkboxIs_corporate_kpi").prop("checked",false);
+	$("#from_checkboxIs_active").prop("checked",false);
 	
 	 $(".from_data_role").prop('checked', false); 
 
@@ -48,19 +54,28 @@ var clearFn = function() {
 
 //--------  GetData Start
 var getDataFn = function(page,rpp){
+	var department= $("#param_Department").val();
+	var section= $("#param_Section").val();
+	var position= $("#param_Position").val();
+	var empName= $("#param_EmpName").val();
 	$.ajax({
 		url : restfulURL+restfulPathImportEmployee,
 		type : "get",
 		dataType : "json",
-		//data:{"page":page,"rpp":rpp},
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"page":page,"rpp":rpp,
+			"department_code":department,
+			"section_code":section,
+			"position_code":position,
+			"emp_code":empName
+		},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
 			
-			listImportEmployeeFn(data);
+			listImportEmployeeFn(data['data']);
 			//total
 			galbalDataImportEmp=data;
-			//paginationSetUpFn(galbalDataImportEmp['current_page'],galbalDataImportEmp['last_page'],galbalDataImportEmp['last_page']);
+			paginationSetUpFn(galbalDataImportEmp['current_page'],galbalDataImportEmp['last_page'],galbalDataImportEmp['last_page']);
 		}
 	});
 	
@@ -79,38 +94,38 @@ var findOneFn = function(id,txtFrom) {
 		success : function(data) {		
 			//alert(txtFrom + " Name : "+data['emp_name']);
 			if(txtFrom == "Role"){
-				document.getElementById('fromRoleEmpName').innerHTML = data['emp_name'];
+				document.getElementById('from_role_emp_name').innerHTML = data['emp_name'];
 			}else{
 				
-				$("#fromEmpEmpCode").val(data['emp_code']);
-				$("#fromEmpEmpName").val(data['emp_name']);
-				$("#fromEmpWSD").val(data['working_start_date']);
-				$("#fromEmpPED").val(data['probation_end_date']);
-				$("#fromEmpAED").val(data['acting_end_date']);
-				$("#fromEmpDepartmentCode").val(data['department_code']);
-				$("#fromEmpDepartmentName").val(data['department_ame']);
-				$("#fromEmpSectionCode").val(data['section_code']);
-				$("#fromEmpSectionName").val(data['section_name']);
-				$("#fromEmpPositionCode").val(data['position_code']);
-				$("#fromEmpPositionName").val(data['position_name']);
-				$("#fromEmpPositionGroup").val(data['position_group']);
-				$("#fromEmpSupEmpCode").val(data['supervisor_emp_code']);
-				$("#fromEmpEmail").val(data['email']);
-				$("#fromEmpSalary").val(data['salary']);
-				$("#fromEmpErpUser").val(data['erp_user']);
+				$("#from_emp_code").val(data['emp_code']);
+				$("#from_emp_name").val(data['emp_name']);
+				$("#from_emp_wsd").val(data['working_start_date']);
+				$("#from_emp_ped").val(data['probation_end_date']);
+				$("#from_emp_aed").val(data['acting_end_date']);
+				$("#from_department_code").val(data['department_code']);
+				$("#from_department_name").val(data['department_ame']);
+				$("#from_section_code").val(data['section_code']);
+				$("#from_section_name").val(data['section_name']);
+				$("#from_position_code").val(data['position_code']);
+				$("#from_position_name").val(data['position_name']);
+				$("#from_position_group").val(data['position_group']);
+				$("#from_sup_emp_code").val(data['supervisor_emp_code']);
+				$("#from_emp_email").val(data['email']);
+				$("#from_emp_salary").val(data['salary']);
+				$("#from_emp_erp_user").val(data['erp_user']);
 				
 				
 				//isCorporateKPI
 				if(data['isCorporateKPI']==1){
-					$('#checkboxIsCorporateKPI').prop('checked', true);
+					$('#from_checkboxIs_corporate_kpi').prop('checked', true);
 				}else{
-					$('#checkboxIsCorporateKPI').prop('checked', false);
+					$('#from_checkboxIs_corporate_kpi').prop('checked', false);
 				}
 				//IsAction
 				if(data['IsActive']==1){
-					$('#checkboxIsActive').prop('checked', true);
+					$('#from_checkboxIs_active').prop('checked', true);
 				}else{
-					$('#checkboxIsActive').prop('checked', false);
+					$('#from_checkboxIs_active').prop('checked', false);
 				}	
 				
 			}
@@ -133,28 +148,7 @@ var searchAdvanceFn = function (Department,Section,Position,EmployeeName) {
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
-	
-	$.ajax({
-		url : restfulURL+restfulPathImportEmployee,
-		type : "get",
-		dataType : "json",
-//		data:{
-/*		
-		"department_ame":$("#param_Department").val(),
-		"section_name":$("#param_Section").val(),
-		"position_name":$("#param_Position").val(),
-		"emp_name":$("#param_EmpName").val(),*/
-
-//		},
-		//headers:{Authorization:"Bearer "+tokenID.token},
-		success : function(data) {
-
-			listImportEmployeeFn(data);
-			galbalDataImportEmp=data;
-			//paginationSetUpFn(galbalDataImportEmp['current_page'],galbalDataImportEmp['last_page'],galbalDataImportEmp['last_page']);
-			
-		}
-	});
+	getDataFn($("#pageNumber").val(),$("#rpp").val());
 	
 	
 }
@@ -169,32 +163,30 @@ var listImportEmployeeFn = function(data) {
 	$("#listEmployee").empty();
 	
 	var htmlTable = "";
-	var IsSQL ="";
-	var IsActive ="";
+//	var IsSQL ="";
+//	var IsActive ="";
 	$.each(data,function(index,indexEntry) {
 		//console.log();
-		if (indexEntry["IsActive"]=="1"){
-			IsActive = "<input disabled type='checkbox' name='is_active' id='is_active' checked value='1'>";
-		}else if (indexEntry["IsActive"]=="0"){
-			IsActive = "<input disabled type='checkbox' name='is_active' id='is_active'  value='0'>";
-		}
-		
+//		if (indexEntry["IsActive"]=="1"){
+//			IsActive = "<input disabled type='checkbox' name='is_active' id='is_active' checked value='1'>";
+//		}else if (indexEntry["IsActive"]=="0"){
+//			IsActive = "<input disabled type='checkbox' name='is_active' id='is_active'  value='0'>";
+//		}
 		htmlTable += "<tr class='rowSearch'>";
-		htmlTable += "<td class='objectCenter'>"+"<input type=\"checkbox\" class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["_id"]+" >"+ "</td>";
+		htmlTable += "<td class='objectCenter '>"+"<div class='checkbox m-n '><input  style=\"margin-top:1px;\" type=\"checkbox\" class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" ><label> </label></div>"+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["position_group"]+"</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["department_ame"]+"</td>";
+		htmlTable += "<td class='columnSearch'>"+indexEntry["department_name"]+"</td>";
 		htmlTable += "<td class='columnSearch'>"+indexEntry["section_name"]+"</td>";
 		htmlTable += "<td class='columnSearch'>"+indexEntry["position_name"]+"</td>";
 		htmlTable += "<td class='columnSearch'>"+indexEntry["position_group"]+"</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["supervisor_emp_code"]+"</td>";
-		htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
+		htmlTable += "<td class='columnSearch'>"+indexEntry["chief_emp_code"]+"</td>";
+		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalRole data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalRole data-toggle='modal'&gt;Role&lt;/button&gt;
 		htmlTable += "<td class='objectCenter'><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
-				"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalRole data-toggle='modal'>Ruld</button>&nbsp;" +
-				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["_id"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
+				"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_code"]+ " data-target=#ModalRole data-toggle='modal'>Ruld</button>&nbsp;" +
+				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["_id"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 	});
@@ -426,13 +418,13 @@ var updateFn = function () {
 	var IsCorporateKPI = "";
 	var IsAction="";
 	//isCorporateKPI
-	if($("#checkboxIsCorporateKPI:checked").is(":checked")){
+	if($("#from_checkboxIs_corporate_kpi:checked").is(":checked")){
 		IsCorporateKPI="1";
 	}else{
 		IsCorporateKPI="0";
 	}
 	//IsAction
-	if($("#checkboxIsActive:checked").is(":checked")){
+	if($("#from_checkboxIs_active:checked").is(":checked")){
 		checkboxIsActive="1";
 	}else{
 		checkboxIsActive="0";
@@ -442,22 +434,22 @@ var updateFn = function () {
 		url:restfulURL+restfulPathImportEmployee+$("#id").val(),
 		type : "PUT",
 		dataType : "json",
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		data : {
-			"emp_code":$("#fromEmpEmpCode").val(),
-			"emp_name":$("#fromEmpEmpName").val(),
-			"working_start_date":$("#fromEmpWSD").val(),
-			"probation_end_date":$("#fromEmpPED").val(),
-			"acting_end_date":$("#fromEmpAED").val(),
-			"department_code":$("#fromEmpDepartmentCode").val(),
-			"department_ame":$("#fromEmpDepartmentName").val(),
-			"section_code":$("#fromEmpSectionCode").val(),
-			"section_name":$("#fromEmpSectionName").val(),
-			"position_code":$("#fromEmpPositionCode").val(),
-			"position_name":$("#fromEmpPositionName").val(),
-			"position_group":$("#fromEmpPositionGroup").val(),
-			"email":$("#fromEmpEmail").val(),
-			"salary":$("#fromEmpSalary").val(),
+			"emp_code":$("#from_emp_code").val(),
+			"emp_name":$("#from_emp_name").val(),
+			"working_start_date":$("#from_emp_wsd").val(),
+			"probation_end_date":$("#from_emp_ped").val(),
+			"acting_end_date":$("#from_emp_aed").val(),
+			"department_code":$("#from_department_code").val(),
+			"department_ame":$("#from_department_name").val(),
+			"section_code":$("#from_section_code").val(),
+			"section_name":$("#from_section_name").val(),
+			"position_code":$("#from_position_code").val(),
+			"position_name":$("#from_position_name").val(),
+			"position_group":$("#from_position_group").val(),
+			"email":$("#from_emp_email").val(),
+			"salary":$("#from_emp_salary").val(),
 			"fromEmpErpUser":$("#erp_user").val(),
 			"isCorporateKPI":checkboxIsActive ,
 			"IsActive":checkboxIsActive
@@ -486,18 +478,18 @@ var updateFn = function () {
 var listAppraisalLevel = function() {
 	var htmlTable="";
 	$.ajax ({
-		url:restfulURL+":3001/api/tyw_appraisal_level" ,
+		url:restfulURL+restfulPathRole ,
 		type:"get" ,
 		dataType:"json" ,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
 			$.each(data,function(index,indexEntry){
 				htmlTable+="<tr>";
 				htmlTable+="<td>";
 				htmlTable+="<div class=\"checkbox m-l-sm\">";
-				htmlTable+="<input id=\"form_role_item-"+indexEntry["_id"]+"\" class=\"from_data_role\"";
-				htmlTable+="type='checkbox' value=\""+indexEntry["_id"]+"\"> <label> </label>";
+				htmlTable+="<input style=\"margin-top:1px;\" id=\"form_role_item-"+indexEntry["appraisal_level_id"]+"\" class=\"from_data_role\"";
+				htmlTable+="type='checkbox' value=\""+indexEntry["appraisal_level_id"]+"\"> <label> </label>";
 				htmlTable+="</div>";
 				htmlTable+="</td>";
 				htmlTable+="<td style=\"vertical-align:middle\">"+indexEntry["appraisal_level_name"]+"</td>";
@@ -508,7 +500,7 @@ var listAppraisalLevel = function() {
 			htmlTable+="<tr>";
 			htmlTable+="<td>";
 			htmlTable+="<div class=\"checkbox m-l-sm\">";
-			htmlTable+="<input id=\"form_role_item_all\" class=\"from_data_role\"";
+			htmlTable+="<input style=\"margin-top:1px;\" id=\"form_role_item_all\" class=\"from_data_role\"";
 			htmlTable+="type='checkbox' value=\all\"> <label> </label>";
 			htmlTable+="</div>";
 			htmlTable+="</td>";
@@ -524,21 +516,20 @@ var listAppraisalLevel = function() {
 //DropDownList Department
 var dropDownListDepartment = function(){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Department\" class=\"input form-control input-sm\" id=\"paramDepartment\" name=\"paramDepartment\" >";
+	html+="<select data-toggle=\"tooltip\" title=\"Department\" class=\"input form-control input-sm\" id=\"search_department\" name=\"search_department\" >";
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
-		url:restfulURL+restfulPathImportEmployee ,
+		url:restfulURL+restfulPathDropDownDepartment ,
 		type:"get" ,
 		dataType:"json" ,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
 //				if(id==indexEntry["txtConnection_id"]){
-//					html+="<option  value="+indexEntry["department_ame"]+">"+indexEntry["department_ame"]+"</option>";			
+//					html+="<option  value="+indexEntry["department_code"]+">"+indexEntry["department_name"]+"</option>";			
 //				}else{
-					html+="<option  value="+indexEntry["department_ame"]+">"+indexEntry["department_ame"]+"</option>";	
+					html+="<option  value="+indexEntry["department_code"]+">"+indexEntry["department_name"]+"</option>";	
 //				}		
 			});	
 
@@ -549,23 +540,25 @@ var dropDownListDepartment = function(){
 };
 
 //DropDownList Section
-var dropDownListSection = function(){
+var dropDownListSection = function(id){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Section\" class=\"input form-control input-sm\" id=\"paramSection\" name=\"paramSection\" >";
+	html+="<select data-toggle=\"tooltip\" title=\"Section\" class=\"input form-control input-sm\" id=\"search_section\" name=\"search_section\" >";
+	
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
-		url:restfulURL+restfulPathImportEmployee ,
+		url:restfulURL+restfulPathDropDownSection ,
 		type:"get" ,
 		dataType:"json" ,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		data : {"department_code":id},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
 				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
-//				if(id==indexEntry["txtConnection_id"]){
-//					html+="<option  value="+indexEntry["section_name"]+">"+indexEntry["section_name"]+"</option>";			
+//				if(id==indexEntry["section_code"]){
+//					html+="<option  value="+indexEntry["section_code"]+">"+indexEntry["section_name"]+"</option>";			
 //				}else{
-					html+="<option  value="+indexEntry["section_name"]+">"+indexEntry["section_name"]+"</option>";	
+					html+="<option  value="+indexEntry["section_code"]+">"+indexEntry["section_name"]+"</option>";	
 //				}		
 			});	
 
@@ -576,95 +569,47 @@ var dropDownListSection = function(){
 };
 
 
-//set paginate start
-var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
-	if(pageTotal==0){
-		pageTotal=1
-	}
-	$('.pagination_top,.pagination_bottom').off("page");
-	$('.pagination_top,.pagination_bottom').bootpag({
-	    total: pageTotal,//page Total
-	    page: pageIndex,//page index
-	    maxVisible: 5,//จำนวนปุ่ม
-	    leaps: true,
-	    firstLastUse: true,
-	    first: '←',
-	    last: '→',
-	    wrapClass: 'pagination',
-	    activeClass: 'active',
-	    disabledClass: 'disabled',
-	    nextClass: 'next',
-	    prevClass: 'prev',
-	    next: 'next',
-	    prev: 'prev',
-	    lastClass: 'last',
-	    firstClass: 'first'
-	}).on("page", function(event, num){
-		var rpp=10;
-		if($("#rpp").val()==undefined){
-			rpp=10;
-		}else{
-			rpp=$("#rpp").val();
-		}
-		
-		getDataFn(num,rpp);
-		
-	    $(".pagingNumber").remove();
-	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
-	    $("body").append(htmlPageNumber);
-	   
-	}); 
-
-	$(".countPagination").off("change");
-	$(".countPagination").on("change",function(){
-
-		$("#countPaginationTop").val($(this).val());
-		$("#countPaginationBottom").val($(this).val());
-		
-		getDataFn(1,$(this).val());
-		
-		$(".rpp").remove();
-	    var htmlRrp= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
-	    $("body").append(htmlRrp);
-	});
-}
-//set paginate end
 
 $(document).ready(function() {
-	paginationSetUpFn(1,1,1);
-	$("#dropDownDepartment").html(dropDownListDepartment());
-	$("#dropDownSection").html(dropDownListSection());
+	//paginationSetUpFn(1,1,1);
+	$("#drop_down_department").html(dropDownListDepartment());
+	$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
+	$("#drop_down_department").change(function () {
+		$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
+	});
+	$("#search_position").val("");
+	$("#search_emp_name").val("");
 	$("#btnSearchAdvance").click(function(){
 		//alert("2");
 		searchAdvanceFn(
-				$("#paramDepartment").val(),
-				$("#paramSection").val(),
-				$("#paramPosition").val(),
-				$("#paramEmpName").val()
+				$("#search_department").val(),
+				$("#search_section").val(),
+				$("#search_position").val().split("-", 1),
+				$("#search_emp_name").val().split("-", 1)
 				);
 
 		return false;
 	});
 	$("#btnSearchAdvance").click();
-	$("#btnAddRole").click(function() {
+	$("#btn_add_role").click(function() {
 		$("#txtAssignEmpName").hide();
 		listAppraisalLevel();
 		
-		$("#form_role_item_all").change(function(){  //"select all" change 
-		    $(".from_data_role").prop('checked', $(this).prop("checked")); //change all ".from_data_role" checked status
-		});
-		
-		//".from_data_role" change 
-		$('.from_data_role').change(function(){ 
-		    //uncheck "select all", if one of the listed from_data_role item is unchecked
-		    if(false == $(this).prop("checked")){ //if this item is unchecked
-		        $("#form_role_item_all").prop('checked', false); //change "select all" checked status to false
-		    }
-		    //check "select all" if all from_data_role items are checked
-		    if ($('.from_data_role:checked').length == $('.from_data_role').length ){
-		        $("#form_role_item_all").prop('checked', true);
-		    }
-		});
+//		$("#form_role_item_all").change(function(){  //"select all" change 
+//		    $(".from_data_role").prop('checked', $(this).prop("checked")); //change all ".from_data_role" checked status
+//		});
+//		
+//		//".from_data_role" change 
+//		$('.from_data_role').change(function(){ 
+//		    //uncheck "select all", if one of the listed from_data_role item is unchecked
+//		    if(false == $(this).prop("checked")){ //if this item is unchecked
+//		        $("#form_role_item_all").prop('checked', false); //change "select all" checked status to false
+//		    }
+//		    //check "select all" if all from_data_role items are checked
+//		    if ($('.from_data_role:checked').length == $('.from_data_role').length ){
+//		        $("#form_role_item_all").prop('checked', true);
+//		    }
+//		});
 		
 	});
 	$("#btnRoldSubmit").click(function(){
@@ -685,65 +630,78 @@ $(document).ready(function() {
 	$(".btnCancle").click(function() {
 		clearFn();
 	});
-
+	//Autocomplete Search Position Start
+	$("#search_position").autocomplete({
+        source: function (request, response) {
+        	$.ajax({
+				 url:restfulURL+restfulPathPositionAutocomplete,
+				 type:"GET",
+				 dataType:"json",
+				 data:{
+					 "department_code":$("#search_department").val(),
+					 "section_code":$("#search_section").val(),
+					 "position_name":request.term},
+				//async:false,
+				 headers:{Authorization:"Bearer "+tokenID.token},
+                 error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error: ' + xhr.responseText);
+                    },
+				 success:function(data){
+					  
+						response($.map(data, function (item) {
+                            return {
+                                label: item.position_name,
+                                value: item.position_code+"-"+item.position_name
+                            };
+                        }));
+					
+				},
+				beforeSend:function(){
+					$("body").mLoading('hide');	
+				}
+				
+				});
+        }
+    });
+   
+	//Autocomplete Search Position End
 	
-	//Auto Complete Position start
-//	$("#paramPosition").autocomplete({
-//        source: function (request, response) {
-//        	 $.ajax({
-//				    url:restfulURL+".......",
-//				    type:"get",
-//				    dataType:"json",
-//					//headers:{Authorization:"Bearer "+tokenID.token},
-//					data:{"q":request.term},
-//					async:false,
-//                    error: function (xhr, textStatus, errorThrown) {
-//                        alert('Error: ' + xhr.responseText);
-//                    },
-//				    success:function(data){
-//					
-//						response($.map(data, function (item) {
-//                            return {
-//                                label: item.desc,
-//                                value: item.desc
-//                            }
-//                        }));
-//					
-//				    }
-//				   });
-//        	
-//        }
-//    });
-    
+
   //Auto Complete Employee Name end
 	
-	//Auto Complete Position start
-//	$("#paramEmpName").autocomplete({
-//        source: function (request, response) {
-//        	 $.ajax({
-//				    url:restfulURL+".......",
-//				    type:"get",
-//				    dataType:"json",
-//					//headers:{Authorization:"Bearer "+tokenID.token},
-//					data:{"q":request.term},
-//					async:false,
-//                    error: function (xhr, textStatus, errorThrown) {
-//                        alert('Error: ' + xhr.responseText);
-//                    },
-//				    success:function(data){
-//					
-//						response($.map(data, function (item) {
-//                            return {
-//                                label: item.desc,
-//                                value: item.desc
-//                            }
-//                        }));
-//					
-//				    }
-//				   });
-//        	
-//        }
-//    });
+	$("#search_emp_name").autocomplete({
+        source: function (request, response) {
+        	$.ajax({
+				 url:restfulURL+restfulPathEmployeeAutocomplete,
+				 type:"GET",
+				 dataType:"json",
+				 data:{
+					 "department_code":$("#search_department").val(),
+					 "section_code":$("#search_section").val(),
+					 "position_code":String($("#search_position").val().split("-", 1)),
+					 "emp_name":request.term},
+				//async:false,
+				 headers:{Authorization:"Bearer "+tokenID.token},
+                 error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error: ' + xhr.responseText);
+                    },
+				 success:function(data){
+					  
+						response($.map(data, function (item) {
+                            return {
+                                label: item.emp_name,
+                                value: item.emp_code+"-"+item.emp_name
+                            };
+                        }));
+					
+				},
+				beforeSend:function(){
+					$("body").mLoading('hide');	
+				}
+				
+				});
+        }
+    });
     
   //Auto Complete Employee Name end
 	
@@ -769,12 +727,12 @@ $(document).ready(function() {
 	
 	
 
-		$("#fromEmpWSD").datepicker();
-	    $("#fromEmpWSD").datepicker( "option", "dateFormat", "dd-mm-yy" );
-	    $("#fromEmpPED").datepicker();
-	    $("#fromEmpPED").datepicker( "option", "dateFormat", "dd-mm-yy" );
-	    $("#fromEmpAED").datepicker();
-	    $("#fromEmpAED").datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$("#from_emp_wsd").datepicker();
+	    $("#from_emp_wsd").datepicker( "option", "dateFormat", "dd-mm-yy" );
+	    $("#from_emp_ped").datepicker();
+	    $("#from_emp_ped").datepicker( "option", "dateFormat", "dd-mm-yy" );
+	    $("#from_emp_aed").datepicker();
+	    $("#from_emp_aed").datepicker( "option", "dateFormat", "dd-mm-yy" );
 	    $(".ui-datepicker").hide();
 
 

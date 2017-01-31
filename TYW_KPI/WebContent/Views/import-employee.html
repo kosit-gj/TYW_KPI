@@ -59,7 +59,7 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
-											<div class="col-lg-7 col-md-7" id="dropDownDepartment">
+											<div class="col-lg-7 col-md-7" id="drop_down_department">
 												<select data-toggle="tooltip" title="Department"
 													class="input form-control input-sm col-lg-9"
 													id="paramDepartment" name="paramDepartment">
@@ -78,7 +78,7 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-3 col-md-3 p-t-xxs">Section</label>
-											<div class="col-lg-7 col-md-7" id="dropDownSection">
+											<div class="col-lg-7 col-md-7" id="drop_down_section">
 												<select data-toggle="tooltip" title="Section"
 													class="input form-control input-sm col-lg-9"
 													id="paramSection" name="paramSection">
@@ -102,7 +102,7 @@
 											<div class="col-lg-9 col-md-9">
 												<input data-toggle="tooltip" title="Position"
 													class="form-control input-sm" placeholder="Position"
-													type="text" id="paramPosition" name="paramPosition">
+													type="text" id="search_position" name="search_position">
 											</div>
 
 										</div>
@@ -113,7 +113,7 @@
 											<div class="col-lg-8 col-md-7">
 												<input data-toggle="tooltip" title="Employee Name"
 													class="form-control input-sm" placeholder="Employee Name"
-													type="text" id="paramEmpName" name="paramEmpName">
+													type="text" id="search_emp_name" name="search_emp_name">
 											</div>
 
 										</div>
@@ -121,7 +121,7 @@
 									<div class="col-lg-8 col-md-8">
 										<div class="form-group  ">
 											<div class=" pull-right p-xxs m-b-none">
-												<button id="btnAddRole" type="button"
+												<button id="btn_add_role" type="button"
 													class="btn btn-success btn-sm" data-target="#ModalRole"
 													data-toggle="modal">
 													&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
@@ -225,13 +225,12 @@
 											<th style='width: auto text-align:center;'>Select</th>
 											<th style='width: auto'>Emp Code</th>
 											<th style='width: auto'>Emp Name</th>
-											<th style='width: auto'>Appraisal Level</th>
 											<th style='width: auto'>Department Name</th>
 											<th style='width: auto'>Section Name</th>
 											<th style='width: auto'>Position Name</th>
 											<th style='width: auto'>Position Group</th>
 											<th style='width: auto'>Shief Emp Code</th>
-											<th style='width: auto text-align:center;'>IsActive</th>
+<!-- 											<th style='width: auto text-align:center;'>IsActive</th> -->
 											<th style='width: auto text-align:center;'>Manage</th>
 										</tr>
 									</thead>
@@ -339,7 +338,7 @@
 						<div class="form-group">
 							<div class="form-group m-n " >
 								<label class="form-label-emp">Employee Name: </label>&nbsp; <label
-									id="fromRoleEmpName" class="form-label-emp">สมใจ
+									id="from_role_emp_name" class="form-label-emp">สมใจ
 									พร้อมเสมอนะ </label>&nbsp;
 							</div>
 
@@ -352,82 +351,82 @@
 							<table class="table table-striped" id="formTableRole">
 								<thead>
 									<tr>
-										<th style='width: auto text-align:center;'>Select</th>
-										<th style='width: auto'>Ruld Name</th>
+										<th style='width: auto; '>Select</th>
+										<th style='width: 70%'>Ruld Name</th>
 									</tr>
 								</thead>
 								<tbody id="formListRuld">
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="checkbox m-l-sm"> -->
-<!-- 												<input id="form_role_item-1" class="from_data_role" -->
-<!-- 													type='checkbox' value="1"> <label> </label> -->
-<!-- 											</div> -->
-<!-- 										</td> -->
-<!-- 										<td>ระดับบริหาร</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="checkbox m-l-sm"> -->
-<!-- 												<input id="form_role_item-2" class="from_data_role" -->
-<!-- 													type='checkbox' value="2"> <label> </label> -->
-<!-- 											</div> -->
-<!-- 										</td> -->
-<!-- 										<td>ระดับการจัดการ</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="checkbox m-l-sm"> -->
-<!-- 												<input id="form_role_item-3" class="from_data_role" -->
-<!-- 													type='checkbox' value="3"> <label> </label> -->
-<!-- 											</div> -->
+							<!-- 		<tr>
+										<td>
+											<div class="checkbox m-l-sm">
+												<input id="form_role_item-1" class="from_data_role"
+													type='checkbox' value="1"> <label> </label>
+											</div>
+										</td>
+										<td>ระดับบริหาร</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox m-l-sm">
+												<input id="form_role_item-2" class="from_data_role"
+													type='checkbox' value="2"> <label> </label>
+											</div>
+										</td>
+										<td>ระดับการจัดการ</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox m-l-sm">
+												<input id="form_role_item-3" class="from_data_role"
+													type='checkbox' value="3"> <label> </label>
+											</div>
 
-<!-- 										</td> -->
-<!-- 										<td>ระดับบังคับบัญชา</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="checkbox m-l-sm"> -->
-<!-- 												<input id="form_role_item-4" class="from_data_role" -->
-<!-- 													type='checkbox' value="4"> <label> </label> -->
-<!-- 											</div> -->
+										</td>
+										<td>ระดับบังคับบัญชา</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox m-l-sm">
+												<input id="form_role_item-4" class="from_data_role"
+													type='checkbox' value="4"> <label> </label>
+											</div>
 
-<!-- 										</td> -->
+										</td>
 
-<!-- 										<td>ระดับเจ้าหน้าที่</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="checkbox m-l-sm"> -->
-<!-- 												<input id="form_role_item-5" class="from_data_role" -->
-<!-- 													type='checkbox' value="5"> <label> </label> -->
-<!-- 											</div> -->
+										<td>ระดับเจ้าหน้าที่</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox m-l-sm">
+												<input id="form_role_item-5" class="from_data_role"
+													type='checkbox' value="5"> <label> </label>
+											</div>
 
-<!-- 										</td> -->
+										</td>
 
-<!-- 										<td>ระดับปฏิบัติการ</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="checkbox m-l-sm"> -->
-<!-- 												<input id="form_role_item-6" class="from_data_role" -->
-<!-- 													type='checkbox' value="6"> <label></label> -->
-<!-- 											</div> -->
+										<td>ระดับปฏิบัติการ</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox m-l-sm">
+												<input id="form_role_item-6" class="from_data_role"
+													type='checkbox' value="6"> <label></label>
+											</div>
 
-<!-- 										</td> -->
+										</td>
 
-<!-- 										<td>HR</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="checkbox m-l-sm"> -->
-<!-- 												<input id="form_role_item_all" class="from_data_role" -->
-<!-- 													type='checkbox' value="all"> <label></label> -->
-<!-- 											</div> -->
+										<td>HR</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox m-l-sm">
+												<input id="form_role_item_all" class="from_data_role"
+													type='checkbox' value="all"> <label></label>
+											</div>
 
-<!-- 										</td> -->
-<!-- 										<td>ทุกระดับ</td> -->
-<!-- 									</tr> -->
+										</td>
+										<td>ทุกระดับ</td>
+									</tr>  -->
 
 								</tbody>
 							</table>
@@ -495,7 +494,7 @@
 							</div>
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpEmpCode">
+									id="from_emp_code">
 							</div>
 
 						</div>
@@ -510,7 +509,7 @@
 							<!-- <label class="col-lg-4 form-label-emp">CDS Description:<span class='redFont'>*</span></label> -->
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpEmpName">
+									id="from_emp_name">
 							</div>
 
 						</div>
@@ -525,7 +524,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpWSD">
+									id="from_emp_wsd">
 							</div>
 
 						</div>
@@ -540,7 +539,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpPED">
+									id="from_emp_ped">
 							</div>
 
 						</div>
@@ -555,7 +554,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpAED">
+									id="from_emp_aed">
 							</div>
 
 						</div>
@@ -570,7 +569,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpDepartmentCode">
+									id="from_department_code">
 							</div>
 
 						</div>
@@ -586,7 +585,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpDepartmentName">
+									id="from_department_name">
 							</div>
 
 						</div>
@@ -601,7 +600,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpSectionCode">
+									id="from_section_code">
 							</div>
 
 						</div>
@@ -616,7 +615,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpSectionName">
+									id="from_section_name">
 							</div>
 
 						</div>
@@ -633,7 +632,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpPositionCode">
+									id="from_position_code">
 							</div>
 
 						</div>
@@ -648,7 +647,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpPositionName">
+									id="from_position_name">
 							</div>
 
 						</div>
@@ -663,7 +662,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpPositionGroup">
+									id="from_position_group">
 							</div>
 
 						</div>
@@ -678,7 +677,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpSupEmpCode">
+									id="from_sup_emp_code">
 							</div>
 
 						</div>
@@ -693,7 +692,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpEmail">
+									id="from_emp_email">
 							</div>
 
 						</div>
@@ -708,7 +707,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpSalary">
+									id="from_emp_salary">
 							</div>
 
 						</div>
@@ -723,7 +722,7 @@
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<input type="text" class="form-control input-sm " placeholder=""
-									id="fromEmpErpUser">
+									id="from_emp_erp_user">
 							</div>
 
 						</div>
@@ -733,7 +732,7 @@
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<div class="checkbox checkbox-inline">
 
-									<input id="checkboxIsCorporateKPI" name="checkboxIsActive"
+									<input id="from_checkboxIs_corporate_kpi" name="from_checkboxIs_corporate_kpi"
 										type="checkbox" value="" class="p-t-xs"> <label
 										for="checkboxIsCorporateKPI"></label>
 								</div>
@@ -746,9 +745,9 @@
 							<div class="col-lg-6 col-sm-7 col-xs-7">
 								<div class="checkbox checkbox-inline">
 
-									<input id="checkboxIsActive" name="checkboxIsActive"
+									<input id="from_checkboxIs_active" name="from_checkboxIs_active"
 										type="checkbox" value=""> <label
-										for="checkboxIsActive"></label>
+										for="from_checkboxIs_active"></label>
 								</div>
 							</div>
 
@@ -859,7 +858,8 @@
 
 
 	<script src="../js/jquery.mloading.js"></script>
-
+	<script src="../Controller/cConfig.js"></script> 
+	<script src="../Controller/cMain.js"></script> 
 	<script src="../Controller/cImportEmployee.js"></script> 
 
 
