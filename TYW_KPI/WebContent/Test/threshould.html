@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Back office | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+   
+
+
+</head>
+
+<body class="top-navigation" id="mainContent" >
+
+
+	<div class='container'>
+	<!-- ###############content data ###############W -->
+<link href="css/branch_management.css" rel="stylesheet">
+    
+<!--  nav bar -->
+<div class="row wrapper border-bottom  page-heading" id="naviTitle" >
+    <div class="col-lg-12">
+     <div id="slide_status"></div>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#/"><i class="fa fa-home "></i> Home</a>
+            </li>
+            <li>
+            <i class="fa fa-gears"></i> System Management
+            </li>
+            <li class="active">
+             <strong id="naviLabelMenu"><i class="fa fa-user"></i> Branch </strong>
+            </li>
+        </ol>
+    </div>
+   
+</div>
+<!-- nav bar -->
+
+                <div class="row">
+                
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                        
+                            <div class="ibox-title">
+                                <h5>Branch List</h5>
+							</div>
+							
+                            <div class="ibox-content">
+	                            
+								
+								<div class="row">
+								
+                                    <div class="col-sm-9">
+                                    	<button type="button" class="btn btn-info edit_table" id="btnEditBranchOperation" data-target="#editModalBranch" data-toggle="modal"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
+                                    	<button type="button" class="btn btn-warning " id="btnSubmit"><i class="fa fa-save"></i>&nbsp;Save</button>
+                                    	<button type="button" class="btn btn-danger "id="btnCancle"><i class="fa fa-trash-o"></i>&nbsp;Cancel</button>
+                                    </div>
+                                    
+                                    <div class="col-sm-3">
+				                       <div class="input-group"><input type="text" placeholder="Search" id="searchText" class="input-sm form-control"> <span class="input-group-btn">
+				                          <button type="button" class="btn btn-sm btn-primary" id="btnSearch">&nbsp;<i class="fa fa-search"></i></button> </span>
+				                       </div>
+				                    </div> 
+                                   
+                                    <div class="col-sm-8">
+	                                    <div class="alert alert-success" hidden="hidden">
+										    <p><strong>Success!</strong> This alert box could indicate a successful or positive action.</p>
+										</div>
+                                    </div>
+                                     
+                                    <input type="hidden" name="id" id="id" value="">
+                                    <input type="hidden" name="action" id="action" value="">
+                             	</div>
+                             	<!-- pagination start -->
+	                             <div class="row">
+	                                <div class="col-sm-9 ">
+										<span class="pagination_top"></span>
+	                                </div>
+	                                 <div class="col-sm-2 object-right paging-text">Results per page</div>
+	                                 <div class="col-sm-1">
+	                                	<select name="account" id='countPaginationTop'  class="form-control input-sm countPagination">
+		                                     <option>10</option>
+		                                     <option>20</option>
+		                                     <option>50</option>
+		                                     <option>100</option>
+		                                 </select> 
+	                                	</div>
+	                               	</div> 
+                               	 <!-- pagination end -->
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="tableBranch">
+                                        <thead>
+                                        	<tr>
+												<th style='width:50px;'>Branch Code</th>
+	                                            <th style='width:140px;'>Branch Name</th>
+	                                            <th style='width:80px;'>Cost Center</th>
+	                                            <th style='width:140px;'>Regional Office</th>
+	                                            <th style='width:140px;'>District</th>
+	                                            <th style='width:50px; text-align:center;' >Close</th>
+                                        	</tr>
+                                        </thead>
+                                        <tbody id="listBranch">
+                                        	
+                                        	
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                
+                                <!-- pagination start -->
+	                             <div class="row">
+	                                <div class="col-sm-9 ">
+										<span class="pagination_bottom"></span>
+	                                </div>
+	                                 <div class="col-sm-2 object-right paging-text">Results per page</div>
+	                                 <div class="col-sm-1">
+	                                	<select name="account" id='countPaginationBottom'  class="form-control input-sm countPagination">
+		                                     <option>10</option>
+		                                     <option>20</option>
+		                                     <option>50</option>
+		                                     <option>100</option>
+		                                 </select> 
+	                                	</div>
+	                               	</div> 
+                               	 <!-- pagination end -->
+ 
+                                
+                            </div>
+                            <!-- content end -->
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+    <!-- Branch Controller -->
+
+	
+	<!-- ###############content data ################ -->
+	
+	</div>
+
+    <!-- Mainly scripts -->
+
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+   
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     <!-- table data start -->
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- table data end -->
+    
+    <!-- load angular fame work start-->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <!-- load angular fame work end -->
+    
+    <script src="../js/jquery.mloading.js"></script>
+    
+</body>
+
+</html>
