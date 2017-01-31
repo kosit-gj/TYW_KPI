@@ -1,10 +1,4 @@
-body{
-	background-color: #f3f3f4;
-}
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-	color: black;
-	
-}
+
 .countPagination {
     width: 92%;
 }
@@ -13,18 +7,6 @@ body{
 	
 }
 
-.p-t-xxs{
- padding-top :5px;
-}
-.p-t-xs{
- padding-top :10px;
-}
-.p-b-xxs{
- padding-bottom :5px;
-}
-.p-b-xs{
- padding-bottom :10px;
-}
 
 .btn-primary {
     background-color: #1ab394;
@@ -64,11 +46,7 @@ body{
     padding-top: 7px;
     text-align: left;
 }
-.font-gear{
-	font-size: 25px;
-	cursor:pointer;
-	color: #993399;
-}
+
 
 .input-contact-cds{
 	width:70px;
