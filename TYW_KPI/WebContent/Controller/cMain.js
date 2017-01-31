@@ -46,6 +46,207 @@ var callFlashSlideInModal =function(text,id,flashType){
 
 }
 
+//check value not null
+var notNullFn = function(data){
+	var dataNotNull="";
+	if((data == '' || data == 'undefinided' || data == null )){
+		dataNotNull="";
+	}else{
+		dataNotNull=data;
+	}
+	return dataNotNull;
+}
+
+
+var searchMultiFn=function(search,searchName){
+	var paramSearchName="";
+	 if(searchName==undefined){
+		 paramSearchName="";
+	 }else{
+		 paramSearchName =searchName;
+	 }
+	 
+	 var search = search.trim().toLowerCase();
+	 $(".rowSearch"+paramSearchName).hide();
+     $.each( $(".rowSearch"+paramSearchName),function(index1,indexEntry1){
+    	 //console.log(indexEntry1);	
+    	 var i=0;
+    	 $.each($(".columnSearch"+paramSearchName,this),function(index2,indexEntry2){
+    		 //console.log($(indexEntry2).text());
+    		 //console.log($(indexEntry2).text().indexOf(search));
+    		 if($(indexEntry2).text().trim().toLowerCase().indexOf(search)>=0){
+    			 $(this).parent().show();
+    			 return false;
+    		 }
+    	 });
+     });
+}
+
+var firstDayInMonthFn = function(){
+	var d = new Date();
+	var month = d.getMonth()+1;
+	var day = d.getDate();
+	
+	var output = d.getFullYear() + '-' +
+	    ((''+	month).length<2 ? '0' : '') + month + '-01';
+	return output;
+}
+var currentDateFn = function(){
+	var d = new Date();
+	var month = d.getMonth()+1;
+	var day = d.getDate();
+	var output = d.getFullYear() + '-' +
+	    ((''+month).length<2 ? '0' : '') + month + '-';
+	    if(day==1){
+	    	output+= ((''+day).length<2 ? '0' : '') + day;
+	    }else{
+	    	 output+= ((''+day).length<2 ? '0' : '') + (day-1);	
+	    }
+	return output;
+}
+var currentDateTimeFn = function(){
+	/*New Code Start*/
+
+	var now = new Date();
+
+	var year = now.getFullYear();
+
+	var month = now.getMonth()+1;
+
+	var day = now.getDate();
+
+	var hour = now.getHours();
+
+	var minute = now.getMinutes();
+
+	var second = now.getSeconds();
+
+	if(month.toString().length == 1) {
+
+	var month = '0'+month;
+
+	}
+
+	if(day.toString().length == 1) {
+
+	var day = '0'+day;
+
+	}
+
+	if(hour.toString().length == 1) {
+
+	var hour = '0'+hour;
+
+	}
+
+	if(minute.toString().length == 1) {
+
+	var minute = '0'+minute;
+
+	}
+
+	if(second.toString().length == 1) {
+
+	var second = '0'+second;
+
+	}
+
+	var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+
+	
+
+	/*New Code End*/
+	return dateTime;
+}
+
+var getPastMonthTH = function(){
+	var dataReturn;
+	var monthTH=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน",
+	             "พฤษาภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน",
+	             "ตุลาคม","พฤจิกายน","ธันวาคม"];
+	
+	var d = new Date();
+	var month = d.getMonth();
+	var year =d.getFullYear()+543;
+	
+	if(month==0){
+		dataReturn=monthTH[11]+" "+(year-1);
+	}else{
+		dataReturn=monthTH[month]+" "+year
+	}
+	return dataReturn;
+	
+}
+
+
+
+
+$( document ).ajaxStart(function() {
+	$("body").mLoading();
+});
+$( document ).ajaxStop(function() {
+	$("body").mLoading('hide');
+});
+
+var checkSession = function(){
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/session",
+		type:"GET",
+		dataType:"json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+		
+			if(data['status']!="200"){
+				window.location.href = "../login.html"; 
+			}else{
+				
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+		    if('error'==textStatus){
+		    	window.location.href = "../login.html"; 
+		    }
+		}
+		
+	});
+}
+checkSession();
+
+var logoutFn = function(){
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/session",
+		type:"DELETE",
+		dataType:"json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		//data:{token:tokenID.token},
+		success:function(data){
+			
+			//console.log(data);
+			if(data['status']=="200"){
+			
+				window.location.href = "../login.html"; 
+				localStorage.setItem("tokenID","{}");
+				
+			}
+			
+			
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+		    //alert(jqXHR.status);
+		    //alert(textStatus);
+		    if('error'==textStatus){
+		    	window.location.href = "../login.html"; 
+		    	
+		    }
+		    //alert(errorThrown);
+		   // console.log(jqXHR);
+		}
+	});
+}
+
+$("#logOut").click(function(){
+	logoutFn();
+});
 //set paginate start
 var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
 	if(pageTotal==0){
