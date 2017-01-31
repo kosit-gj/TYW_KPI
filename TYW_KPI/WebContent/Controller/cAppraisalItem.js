@@ -55,6 +55,7 @@ var appraisalLevelListFn = function(){
 		type:"get",
 		dataType:"json",
 		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			console.log(data);
 		}
@@ -74,6 +75,7 @@ var perspectiveListFn = function(){
 		type:"get",
 		dataType:"json",
 		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			console.log(data);
 		}
