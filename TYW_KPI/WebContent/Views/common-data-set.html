@@ -32,7 +32,10 @@
 					<!-- 	style="display: none;" -->
 
 					<div class="col-lg-12">
-						<div id="slide_status"></div>
+						<div id="slide_status">
+							<div id="btnClose"></div>
+							<div id="slide_status_area"></div>
+						</div>
 						<ol class="breadcrumb">
 							<li><a href="#/"><i class="fa fa-home "></i> Home</a></li>
 							<li><i class="fa fa-gears"></i> System Management</li>
@@ -58,15 +61,9 @@
 										<div class="form-group p-xxs">
 											<label class="col-lg-4 col-md-4 p-t-xxs">Appraisal</label>
 											<div class="col-lg-7 col-md-7" id="dropDownListAppraisalLevel">
-												<select data-toggle="tooltip" title="Year"
+												<select data-toggle="tooltip" title="Appraisal"
 													class="input form-control input-sm col-lg-9" id="app_lv"
 													name="app_lv">
-													<option>All</option>
-													<option>ระดับบริหาร</option>
-													<option>ระดับการจัดการ</option>
-													<option>ระดับบังคับบัญชา</option>
-													<option>ระดับเจ้าหน้าที่</option>
-													<option>HR</option>
 												</select>
 											</div>
 
@@ -79,10 +76,14 @@
 										<div class="form-group p-xxs">
 											<label class="col-lg-4 col-md-4 p-t-xxs">CDS Name</label>
 											<div class="col-lg-8 col-md-8">
-												<input data-toggle="tooltip" title="Position"
-													class="form-control input-sm" placeholder="Position"
+												<input data-toggle="tooltip" title="CDS Name"
+													class="form-control input-sm" placeholder="CDS Name"
 													type="text" id="cds_name" name="cds_name">
+												<input type='hidden' class='form-control input-sm'
+													id='cds_id' name='cds_id'
+													value=''>
 											</div>
+											
 
 										</div>
 									</div>
@@ -174,20 +175,7 @@
 							</tr>
 						</thead>
 						<tbody id="listCommonDataSet">
-										<tr>
-											<td>SR</td>
-											<td>ระดีบจัดการ</td>
-											<td class='objectCenter'><input disabled type='checkbox' name='is_sql' id='is_sql' checked value='1'></td>
-											<td class='objectCenter'><input disabled type='checkbox' name='is_active' id='is_active' checked value='1'></td>
-											<td class='objectCenter'>
-												<i class="fa fa-cog font-gear popover-edit-del" data-html="true"
-												data-toggle="popover" data-placement="top"
-												data-content="<button class='btn btn-warning btn-xs edit' id='1'
-												data-target=#ModalCommonData data-toggle='modal'>Edit
-												</button>&nbsp;
-												<button id='1' class='btn btn-danger btn-xs del'>Delete</button>"></i>
-											</td>
-										</tr>
+	
 						</tbody>
 					</table>
 
