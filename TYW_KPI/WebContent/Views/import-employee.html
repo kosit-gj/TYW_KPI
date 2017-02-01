@@ -35,7 +35,10 @@
 					<!-- 	style="display: none;" -->
 
 					<div class="col-lg-12">
-						<div id="slide_status"></div>
+						<div id="slide_status">
+							<div id="btnClose"></div>
+							<div id="slide_status_area"></div>
+						</div>
 						<ol class="breadcrumb">
 							<li><a href="#/"><i class="fa fa-home "></i> Home</a></li>
 							<li><i class="fa fa-gears"></i> System Management</li>
@@ -231,7 +234,7 @@
 											<th style='width: auto'>Position Group</th>
 											<th style='width: auto'>Shief Emp Code</th>
 <!-- 											<th style='width: auto text-align:center;'>IsActive</th> -->
-											<th style='width: auto text-align:center;'>Manage</th>
+											<th style='width: auto' class='objectCenter'>Manage</th>
 										</tr>
 									</thead>
 									<tbody id="listEmployee">
@@ -441,13 +444,11 @@
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="button" id="btnEmpSubmit">Save</button>
-					<!-- 				<button class="btn btn-success" type="button" id="btnAddAnother">Save -->
-					<!-- 					& Add Another</button> -->
+					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-					<div class="alert alert-warning" id="information"
-						style="display: none;"></div>
+<!-- 					<div class="alert alert-warning" id="information" -->
+<!-- 						style="display: none;"></div> -->
 				</div>
 			</div>
 		</div>
@@ -706,7 +707,7 @@
 							</div>
 							
 							<div class="col-lg-6 col-sm-7 col-xs-7">
-								<input type="text" class="form-control input-sm " placeholder=""
+								<input type="text" class="form-control input-sm numberOnly" placeholder=""
 									id="from_emp_salary">
 							</div>
 
@@ -762,7 +763,7 @@
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button>
+					<button class="btn btn-success" type="button" id="btnEmpSubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
 					<div class="alert alert-warning" id="information"
