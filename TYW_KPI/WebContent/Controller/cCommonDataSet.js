@@ -485,12 +485,13 @@ $(document).ready(function() {
 	$(".btnCancle").click(function() {
 		clearFn();
 	});
+
 	$("#checkbox_is_sql").change(function name() {
 		if($("#checkbox_is_sql:checked").is(":checked")){
-			$("#btn_execute").removeAttr("disabled");
+			$("#btn_Execute").removeAttr("disabled");
 			//executeFn();
 		}else{
-			$("#btn_execute").attr("disabled","disabled");
+			$("#btn_Execute").attr("disabled","disabled");
 		}
 	});
 	
