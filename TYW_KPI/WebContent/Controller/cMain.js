@@ -1,5 +1,26 @@
 var tokenID= eval("("+localStorage.getItem("tokenID")+")");
 
+
+var flashSLideUp=function(){
+	
+	$("#slide_status").slideUp();
+	
+}
+
+var flashSlideInModalSlideUp=function(){
+	
+	$(".information").slideUp();
+	
+	
+}
+$(document).on("click","#btnCloseSlide",function(){
+	flashSLideUp();
+});
+$(document).on("click",".btnModalClose",function(){
+	
+	flashSlideInModalSlideUp();
+});
+
 var callFlashSlide = function(text,flashType){
 	if(flashType=="error"){
 		
@@ -11,7 +32,7 @@ var callFlashSlide = function(text,flashType){
 		$("#slide_status").slideDown("slow");
 		setTimeout(function(){
 			$("#slide_status").slideUp();
-		},8000);
+		},3000);
 	}
 }
 var callFlashSlideInModal =function(text,id,flashType){
@@ -249,6 +270,7 @@ $("#logOut").click(function(){
 });
 //set paginate start
 var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
+	
 	if(pageTotal==0){
 		pageTotal=1
 	}

@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../css/animate.css" rel="stylesheet">
+    <!-- 
     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     -->
     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
 
     <link rel="stylesheet" href="../css/jquery.mloading.css">
@@ -28,7 +30,16 @@
 
 <!--  #####################Content data here ######################-->
 <div class="container">
+<div class='row'>
 
+	<div class='col-xs-12'>
+		<div id="slide_status">
+			<div id="btnCloseSlide">×</div>
+			<div id="slide_status_area"></div>
+		</div>
+	</div>
+
+</div>
 
 <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal Item</span> </h2>
         
@@ -97,11 +108,7 @@
 			
 						                                    <div class="col-lg-6" id='appraisalItemNameArea'>
 						                                    
-							                                    <select data-toggle="tooltip" title="Appraisal Item Name" class="input form-control input-sm"  id="appraisalItemName" name="appraisalItemName">
-							                                    	
-							                                    	<option value="0"></option>
-																	
-																</select>
+																<input data-toggle="tooltip" title="Appraisal Item Name" type='text' name='appraisalItemName' class='input form-control input-sm' id='appraisalItemName'>
 																
 						                                    </div>
 						                                </div>
@@ -147,16 +154,31 @@
                                     	<!-- start table -->
                                     	<!-- pagination start -->
                                     	<div class="row">
-	                                    	<div class="col-sm-9 m-b-xs">
-												<!-- 
-												<p class="pagination_top"></p>
-												 -->
-												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
+	                                    	<div class="col-sm-9 ">
 												
+												<div class="pagination_top"></div>
+												
+												 <!-- 
+												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
+												 -->
 	                   
 	                                    	</div>
 	                                    
-		                                    <div class="col-sm-2 object-right paging-text">Results per page</div>
+		                                    <div class="col-sm-3 object-right paging-text">
+		                                    
+		                                    	 <div class='pagingDropdown'>
+		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+		                                 		
+		                                 		</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                    <!-- 
 		                                    <div class="col-sm-1">
 	                                     
 	                                    	<select name="countPagination" id='countPaginationTop'  class="form-control input-sm countPagination">
@@ -167,364 +189,39 @@
 		                                    </select> 
 	                                        
 	                                    	</div>
+	                                    	 -->
 	                                    	
                                     	</div> 
-                                    	 <!-- pagination end -->
-                                    	 
-                                    	 <!-- content row 1 start-->
-                                    	  <div class="row">
-				         					<div class="col-lg-12">
-		                                    	<div class="ibox-title">
-					                                <!-- <div class='titlePanel'>KPI </div> -->
-					                                <button data-toggle="modal" data-target="#ModalKPI" id="btnAddKPI" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Add KPI</button>
-					                            </div>
-					         					
-					         					<div class="ibox-content">
-					         							
-					         							<!-- content table start-->	 
-				                                    	<div class="table-responsive">
-				                                   		<table class="table table-striped" id="tableKPI">
-				                                   		
-					                                        <thead>
-						                                        <tr>
-						                                            <th  style='width:30%'>Appraisal Item Name</th>
-						                                            <th  style='width:20%'>Appraisal Level </th>
-						                                            <th  style='width:20%'>Structure</th>
-						                                            <th  style='width:15%'>Perspective</th>
-						                                            <th  style='width:10%'>UOM</th>
-						                                            <th  style='width:10%'>IsActive</th>
-						                                            <th style='width:10%; text-align:center;'>Manage</th>
-						                                        </tr>
-					                                        </thead>
-					                                        <tbody id="listKPI">
-					                                        	<tr>
-					                                        		<td>ยอดขายสุทธิ 5,000,000,000</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>ผลการปฏิบัติงาน(KPI)</td>
-					                                        		<td>Financial</td>
-					                                        		<td>
-					                                        			%
-					                                        		</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>ยอดขายสุทธิ 5,000,000,000</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>ผลการปฏิบัติงาน(KPI)</td>
-					                                        		<td>Financial</td>
-					                                        		<td>%</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>ยอดขายสุทธิ 5,000,000,000</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>ผลการปฏิบัติงาน(KPI)</td>
-					                                        		<td>Financial</td>
-					                                        		<td>%</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	
-					                                        </tbody>
-				                                        </table>
-				                                        </div>
-                                        				<!-- content table end-->
-                                        				
-                                        				
-					         					</div>
-					         				</div>
-					         			</div>
-	         							<!-- content row 1 end-->
-	         							<!-- content row 2 start-->
-                                    	  <div class="row">
-				         					<div class="col-lg-12">
-		                                    	<div class="ibox-title">
-					                             
-					                                
-					                               <!-- <div class='titlePanel'>Competency </div> --> 
-					                                <button data-toggle="modal" data-target="#modalCompetency" id="btnAddCompetency" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Add Competency</button>
-					                            
-					                            
-					                            
-					         					</div>
-					         					
-					         					<div class="ibox-content">
-					         							<!-- content table start-->	 
-				                                    	<div class="table-responsive">
-				                                   		<table class="table table-striped" id="tableCompetency">
-				                                   		
-					                                        <thead>
-						                                        <tr>
-						                                            <th  style='width:50%'>Appraisal Item Name</th>
-						                                            <th  style='width:20%'>Appraisal Level </th>
-						                                            <th  style='width:5%'>IsActive</th>                        
-						                                            <th style='width:5%; text-align:center;'>Manage</th>
-						                                        </tr>
-					                                        </thead>
-					                                        <tbody id="listCompetency">
-					                                        	<tr>
-					                                        		<td>ภาวะผู้นำ(MC)</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>การพัฒนาปรับปรุงานอย่างต่อเนื่อง(CC)</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>แก้ไขปัญหาและตัดสินใจ(CC)</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        	
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	
-					                                        </tbody>
-				                                        </table>
-				                                        </div>
-                                        				<!-- content table end-->
-					         					</div>
-					         				</div>
-					         			</div>
-	         							<!-- content row 2 end-->
-	         							<!-- content row 3 start-->
-                                    	  <div class="row">
-				         					<div class="col-lg-12">
-		                                    	<div class="ibox-title">
-					                                
-					                          
-					                                 <!-- <div class='titlePanel'>Work Behavior </div> -->
-					                                <button data-toggle="modal" data-target="#modalWorkBehavior" id="btnAddWorkBehavior" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Add Work Behavior</button>
-					                            
-					                            
-					                            
-					         					</div>
-					         					
-					         					<div class="ibox-content">
-					         							<!-- content table start-->	 
-				                                    	<div class="table-responsive">
-				                                   		<table class="table table-striped" id="tableWorkBehavior">
-				                                   		
-					                                        <thead>
-						                                        <tr>
-					                                            	<th  style='width:30%'>Appraisal Item Name</th>
-					                                            	<th  style='width:30%'>Appraisal Level </th>
-					                                           	 	<th  style='width:10%'>Max Value</th>    
-					                                            	<th  style='width:15%'>Deduct Score/Unit </th> 
-					                                            	<th  style='width:10%'>IsActive</th>             
-					                                           		<th style='width:10%; text-align:center;'>Manage</th>
-						                                        </tr>
-					                                        </thead>
-					                                        <tbody id="listWorkBehavior">
-					                                        	<tr>
-					                                        		<td>ลาป่วยตั้งแต่ 10 วันขึ้นไป</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-					                                        		<td>0</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>ลาป่วยตั้งแต่ 10 วันขึ้นไป</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-					                                        		<td>0</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>ลาป่วยตั้งแต่ 10 วันขึ้นไป</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-					                                        		<td>0</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	
-					                                        </tbody>
-				                                        </table>
-				                                        </div>
-                                        				<!-- content table end-->
-					         					</div>
-					         				</div>
-					         			</div>
-	         							<!-- content row 3 end-->
-	         							<!-- content row 4 start-->
-                                    	  <div class="row">
-				         					<div class="col-lg-12">
-		                                    	<div class="ibox-title">
-					                              
-					                                
-					                                  <!-- <div class='titlePanel'>Organization Development</div> -->
-					                                <button data-toggle="modal" data-target="#modalOrganizationDevelopment" id="btnAddOrganizationDevelopment" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Add Organization Development</button>
-					                            
-					                            
-					                            
-					         					</div>
-					         					
-					         					<div class="ibox-content">
-					         							<!-- content table start-->	 
-				                                    	<div class="table-responsive">
-				                                   		<table class="table table-striped" id="tablebOrganizationDevelopment">
-				                                   		
-					                                        <thead>
-						                                        <tr>
-					                                            	<th  style='width:30%'>Appraisal Item Name</th>
-					                                            	<th  style='width:30%'>Appraisal Level </th>
-					                                           	 	<th  style='width:10%'>Max Value</th>    
-					                                            	<th  style='width:15%'>Deduct Score/Unit </th> 
-					                                            	<th  style='width:10%'>IsActive</th>             
-					                                           		<th style='width:10%; text-align:center;'>Manage</th>
-						                                        </tr>
-					                                        </thead>
-					                                        <tbody id="listOrganizationDevelopment">
-					                                        	<tr>
-					                                        		<td>5 ส (นับจำนวนใบ Carท ี่ได้รับหักใบละ 1 คะแนน</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-					                                        		<td>0</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>ISO (นับจำนวนใบ Car ทีได้แก้)</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-					                                        		<td>0</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>ISO (นับจำนวนใบ Car ทีได้แก้)</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-					                                        		<td>0</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	
-					                                        </tbody>
-				                                        </table>
-				                                        </div>
-                                        				<!-- content table end-->
-					         					</div>
-					         				</div>
-					         			</div>
-	         							<!-- content row 4 end-->
-	         							<!-- content row 5 start-->
-                                    	  <div class="row">
-				         					<div class="col-lg-12">
-		                                    	<div class="ibox-title">
-					                               
-					                                
-					                                  <!-- <div class='titlePanel'>Disciplinary</div> -->
-					                                <button data-toggle="modal" data-target="#modalDisciplinaryPunishment" id="btnAddDisciplinaryPunishment" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Add Disciplinary</button>
-					                            
-					                            
-					                            
-					         					</div>
-					         					
-					         					<div class="ibox-content">
-					         							<!-- content table start-->	 
-				                                    	<div class="table-responsive">
-				                                   		<table class="table table-striped" id="tableDisciplinaryPunishment">
-				                                   		
-					                                        <thead>
-						                                       <tr>
-					                                            	<th  style='width:30%'>Appraisal Item Name</th>
-					                                            	<th  style='width:30%'>Appraisal Level </th>
-					                                           	 	<th  style='width:10%'>Max Value</th>    
-					                                            	<th  style='width:15%'>Deduct Score/Unit </th> 
-					                                            	<th  style='width:10%'>IsActive</th>             
-					                                           		<th style='width:10%; text-align:center;'>Manage</th>
-						                                        </tr>
-						                                        
-					                                        </thead>
-					                                        <tbody id="listDisciplinaryPunishment">
-					                                        	<tr>
-					                                        		<td>ใบเตือนด้วยวาจา</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-					                                        		<td>0</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>ใบเตือนลาดลลักษณ์อักษร</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-					                                        		<td>0</td>
-					                                        		<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	<tr>
-					                                        		<td>พักงาน</td>
-					                                        		<td>ระดับเจ้าหน้าที่</td>
-					                                        		<td>0</td>
-						                                        	<td>0</td>
-						                                        	<td><input type='checkbox'></td>
-					                                        		<td style="text-align:center">
-					                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
-					                                        		</td>
-					                                        	</tr>
-					                                        	
-					                                        </tbody>
-				                                        </table>
-				                                        </div>
-                                        				<!-- content table end-->
-					         					</div>
-					         				</div>
-					         			</div>
-	         							<!-- content row 5 end-->
-	         							
-	         							
-
-                                        
+                                    	<!-- pagination end -->
+                                    	<!-- mian content start -->
+                                    	
+                                    		<div id='main_conntent_list_data'></div>
+                                    	
+                                    	<!-- mian content end -->
                                         <!-- row start -->
                                     	<div class="row">
-	                                    	<div class="col-sm-9 m-b-xs">
+	                                    	<div class="col-sm-9 ">
 	
-												<!--  <p class="pagination_bottom"></p>-->
+											    <div class="pagination_bottom"></div>
+											    <!-- 
 												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
-	                   
+	                   							 -->
 	                                    	</div>
 	                                    
-		                                    <div class="col-sm-2 object-right paging-text">Results per page</div>
+		                                    <div class="col-sm-3 object-right paging-text">
+		                                    
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select> 
+			                                 	</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                  <!-- 
 		                                    <div class="col-sm-1">
 	                                    
 	                                    	<select name="countPagination" id='countPaginationBottom'  class="form-control input-sm countPagination">
@@ -535,6 +232,7 @@
 		                                    </select> 
 	                                        
 	                                    	</div>
+	                                    	 -->
                                     	</div> 
                                     	 <!-- row end -->
                                     	<!-- end table -->
@@ -544,756 +242,15 @@
          					</div>
   </div>       					
          					
-<!-- Modal KPI Start Edit -->
-
-  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalKPI" class="modal inmodal" style="display: none;">
-    <div class="modal-dialog  modal-lg">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-             
-                <h4 class="modal-title" id="modalTitleRole">Appraisal Item</h4>
-               
-            </div>
-            <div class="modal-body">
-                <!-- content start -->
-                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Add KPI</span> </h2>
-                <hr>
-                <div class='row'>
-                	<div class="col-xs-6">
-                	 		<!-- form start -->
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                	Appraisal Item Name <span class='redFont '>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="appraisalItemNameKPI">
-				                	
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Perspective <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs" id="perspectiveAreaKPI">
-				                
-				                		<select class="form-control input-sm" id="perspectiveKPI">
-					                		<option></option>
-					                	</select>
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-			                
-				                <div class="form-label-customs">
-				                
-				                	UOM <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs" id="uomAreaKPI">
-				                
-				                	<select class="form-control input-sm" id="uomKPI">
-				                		<option></option>
-				                	</select>
-					                	
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-			                
-				                <div class="form-label-customs">
-				                
-				                	Formula Description <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs-title" id="formulaDescriptionAreaKPI">
-				                
-				                	<textarea class="form-control input-sm" id="formulaDescriptionKPI"  style="width: 389px; height: 81px;"></textarea>
-				                	
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <!-- form end -->	
-                	</div>
-                	<div class="col-xs-6">
-                			<!-- form start -->
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                	 <span class='redFont '>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs" id="appraisalLevelAreaKPI">
-				                	<select class="form-control input-sm" id="appraisalLevelKPI">
-				                		<option></option>
-				                	</select>
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Baseline Value <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                
-				                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="baselineValueKPI">
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                
-			                <div class='form-file-mangement-radio'>
-				                <div class="form-label-customs"> 
-				                </div>
-				                <div class="input-inline-table-customs">
-				                	
-					             <input type="checkbox" checked disabled name="isActiveKPI" id="isActiveKPI" value="1">
-					              <span>Is Active</span>
-				                </div>
-				                <br style="clear:both">   		
-			                </div>
-			                <!-- form end -->
-                	</div>
-                </div>
-                <br style="clear:both">
-                <!-- panel2 start -->
-                <div class="row">
-	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
-	                          <div class='titlePanel'>Advanced Search </div>
-	                      </div>
-	   					
-	   					<div class="ibox-content">
-	   							
-	   							<!-- content  start-->	 
-	                             	<div class="row">
-										<div class="col-sm-10">
-											<div class="row">
-				                                    <div class="col-sm-6 m-b-xs">
-					                                    <div class="form-group"><label class="col-lg-4 control-label">Appraisal Level</label>
-			
-						                                    <div class="col-lg-8" id="appraisalLevelSearchAreaKPI">
-						                                    
-							                                    <select name="flag_2" id="appraisalLevelSearchKPI" class="input form-control input-sm" title="Appraisal Level" data-toggle="tooltip">
-							                                    	<option value="0"></option>
-																</select>
-																
-						                                    </div>
-						                                </div>
-													</div>
-													<div class="col-sm-6 m-b-xs">
-					                                    <div class="form-group"><label class="col-lg-3 control-label">Perspective</label>
-			
-						                                    <div class="col-lg-9" id="perspectiveSearchAreaKPI">
-						                                    
-							                                    <select name="perspectiveSearchKPI" id="perspectiveSearchKPI" class="input form-control input-sm" title="Perspective" data-toggle="tooltip">
-							                                    	
-							                                    	<option value="0"></option>
-																	
-																</select>
-																
-						                                    </div>
-						                                </div>
-													</div>
-													
-											</div>
-										</div>
-										<div class="col-sm-2">
-												<div align="right" >
-			                                     	<div class="input-group">
-				                                     	<div id="">
-			                                         		<button id="SearchKPI" name="SearchKPI" class="btn btn-info input-sm" type="button"><i class="fa fa-search"></i>&nbsp;Search</button>
-			                                         	</div>
-		                                         	</div>
-		                                     	</div>
-										</div>
-                             		</div>
-	                            <!-- content  end-->
-	                             				
-	                             				
-	   					</div>
-	   				</div>
-	   			</div>
-                <!-- panel2 end -->
-                <!-- panel3 start -->
-                <div class="row">
-	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
-	                          <div class='titlePanel'>CDS List</div>
-	                      </div>
-	   					
-	   					<div class="ibox-content">
-	   							
-	   							<!-- content table start-->	
-	   							<!-- pagination top start -->
-	   							<div class="row">
-	                                  	<div class="col-sm-9 m-b-xs">
-										
-										<ul class="pagination bootpag"><li data-lp="1" class="first disabled"><a href="javascript:void(0);">←</a></li><li data-lp="1" class="prev disabled"><a href="javascript:void(0);">prev</a></li><li class="active" data-lp="1"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li><li data-lp="2" class="last"><a href="javascript:void(0);">→</a></li></ul>
-										
-	                 
-	                                  	</div>
-	                                  
-	                                   <div class="col-sm-2 object-right paging-text">Results per page</div>
-	                                   <div class="col-sm-1">
-	                                   
-	                                  	<select class="form-control input-sm " id="countPaginationTop" name="countPagination">
-	                                       <option>10</option>
-	                                    	<option>20</option>
-	                                    	<option>50</option>
-	                                    	<option>100</option>
-	                                   </select> 
-	                                      
-	                                  	</div>
-	                                  	
-	                              </div>
-	   							<!-- pagination top end --> 
-	                             	<div class="table-responsive">
-                                  		<table id="tablethreshould" class="table table-striped">
-                                  		
-                                        <thead>
-	                                        <tr>
-	                                            <th style="width:5%">ID</th>
-	                                            <th style="width:75%">Description </th>
-	                                            <th style="width:20%; text-align:center;"></th>
-	                                        </tr>
-                                        </thead>
-                                        <tbody id="listCDS">
-                                        	<tr>
-                                        		<td>1</td>
-                                        		<td>1,ยอดขายสุทธิ</td>
-                                        		
-                                        		<td style="text-align:center">
-                                        			<button data-toggle="modal" data-target="#addModalRule" id="1" class="btn btn-warning btn-xs btn-gear edit">Edit</button>
-                                        			<button class="btn btn-danger btn-xs btn-gear del" id="1">Delete</button>
-                                        		</td>
-                                        	</tr>
-                                        	<tr>
-                                        		<td>2</td>
-                                        		<td>จำนวนเงินหนี้สูญ</td>
-                                        		
-                                        		<td style="text-align:center">
-                                        			<button data-toggle="modal" data-target="#addModalRule" id="1" class="btn btn-warning btn-xs btn-gear edit">Edit</button>
-                                        			<button class="btn btn-danger btn-xs btn-gear del" id="1">Delete</button>
-                                        		</td>
-                                        	</tr>
-                                        	<tr>
-                                        		<td>3</td>
-                                        		<td>จำนวนเงินที่ลดลงได้</td>
-                                        		
-                                        		<td style="text-align:center">
-                                        			<button data-toggle="modal" data-target="#addModalRule" id="1" class="btn btn-warning btn-xs btn-gear edit">Edit</button>
-                                        			<button class="btn btn-danger btn-xs btn-gear del" id="1">Delete</button>
-                                        		</td>
-                                        	</tr>
-                                        	<tr>
-                                        		<td>4</td>
-                                        		<td>จำนวนเงินเป้าหมาย</td>
-                                        		
-                                        		<td style="text-align:center">
-                                        			<button data-toggle="modal" data-target="#addModalRule" id="1" class="btn btn-warning btn-xs btn-gear edit">Edit</button>
-                                        			<button class="btn btn-danger btn-xs btn-gear del" id="1">Delete</button>	
-                                        		</td>
-                                        	</tr>
-                                        	<tr>
-                                        		<td>5</td>
-                                        		<td>เบี้ยปรับเินเพิ่ม</td>
-                                        		
-                                        		<td style="text-align:center">
-                                        			<button data-toggle="modal" data-target="#addModalRule" id="1" class="btn btn-warning btn-xs btn-gear edit">Edit</button>
-                                        			<button class="btn btn-danger btn-xs btn-gear del" id="1">Delete</button>
-                                        		</td>
-                                        	</tr>
-                                        	<tr>
-                                        		<td>6</td>
-                                        		<td>จำนวนเงิน PN</td>
-                                        		
-                                        		<td style="text-align:center">
-                                        			<button data-toggle="modal" data-target="#addModalRule" id="1" class="btn btn-warning btn-xs btn-gear edit">Edit</button>
-                                        			<button class="btn btn-danger btn-xs btn-gear del" id="1">Delete</button>
-                                        		</td>
-                                        	</tr>
-                                        	
-                                        </tbody>
-                                       </table>
-                                       
-                                       
-                                      
-			                
-                                  </div>
-                                  
-                                  <!-- pagination bottom start -->
-                                  <div class="row">
-	                                   	<div class="col-sm-9 m-b-xs">
-	
-											<!--  <p class="pagination_bottom"></p>-->
-											<ul class="pagination bootpag"><li data-lp="1" class="first disabled"><a href="javascript:void(0);">←</a></li><li data-lp="1" class="prev disabled"><a href="javascript:void(0);">prev</a></li><li class="active" data-lp="1"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li><li data-lp="2" class="last"><a href="javascript:void(0);">→</a></li></ul>
-	                  
-	                                   	</div>
-	                                   
-	                                    <div class="col-sm-2 object-right paging-text">Results per page</div>
-	                                    <div class="col-sm-1">
-	                                   
-		                                   	<select class="form-control input-sm " id="countPaginationBottom" name="countPagination">
-		                                        <option>10</option>
-		                                     	<option>20</option>
-		                                     	<option>50</option>
-		                                     	<option>100</option>
-		                                    </select> 
-	                                       
-	                                   	</div>
-                                  </div>
-                                  <!-- pagination bottom end -->
-                                  
-                                   <!-- Formula start-->
-                                   <hr>
-                                   <div class='row'>
-	                                   <div class='col-xs-12'>
-	                                       <div class='form-file-mangement'>
-				                
-								                <div class="form-label-customs">
-								                
-								                	Formula Description <span class='redFont'>*</span>
-								                </div>
-								                
-								                <div class="form-input-customs-title">
-								                
-								                	<textarea id="formulaDescriptionKPI" class="form-control input-sm"  style="width: 664px; height: 100px;">([sum:จำนวนยอดขายสุทธิต่อไตรมาส]/[sum:จำนวนเป้าหมายยอดขายสุทธิต่อไตรมาส]*100)</textarea>
-								                	
-								                </div>
-								               
-							                </div>
-							            </div>
-						            </div>
-						                <!-- Formula end-->
-						            
-						                 <br style="clear:both">
-						                 <br style="clear:both">
-	                            <!-- content table end-->
-	                             				
-	                             				
-	   					</div>
-	   				</div>
-	   			</div>
-                <!-- panel3 end -->
-                
-               
-                
-                <!-- content end -->
-            </div>
-            <div class="modal-footer">
-           	 	<input type="hidden" name="idKPI" id="id" value="">
-   				<input type="hidden" name="actionKPI" id="action" value="add">
-   				
-   				<button class="btn btn-primary" type="button" id="btnSubmitKPI">Save</button>
-   				<button class="btn btn-primary" type="button" id="btnAddAnotherKPI">Save & Add Another</button>
-                <button data-dismiss="modal" class="btn btn-white btnCancleKPI" type="button">Cancel</button>
-                <div class="alert alert-warning" id="informationKPI" style="display: none;"></div>
-            </div>
-        </div>
-    </div>
-</div>                      
-<!-- Modal KPI End Edit -->
-
-<!-- Modal Competency Start Edit -->
-  <div aria-hidden="true" role="dialog" tabindex="-1" id="modalCompetency" class="modal inmodal" style="display: none;">
-    <div class="modal-dialog  ">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-             
-                <h4 class="modal-title" id="modalTitleRole">Appraisal Item</h4>
-               
-            </div>
-            <div class="modal-body">
-                <!-- content start -->
-                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Add Competency</span> </h2>
-                <hr>
-                <div class='row'>
-                	<div class="col-xs-12">
-                	 		<!-- form start -->
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                	Appraisal Item Name <span class='redFont '>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                	<input id="appraisalItemNameCompetency" type="text" class="form-control input-sm numberOnly" placeholder="" >
-				                	
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Appraisal Level <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs" id="appraisalLevelAreaCompetency">
-				                
-				                		<select class="form-control input-sm" id="appraisalLevelCompetency">
-					                		<option></option>
-					                	</select>
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement-radio'>
-				                <div class="form-label-customs"> 
-				                </div>
-				                <div class="input-inline-table-customs">
-				                	
-					             <input type="checkbox" checked disabled name="isActive" id="isActiveCompetency" value="1">
-					              <span>Is Active</span>
-				                </div>
-				                <br style="clear:both">   		
-			                </div>
-			               
-			                
-			                
-			                
-			                <!-- form end -->	
-                	</div>
-                	
-                </div>
-                <br style="clear:both">
-                <!-- content end -->
-            </div>
-            <div class="modal-footer">
-           	 	<input type="hidden" name="id" id="id" value="">
-   				<input type="hidden" name="action" id="action" value="add">
-   				
-   				<button class="btn btn-primary" type="button" id="btnSubmitCompetency">Save</button>
-   				<button class="btn btn-primary" type="button" id="btnAddAnotherCompetency">Save & Add Another</button>
-                <button data-dismiss="modal" class="btn btn-white btnCancleCompetency" type="button">Cancel</button>
-                <div class="alert alert-warning" id="informationCompetency" style="display: none;"></div>
-            </div>
-        </div>
-    </div>
-</div>                      
-<!-- Modal Competency End Edit -->
-
-
-<!-- Modal  Work Behavior Start Edit -->
-
-  <div aria-hidden="true" role="dialog" tabindex="-1" id="modalWorkBehavior" class="modal inmodal" style="display: none;">
-    <div class="modal-dialog  ">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-             
-                <h4 class="modal-title" id="modalTitleRole">Appraisal Item</h4>
-               
-            </div>
-            <div class="modal-body">
-                <!-- content start -->
-                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Add Work Behavior</span> </h2>
-                <hr>
-                <div class='row'>
-                	<div class="col-xs-12">
-                	 		<!-- form start -->
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                	Appraisal Item Name <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="appraisalItemNameCompetency">
-				                	
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Appraisal Level <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div id="appraisalLevelAreaCompetency" class="form-input-customs">
-				                
-				                		<select class="form-control input-sm" id="appraisalLevelCompetency">
-					                		<option></option>
-					                	</select>
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Max Value <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                
-				                		<input type="text" class="form-control input-sm numberOnly" placeholder="" id="maxValueCompetency">
-				                	
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement-radio'>
-				                <div class="form-label-customs"> 
-				                </div>
-				                <div class="input-inline-table-customs">
-				                	
-					             <input type="checkbox" checked disabled name="isActive" id="isActiveCompetency" value="1">
-					              <span>Is Active</span>
-				                </div>
-				                <br style="clear:both">   		
-			                </div>
-			                <!-- form end -->	
-                	</div>
-                	
-                </div>
-                <br style="clear:both">
-                <!-- content end -->
-            </div>
-            <div class="modal-footer">
-           	 	<input type="hidden" name="id" id="idCompetency" value="">
-   				<input type="hidden" name="action" id="actionCompetency" value="add">
-   				
-   				<button class="btn btn-primary" type="button" id="btnSubmitCompetency">Save</button>
-   				<button class="btn btn-primary" type="button" id="btnAddAnotherCompetency">Save & Add Another</button>
-                <button data-dismiss="modal" class="btn btn-white btnCancleCompetency" type="button">Cancel</button>
-                <div class="alert alert-warning" id="informationCompetency" style="display: none;"></div>
-            </div>
-        </div>
-    </div>
-</div>                      
-<!-- Modal  Work Behavior End Edit -->
-
-
-<!-- Modal  Organization Development Start  OrgDev-->
-
-  <div aria-hidden="true" role="dialog" tabindex="-1" id="modalOrganizationDevelopment" class="modal inmodal" style="display: none;">
-    <div class="modal-dialog  ">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-             
-                <h4 class="modal-title" id="modalTitleRole">Appraisal Item</h4>
-               
-            </div>
-            <div class="modal-body">
-                <!-- content start -->
-                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Add Organization Development</span> </h2>
-                <hr>
-                <div class='row'>
-                	<div class="col-xs-12">
-                	 		<!-- form start -->
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                	Appraisal Item Name <span class='redFont '>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="appraisalItemNameOrgDev">
-				                	
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Appraisal Level <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs" id="appraisalLevelAreaOrgDev">
-				                
-				                		<select class="form-control input-sm" id="appraisalLevelOrgDev">
-					                		<option></option>
-					                	</select>
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Max Value <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div id="maxValueAreaOrgDev" class="form-input-customs">
-				                
-				                		<input type="text" class="form-control input-sm numberOnly" placeholder="" id="maxValueAreaOrgDev">
-				                	
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Deduct Score/Unit <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                
-				                		<input type="text" class="form-control input-sm numberOnly" placeholder="" id="DeductScoreUnitOrgDev">
-				                	
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement-radio'>
-				                <div class="form-label-customs"> 
-				                </div>
-				                <div class="input-inline-table-customs">
-				                	
-					             <input type="checkbox" checked disabled name="isActiveOrgDev" id="isActiveOrgDev" value="1">
-					              <span>Is Active</span>
-				                </div>
-				                <br style="clear:both">   		
-			                </div>
-			                <!-- form end -->	
-                	</div>
-                	
-                </div>
-                <br style="clear:both">
-                <!-- content end -->
-            </div>
-            <div class="modal-footer">
-           	 	<input type="hidden" name="idOrgDev" id="idOrgDev" value="">
-   				<input type="hidden" name="actionOrgDev" id="actionOrgDev" value="add">
-   				
-   				<button class="btn btn-primary" type="button" id="btnSubmitOrgDev">Save</button>
-   				<button class="btn btn-primary" type="button" id="btnAddAnotherOrgDev">Save & Add Another</button>
-                <button data-dismiss="modal" class="btn btn-white btnCancleOrgDev" type="button">Cancel</button>
-                <div class="alert alert-warning" id="informationOrgDev" style="display: none;"></div>
-            </div>
-        </div>
-    </div>
-</div>                      
-<!-- Modal  Organization Development End  -->
 
 
 
-<!-- Modal Disciplinary Punishment Start  DisPun-->
 
-  <div aria-hidden="true" role="dialog" tabindex="-1" id="modalDisciplinaryPunishment" class="modal inmodal" style="display: none;">
-    <div class="modal-dialog  ">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-             
-                <h4 class="modal-title" id="modalTitleRole">Appraisal Item</h4>
-               
-            </div>
-            <div class="modal-body">
-                <!-- content start -->
-                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Add Disciplinary Punishment</span> </h2>
-                <hr>
-                <div class='row'>
-                	<div class="col-xs-12">
-                	 		<!-- form start -->
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                	Appraisal Item Name <span class='redFont '>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="appraisalItemNameDisPun">
-				                	
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Appraisal Level <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs" id="appraisalLevelAreaDisPun">
-				                
-				                		<select id="appraisalLevelDisPun" class="form-control input-sm">
-					                		<option></option>
-					                	</select>
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Max Value <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs">
-				                
-				                		<input type="text" id="maxValueDisPun" class="form-control input-sm numberOnly" placeholder="" >
-				                	
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                 <div class='form-file-mangement'>
-				                <div class="form-label-customs">
-				                
-				                	Deduct Score/Unit <span class='redFont'>*</span>
-				                </div>
-				                
-				                <div class="form-input-customs" id="deductScoreUnitAreaDisPun">
-				                
-				                		<input type="text" class="form-control input-sm numberOnly" placeholder="" id="deductScoreUnitAreaDisPun">
-				                	
-				                		
-				                </div>
-				                <br style="clear:both">
-			                </div>
-			                
-			                <div class='form-file-mangement-radio'>
-				                <div class="form-label-customs"> 
-				                </div>
-				                <div class="input-inline-table-customs">
-				                	
-					             <input type="checkbox" checked disabled name="isActiveDisPun" id="isActiveDisPun" value="1">
-					              <span>Is Active</span>
-				                </div>
-				                <br style="clear:both">   		
-			                </div>
-			                <!-- form end -->	
-                	</div>
-                	
-                </div>
-                <br style="clear:both">
-                <!-- content end -->
-            </div>
-            <div class="modal-footer">
-           	 	<input type="hidden" name="idDisPun" id="id" value="">
-   				<input type="hidden" name="actionDisPun" id="action" value="add">
-   				
-   				<button class="btn btn-primary" type="button" id="btnSubmitDisPun">Save</button>
-   				<button class="btn btn-primary" type="button" id="btnAddAnotherDisPun">Save & Add Another</button>
-                <button data-dismiss="modal" class="btn btn-white btnCancleDisPun" type="button">Cancel</button>
-                <div class="alert alert-warning" id="informationDisPun" style="display: none;"></div>
-            </div>
-        </div>
-    </div>
-</div>                      
-<!-- Modal Disciplinary Punishment End  -->
 
+
+<div id='include_deduct_score'></div>
+<div id='include_quality'></div>
+<div id='include_quantity_form'></div>
 
 
 <!-- Modal Confirm Start -->
@@ -1332,6 +289,8 @@
     
    
 </div>
+<div id='embedParamSearch'></div>
+<div id='embedParamSearchQuantity'></div>
 <!-- Modal Confirm End -->
 
  <!--  #####################Content data here ######################-->
@@ -1349,21 +308,27 @@
   
    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
      <script src="../js/bootstrap.min.js"></script> 
-     
+     <!-- 
     <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
+ 	-->
     <!-- Custom and plugin javascript -->
+    <!-- 
     <script src="../js/inspinia.js"></script>
     <script src="../js/plugins/pace/pace.min.js"></script>
+     -->
      <!-- table data start -->
+     <!-- 
     <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+	 -->
     <!-- table data end -->
     
     <!-- load angular fame work start-->
+    <!-- 
     <script src="../js/angular.min.js"></script>
     <script src="../js/angular-route.js"></script>
+     -->
     <!-- load angular fame work end -->
     
     
