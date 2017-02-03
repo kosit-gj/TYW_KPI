@@ -237,9 +237,10 @@ $(document).ready(function() {
  
 			if ($("#position").val() == tempPosiName) {
 				$("#position_id").val(tempPosiId);
-			} else {
+			}  else if (ui.item != null){
+				$("#position_id").val(ui.item.position_code);
+			}else {
 				$("#position_id").val("");
-				$("#position_id").val(ui.item.emp_code);
 			}
          }
     });
@@ -291,9 +292,11 @@ $(document).ready(function() {
         },change: function(e, ui) {  
 			if ($("#emp_name").val() == tempEmpName) {
 				$("#emp_name_id").val(tempEmpId);
+			} else if (ui.item != null){
+				$("#emp_name_id").val(ui.item.emp_code);
 			} else {
 				$("#emp_name_id").val("");
-				$("#emp_name_id").val(ui.item.emp_code);
+				
 			}
         	
          }
@@ -307,20 +310,20 @@ $(document).ready(function() {
 	
 	
 	//#### Call Export User Function Start ####
-//	$("#exportToExcel").click(function(){
-//		$("form#formExportToExcel").attr("action",restfulURL+"/dqs_api/public/dqs_user/export?token="+tokenID.token);
-//		
-//
-// 		
+	$("#exportToExcel").click(function(){
+		//$("form#formExportToExcel").attr("action",restfulURL+"/dqs_api/public/dqs_user/export?token="+tokenID.token);
+		$("form#formExportToExcel").attr("action","../file/excel_cds_result.xlsx");
+
+ 		
 //		$("#export_employee_Code").val($("#").val());
 //		$("#export_cds_id").val($("#").val());
 //		$("#export_cds_name").val($("#").val());
 //		$("#export_year").val($("#").val());
 //		$("#export_Month").val($("#").val());
 //		$("#export_cds_Value").val($("#").val());
-//		
-//		$("form#formExportToExcel").submit();
-//	});
+		
+		$("form#formExportToExcel").submit();
+	});
     //#### Call Export User Function End ####
 	
 	
