@@ -1,6 +1,9 @@
 //Global variable
 var galbalDataImportEmp=[];
-var galbalDataRold=[];
+var tempEmpName="";
+var tempEmpID="";
+var tempPosiName="";
+var tempPosiID="";
 var restfulPathImportEmployee="/tyw_api/public/import_employee";
 var restfulPathRole="/tyw_api/public/import_employee/role_list";
 
@@ -363,7 +366,7 @@ var listAppraisalLevel = function() {
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-			galbalDataRold=data;
+			
 			$.each(data,function(index,indexEntry){
 				htmlTable+="<tr>";
 				htmlTable+="<td>";
@@ -601,8 +604,10 @@ $(document).ready(function() {
 		searchAdvanceFn(
 				$("#search_department").val(),
 				$("#search_section").val(),
-				$("#search_position").val().split("-", 1),
-				$("#search_emp_name").val().split("-", 1)
+				//$("#search_position").val().split("-", 1),
+				$("#search_position_id").val(),
+				//$("#search_emp_name").val().split("-", 1)search_emp_id
+				$("#search_emp_id").val()
 				);
 
 		return false;
@@ -684,7 +689,8 @@ $(document).ready(function() {
 						response($.map(data, function (item) {
                             return {
                                 label: item.position_name,
-                                value: item.position_code+"-"+item.position_name
+                                value: item.position_name,
+                                position_code:item.position_code
                             };
                         }));
 					
@@ -694,7 +700,24 @@ $(document).ready(function() {
 				}
 				
 				});
-        }
+        },
+		select:function(event, ui) {
+			$("#search_position").val(ui.item.value);
+            $("#search_position_id").val(ui.item.position_code);
+            tempPosiName = ui.item.value;
+            tempPosiId=ui.item.position_code;
+            return false;
+        },change: function(e, ui) {  
+        	//alert($("#search_position").val() +"-----"+tempPosiName+"-----"+tempPosiId);
+			if ($("#search_position").val() == tempPosiName) {
+				$("#search_position_id").val(tempPosiId);
+			} else if (ui.item != null) {
+				$("#search_position_id").val(ui.item.position_code);
+			} else {
+				$("#search_position_id").val("");
+			}
+        	
+         }
     });
    
 	//Autocomplete Search Position End
@@ -711,7 +734,7 @@ $(document).ready(function() {
 				 data:{
 					 "department_code":$("#search_department").val(),
 					 "section_code":$("#search_section").val(),
-					 "position_code":String($("#search_position").val().split("-", 1)),
+					 "position_code":$("#search_position_id").val(),
 					 "emp_name":request.term},
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
@@ -723,7 +746,8 @@ $(document).ready(function() {
 						response($.map(data, function (item) {
                             return {
                                 label: item.emp_name,
-                                value: item.emp_code+"-"+item.emp_name
+                                value: item.emp_name,
+                                emp_code:item.emp_code
                             };
                         }));
 					
@@ -733,10 +757,30 @@ $(document).ready(function() {
 				}
 				
 				});
-        }
+        },
+		select:function(event, ui) {
+			$("#search_emp_name").val(ui.item.value);
+            $("#search_emp_id").val(ui.item.emp_code);
+            tempEmpName = ui.item.value;
+            tempEmpId=ui.item.emp_code;
+            return false;
+        },change: function(e, ui) {  
+			if ($("#search_emp_name").val() == tempEmpName) {
+				$("#search_emp_id").val(tempEmpId);
+			} else if (ui.item != null) {
+				$("#search_emp_id").val(ui.item.emp_code);
+			} else {
+				$("#search_emp_id").val("");
+			}
+        	
+         }
     });
     
   //Auto Complete Employee Name end
+	
+	$("#exportToExcel").click(function(){
+		$("form#formExportToExcel").attr("action","../file/excel_import_employee.xlsx");
+	});
 	
 	//#### Call Export User Function Start ####
 //	$("#exportToExcel").click(function(){

@@ -106,6 +106,9 @@
 												<input data-toggle="tooltip" title="Position"
 													class="form-control input-sm" placeholder="Position"
 													type="text" id="search_position" name="search_position">
+												<input class="form-control input-sm"
+													type="hidden" id="search_position_id"
+													name="search_position_id">
 											</div>
 
 										</div>
@@ -117,6 +120,9 @@
 												<input data-toggle="tooltip" title="Employee Name"
 													class="form-control input-sm" placeholder="Employee Name"
 													type="text" id="search_emp_name" name="search_emp_name">
+												<input class="form-control input-sm"
+													type="hidden" id="search_emp_id"
+													name="search_emp_id">
 											</div>
 
 										</div>
@@ -137,7 +143,6 @@
 
 
 											<div class=" pull-right p-xxs m-b-none">
-
 												<button id="importToEmpployee"
 													class="btn btn-primary btn-sm" type="submit">
 													<i class="fa fa-upload"></i> Import
@@ -154,8 +159,7 @@
 											</div>
 											<div class=" pull-right p-xxs m-b-none">
 												<form id='formExportToExcel' action="" method="post">
-
-													<button id="exportToExcel" class="btn btn-warning btn-sm"
+													<button id="exportToExcel" class="btn btn-warning btn-sm" 
 														type="submit">
 														<i class="fa fa-download"></i> Download
 													</button>
