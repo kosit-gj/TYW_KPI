@@ -1,7 +1,8 @@
 //Global variable
 var galbalDataCDS=[];
 //IP Server : 171.96.201.146
-
+var tempCdsId ="";
+var tempCdsName ="";
 var restfulPathCDS="/tyw_api/public/cds";
 var restfulPathDropDownAppraisalLevel="/tyw_api/public/cds/al_list";
 var restfulPathDropDownConnection="/tyw_api/public/cds/connection_list";
@@ -452,7 +453,7 @@ $(document).ready(function() {
 	$("#cds_id").val("");
 	$("#btn_search_advance").click(function(){
 		///alert($("#cds_name").val().split("-", 1));
-		searchAdvanceFn($("#app_lv").val(),$("#cds_name").val().split("-", 1));
+		searchAdvanceFn($("#app_lv").val(),$("#cds_id").val());
 		
 		return false;
 	});
@@ -528,7 +529,8 @@ $(document).ready(function() {
 							//alert(item.cds_id);
                             return {
                                 label: item.cds_name,
-                                value: item.cds_id+"-"+item.cds_name
+                                value: item.cds_name,
+                                cds_id:item.cds_id
                             };
                         }));
 					
@@ -538,7 +540,23 @@ $(document).ready(function() {
 				}
 				
 				});
-        }
+        },
+		select:function(event, ui) {
+			$("#cds_name").val(ui.item.value);
+            $("#cds_id").val(ui.item.cds_id);
+            tempCdsName = ui.item.value;
+            tempCdsId=ui.item.cds_id;
+            return false;
+        },change: function(e, ui) {  
+			if ($("#cds_name").val() == tempCdsName) {
+				$("#cds_id").val(tempCdsId);
+			} else if (ui.item != null) {
+				$("#cds_id").val(ui.item.cds_id);
+			} else {
+				$("#cds_id").val("");
+			}
+        	
+         }
     });
    
 	//Autocomplete Search End
