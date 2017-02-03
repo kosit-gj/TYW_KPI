@@ -779,7 +779,7 @@ $(document).ready(function() {
   //Auto Complete Employee Name end
 	
 	$("#exportToExcel").click(function(){
-		$("form#formExportToExcel").attr("action","../file/excel_import_employee.xlsx");
+		$("form#formExportToExcel").attr("action","../file/eimport_employee_template.xlsx");
 	});
 	
 	//#### Call Export User Function Start ####
