@@ -265,7 +265,7 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='objectCenter'><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
 				"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_code"]+ " data-target=#ModalRole data-toggle='modal'>Role</button>&nbsp;" +
 				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
-		        "<button id="+indexEntry["_id"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
+		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 	});
 	
@@ -343,7 +343,7 @@ var listImportEmployeeFn = function(data) {
 					       clearFn();
 					       $("#confrimModal").modal('hide');
 					       
-					     }
+					     }else{alert("Error");}
 					 }
 				});
 				
@@ -817,6 +817,70 @@ $(document).ready(function() {
 		            e.preventDefault();
 		        }
 		});
+	
+	
+	//FILE IMPORT MOBILE START
+	// Variable to store your files
+	var files2;
+	// Add events
+	$('#file').on('change', prepareUpload2);
+
+	// Grab the files and set them to our variable
+	function prepareUpload2(event)
+	{
+	  files2 = event.target.files2;
+	}
+	$('form#fileImportEmployee').on('submit', uploadFiles);
+
+	// Catch the form submit and upload the files
+	function uploadFiles(event)
+	{
+		alert("Upload");
+	  event.stopPropagation(); // Stop stuff happening
+	  event.preventDefault(); // Totally stop stuff happening
+
+		// START A LOADING SPINNER HERE
+
+		// Create a formdata object and add the files
+		var data = new FormData();
+		jQuery_1_1_3.each(files, function(key, value)
+		{
+			data.append(key, value);
+		});
+		$("body").mLoading();
+		jQuery_1_1_3.ajax({
+			url:restfulURL+restfulPathImportEmployee,
+			type: 'POST',
+			data: data,
+			cache: false,
+			dataType: 'json',
+			processData: false, // Don't process the files
+			contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+			headers:{Authorization:"Bearer "+tokenID.token},
+			success: function(data, textStatus, jqXHR)
+			{
+				console.log(data);
+				if(data['status']==200 && data['error'].length==0){
+
+					callFlashSlide("Import Employee Successfully");
+					$('#file').val("");
+					$("body").mLoading('hide');
+					
+				}else{
+					
+					callFlashSlide(listErrorFn(data['error']),"error");
+					$("body").mLoading('hide');
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				// Handle errors here
+				callFlashSlide('Format Error : ' + textStatus);
+				// STOP LOADING SPINNER
+			}
+		});
+		return false;
+	}
 	
 
 		
