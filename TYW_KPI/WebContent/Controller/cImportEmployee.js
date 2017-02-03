@@ -828,7 +828,7 @@ $(document).ready(function() {
 	// Grab the files and set them to our variable
 	function prepareUpload2(event)
 	{
-	  files2 = event.target.files2;
+	  files = event.target.files;
 	}
 	$('form#fileImportEmployee').on('submit', uploadFiles);
 
@@ -836,8 +836,8 @@ $(document).ready(function() {
 	function uploadFiles(event)
 	{
 		alert("Upload");
-	  event.stopPropagation(); // Stop stuff happening
-	  event.preventDefault(); // Totally stop stuff happening
+		event.stopPropagation(); // Stop stuff happening
+		event.preventDefault(); // Totally stop stuff happening
 
 		// START A LOADING SPINNER HERE
 
@@ -859,8 +859,9 @@ $(document).ready(function() {
 			headers:{Authorization:"Bearer "+tokenID.token},
 			success: function(data, textStatus, jqXHR)
 			{
+				
 				console.log(data);
-				if(data['status']==200 && data['error'].length==0){
+				if(data['status']==200 && data['errors'].length==0){
 
 					callFlashSlide("Import Employee Successfully");
 					$('#file').val("");
@@ -868,7 +869,7 @@ $(document).ready(function() {
 					
 				}else{
 					
-					callFlashSlide(listErrorFn(data['error']),"error");
+					callFlashSlide(listErrorFn(data['errors']),"error");
 					$("body").mLoading('hide');
 				}
 			},
