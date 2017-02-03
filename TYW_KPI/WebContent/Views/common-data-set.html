@@ -60,7 +60,7 @@
 									<div class="col-lg-3 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-4 col-md-4 p-t-xxs">Appraisal</label>
-											<div class="col-lg-7 col-md-7" id="dropDownListAppraisalLevel">
+											<div class="col-lg-7 col-md-7" id="drop_down_list_appraisal_level">
 												<select data-toggle="tooltip" title="Appraisal"
 													class="input form-control input-sm col-lg-9" id="app_lv"
 													name="app_lv">
@@ -94,7 +94,7 @@
 
 
 												<button type="button" class="btn btn-info input-sm"
-													name="btnSearchAdvance" id="btnSearchAdvance">
+													name="btn_search_advance" id="btn_search_advance">
 													<i class="fa fa-search"></i>&nbsp;Search
 												</button>
 
@@ -139,17 +139,17 @@
 
 
 				<!-- start table -->
-											<!-- pagination start -->
+						<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs">
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs width-100-persen">
 
 									<p class="pagination_top m-b-none" ></p>
 
 								</div>
 
-								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text p-t-xxs">Results
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text p-t-xs txtCountPaginationTop">Results
 									per page</div>
-								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs p-t-xxs">
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs selectCountPaginationTop">
 
 									<select name="account" id='countPaginationTop'
 										class="form-control input-sm countPagination">
@@ -183,15 +183,14 @@
 				</div>
 				<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs">
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs width-100-persen">
 
 									<p class="pagination_bottom"></p>
 
 								</div>
-
-								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text p-t-xxs">Results
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right p-t-xs paging-text txtCountPaginationBottom">Results
 									per page</div>
-								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs p-t-xxs">
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs selectCountPaginationBottom">
 
 									<select name="account" id='countPaginationBottom'
 										class="form-control input-sm countPagination">
@@ -276,7 +275,7 @@
 							
 							</div>
 <!-- 							<label class="col-lg-4 form-label-cds">Appraisal Level: <span class='redFont'>*</span></label> -->
-							<div class="col-lg-6 col-xs-8" id="dropDownListFromAppraisalLevel">
+							<div class="col-lg-6 col-xs-8" id="drop_down_list_from_appraisal_level">
 								<select class="input form-control input-sm"  id="f_app_lv" name="f_app_lv">
 	                				<option>ระดับบริหาร</option>
 									<option>ระดับการจัดการ</option>
@@ -297,7 +296,7 @@
 							
 							</div>
 <!-- 							<label class="col-lg-4 form-label-cds">Connection: <span class='redFont'>*</span></label> -->
-							<div class="col-lg-6 col-xs-8" id="dropDownListConnection">
+							<div class="col-lg-6 col-xs-8" id="drop_down_list_connection">
 								<select class="input form-control input-sm"  id="f_connection" name="f_connection">
 	                				<option>ระดับบริหาร</option>
 									<option>ระดับการจัดการ</option>
@@ -315,8 +314,8 @@
 							<div class="col-lg-6 col-md-8 col-sm-8 col-xs-8">
 								<div class="checkbox checkbox-inline">
 
-									<input id="checkboxIsSQL" name="checkboxIsSQL" type="checkbox"
-										value=""> <label for="checkboxIsSQL">IsSQL</label>
+									<input id="checkbox_is_sql" name="checkbox_is_sql" type="checkbox"
+										value=""> <label for="checkbox_is_sql">IsSQL</label>
 								</div>
 							</div>
 
@@ -328,16 +327,16 @@
 									<label class="form-label-cds p-b-xs">
 										SQL: &nbsp;
 									</label>
-									<button class="btn btn-xs btn-white " type="button" id="btnExecute">Execute</button>&nbsp;
+									<button class="btn btn-xs btn-white " type="button" id="btn_Execute">Execute</button>&nbsp;
 <!-- 									<span class='redFont p-b-xs p-t-xs'>*</span> -->
 								</div>
 							
 							</div>
 <!-- 							<label class="col-lg-4 col-md-2 col-xs-5  form-label-cds form-inline"> -->
-<!-- 								SQL: &nbsp;<button class="btn btn-xs btn-white " type="button" id="btnExecute">Execute</button><span class='redFont p-b-xs'>*</span> -->
+<!-- 								SQL: &nbsp;<button class="btn btn-xs btn-white " type="button" id="btn_Execute">Execute</button><span class='redFont p-b-xs'>*</span> -->
 <!-- 							</label> -->
 							<div class="col-lg-6 col-md-8 col-sm-8 col-xs-12">
-								<textarea id="txtSQL" class="form-control input-contact-textinput" placeholder="" style="height: 95px;"></textarea>
+								<textarea id="txt_sql" class="form-control input-contact-textinput" placeholder="" style="height: 95px;"></textarea>
 							</div>
 
 						</div>
@@ -355,7 +354,7 @@
 <!-- 								Sample Data: <span class='redFont '>*</span> -->
 <!-- 							</label> -->
 							<div class="col-lg-6 col-md-8 col-sm-8 col-xs-12">
-								<textarea id="txtSampleData" class="form-control input-contact-textinput" placeholder="" style="height: 110px;"></textarea>
+								<textarea id="txt_sample_data" class="form-control input-contact-textinput" placeholder="" style="height: 110px;"></textarea>
 							</div>
 
 						</div>
@@ -366,8 +365,8 @@
 							<div class="col-lg-6 col-md-8 col-sm-8">
 								<div class="checkbox checkbox-inline">
 
-									<input id="checkboxIsActive" name="checkboxIsActive"  type="checkbox" value="">
-		             				<label for="checkboxIsActive">IsActive</label>
+									<input id="checkbox_is_active" name="checkbox_is_active"  type="checkbox" value="">
+		             				<label for="checkbox_is_active">IsActive</label>
 								</div>
 							</div>
 
@@ -475,8 +474,9 @@
     
     
     <script src="../js/jquery.mloading.js"></script>
-    
-    <script src="../Controller/common-data-set.js"></script>
+    <script src="../Controller/cConfig.js"></script>
+     <script src="../Controller/cMain.js"></script>
+    <script src="../Controller/cCommonDataSet.js"></script>
 
 </body>
 </html>

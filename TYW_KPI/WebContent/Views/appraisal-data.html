@@ -58,17 +58,7 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-3 col-md-3 p-t-xxs">Structure</label>
-											<div class="col-lg-8 col-md-8" id="dropDownListStructure">
-												<select data-toggle="tooltip" title="Structure"
-													class="input form-control input-sm col-lg-9"
-													id="paramStructure" name="paramStructure">
-													<option>All</option>
-													<option>ระดับบริหาร</option>
-													<option>ระดับการจัดการ</option>
-													<option>ระดับบังคับบัญชา</option>
-													<option>ระดับเจ้าหน้าที่</option>
-													<option>HR</option>
-												</select>
+											<div class="col-lg-8 col-md-8" id="drop_down_list_structure">
 											</div>
 
 										</div>
@@ -77,17 +67,7 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-4 col-md-5 p-t-xxs">Appraisal Level</label>
-											<div class="col-lg-8 col-md-7" id="dropDownListAppraisalLevel">
-												<select data-toggle="tooltip" title="Appraisal Level"
-													class="input form-control input-sm col-lg-9"
-													id="paramAppLv" name="paramAppLv">
-													<option>All</option>
-													<option>ระดับบริหาร</option>
-													<option>ระดับการจัดการ</option>
-													<option>ระดับบังคับบัญชา</option>
-													<option>ระดับเจ้าหน้าที่</option>
-													<option>HR</option>
-												</select>
+											<div class="col-lg-8 col-md-7" id="drop_down_list_appraisal_level">
 											</div>
 
 										</div>
@@ -96,17 +76,12 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-4 col-md-5 p-t-xxs">Appraisal Item</label>
-											<div class="col-lg-8 col-md-7" id="dropDownListAppraisalItem">
-												<select data-toggle="tooltip" title="Appraisal Item"
-													class="input form-control input-sm col-lg-9"
-													id="paramAppItem" name="paramAppItem">
-													<option>All</option>
-													<option>ระดับบริหาร</option>
-													<option>ระดับการจัดการ</option>
-													<option>ระดับบังคับบัญชา</option>
-													<option>ระดับเจ้าหน้าที่</option>
-													<option>HR</option>
-												</select>
+											<div class="col-lg-8 col-md-7" >
+												<input data-toggle="tooltip" title="Appraisal Item"
+													class="form-control input-sm" placeholder="Appraisal Item"
+													type="text" id=app_item name="app_item">
+												<input class="form-control input-sm" 
+													type="hidden" id="app_item_id" name="app_item_id">
 											</div>
 
 										</div>
@@ -115,19 +90,7 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
 											<label class="col-lg-3  col-md-3 p-t-xxs">Period</label>
-											<div class="col-lg-8 col-md-8" id="dropDownListPeriod">
-												<select data-toggle="tooltip" title="Period"
-													class="input form-control input-sm col-lg-9"
-													id="paramPeriod" name="paramPeriod">
-													<option>All</option>
-													<option>ระดับบริหาร</option>
-													<option>ระดับการจัดการ</option>
-													<option>ระดับบังคับบัญชา</option>
-													<option>ระดับเจ้าหน้าที่</option>
-													<option>HR</option>
-												</select>
-											</div>
-
+											<div class="col-lg-8 col-md-8" id="drop_down_list_period"></div>
 										</div>
 									</div>
 									<div class="col-lg-4 col-md-4">
@@ -136,13 +99,15 @@
 											<div class="col-lg-8 col-md-7">
 												<input data-toggle="tooltip" title="Employee Name"
 													class="form-control input-sm" placeholder="Employee Name"
-													type="text" id="paramEmployeeName" name="paramEmployeeName">
+													type="text" id="emp_name" name="emp_name">
+												<input class="form-control input-sm" 
+													type="hidden" id="emp_name_id" name="emp_name_id">
 											</div>
 
 										</div>
 									</div>
 									<div class="col-lg-4 col-md-4">
-										<div class="form-group p-xxs ">
+										<div class="form-group ">
 											<div class="form-group pull-right p-xxs m-b-none">
 												<form id='formImportToAppraisalData' action="" method="post">
 													<button id="importToAppraisalData"
@@ -223,17 +188,18 @@
 						<div class="ibox-content">
 
 							<!-- start table -->
-							<!-- pagination start -->
+						<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs">
+								<div class="col-sm-12 height-32-px"></div>
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs width-100-persen">
 
-									<p class="pagination_top m-b-none"></p>
+									<p class="pagination_top m-b-none" ></p>
 
 								</div>
 
-								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text p-t-xxs">Results
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text p-t-xs txtCountPaginationTop">Results
 									per page</div>
-								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-t-xxs">
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs selectCountPaginationTop">
 
 									<select name="account" id='countPaginationTop'
 										class="form-control input-sm countPagination">
@@ -262,23 +228,7 @@
 										</tr>
 									</thead>
 									<tbody id="listAppraisalData">
-										<tr>
-											<td>ประเมินผลการปฏิบัติงานประจำปี 2017 ครั้งที่ 1</td>
-											<td>Work Behavior</td>
-											<td>ลาป่วยตั้งแต่ 10 วันขึ้นไป</td>
-											<td>00004</td>
-											<td>นายสมหมาย จันทร์กะจ่าง</td>
-											<td>10</td>
-										</tr>
-										<tr>
-											<td>ประเมินผลการปฏิบัติงานประจำปี 2017 ครั้งที่ 1</td>
-											<td>Org.</td>
-											<td>ลาป่วยตั้งแต่ 15 วันขึ้นไป</td>
-											<td>00005</td>
-											<td>นายสมหมายมั่น จันทร์กะจ่าง</td>
-											<td>00</td>
-										</tr>
-
+	
 									</tbody>
 								</table>
 
@@ -286,15 +236,14 @@
 							</div>
 							<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs">
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs width-100-persen">
 
-									<p class="pagination_bottom m-b-none"></p>
+									<p class="pagination_bottom"></p>
 
 								</div>
-
-								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text p-t-xxs">Results
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right p-t-xs paging-text txtCountPaginationBottom">Results
 									per page</div>
-								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-t-xxs">
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs selectCountPaginationBottom">
 
 									<select name="account" id='countPaginationBottom'
 										class="form-control input-sm countPagination">
@@ -320,6 +269,7 @@
 
 			</div>
 		</div>
+	</div>
 	</div>
 
 
@@ -357,7 +307,8 @@
     
     
     <script src="../js/jquery.mloading.js"></script>
-    
+    <script src="../Controller/cConfig.js"></script> 
+	<script src="../Controller/cMain.js"></script> 
     <script src="../Controller/appraisal-data.js"></script>
 
 
