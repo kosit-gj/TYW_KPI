@@ -172,6 +172,35 @@ var dropDownListAppraisalLevel = function(){
 	html+="</select>";
 	return html;
 };
+var listErrorFn =function(data){
+	var errorData="";
+	
+	$.each(data,function(index,indexEntry){
+
+		
+		if(data[index]['errors']['employee_code']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['employee_code']+"<br>";
+		}
+		if(data[index]['errors']['cds_id']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['cds_id']+"<br>";
+		}
+		if(data[index]['errors']['year']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['year']+"<br>";
+		}
+		if(data[index]['errors']['month']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['month']+"<br>";
+		}
+		if(data[index]['errors']['cds_value']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['cds_value']+"<br>";
+		}
+		
+		
+
+	});
+	//alert(errorData);
+	callFlashSlideInModal(errorData);
+	/*return errorData;*/
+}
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
 
 $(document).ready(function() {
@@ -312,7 +341,7 @@ $(document).ready(function() {
 	//#### Call Export User Function Start ####
 	$("#exportToExcel").click(function(){
 		//$("form#formExportToExcel").attr("action",restfulURL+"/dqs_api/public/dqs_user/export?token="+tokenID.token);
-		$("form#formExportToExcel").attr("action","../file/excel_cds_result.xlsx");
+		$("form#formExportToExcel").attr("action","../file/cds_result_template.xlsx");
 
  		
 //		$("#export_employee_Code").val($("#").val());
@@ -326,7 +355,74 @@ $(document).ready(function() {
 	});
     //#### Call Export User Function End ####
 	
+	//FILE IMPORT MOBILE START
+	$("#btn_import").click(function () {
+		$('#file').val("");
+	});
 	
+	// Variable to store your files
+	var files2;
+	// Add events
+	$('#file').on('change', prepareUpload2);
+
+	// Grab the files and set them to our variable
+	function prepareUpload2(event)
+	{
+	  files = event.target.files;
+	}
+	$('form#fileImportCdsResult').on('submit', uploadFiles);
+
+	// Catch the form submit and upload the files
+	function uploadFiles(event)
+	{
+		
+		event.stopPropagation(); // Stop stuff happening
+		event.preventDefault(); // Totally stop stuff happening
+
+		// START A LOADING SPINNER HERE
+
+		// Create a formdata object and add the files
+		var data = new FormData();
+		jQuery_1_1_3.each(files, function(key, value)
+		{
+			data.append(key, value);
+		});
+		$("body").mLoading();
+		jQuery_1_1_3.ajax({
+			url:restfulURL+restfulPathCdsResult,
+			type: 'POST',
+			data: data,
+			cache: false,
+			dataType: 'json',
+			processData: false, // Don't process the files
+			contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+			headers:{Authorization:"Bearer "+tokenID.token},
+			success: function(data, textStatus, jqXHR)
+			{
+				
+				console.log(data);
+				if(data['status']==200 && data['errors'].length==0){
+							
+					callFlashSlide("Import CDS Result Successfully");
+					$('#file').val("");
+					$("body").mLoading('hide');
+					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					
+				}else{
+					$('#file').val("");
+					listErrorFn(data['errors']);
+					$("body").mLoading('hide');
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				// Handle errors here
+				callFlashSlide('Format Error : ' + textStatus);
+				// STOP LOADING SPINNER
+			}
+		});
+		return false;
+	}
 	
 });
 

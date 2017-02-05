@@ -112,19 +112,11 @@
 									<div class="col-md-5">
 										<div class="form-group ">
 											<div class="form-group pull-right p-xxs m-b-none">
-
-												<button id="importToCdsResult"
-													class="btn btn-primary btn-sm" type="submit">
-													<i class="fa fa-upload"></i> Import
+													<button id="btn_import" type="button"
+													class="btn btn-primary btn-sm" data-target="#ModalImport"
+													data-toggle="modal">
+													<i class="fa fa-upload"></i>&nbsp;Import
 												</button>
-												<!-- 								<div class="fileinput fileinput-new" data-provides="fileinput"> -->
-												<!-- 									<span class="btn btn-default btn-file"><span -->
-												<!-- 										class="fileinput-new">Select file</span> <span -->
-												<!-- 										class="fileinput-exists">Change</span><input type="file" -->
-												<!-- 										name="..." /></span> <span class="fileinput-filename"></span> <a -->
-												<!-- 										href="#" class="close fileinput-exists" -->
-												<!-- 										data-dismiss="fileinput" style="float: none">×</a> -->
-												<!-- 								</div> -->
 
 											</div>
 											<div class="form-group pull-right p-xxs m-b-none">
@@ -263,7 +255,68 @@
 		</div>
 	</div>
 
+<!-- Modal Import CDS Result -->
 
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalImport"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="">CDS Result</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<h2>
+						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+							id="">CDS Result</span>
+					</h2>
+					<hr>
+
+					<!-- form start -->
+					
+
+					<div class="form-group">
+					<form id="fileImportCdsResult">
+						
+							<h3>FILE IMPORT</h3>
+							<div class="fileUpload ">
+								<span>Browse File</span> <input type="file" name="file"
+									id="file" > <span></span>
+							</div>
+							<br>
+							<h6 class="label-content-import-export">
+
+								<input class="btn btn-primary" type="submit"
+									name="importFileMobile" id="importFileMobile" value="Import">
+<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
+
+							</h6>
+						
+					</form>
+					
+						<!-- start table -->
+					</div>
+					<!-- form End -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+<!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+						<div class="alert alert-warning" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End  -->
 
 
     <!-- Mainly scripts -->
