@@ -71,7 +71,44 @@ var validationFn = function(data){
 	
 	callFlashSlideInModal(validate);
 };
+
 //Check Validation Edd
+
+var listErrorFn =function(data){
+	var errorData="";
+	
+	$.each(data,function(index,indexEntry){
+
+		
+		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
+			if(data[index]['employee_code']== null){
+				errorData+="<font color='red'>*</font> The employee code field is null<br>";
+			}else{
+				errorData+="<font color='red'>*</font> "+data[index]['employee_code']+"<br>";}
+		}
+		if(data[index]['errors']['working_start_date_yyyy_mm_dd']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['working_start_date_yyyy_mm_dd']+"<br>";
+		}
+		if(data[index]['errors']['probation_end_date_yyyy_mm_dd']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
+		}
+		if(data[index]['errors']['acting_end_date_yyyy_mm_dd']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
+		}
+		if(data[index]['errors']['salary_amount']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['salary_amount']+"<br>";
+		}
+		if(data[index]['errors']['email']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['email']+"<br>";
+		}
+		
+		
+
+	});
+	//alert(errorData);
+	callFlashSlideInModal(errorData);
+	/*return errorData;*/
+}
 
 //--------  Clear Start 
 var clearFn = function() {
@@ -96,6 +133,8 @@ var clearFn = function() {
 	$("#from_checkboxIs_active").prop("checked",false);
 	
 	 $(".from_data_role").prop('checked', false); 
+	 
+	 $('#file').val("");
 
 //	$("#txtSampleData").removeAttr("disabled");
 	
@@ -779,7 +818,7 @@ $(document).ready(function() {
   //Auto Complete Employee Name end
 	
 	$("#exportToExcel").click(function(){
-		$("form#formExportToExcel").attr("action","../file/eimport_employee_template.xlsx");
+		$("form#formExportToExcel").attr("action","../file/import_employee_template.xlsx");
 	});
 	
 	//#### Call Export User Function Start ####
@@ -820,6 +859,10 @@ $(document).ready(function() {
 	
 	
 	//FILE IMPORT MOBILE START
+	$("#btn_import").click(function () {
+		$('#file').val("");
+	});
+	
 	// Variable to store your files
 	var files2;
 	// Add events
@@ -835,7 +878,7 @@ $(document).ready(function() {
 	// Catch the form submit and upload the files
 	function uploadFiles(event)
 	{
-		alert("Upload");
+		
 		event.stopPropagation(); // Stop stuff happening
 		event.preventDefault(); // Totally stop stuff happening
 
@@ -862,14 +905,14 @@ $(document).ready(function() {
 				
 				console.log(data);
 				if(data['status']==200 && data['errors'].length==0){
-
+							
 					callFlashSlide("Import Employee Successfully");
 					$('#file').val("");
 					$("body").mLoading('hide');
 					
 				}else{
-					
-					callFlashSlide(listErrorFn(data['errors']),"error");
+					$('#file').val("");
+					listErrorFn(data['errors']);
 					$("body").mLoading('hide');
 				}
 			},

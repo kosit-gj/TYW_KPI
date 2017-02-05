@@ -39,7 +39,7 @@ var clearFn = function() {
 	$("#f_cds_name").val("");
 	$("#f_cds_description").val("");
 	$("#txt_sql").val("");
-	$("#txt_sample_data").val("");
+	$("#table_Sql").html("");
 	$("#txt_sample_data").removeAttr("disabled");
 	
 	$("#btn_execute").removeAttr("disabled");
@@ -286,8 +286,8 @@ var updateFn = function () {
 				callFlashSlide("Update Successfully.");
 				
 			}else if (data['status'] == "400") {
-				alert("Error ?");
-				//validationFn(data);
+				//alert("Error ?");
+				validationFn(data);
 			}
 		}
 	});
@@ -346,7 +346,7 @@ var insertFn = function (param) {
 						callFlashSlideInModal("Insert Data is Successfully.");
 					}
 			}else if (data['status'] == "400") {
-				alert("Error ?");
+				//alert("Error ?");
 				validationFn(data);
 			}  
 				   
@@ -419,25 +419,134 @@ var dropDownListConnection = function(id){
 	html+="</select>";
 	return html;
 };
+var myList = [
+              {
+            "initial_validate_id": "1",
+            "rule_id": "15"
+        },
+        {
+            "initial_validate_id": "2",
+            "rule_id": "30"
+        },
+        {
+            "initial_validate_id": "3",
+            "rule_id": "42"
+        },
+        {
+            "initial_validate_id": "4",
+            "rule_id": "3"
+        },
+        {
+            "initial_validate_id": "5",
+            "rule_id": "5"
+        },
+        {
+            "initial_validate_id": "6",
+            "rule_id": "18"
+        },
+        {
+            "initial_validate_id": "7",
+            "rule_id": "35"
+        },
+        {
+            "initial_validate_id": "8",
+            "rule_id": "40"
+        },
+        {
+            "initial_validate_id": "9",
+            "rule_id": "44"
+        },
+        {
+            "initial_validate_id": "10",
+            "rule_id": "2"
+        }
+            ];
 
-var executeFn = function (txtSQL) {
+
+
+
+var executeSQLFn = function (txtSQL) {
+	
+
 	$.ajax({
-		url : restfulURL + "...............",
-		type : "put",
+		url : restfulURL + restfulPathCDS+"/test_sql",
+		type : "POST",
 		dataType : "json",
+		data : {"connection_id":$("#f_connection").val(),
+		"sql":txtSQL},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async : false,
 		success : function(data) {
-			// galbalDqsRoleObj=data;
 			if (data['status'] == "200") {
-				$("#txt_sample_data").val(data['txtExecute']);
-
+				listSqlFn(data['data']);
+				
 			} else if (data['status'] == "400") {
-
-				validationFn(data);
+				validationSqlFn(data['data']);
 			}
 		}
 	});
+}
+
+var listSqlFn = function (data) {
+	var tableSql = "";
+	var tableSqlHead = "";
+	var tableSqlBody = "";
+	tableSqlHead+="<thead><tr>";
+	tableSqlBody+="<tbody id=\"listSqlData\">";
+   
+	for ( var obj in data) {
+		if (data.hasOwnProperty(obj)) {
+			
+			tableSqlBody+="<tr class='rowSearch'>";
+			for ( var prop in data[obj]) {
+				
+				if (data[obj].hasOwnProperty(prop)) {
+					if(obj == 0){
+						tableSqlHead+="<th>"+prop+"</th>";
+					}
+					tableSqlBody += "<td class='columnSearch'>"+ data[obj][prop]+ "</td>";
+					//console.log(prop + ':' + data[obj][prop]);
+					
+				}
+			}
+			tableSqlBody+="</tr>";
+		}
+	}
+	
+	tableSqlHead+="</tr></thead>";
+	tableSqlBody+="</tbody>";
+	tableSql=tableSqlHead+tableSqlBody;
+	$("#table_Sql").html(tableSql);
+	
+}
+
+var validationSqlFn = function (data) {
+	
+	//alert(data);
+	var validate ="";
+	if( data instanceof Array ){
+		for ( var obj in data) {
+			if (data.hasOwnProperty(obj)) {
+				for ( var prop in data[obj]) {
+					if (data[obj].hasOwnProperty(prop)) {
+						validate+="<font color='red'>*</font> "+prop + ':' + data[obj][prop]+"<br>";
+						//console.log(prop + ':' + data[obj][prop]);
+						
+					}
+				}
+				
+			}
+		}
+	}else{
+		if(data !=undefined){
+			validate+="<font color='red'>*</font> "+data+"<br>";
+		}
+		
+	}
+	
+	
+	callFlashSlideInModal(validate);
+	
 }
 
 
@@ -496,16 +605,21 @@ $(document).ready(function() {
 		}
 	});
 	
-//	$("#btn_execute").attr("disabled","disabled");
-//	 $("#btn_execute").click(function () {
-//		if ($("#checkbox_is_sql:checked").is(":checked")) {
-//			alert("Execute");
-//			//executeFn();
-//		} else {
-//			alert("กรุณาคลิกเลือก \"IsSQL\" ");
-//		}		
-//		 
-//	});
+	
+	
+
+
+	            
+	            
+	
+	
+	
+	
+	 $("#btn_Execute").click(function () {
+		 executeSQLFn($("#txt_sql").val());
+		 
+		 //buildHtmlTable('#excelDataTable');
+	});
 	
 
 	
