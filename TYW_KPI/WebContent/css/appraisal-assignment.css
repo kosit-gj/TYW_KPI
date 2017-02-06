@@ -52,10 +52,7 @@
 	padding-top: 1px;
 	width:170px;
 }
-.font-gear{
-	font-size: 25px;
-	cursor:pointer;
-}
+	
 
 .input-contact-customs{
 	width:70px;
@@ -88,10 +85,20 @@
     text-align: right;
 }
 #btnSearchArea{
-	padding-top:35px;
+	/*padding-top:35px;*/
 }
 .titlePanel{
 	/*display: inline;*/
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+    width:200px;
+    float:left;
+}
+.totalWeight{
+	width:145px;
+    float:right;
     font-size: 14px;
     font-weight: bold;
     margin-right: 5px;
@@ -113,6 +120,68 @@
     padding-top: 5px;
    
 
+}
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFCC00;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 35px;
+    padding: 0px 10px;
+}
+.modal-lg {
+    width: 90%;
+}
+.th-small{
+	font-size:8px;
+}
+.input-sm-small{
+	height:24px;
+}
+.font-small{
+	font-size:12px;
+	padding-top:2px;
+}
+.score1{
+	background:#dddddd;
+}
+.score2{
+	
+}
+.score3{
+	background:#dddddd;
+}
+.score4{
+	
+}
+.score5{
+	background:#dddddd;
+}
+.label_info{
+	float:left;
+	font-weight: bold;
+    margin-right: 10px;
+    padding-top:1px;
+    padding-bottom:1px;
+}
+.text_info{
+	float:left;
+
+	padding-top:1px;
+    padding-bottom:1px;
+}
+.text-width-box{
+	padding-top:7px
+}
+.search_result{
+	display:none;
 }
 /*
 .modal-body {

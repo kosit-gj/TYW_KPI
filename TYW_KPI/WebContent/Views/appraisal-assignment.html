@@ -42,8 +42,7 @@
          					</div>
          					
          						<div class="ibox-content"> 
-         							<div class="row">
-										<div class='col-sm-11'>
+         							
 											<div class='row'>
 												
 				                                    <div class="col-sm-4 m-b-xs">
@@ -92,6 +91,7 @@
 					                                    <div class="form-group"><label class="col-lg-5 control-label">Period frequency</label>
 			
 						                                    <div class="col-lg-7" id="periodFrequencyArea">
+						                                    
 							                                    <select data-toggle="tooltip" title="Period frequency" class="input form-control input-sm"  id="periodFrequency" name="periodFrequency">
 							                                    	<option value="0"></option>
 																</select>
@@ -104,10 +104,11 @@
 					                                    <div class="form-group"><label class="col-lg-5 control-label">Assign Frequency</label>
 			
 						                                    <div class="col-lg-7" id='assignFrequencyArea'>
-						                                    
+						               
 							                                    <select data-toggle="tooltip" title="Assign Frequency" class="input form-control input-sm"  id="assignFrequency" name="assignFrequency">
-							                                    	
-							                                    	<option value="0"></option>
+							                                    
+							                                    	<option value="1">ครั้งเดียวทุกงวด</option>
+							                                    	<option value="2">ทีละงวด</option>
 																	
 																</select>
 																
@@ -122,7 +123,7 @@
 						                                    
 							                                    <select data-toggle="Period" title="Period" class="input form-control input-sm"  id="period" name="period">
 							                                    	
-							                                    	<option value="0"></option>
+							                                    	<option value="">All</option>
 																	
 																</select>
 																
@@ -142,36 +143,30 @@
 						                                    </div>
 						                                </div>
 													</div>
+													<div class='col-sm-8 object-right' style='text-align:right;' >
+										
+												
+														
+			                                  
+				                                     	<div id="btnSearchArea">
+			                                         		<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
+			                                         		<button type="button"  data-target='#ModalAssignment' data-toggle='modal' class="btn btn-warning input-sm" name="btnAssignment" id="btnAssignment"><i class="fa fa-sign-in"></i>&nbsp;Assign</button>
+			                                         	</div>
+		                                         
+				                                     	
+                                     	
+													</div>
 													
 													
 											</div>
-										</div>
-										
-										<div class='col-sm-1'>
-										
-												
-												<div class="col-sm-1" align="right">
-			                                     	<div class="input-group" >
-				                                     	<div id="btnSearchArea">
-			                                         		<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
-			                                         	</div>
-		                                         	</div>
-		                                     	</div>
-                                     	
-										</div>
-										
-
-	                                    
-                                    
-                                     	 
-                             		</div>
+							
 				         		</div><!-- content end -->
 				         		</div>
 				         		
          				</div>
 	
          			</div><!-- end--row -->
-         			<div class="row">
+         			<div class="row search_result">
 				         		<div class="col-lg-12">
 					         	<div class="ibox-title">
 	                                <div class='titlePanel'>Employee List</div>
@@ -183,16 +178,30 @@
                                     	<!-- start table -->
                                     	<!-- pagination start -->
                                     	<div class="row">
-	                                    	<div class="col-xs-9 m-b-xs">
-												<!-- 
+	                                    	<div class="col-xs-9">
+												 
 												<p class="pagination_top"></p>
-												 -->
+												<!--  
 												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
-												
+												 -->
 	                   
 	                                    	</div>
 	                                    
-		                                    <div class="col-xs-2 object-right paging-text">Results per page</div>
+		                                    <div class="col-xs-3 object-right paging-text">
+		                                    
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+		                                 		
+		                                 		</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                    <!-- 
 		                                    <div class="col-xs-1">
 	                                     
 	                                    	<select name="countPagination" id='countPaginationTop'  class="form-control input-sm countPagination">
@@ -203,7 +212,7 @@
 		                                    </select> 
 	                                        
 	                                    	</div>
-	                                    	
+	                                    	 -->
                                     	</div> 
                                     	 <!-- pagination end -->
                                     	 
@@ -223,19 +232,20 @@
 				                                   		<!-- Select,Status,Emp Code,Department,Section,Appraisal Type,Position -->
 					                                        <thead>
 						                                        <tr>
-						                                            <th  style='width:5%'>Select</th>
+						                                            <th class='object-center' style='width:5%'>Select</th>
 						                                            <th  style='width:10%'>Status</th>
 						                                            <th  style='width:10%'>Emp Code</th>
-						                                            <th  style='width:20%'>Department</th>
+						                                            <th  style='width:10%'>Department</th>
 						                                            <th  style='width:10%'>Section</th>
 						                                            <th  style='width:10%'>Appraisal Type</th>
-						                                            <th  style='width:15%'>Position</th>
-						                                            <th style='width:15%; text-align:center;'>Manage</th>
+						                                            <th  style='width:10%'>Position</th>
+						                                            <th style='width:7%; text-align:center;'>Manage</th>
 						                                        </tr>
 					                                        </thead>
 					                                        <tbody id="listDatas">
+					                                        <!-- 
 					                                        	<tr>
-					                                        		<td><input type='checkbox'></td>
+					                                        		<td class='object-center'><input type='checkbox'></td>
 					                                        		<td>Unassigned</td>
 					                                        		<td>0001</td>
 					                                        		<td>ระดับการจัดการ</td>
@@ -244,13 +254,13 @@
 					                                        		<td>หัวหน้าพัฒนาลูกค้า</td>
 					                                        		<td style="text-align:center">
 					                                        			
-					                                        		<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content="<button class='btn btn-info input-xs btn-gear' id='btnAddKPI' data-target='#ModalKPI' data-toggle='modal'> Assign KPI</button> &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
+					                                        		<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content=" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
 					                                        		
 					                                        		
 					                                        		</td>
 					                                        	</tr>
 					                                        	<tr>
-					                                        		<td><input type='checkbox'></td>
+					                                        		<td class='object-center'><input type='checkbox'></td>
 					                                        		<td>Unassigned</td>
 					                                        		<td>0001</td>
 					                                        		<td>ระดับการจัดการ</td>
@@ -258,11 +268,11 @@
 					                                        		<td>ประจำปี</td>
 					                                        		<td>หัวหน้าพัฒนาลูกค้า</td>
 					                                        		<td style="text-align:center">
-					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content="<button class='btn btn-info input-xs btn-gear' id='btnAddKPI' data-target='#ModalKPI' data-toggle='modal'> Assign KPI</button> &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
+					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content=" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
 					                                        		</td>
 					                                        	</tr>
 					                                        	<tr>
-					                                        		<td><input type='checkbox'></td>
+					                                        		<td class='object-center'><input type='checkbox'></td>
 					                                        		<td>Unassigned</td>
 					                                        		<td>0001</td>
 					                                        		<td>ระดับการจัดการ</td>
@@ -270,11 +280,11 @@
 					                                        		<td>ประจำปี</td>
 					                                        		<td>หัวหน้าพัฒนาลูกค้า</td>
 					                                        		<td style="text-align:center">
-					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content="<button class='btn btn-info input-xs btn-gear' id='btnAddKPI' data-target='#ModalKPI' data-toggle='modal'> Assign KPI</button> &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
+					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content=" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
 					                                        		</td>
 					                                        	</tr>
 					                                        	<tr>
-					                                        		<td><input type='checkbox'></td>
+					                                        		<td class='object-center'><input type='checkbox'></td>
 					                                        		<td>Unassigned</td>
 					                                        		<td>0001</td>
 					                                        		<td>ระดับการจัดการ</td>
@@ -282,10 +292,10 @@
 					                                        		<td>ประจำปี</td>
 					                                        		<td>หัวหน้าพัฒนาลูกค้า</td>
 					                                        		<td style="text-align:center">
-					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content="<button class='btn btn-info input-xs btn-gear' id='btnAddKPI' data-target='#ModalKPI' data-toggle='modal'> Assign KPI</button> &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
+					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content=" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
 					                                        		</td>
 					                                        	</tr>
-					                                        	
+					                                        	 -->
 					                                        	
 					                                        </tbody>
 				                                        </table>
@@ -304,24 +314,35 @@
                                         
                                         <!-- row start -->
                                     	<div class="row">
-	                                    	<div class="col-xs-9 m-b-xs">
+	                                    	<div class="col-xs-9">
 	
-												<!--  <p class="pagination_bottom"></p>-->
+												  <p class="pagination_bottom"></p>
+												<!-- 
 												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
-	                   
+	                   							 -->
 	                                    	</div>
 	                                    
-		                                    <div class="col-xs-2 object-right paging-text">Results per page</div>
+		                                    <div class="col-xs-3 object-right paging-text">
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select> 
+			                                 	</div>
+												<div class='pagingText'>Results per page</div>
+		                                    </div>
+		                                    <!-- 
 		                                    <div class="col-xs-1">
-	                                    
 	                                    	<select name="countPagination" id='countPaginationBottom'  class="form-control input-sm countPagination">
 		                                        <option>10</option>
 		                                     	<option>20</option>
 		                                     	<option>50</option>
 		                                     	<option>100</option>
 		                                    </select> 
-	                                        
 	                                    	</div>
+	                                    	 -->
                                     	</div> 
                                     	 <!-- row end -->
                                     	<!-- end table -->
@@ -330,11 +351,13 @@
          					</div>
          					</div>
          					 
-  </div>       					
+  </div>
+  
+  <div id='embedParamSearch'></div>       					
       <!-- <button data-toggle="modal" data-target="#ModalKPI" id="btnAddKPI" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Assign KPI</button>	 -->				
 <!-- Modal KPI Start Edit -->
 
-  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalKPI" class="modal inmodal" style="display: none;">
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalAssignment" class="modal inmodal" style="display: none;">
     <div class="modal-dialog  modal-lg">
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
@@ -349,351 +372,69 @@
                 <hr>
                
              
-                
+                <!-- panel0 start -->
+                <div class="row " style='display:none;'>
+	  					<div class="col-lg-12">
+	                      <div class="ibox-title">
+	                          <div class='titlePanel'>Employee Information</div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content table start-->	
+	   								<div class='row wrapper'>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Employee Code:</div>
+	   										<div class='text_info' id='employee_code'>0004</div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Section:</div>
+	   										<div class='text_info' id='section'>แผนกบัญชีต้นทุน </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Appraisal Type:</div>
+	   										<div class='text_info' id='appraisal_type'>ประจำปี</div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Employee Name:</div>
+	   										<div class='text_info' id='employee_name'>นางสาวงามตา ใจดี </div>
+	   									</div>
+	   								
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Department:</div>
+	   										<div class='text_info' id='department'>บัญชีการเงิน </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Period:</div>
+	   										<div class='text_info' id='period'>ประเมินผลการปฏิบัติงานประจำปี 2017 ครั้งที่ 1 </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Start Working Date:</div>
+	   										<div class='text_info' id='start_working_date'>05/04/2005 </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Chief Employee Code:</div>
+	   										<div class='text_info' id='chief_employee_code'>0001 </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Position:</div>
+	   										<div class='text_info' id='position'>หัวหน้าแผนกพัฒนาลูกค้า </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Chief Employee Name:</div>
+	   										<div class='text_info'id='chief_employee_name'> นายสมใจ พร้อมพงศ์</div>
+	   									</div>
+	   									
+	   								</div>
+						          <br style="clear:both">
+	                            <!-- content table end-->				
+	   					</div>
+	   				</div>
+	   			</div>
+                <!-- panel0 end -->
                 <!-- panel1 start -->
-                <div class="row">
-	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
-	                          <div class='titlePanel'>KPI</div>
-	                      </div>
-	   					
-	   					<div class="ibox-content">
-	   							
-	   							<!-- content table start-->	
-	   							
-	                             	<div class="table-responsive">
-                                  		<table id="tablethreshould" class="table table-striped">
-                                  		<!-- select,Appraisal Item Name,Target,Score1 Start,Score2 Start,Score5Start,Score5 End %Weight -->
-                                        <thead>
-	                                        <tr>
-	                                            <th style="width:5%">select</th>
-	                                            <th style="width:15%">Appraisal Item Name</th>
-	                                            <th style="width:5%">Target </th>
-	                                            <th style="width:5%">Score1 Start </th>
-	                                            <th style="width:5%">Score1 End </th>
-	                                            <th style="width:5%">Score2 Start </th>
-	                                            <th style="width:5%">Score2 End </th>
-	                                            <th style="width:5%">Score3 Start </th>
-	                                            <th style="width:5%">Score3 End </th>
-	                                            <th style="width:5%">Score4 Start </th>
-	                                            <th style="width:5%">Score4 End </th>
-	                                            <th style="width:5%">Score5 Start </th>
-	                                            <th style="width:5%">Score5 End </th>
-	                                            <th style="width:5%;">%Weight</th>
-	                                        </tr>
-                                        </thead>
-                                        <tbody id="listthreshould">
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ยอดขายสุทธิ 5,000,000,000</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>อัตรากำไรขั้นต้น GP</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>อัตรารักษาลูกค้าเก่า</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>อัตราลูกค้าใหม่ 300 ราย</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        	</tr>
-                                        	
-                                        	
-                                        </tbody>
-                                       </table>
-                                       
-                                       
-                                      
-			                
-                                  </div>
-                                  
-                                  
-                                  
-						            
-						                 <br style="clear:both">
-	                            <!-- content table end-->
-	                             				
-	                             				
-	   					</div>
-	   				</div>
-	   			</div>
+                <div id='appraisal_template_area'></div>
                 <!-- panel1 end -->
-                
-                <!-- panel2 start -->
-                <div class="row">
-	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
-	                          <div class='titlePanel'>Competency</div>
-	                      </div>
-	   					
-	   					<div class="ibox-content">
-	   							
-	   							<!-- content table start-->	
-	   							
-	                             	<div class="table-responsive">
-                                  		<table id="tablethreshould" class="table table-striped">
-                                  		<!-- Select,Appraisal Item Name,Target,%Weight -->
-                                        <thead>
-	                                        <tr>
-	                                            <th style="width:5%">select</th>
-	                                            <th style="width:15%">Appraisal Item Name</th>
-	                                            <th style="width:5%">Target </th>
-	                                            <th style="width:5%">%Weight</th>
-	                                           
-	                                        </tr>
-                                        </thead>
-                                        <tbody id="listthreshould">
-                                       
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ภาวะผู้นำ(MC)</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>แก้ไขปัญหาและตัดสินใจ(CC)</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>การทำงานเป็นทีม(CC)</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>การพัฒนาปรับปรุงงานอย่างต่อเนื่อง(CC)</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>	
-                                        	</tr>
-                                        </tbody>
-                                       </table>
-                                  </div>
-						          <br style="clear:both">
-	                            <!-- content table end-->				
-	   					</div>
-	   				</div>
-	   			</div>
-                <!-- panel2 end -->
-                <!-- panel3 start -->
-                <div class="row">
-	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
-	                          <div class='titlePanel'>Work Behavior</div>
-	                      </div>
-	   					
-	   					<div class="ibox-content">
-	   							
-	   							<!-- content table start-->	
-	   							
-	                             	<div class="table-responsive">
-                                  		<table id="tablethreshould" class="table table-striped">
-                                  		<!-- Select,Appraisal Item Name,Target,%Weight -->
-                                        <thead>
-	                                        <tr>
-	                                            <th style="width:5%">select</th>
-	                                            <th style="width:15%">Appraisal Item Name</th>
-	                                            <th style="width:5%">Max Value </th>
-	                                            <th style="width:5%">Deduct Score/Unit </th>
-	                                           
-	                                           
-	                                        </tr>
-                                        </thead>
-                                        <tbody id="listthreshould">
-                                       
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ลาป่วยตั้งแต่ 10 วันขึ้นไป</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ลากิจตั้งแต่ 7  วันขึ้นไป</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ขาดงาน</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ขาดงานควบวันหยุด</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>	
-                                        	</tr>
-                                        </tbody>
-                                       </table>
-                                  </div>
-						          <br style="clear:both">
-	                            <!-- content table end-->				
-	   					</div>
-	   				</div>
-	   			</div>
-                <!-- panel3 end -->
-                 <!-- panel4 start -->
-                <div class="row">
-	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
-	                          <div class='titlePanel'>Oranization Development</div>
-	                      </div>
-	   					
-	   					<div class="ibox-content">
-	   							
-	   							<!-- content table start-->	
-	   							
-	                             	<div class="table-responsive">
-                                  		<table id="tablethreshould" class="table table-striped">
-                                  		<!-- Select,Appraisal Item Name,Target,%Weight -->
-                                        <thead>
-	                                        <tr>
-	                                            <th style="width:5%">select</th>
-	                                            <th style="width:15%">Appraisal Item Name</th>
-	                                            <th style="width:5%">Max Value </th>
-	                                            <th style="width:5%">Deduct Score/Unit </th>
-	                                           
-	                                           
-	                                        </tr>
-                                        </thead>
-                                        <tbody id="listthreshould">
-                                       
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>5 ส(นับจำนวจใบ Car ที่ได้รับหักใบละ1 คะแนน)</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ISO(นับจำนวนใบ Car ที่ได้แก้ไม่ทันกำหนด หักใบละ 2 คะแนน)</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	
-                                        </tbody>
-                                       </table>
-                                  </div>
-						          <br style="clear:both">
-	                            <!-- content table end-->				
-	   					</div>
-	   				</div>
-	   			</div>
-                <!-- panel4 end -->
-                
-                 <!-- panel5 start -->
-                <div class="row">
-	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
-	                          <div class='titlePanel'>Disciplinary Punishment</div>
-	                      </div>
-	   					
-	   					<div class="ibox-content">
-	   							
-	   							<!-- content table start-->	
-	   							
-	                             	<div class="table-responsive">
-                                  		<table id="tablethreshould" class="table table-striped">
-                                  		<!-- Select,Appraisal Item Name,Target,%Weight -->
-                                        <thead>
-	                                        <tr>
-	                                            <th style="width:5%">select</th>
-	                                            <th style="width:15%">Appraisal Item Name</th>
-	                                            <th style="width:5%">Max Value </th>
-	                                            <th style="width:5%">Deduct Score/Unit </th>
-	                                           
-	                                           
-	                                        </tr>
-                                        </thead>
-                                        <tbody id="listthreshould">
-                                       
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ใบเตือนด้วยวาจา</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	<tr>
-                                        		<td><input class='input form-control input-sm' type='checkbox'></td>
-                                        		<td>ใบเตือนเป็นลายลักษณ์อักษร</td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		<td><input class='input form-control input-sm' type='text'></td>
-                                        		
-                                        	</tr>
-                                        	
-                                        	
-                                        </tbody>
-                                       </table>
-                                  </div>
-						          <br style="clear:both">
-	                            <!-- content table end-->				
-	   					</div>
-	   				</div>
-	   			</div>
-                <!-- panel5 end -->
                 
                 
                
@@ -786,8 +527,8 @@
     
     
     <script src="../js/jquery.mloading.js"></script>
-    
-    <!-- <script src="../Controller/cMain.js"></script> -->
+    <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script> 
     <script src="../Controller/cAppraisalAssignment.js"></script>
 
 
