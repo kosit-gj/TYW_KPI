@@ -33,7 +33,10 @@
 					<!-- 	style="display: none;" -->
 
 					<div class="col-lg-12">
-						<div id="slide_status"></div>
+						<div id="slide_status">
+							<div id="btnClose"></div>
+							<div id="slide_status_area"></div>
+						</div>
 						<ol class="breadcrumb">
 							<li><a href="#/"><i class="fa fa-home "></i> Home</a></li>
 							<li><i class="fa fa-gears"></i> System Management</li>
@@ -112,37 +115,17 @@
 									<div class="col-md-5">
 										<div class="form-group ">
 											<div class="form-group pull-right p-xxs m-b-none">
-
-												<button id="importToCdsResult"
-													class="btn btn-primary btn-sm" type="submit">
-													<i class="fa fa-upload"></i> Import
+													<button id="btn_import" type="button"
+													class="btn btn-primary btn-sm" data-target="#ModalImport"
+													data-toggle="modal">
+													<i class="fa fa-upload"></i>&nbsp;Import
 												</button>
-												<!-- 								<div class="fileinput fileinput-new" data-provides="fileinput"> -->
-												<!-- 									<span class="btn btn-default btn-file"><span -->
-												<!-- 										class="fileinput-new">Select file</span> <span -->
-												<!-- 										class="fileinput-exists">Change</span><input type="file" -->
-												<!-- 										name="..." /></span> <span class="fileinput-filename"></span> <a -->
-												<!-- 										href="#" class="close fileinput-exists" -->
-												<!-- 										data-dismiss="fileinput" style="float: none">×</a> -->
-												<!-- 								</div> -->
 
 											</div>
 											<div class="form-group pull-right p-xxs m-b-none">
 												<form id='formExportToExcel' action="" method="post">
-												<!--Employee Code
-													CDS ID
-													CDS Name
-													Year
-													Month
-													CDS Value -->
-<!-- 												<input type="hidden" name="employee_Code" id="export_employee_Code" value=""> -->
-<!-- 	                                     		<input type="hidden" name="cds_id" id="export_cds_id" value=""> -->
-<!-- 	                                     		<input type="hidden" name="cds_name" id="export_cds_name" value=""> -->
-<!-- 	                                     		<input type="hidden" name="year" id="export_year" value=""> -->
-<!-- 	                                     		<input type="hidden" name="Month" id="export_Month" value=""> -->
-<!-- 	                                     		<input type="hidden" name="cds_Value" id="export_cds_Value" value=""> -->
 													<button id="exportToExcel" class="btn btn-warning btn-sm"
-														type="submit">
+														type="button">
 														<i class="fa fa-download"></i> Download
 													</button>
 												</form>
@@ -172,15 +155,15 @@
 				</div>
 				<!-- end--row -->
 
-				<div class="row">
+				<div class="row" id="cds_result_list_content">
 					<div class="col-lg-12">
 						<div class="ibox-title">
 							<h5>CDS Result List</h5>
 						</div>
 
 
-						<div class="ibox-content">
-
+						<div class="ibox-content" >
+						
 							<!-- start table -->
 						<!-- pagination start -->
 							<div class="row">
@@ -253,6 +236,7 @@
 							</div>
 							<!-- pagination end -->
 							<!-- end table -->
+							
 						</div>
 						<!-- content end -->
 					</div>
@@ -263,7 +247,68 @@
 		</div>
 	</div>
 
+<!-- Modal Import CDS Result -->
 
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalImport"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="">CDS Result</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<h2>
+						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+							id="">CDS Result</span>
+					</h2>
+					<hr>
+
+					<!-- form start -->
+					
+
+					<div class="form-group">
+					<form id="fileImportCdsResult">
+						
+							<h3>FILE IMPORT</h3>
+							<div class="fileUpload ">
+								<span>Browse File</span> <input type="file" name="file"
+									id="file" > <span></span>
+							</div>
+							<br>
+							<h6 class="label-content-import-export">
+
+								<input class="btn btn-primary" type="submit"
+									name="importFileMobile" id="importFileMobile" value="Import">
+<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
+
+							</h6>
+						
+					</form>
+					
+						<!-- start table -->
+					</div>
+					<!-- form End -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+<!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+						<div class="alert alert-warning" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End  -->
 
 
     <!-- Mainly scripts -->

@@ -39,7 +39,7 @@ var clearFn = function() {
 	$("#f_cds_name").val("");
 	$("#f_cds_description").val("");
 	$("#txt_sql").val("");
-	$("#txt_sample_data").val("");
+	$("#table_Sql").html("");
 	$("#txt_sample_data").removeAttr("disabled");
 	
 	$("#btn_execute").removeAttr("disabled");
@@ -286,8 +286,8 @@ var updateFn = function () {
 				callFlashSlide("Update Successfully.");
 				
 			}else if (data['status'] == "400") {
-				alert("Error ?");
-				//validationFn(data);
+				//alert("Error ?");
+				validationFn(data);
 			}
 		}
 	});
@@ -346,7 +346,7 @@ var insertFn = function (param) {
 						callFlashSlideInModal("Insert Data is Successfully.");
 					}
 			}else if (data['status'] == "400") {
-				alert("Error ?");
+				//alert("Error ?");
 				validationFn(data);
 			}  
 				   
@@ -368,7 +368,7 @@ var dropDownListAppraisalLevel = function(id,inputId){
 	//id = app_lv
 	var html="";
 	html+="<select data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input form-control input-sm\" id=\""+inputId+"\" name=\""+inputId+"\">";
-	//html+="<option selected value=''>All</option>";
+	if(inputId == "app_lv"){html+="<option selected value=''>All</option>";}
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel,
 		type:"get" ,
@@ -420,31 +420,95 @@ var dropDownListConnection = function(id){
 	return html;
 };
 
-var executeFn = function (txtSQL) {
+var executeSQLFn = function (txtSQL) {
+	
+
 	$.ajax({
-		url : restfulURL + "...............",
-		type : "put",
+		url : restfulURL + restfulPathCDS+"/test_sql",
+		type : "POST",
 		dataType : "json",
+		data : {"connection_id":$("#f_connection").val(),
+		"sql":txtSQL},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async : false,
 		success : function(data) {
-			// galbalDqsRoleObj=data;
 			if (data['status'] == "200") {
-				$("#txt_sample_data").val(data['txtExecute']);
-
+				listSqlFn(data['data']);
+				
 			} else if (data['status'] == "400") {
-
-				validationFn(data);
+				validationSqlFn(data['data']);
 			}
 		}
 	});
+}
+
+var listSqlFn = function (data) {
+	var tableSql = "";
+	var tableSqlHead = "";
+	var tableSqlBody = "";
+	tableSqlHead+="<thead><tr>";
+	tableSqlBody+="<tbody id=\"listSqlData\">";
+   
+	for ( var obj in data) {
+		if (data.hasOwnProperty(obj)) {
+			
+			tableSqlBody+="<tr class='rowSearch'>";
+			for ( var prop in data[obj]) {
+				
+				if (data[obj].hasOwnProperty(prop)) {
+					if(obj == 0){
+						tableSqlHead+="<th>"+prop+"</th>";
+					}
+					tableSqlBody += "<td class='columnSearch'>"+ data[obj][prop]+ "</td>";
+					//console.log(prop + ':' + data[obj][prop]);
+					
+				}
+			}
+			tableSqlBody+="</tr>";
+		}
+	}
+	
+	tableSqlHead+="</tr></thead>";
+	tableSqlBody+="</tbody>";
+	tableSql=tableSqlHead+tableSqlBody;
+	$("#table_Sql").html(tableSql);
+	
+}
+
+var validationSqlFn = function (data) {
+	
+	//alert(data);
+	var validate ="";
+	if( data instanceof Array ){
+		for ( var obj in data) {
+			if (data.hasOwnProperty(obj)) {
+				for ( var prop in data[obj]) {
+					if (data[obj].hasOwnProperty(prop)) {
+						validate+="<font color='red'>*</font> "+prop + ':' + data[obj][prop]+"<br>";
+						//console.log(prop + ':' + data[obj][prop]);
+						
+					}
+				}
+				
+			}
+		}
+	}else{
+		if(data !=undefined){
+			validate+="<font color='red'>*</font> "+data+"<br>";
+		}
+		
+	}
+	
+	
+	callFlashSlideInModal(validate);
+	
 }
 
 
 $(document).ready(function() {
 	
 	// ------------------- Common Data Set -------------------
-	
+	$("#cds_list_content").hide();
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel("","app_lv"));
 	$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel("","f_app_lv"));
 	$("#drop_down_list_connection").html(dropDownListConnection());
@@ -453,11 +517,12 @@ $(document).ready(function() {
 	$("#cds_id").val("");
 	$("#btn_search_advance").click(function(){
 		///alert($("#cds_name").val().split("-", 1));
-		searchAdvanceFn($("#app_lv").val(),$("#cds_id").val());
 		
+		searchAdvanceFn($("#app_lv").val(),$("#cds_id").val());
+		$("#cds_list_content").show();
 		return false;
 	});
-	$("#btn_search_advance").click();
+	//$("#btn_search_advance").click();
 	
 	
 	
@@ -496,16 +561,21 @@ $(document).ready(function() {
 		}
 	});
 	
-//	$("#btn_execute").attr("disabled","disabled");
-//	 $("#btn_execute").click(function () {
-//		if ($("#checkbox_is_sql:checked").is(":checked")) {
-//			alert("Execute");
-//			//executeFn();
-//		} else {
-//			alert("กรุณาคลิกเลือก \"IsSQL\" ");
-//		}		
-//		 
-//	});
+	
+	
+
+
+	            
+	            
+	
+	
+	
+	
+	 $("#btn_Execute").click(function () {
+		 executeSQLFn($("#txt_sql").val());
+		 
+		 //buildHtmlTable('#excelDataTable');
+	});
 	
 
 	

@@ -177,9 +177,41 @@ var dropDownListPeriod = function(){
 };
 //-------------------  Drop Down List Appraisal Item FN END ---------------------
 
+var listErrorFn =function(data){
+	var errorData="";
+	
+	$.each(data,function(index,indexEntry){	
+		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
+			if(data[index]['employee_code']== null){//The employee code field is null
+				errorData+="<font color='red'>*</font> employee code : null ↓<br>";
+			}else{
+				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  ↓<br>";}
+		}
+		if(typeof data[index]['errors'] != 'object'){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']+"<br>";
+		}
+		if(data[index]['errors']['employee_code']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['employee_code']+"<br>";
+		}
+		if(data[index]['errors']['period_id']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['period_id']+"<br>";
+		}
+		if(data[index]['errors']['appraisal_item_id']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['appraisal_item_id']+"<br>";
+		}
+		if(data[index]['errors']['data_value']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['data_value']+"<br>";
+		}
+		
+		
+	});
+	//alert(errorData);callFlashSlideInModal(errorData,"#information","error");
+	callFlashSlideInModal(errorData);
+	/*return errorData;*/
+}
 $(document).ready(function() {
 	// -------------------  Appraisal Data  ---------------------	
-	
+	$("#appraisal_data_list_content").hide();
 	$("#drop_down_list_structure").html(dropDownListStructure());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
 	$("#drop_down_list_period").html(dropDownListPeriod());
@@ -192,10 +224,10 @@ $(document).ready(function() {
 				$("#app_item_id").val(),
 				$("#period").val(),
 				$("#emp_name_id").val());
-		
+		$("#appraisal_data_list_content").show();
 		return false;
 	});
-	$("#btnSearchAdvance").click();
+	//$("#btnSearchAdvance").click();
 	
 	
 	//Autocomplete Search Position Start
@@ -315,22 +347,92 @@ $(document).ready(function() {
 	
 	//#### Call Export User Function Start ####
 	$("#exportToExcel").click(function(){
-		//$("form#formExportToExcel").attr("action",restfulURL+"/dqs_api/public/dqs_user/export?token="+tokenID.token);
-		$("form#formExportToExcel").attr("action","../file/excel_appraisal_data.xlsx");	
-
- 		
-//		$("#export_employee_Code").val($("#").val());
-//		$("#export_structure_id").val($("#").val());
-//		$("#export_structure_name").val($("#").val());
-//		$("#export_period_id").val($("#").val());
-//		$("#export_period_name").val($("#").val());
-//		$("#export_appraisal_item_id").val($("#").val());
-//		$("#export_appraisal_item_name").val($("#").val());
-//		$("#export_data_value").val($("#").val());
-
+		var paramStructure= $("#param_structure").val();
+		var paramAppLv= $("#param_app_lv").val();
+		var paramAppItem= $("#param_app_item").val();
+		var paramPeriod= $("#param_period").val();
+		var paramEmpCode= $("#param_emp_code").val();
+		
+		var param="";
+		param+="&structure_id="+paramStructure;
+		param+="&appraisal_level_id="+paramAppLv;
+		param+="&appraisal_item_id="+paramAppItem;
+		param+="&period_id="+paramPeriod;
+		param+="&emp_code="+paramEmpCode;
+		//alert(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
+		$("form#formExportToExcel").attr("action",restfulURL+restfulPathAppData+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").submit();
 	});
     //#### Call Export User Function End ####	
+	//FILE IMPORT MOBILE START
+	$("#btn_import").click(function () {
+		$('#file').val("");
+	});
+	
+	// Variable to store your files
+	var files2;
+	// Add events
+	$('#file').on('change', prepareUpload2);
 
+	// Grab the files and set them to our variable
+	function prepareUpload2(event)
+	{
+	  files = event.target.files;
+	}
+	$('form#fileImportEmployee').on('submit', uploadFiles);
+
+	// Catch the form submit and upload the files
+	function uploadFiles(event)
+	{
+		
+		event.stopPropagation(); // Stop stuff happening
+		event.preventDefault(); // Totally stop stuff happening
+
+		// START A LOADING SPINNER HERE
+
+		// Create a formdata object and add the files
+		var data = new FormData();
+		jQuery_1_1_3.each(files, function(key, value)
+		{
+			data.append(key, value);
+		});
+		$("body").mLoading();
+		jQuery_1_1_3.ajax({
+			url:restfulURL+restfulPathAppData,
+			type: 'POST',
+			data: data,
+			cache: false,
+			dataType: 'json',
+			processData: false, // Don't process the files
+			contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+			headers:{Authorization:"Bearer "+tokenID.token},
+			success: function(data, textStatus, jqXHR)
+			{
+				
+				console.log(data);
+				if(data['status']==200 && data['errors'].length==0){
+							
+					callFlashSlide("Import CDS Result Successfully");
+					$('#file').val("");
+					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					$("body").mLoading('hide');
+					$('#ModalImport').modal('hide');
+					
+				}else{
+					$('#file').val("");
+					listErrorFn(data['errors']);
+					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					$("body").mLoading('hide');
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				// Handle errors here
+				callFlashSlide('Format Error : ' + textStatus);
+				// STOP LOADING SPINNER
+			}
+		});
+		return false;
+	}
 	
 });

@@ -59,7 +59,7 @@
 								<div class="row">
 									<div class="col-lg-3 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-4 col-md-4 p-t-xxs">Appraisal</label>
+											<label class="col-lg-5 col-md-5 p-t-xxs">Appraisal level</label>
 											<div class="col-lg-7 col-md-7" id="drop_down_list_appraisal_level">
 												<select data-toggle="tooltip" title="Appraisal"
 													class="input form-control input-sm col-lg-9" id="app_lv"
@@ -116,7 +116,7 @@
 				<!-- end--row -->
 				
 				
-				<div class="row">
+				<div class="row" id="cds_list_content">
 		<div class="col-lg-12">
 			<div class="ibox-title">
 				<h5>Common Data Set List</h5>
@@ -344,6 +344,7 @@
 						
 						<div class="form-group">
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-inline">
+						
 								<div class="form-group m-n">
 									<label class="form-label-cds p-b-xs">Sample Data: </label>&nbsp;
 <!-- 									<span class='redFont p-t-xs'>*</span> -->
@@ -354,7 +355,18 @@
 <!-- 								Sample Data: <span class='redFont '>*</span> -->
 <!-- 							</label> -->
 							<div class="col-lg-6 col-md-8 col-sm-8 col-xs-12">
-								<textarea id="txt_sample_data" class="form-control input-contact-textinput" placeholder="" style="height: 110px;"></textarea>
+							
+									
+							
+								 <div class="table-responsive" style="background-color:white;min-height: 145px;">
+								 
+									<table class="table table-bordered" id="table_Sql">
+										
+									</table>
+
+
+								</div>
+<!-- 								<textarea id="txt_sample_data" class="form-control input-contact-textinput" placeholder="" style="height: 110px;"></textarea> -->
 							</div>
 
 						</div>
