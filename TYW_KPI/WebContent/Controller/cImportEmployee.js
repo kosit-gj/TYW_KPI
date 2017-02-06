@@ -81,10 +81,10 @@ var listErrorFn =function(data){
 
 		
 		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
-			if(data[index]['employee_code']== null){
-				errorData+="<font color='red'>*</font> The employee code field is null<br>";
+			if(data[index]['employee_code']== null){//The employee code field is null
+				errorData+="<font color='red'>*</font> employee code : null ↓<br>";
 			}else{
-				errorData+="<font color='red'>*</font> "+data[index]['employee_code']+"<br>";}
+				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  ↓<br>";}
 		}
 		if(data[index]['errors']['working_start_date_yyyy_mm_dd']!=undefined){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']['working_start_date_yyyy_mm_dd']+"<br>";
@@ -631,6 +631,7 @@ var dropDownListSection = function(id){
 
 $(document).ready(function() {
 	//paginationSetUpFn(1,1,1);
+	$("#employee_list_content").hide();
 	$("#drop_down_department").html(dropDownListDepartment());
 	$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
 	$("#drop_down_department").change(function () {
@@ -640,6 +641,7 @@ $(document).ready(function() {
 	$("#search_emp_name").val("");
 	$("#btnSearchAdvance").click(function(){
 		//alert("2");
+		
 		searchAdvanceFn(
 				$("#search_department").val(),
 				$("#search_section").val(),
@@ -648,11 +650,12 @@ $(document).ready(function() {
 				//$("#search_emp_name").val().split("-", 1)search_emp_id
 				$("#search_emp_id").val()
 				);
-
+		$("#employee_list_content").show();
 		return false;
 	});
 	listAppraisalLevel();
-	$("#btnSearchAdvance").click();
+	//$("#btnSearchAdvance").click();
+	
 	$("#btn_add_role").click(function() {
 		clearFn();
 		$("#txtAssignEmpName").hide();
@@ -908,7 +911,9 @@ $(document).ready(function() {
 							
 					callFlashSlide("Import Employee Successfully");
 					$('#file').val("");
+					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');
+					$('#ModalImport').modal('hide');
 					
 				}else{
 					$('#file').val("");

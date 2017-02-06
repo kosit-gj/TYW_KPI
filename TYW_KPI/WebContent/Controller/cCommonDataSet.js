@@ -419,51 +419,6 @@ var dropDownListConnection = function(id){
 	html+="</select>";
 	return html;
 };
-var myList = [
-              {
-            "initial_validate_id": "1",
-            "rule_id": "15"
-        },
-        {
-            "initial_validate_id": "2",
-            "rule_id": "30"
-        },
-        {
-            "initial_validate_id": "3",
-            "rule_id": "42"
-        },
-        {
-            "initial_validate_id": "4",
-            "rule_id": "3"
-        },
-        {
-            "initial_validate_id": "5",
-            "rule_id": "5"
-        },
-        {
-            "initial_validate_id": "6",
-            "rule_id": "18"
-        },
-        {
-            "initial_validate_id": "7",
-            "rule_id": "35"
-        },
-        {
-            "initial_validate_id": "8",
-            "rule_id": "40"
-        },
-        {
-            "initial_validate_id": "9",
-            "rule_id": "44"
-        },
-        {
-            "initial_validate_id": "10",
-            "rule_id": "2"
-        }
-            ];
-
-
-
 
 var executeSQLFn = function (txtSQL) {
 	
@@ -553,7 +508,7 @@ var validationSqlFn = function (data) {
 $(document).ready(function() {
 	
 	// ------------------- Common Data Set -------------------
-	
+	$("#cds_list_content").hide();
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel("","app_lv"));
 	$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel("","f_app_lv"));
 	$("#drop_down_list_connection").html(dropDownListConnection());
@@ -562,11 +517,12 @@ $(document).ready(function() {
 	$("#cds_id").val("");
 	$("#btn_search_advance").click(function(){
 		///alert($("#cds_name").val().split("-", 1));
-		searchAdvanceFn($("#app_lv").val(),$("#cds_id").val());
 		
+		searchAdvanceFn($("#app_lv").val(),$("#cds_id").val());
+		$("#cds_list_content").show();
 		return false;
 	});
-	$("#btn_search_advance").click();
+	//$("#btn_search_advance").click();
 	
 	
 	

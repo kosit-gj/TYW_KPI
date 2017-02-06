@@ -33,7 +33,10 @@
 					<!-- 	style="display: none;" -->
 
 					<div class="col-lg-12">
-						<div id="slide_status"></div>
+						<div id="slide_status">
+							<div id="btnClose"></div>
+							<div id="slide_status_area"></div>
+						</div>
 						<ol class="breadcrumb">
 							<li><a href="#/"><i class="fa fa-home "></i> Home</a></li>
 							<li><i class="fa fa-gears"></i> System Management</li>
@@ -121,20 +124,8 @@
 											</div>
 											<div class="form-group pull-right p-xxs m-b-none">
 												<form id='formExportToExcel' action="" method="post">
-												<!--Employee Code
-													CDS ID
-													CDS Name
-													Year
-													Month
-													CDS Value -->
-<!-- 												<input type="hidden" name="employee_Code" id="export_employee_Code" value=""> -->
-<!-- 	                                     		<input type="hidden" name="cds_id" id="export_cds_id" value=""> -->
-<!-- 	                                     		<input type="hidden" name="cds_name" id="export_cds_name" value=""> -->
-<!-- 	                                     		<input type="hidden" name="year" id="export_year" value=""> -->
-<!-- 	                                     		<input type="hidden" name="Month" id="export_Month" value=""> -->
-<!-- 	                                     		<input type="hidden" name="cds_Value" id="export_cds_Value" value=""> -->
 													<button id="exportToExcel" class="btn btn-warning btn-sm"
-														type="submit">
+														type="button">
 														<i class="fa fa-download"></i> Download
 													</button>
 												</form>
@@ -164,15 +155,15 @@
 				</div>
 				<!-- end--row -->
 
-				<div class="row">
+				<div class="row" id="cds_result_list_content">
 					<div class="col-lg-12">
 						<div class="ibox-title">
 							<h5>CDS Result List</h5>
 						</div>
 
 
-						<div class="ibox-content">
-
+						<div class="ibox-content" >
+						
 							<!-- start table -->
 						<!-- pagination start -->
 							<div class="row">
@@ -245,6 +236,7 @@
 							</div>
 							<!-- pagination end -->
 							<!-- end table -->
+							
 						</div>
 						<!-- content end -->
 					</div>

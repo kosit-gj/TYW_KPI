@@ -44,7 +44,7 @@
 				</div>
 
 
-				<div class="row">
+				<div class="row" >
 					<!-- start--row -->
 
 					<div class="col-lg-12">
@@ -109,46 +109,16 @@
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group ">
 											<div class="form-group pull-right p-xxs m-b-none">
-												<form id='formImportToAppraisalData' action="" method="post">
-													<button id="importToAppraisalData"
-														class="btn btn-primary btn-sm" type="submit">
-														<i class="fa fa-upload"></i> Import
-													</button>
-												</form>
-
-
-												<!-- 								<div class="fileinput fileinput-new" data-provides="fileinput"> -->
-												<!-- 									<span class="btn btn-default btn-file"><span -->
-												<!-- 										class="fileinput-new">Select file</span> <span -->
-												<!-- 										class="fileinput-exists">Change</span><input type="file" -->
-												<!-- 										name="..." /></span> <span class="fileinput-filename"></span> <a -->
-												<!-- 										href="#" class="close fileinput-exists" -->
-												<!-- 										data-dismiss="fileinput" style="float: none">×</a> -->
-												<!-- 								</div> -->
-
+												<button id="btn_import" type="button"
+													class="btn btn-primary btn-sm" data-target="#ModalImport"
+													data-toggle="modal">
+													<i class="fa fa-upload"></i>&nbsp;Import
+												</button>
 											</div>
 											<div class="form-group pull-right p-xxs m-b-none">
 												<form id='formExportToExcel' action="" method="post">
-												<!--Employee Code
-													Structure ID
-													Structure Name
-													Period ID
-													Period Name
-													Appraisal Item ID
-													Appraisal Item Name
-													Data Value
-													 
-												<input type="hidden" name="employee_Code" id="export_employee_Code" value="">
-	                                     		<input type="hidden" name="structure_id" id="export_structure_id" value="">
-	                                     		<input type="hidden" name="structure_name" id="export_structure_name" value="">
-	                                     		<input type="hidden" name="period_id" id="export_period_id" value="">
-	                                     		<input type="hidden" name="period_name" id="export_period_name" value="">
-	                                     		<input type="hidden" name="appraisal_item_id" id="export_appraisal_item_id" value="">
-	                                     		<input type="hidden" name="appraisal_item_name" id="export_appraisal_item_name" value="">
-	                                     		<input type="hidden" name="data_value" id="export_data_value" value=""> 
-	                                     		-->
 													<button id="exportToExcel" class="btn btn-warning btn-sm"
-														type="submit">
+														type="button">
 														<i class="fa fa-download"></i> Download
 													</button>
 												</form>
@@ -178,7 +148,7 @@
 
 				</div>
 				<!-- end--row -->
-				<div class="row">
+				<div class="row" id="appraisal_data_list_content">
 					<div class="col-lg-12">
 						<div class="ibox-title">
 							<h5>Appraisal Data List</h5>
@@ -270,7 +240,68 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal Import App Data -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalImport"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="">Appraisal Data</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<h2>
+						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+							id="">Appraisal Data</span>
+					</h2>
+					<hr>
+
+					<!-- form start -->
+					
+
+					<div class="form-group">
+					<form id="fileImportEmployee">
+						
+							<h3>FILE IMPORT</h3>
+							<div class="fileUpload ">
+								<span>Browse File</span> <input type="file" name="file"
+									id="file" > <span></span>
+							</div>
+							<br>
+							<h6 class="label-content-import-export">
+
+								<input class="btn btn-primary" type="submit"
+									name="importFileMobile" id="importFileMobile" value="Import">
+<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
+
+							</h6>
+						
+					</form>
+					
+						<!-- start table -->
+					</div>
+					<!-- form End -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+<!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+						<div class="alert alert-warning" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
 	</div>
+	<!-- Modal End  -->
 
 
 

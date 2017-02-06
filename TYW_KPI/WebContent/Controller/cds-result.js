@@ -17,11 +17,11 @@ var restfulPathEmployeeAutocomplete=restfulPathCdsResult+"/auto_emp_name";
 
 //------------------- GetData FN Start ---------------------
 var getDataFn = function(page,rpp){
-	var year= $("#param_Year").val();
-	var month= $("#param_Month").val();
-	var app_lv= $("#param_AppLv").val();
-	var position= $("#param_Position").val();
-	var emp_name= $("#param_EmpName").val();
+	var year= $("#param_year").val();
+	var month= $("#param_month").val();
+	var app_lv= $("#param_app_lv").val();
+	var position= $("#param_position_code").val();
+	var emp_name= $("#param_emp_code").val();
 	$.ajax({
 		url : restfulURL+restfulPathCdsResult,
 		type : "get",
@@ -53,16 +53,15 @@ var searchAdvanceFn = function (year,month,app_lv,position,emp_name) {
 //embed parameter start
 	
 	var htmlParam="";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Year' name='param_Year' value='"+year+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Month' name='param_Month' value='"+month+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_AppLv' name='param_AppLv' value='"+app_lv+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Position' name='param_Position' value='"+position+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_EmpName' name='param_EmpName' value='"+emp_name+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' name='param_year' value='"+year+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_month' name='param_month' value='"+month+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' name='param_app_lv' value='"+app_lv+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_position_code' name='param_position_code' value='"+position+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_code' name='param_emp_code' value='"+emp_name+"'>";
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
 	getDataFn($("#pageNumber").val(),$("#rpp").val());
-	
 }
 
 var listCdsResultFn = function (data) {
@@ -174,10 +173,18 @@ var dropDownListAppraisalLevel = function(){
 };
 var listErrorFn =function(data){
 	var errorData="";
-	
-	$.each(data,function(index,indexEntry){
-
+	//alert(data['errors'] instanceof  Array);
+		$.each(data,function(index,indexEntry){	
+		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
+			if(data[index]['employee_code']== null){//The employee code field is null
+				errorData+="<font color='red'>*</font> employee code : null ↓<br>";
+			}else{
+				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  ↓<br>";}
+		}
 		
+		if(typeof data[index]['errors'] != 'object'){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']+"<br>";
+		}
 		if(data[index]['errors']['employee_code']!=undefined){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']['employee_code']+"<br>";
 		}
@@ -195,8 +202,8 @@ var listErrorFn =function(data){
 		}
 		
 		
-
 	});
+
 	//alert(errorData);
 	callFlashSlideInModal(errorData);
 	/*return errorData;*/
@@ -204,24 +211,24 @@ var listErrorFn =function(data){
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
 
 $(document).ready(function() {
-	
+	$("#cds_result_list_content").hide();
 	$("#drop_down_list_year").html(dropDownListYear());
 	$("#drop_down_list_month").html(dropDownListMonth());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
 	$("#btnSearchAdvance").click(function(){
 	$("#position").val("");
 	$("#emp_name").val("");
-		
+	
 		searchAdvanceFn(
 				$("#year").val(),
 				$("#month").val(),
 				$("#app_lv").val(),
 				$("#position_id").val(),
 				$("#emp_name_id").val());
-		
+		$("#cds_result_list_content").show();
 		return false;
 	});
-	$("#btnSearchAdvance").click();
+	//$("#btnSearchAdvance").click();
 	
 	//Autocomplete Search Position Start
 	$("#position").autocomplete({
@@ -340,17 +347,21 @@ $(document).ready(function() {
 	
 	//#### Call Export User Function Start ####
 	$("#exportToExcel").click(function(){
-		//$("form#formExportToExcel").attr("action",restfulURL+"/dqs_api/public/dqs_user/export?token="+tokenID.token);
-		$("form#formExportToExcel").attr("action","../file/cds_result_template.xlsx");
+		var paramYear=$("#param_year").val();
+		var paramMonth=$("#param_month").val();
+		var paramAppLv=$("#param_app_lv").val();
+		var paramPositionCode=$("#param_position_code").val();
+		var paramEmpCode=$("#param_emp_code").val();
 
- 		
-//		$("#export_employee_Code").val($("#").val());
-//		$("#export_cds_id").val($("#").val());
-//		$("#export_cds_name").val($("#").val());
-//		$("#export_year").val($("#").val());
-//		$("#export_Month").val($("#").val());
-//		$("#export_cds_Value").val($("#").val());
 		
+		var param="";
+		param+="&current_appraisal_year="+paramYear;
+		param+="&month_id="+paramMonth;
+		param+="&appraisal_level_id="+paramAppLv;
+		param+="&position_code="+paramPositionCode;
+		param+="&emp_code="+paramEmpCode;
+		//alert(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
+		$("form#formExportToExcel").attr("action",restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").submit();
 	});
     //#### Call Export User Function End ####
@@ -405,12 +416,14 @@ $(document).ready(function() {
 							
 					callFlashSlide("Import CDS Result Successfully");
 					$('#file').val("");
-					$("body").mLoading('hide');
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					$("body").mLoading('hide');
+					$('#ModalImport').modal('hide');
 					
 				}else{
 					$('#file').val("");
 					listErrorFn(data['errors']);
+					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');
 				}
 			},
