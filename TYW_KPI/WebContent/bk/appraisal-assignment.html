@@ -91,7 +91,6 @@
 					                                    <div class="form-group"><label class="col-lg-5 control-label">Period frequency</label>
 			
 						                                    <div class="col-lg-7" id="periodFrequencyArea">
-						                                    
 							                                    <select data-toggle="tooltip" title="Period frequency" class="input form-control input-sm"  id="periodFrequency" name="periodFrequency">
 							                                    	<option value="0"></option>
 																</select>
@@ -150,7 +149,7 @@
 			                                  
 				                                     	<div id="btnSearchArea">
 			                                         		<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
-			                                         		<button type="button"  data-target='#ModalAssignment' data-toggle='modal' class="btn btn-warning input-sm" name="btnAssignment" id="btnAssignment"><i class="fa fa-sign-in"></i>&nbsp;Assign</button>
+			                                         		<button type="button"  data-target='#ModalAssignment' data-toggle='modal' class="btn btn-warning input-sm" name="btnAssignment" id="btnAssignment"><i class=""></i>&nbsp;Assign</button>
 			                                         	</div>
 		                                         
 				                                     	
@@ -166,7 +165,7 @@
          				</div>
 	
          			</div><!-- end--row -->
-         			<div class="row search_result">
+         			<div class="row">
 				         		<div class="col-lg-12">
 					         	<div class="ibox-title">
 	                                <div class='titlePanel'>Employee List</div>
@@ -179,11 +178,11 @@
                                     	<!-- pagination start -->
                                     	<div class="row">
 	                                    	<div class="col-xs-9">
-												 
+												<!-- 
 												<p class="pagination_top"></p>
-												<!--  
-												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
 												 -->
+												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
+												
 	                   
 	                                    	</div>
 	                                    
@@ -316,10 +315,9 @@
                                     	<div class="row">
 	                                    	<div class="col-xs-9">
 	
-												  <p class="pagination_bottom"></p>
-												<!-- 
+												<!--  <p class="pagination_bottom"></p>-->
 												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
-	                   							 -->
+	                   
 	                                    	</div>
 	                                    
 		                                    <div class="col-xs-3 object-right paging-text">
@@ -433,8 +431,343 @@
 	   			</div>
                 <!-- panel0 end -->
                 <!-- panel1 start -->
-                <div id='appraisal_template_area'></div>
+                
+                <div class="row">
+	  					<div class="col-lg-12">
+	                      <div class="ibox-title">
+	                          <div class='titlePanel'>KPI</div>
+	                          <div class='totalWeight'>Total Weight %</div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content table start-->	
+	   							
+	                             	<div class="table-responsive">
+                                  		<table id="tableAppraisalAssignment" class="table table-striped">
+                                  		<!-- select,Appraisal Item Name,Target,Score1 Start,Score2 Start,Score5Start,Score5 End %Weight -->
+                                        <thead>
+	                                        <tr>
+	                                            <th style="width:3%" class=''>select</th>
+	                                            <th style="width:25%" class=''>Appraisal Item Name</th>
+	                                            <th style="width:5%" class=''>Target </th>
+	                                            <th style="width:5%" class='gray-bg'>Score1 S </th>
+	                                            <th style="width:5%" class='gray-bg'>Score1 E </th>
+	                                            <th style="width:5%" class='score2'>Score2 S </th>
+	                                            <th style="width:5%" class='score2'>Score2 E </th>
+	                                            <th style="width:5%" class='gray-bg'>Score3 S </th>
+	                                            <th style="width:5%" class='gray-bg'>Score3 E </th>
+	                                            <th style="width:5%" class='score4'>Score4 S </th>
+	                                            <th style="width:5%" class='score4'>Score4 E </th>
+	                                            <th style="width:5%" class='gray-bg'>Score5 S </th>
+	                                            <th style="width:5%" class='gray-bg'>Score5 E </th>
+	                                            <th style="width:5%;" class=''>%Weight</th>
+	                                        </tr>
+                                        </thead>
+                                        <tbody id="listthreshould">
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td class='' style='padding-top:7px;'>ยอดขายสุทธิ 5,000,000,000</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small score2' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small score2' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small score4' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small score4' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td class='' style='padding-top:7px;'>อัตรากำไรขั้นต้น GP</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td class='' style='padding-top:7px;'>อัตรารักษาลูกค้าเก่า</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td class='' style='padding-top:7px;'>อัตราลูกค้าใหม่ 300 ราย</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small gray-bg' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        	</tr>
+                                        </tbody>
+                                       </table>
+                                  </div>
+						                 <br style="clear:both">
+	                            <!-- content table end-->				
+	   					</div>
+	   				</div>
+	   			</div>
                 <!-- panel1 end -->
+                
+                <!-- panel2 start -->
+                <div class="row">
+	  					<div class="col-lg-12">
+	                      <div class="ibox-title">
+	                          <div class='titlePanel'>Competency</div>
+	                          <div class='totalWeight'>Total Weight %</div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content table start-->	
+	   							
+	                             	<div class="table-responsive">
+                                  		<table id="tablethreshould" class="table table-striped">
+                                  		<!-- Select,Appraisal Item Name,Target,%Weight -->
+                                        <thead>
+	                                        <tr>
+	                                            <th style="width:3%">Select</th>
+	                                            <th style="width:67%">Appraisal Item Name</th>
+	                                            <th style="width:15%">Target </th>
+	                                            <th style="width:15%">%Weight</th>
+	                                           
+	                                        </tr>
+                                        </thead>
+                                        <tbody id="listthreshould">
+                                       
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>ภาวะผู้นำ(MC)</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>แก้ไขปัญหาและตัดสินใจ(CC)</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>การทำงานเป็นทีม(CC)</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>การพัฒนาปรับปรุงงานอย่างต่อเนื่อง(CC)</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>	
+                                        	</tr>
+                                        </tbody>
+                                       </table>
+                                  </div>
+						          <br style="clear:both">
+	                            <!-- content table end-->				
+	   					</div>
+	   				</div>
+	   			</div>
+                <!-- panel2 end -->
+                <!-- panel3 start -->
+                <div class="row">
+	  					<div class="col-lg-12">
+	                      <div class="ibox-title">
+	                          <div class='titlePanel'>Work Behavior</div>
+	                          <div class='totalWeight'>Total Weight %</div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content table start-->	
+	   							
+	                             	<div class="table-responsive">
+                                  		<table id="tablethreshould" class="table table-striped">
+                                  		<!-- Select,Appraisal Item Name,Target,%Weight -->
+                                        <thead>
+	                                        <tr>
+	                                            <th style="width:3%">select</th>
+	                                            <th style="width:67%">Appraisal Item Name</th>
+	                                            <th style="width:15%">Max Value </th>
+	                                            <th style="width:15%">Deduct Score/Unit </th>
+	                                           
+	                                           
+	                                        </tr>
+                                        </thead>
+                                        <tbody id="listthreshould">
+                                       
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td>ลาป่วยตั้งแต่ 10 วันขึ้นไป</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>ลากิจตั้งแต่ 7  วันขึ้นไป</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>ขาดงาน</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>ขาดงานควบวันหยุด</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>	
+                                        	</tr>
+                                        </tbody>
+                                       </table>
+                                  </div>
+						          <br style="clear:both">
+	                            <!-- content table end-->				
+	   					</div>
+	   				</div>
+	   			</div>
+                <!-- panel3 end -->
+                 <!-- panel4 start -->
+                <div class="row">
+	  					<div class="col-lg-12">
+	                      <div class="ibox-title">
+	                          <div class='titlePanel'>Organization Development</div>
+	                          <div class='totalWeight'>Total Weight %</div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content table start-->	
+	   							
+	                             	<div class="table-responsive">
+                                  		<table id="tablethreshould" class="table table-striped">
+                                  		<!-- Select,Appraisal Item Name,Target,%Weight -->
+                                        <thead>
+	                                        <tr>
+	                                            <th style="width:3%">select</th>
+	                                            <th style="width:67%">Appraisal Item Name</th>
+	                                            <th style="width:15%">Max Value </th>
+	                                            <th style="width:15%">Deduct Score/Unit </th>
+	                                           
+	                                           
+	                                        </tr>
+                                        </thead>
+                                        <tbody id="listthreshould">
+                                       
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>5 ส(นับจำนวจใบ Car ที่ได้รับหักใบละ1 คะแนน)</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>ISO(นับจำนวนใบ Car ที่ได้แก้ไม่ทันกำหนด หักใบละ 2 คะแนน)</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	
+                                        </tbody>
+                                       </table>
+                                  </div>
+						          <br style="clear:both">
+	                            <!-- content table end-->				
+	   					</div>
+	   				</div>
+	   			</div>
+                <!-- panel4 end -->
+                
+                 <!-- panel5 start -->
+                <div class="row">
+	  					<div class="col-lg-12">
+	                      <div class="ibox-title">
+	                          <div class='titlePanel'>Disciplinary Punishment</div>
+	                          <div class='totalWeight'>Total Weight %</div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content table start-->	
+	   							
+	                             	<div class="table-responsive">
+                                  		<table id="tablethreshould" class="table table-striped">
+                                  		<!-- Select,Appraisal Item Name,Target,%Weight -->
+                                        <thead>
+	                                        <tr>
+	                                            <th style="width:3%">select</th>
+	                                            <th style="width:67%">Appraisal Item Name</th>
+	                                            <th style="width:15%">Max Value </th>
+	                                            <th style="width:15%">Deduct Score/Unit </th>
+	                                           
+	                                           
+	                                        </tr>
+                                        </thead>
+                                        <tbody id="listthreshould">
+                                       
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>ใบเตือนด้วยวาจา</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	<tr>
+                                        		<td class='object-center'><input class='' type='checkbox'></td>
+                                        		<td style='padding-top:7px;'>ใบเตือนเป็นลายลักษณ์อักษร</td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		<td><input class='input form-control input-sm-small' type='text'></td>
+                                        		
+                                        	</tr>
+                                        	
+                                        	
+                                        </tbody>
+                                       </table>
+                                  </div>
+						          <br style="clear:both">
+	                            <!-- content table end-->				
+	   					</div>
+	   				</div>
+	   			</div>
+                <!-- panel5 end -->
                 
                 
                

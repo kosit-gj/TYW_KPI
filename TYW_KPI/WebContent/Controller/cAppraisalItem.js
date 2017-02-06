@@ -108,6 +108,7 @@ var listDataFn = function(data) {
 		$.each(indexEntry['columns'],function(columns,columnsEntry){
 		mainContentHTML+="                          <th >"+columnsEntry['column_display']+"</th>";
 		});
+		
 		/*
 		mainContentHTML+="                          <th  style='width:20%'>Appraisal Level </th>";
 		mainContentHTML+="                          <th  style='width:20%'>Structure</th>";
@@ -115,6 +116,7 @@ var listDataFn = function(data) {
 		mainContentHTML+="                          <th  style='width:10%'>UOM</th>";
 		mainContentHTML+="                       	<th  style='width:10%'>IsActive</th>";
 		*/
+		
 		mainContentHTML+="                          <th style='width:10%; text-align:center;'>Manage</th>";
 		mainContentHTML+="                      </tr>";
 		mainContentHTML+="                  </thead>";
@@ -138,9 +140,6 @@ var listDataFn = function(data) {
 		mainContentHTML+="          				</td>";
 		
 		mainContentHTML+="           			</tr>";
-		
-		
-		
 		});
                           	
 		mainContentHTML+="             </tbody>";
