@@ -205,8 +205,10 @@ var listErrorFn =function(data){
 		
 		
 	});
-	//alert(errorData);callFlashSlideInModal(errorData,"#information","error");
-	callFlashSlideInModal(errorData);
+	//alert(errorData);
+	callFlashSlideInModal(errorData,"#information","error");
+	//callFlashSlideInModal(errorData);
+	
 	/*return errorData;*/
 }
 $(document).ready(function() {

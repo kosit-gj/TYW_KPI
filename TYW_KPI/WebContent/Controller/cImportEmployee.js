@@ -68,8 +68,8 @@ var validationFn = function(data){
 	}
 	
 	
-	
-	callFlashSlideInModal(validate);
+	callFlashSlideInModal(validate,"#information","error");
+	//callFlashSlideInModal(validate);
 };
 
 //Check Validation Edd
@@ -106,7 +106,8 @@ var listErrorFn =function(data){
 
 	});
 	//alert(errorData);
-	callFlashSlideInModal(errorData);
+	callFlashSlideInModal(errorData,"#information","error");
+	//callFlashSlideInModal(errorData);
 	/*return errorData;*/
 }
 

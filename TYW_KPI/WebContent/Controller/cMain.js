@@ -9,7 +9,7 @@ var flashSLideUp=function(){
 
 var flashSlideInModalSlideUp=function(){
 	
-	$(".information").slideUp();
+	$("#information").slideUp();
 	
 	
 }

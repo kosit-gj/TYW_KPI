@@ -27,7 +27,8 @@ var validationFn = function(data){
 		if(data['data']['cds_sql']!=undefined){
 			validate+="<font color='red'>*</font> "+data['data']['cds_sql']+"<br>";
 		}
-		callFlashSlideInModal(validate);
+		//callFlashSlideInModal(validate);
+		callFlashSlideInModal(validate,"#information","error");
 };	
 	
 	

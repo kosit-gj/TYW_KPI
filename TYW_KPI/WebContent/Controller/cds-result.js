@@ -205,7 +205,8 @@ var listErrorFn =function(data){
 	});
 
 	//alert(errorData);
-	callFlashSlideInModal(errorData);
+	//callFlashSlideInModal(errorData);
+	callFlashSlideInModal(errorData,"#information","error");
 	/*return errorData;*/
 }
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
