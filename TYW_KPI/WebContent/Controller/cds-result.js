@@ -371,9 +371,11 @@ $(document).ready(function() {
 	$("#btn_import").click(function () {
 		$('#file').val("");
 	});
-	
+	$("#importFileMobile").click(function () {
+		$('#file').val("");
+	});
 	// Variable to store your files
-	var files2;
+	var files;
 	// Add events
 	$('#file').on('change', prepareUpload2);
 
@@ -416,13 +418,11 @@ $(document).ready(function() {
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import CDS Result Successfully");
-					$('#file').val("");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');
 					$('#ModalImport').modal('hide');
 					
 				}else{
-					$('#file').val("");
 					listErrorFn(data['errors']);
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');
