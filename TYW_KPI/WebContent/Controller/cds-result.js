@@ -212,13 +212,17 @@ var listErrorFn =function(data){
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
 
 $(document).ready(function() {
+	$("#position").val("");
+	$("#emp_name").val("");
+	$("#position_id").val("");
+	$("#emp_name_id").val("");
+	
 	$("#cds_result_list_content").hide();
 	$("#drop_down_list_year").html(dropDownListYear());
 	$("#drop_down_list_month").html(dropDownListMonth());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
 	$("#btnSearchAdvance").click(function(){
-	$("#position").val("");
-	$("#emp_name").val("");
+
 	
 		searchAdvanceFn(
 				$("#year").val(),
@@ -370,10 +374,9 @@ $(document).ready(function() {
 	//FILE IMPORT MOBILE START
 	$("#btn_import").click(function () {
 		$('#file').val("");
+		$(".btnModalClose").click();
 	});
-	$("#importFileMobile").click(function () {
-		$('#file').val("");
-	});
+	
 	// Variable to store your files
 	var files;
 	// Add events
@@ -420,10 +423,12 @@ $(document).ready(function() {
 					callFlashSlide("Import CDS Result Successfully");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');
+					$('#file').val("");
 					$('#ModalImport').modal('hide');
 					
 				}else{
 					listErrorFn(data['errors']);
+					$('#file').val("");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');
 				}

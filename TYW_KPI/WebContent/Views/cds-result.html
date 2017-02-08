@@ -25,27 +25,24 @@
 </head>
 <body>
 
-	<div class="wrapper wrapper-content">
+	
 		<div class="container">
-			<div id="includePage" class="ng-view ng-scope">
-				<!--  nav bar -->
-				<div class="row wrapper border-bottom  page-heading" id="naviTitle">
-					<!-- 	style="display: none;" -->
+			<div class='row'>
 
-					<div class="col-lg-12">
+					<div class='col-xs-12'>
 						<div id="slide_status">
-							<div id="btnClose"></div>
+							<div id="btnCloseSlide">×</div>
 							<div id="slide_status_area"></div>
 						</div>
-						<ol class="breadcrumb">
-							<li><a href="#/"><i class="fa fa-home "></i> Home</a></li>
-							<li><i class="fa fa-gears"></i> System Management</li>
-							<li class="active"><strong id="naviLabelMenu"><i
-									class="fa fa-share-alt"></i> CDS Result </strong></li>
-						</ol>
 					</div>
+
 				</div>
-				<!-- nav bar -->
+
+				<h2>
+					<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+						id="modalDescription"> CDS Result</span>
+				</h2>
+				
 
 				<div class="row">
 					<!-- start--row -->
@@ -243,8 +240,7 @@
 				</div>
 
 
-			</div>
-		</div>
+			
 	</div>
 
 <!-- Modal Import CDS Result -->
@@ -302,7 +298,7 @@
 <!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-						<div class="alert alert-warning" id="information"
+						<div class="alert alert-warning information" id="information"
 						style="display: none;"></div>
 				</div>
 			</div>

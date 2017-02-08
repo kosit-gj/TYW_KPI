@@ -369,9 +369,7 @@ $(document).ready(function() {
 	//FILE IMPORT MOBILE START
 	$("#btn_import").click(function () {
 		$('#file').val("");
-	});
-	$("#importFileMobile").click(function () {
-		$('#file').val("");
+		$(".btnModalClose").click();
 	});
 	
 	// Variable to store your files
@@ -419,12 +417,14 @@ $(document).ready(function() {
 							
 					callFlashSlide("Import CDS Result Successfully");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					$('#file').val("");
 					$("body").mLoading('hide');
 					$('#ModalImport').modal('hide');
 					
 				}else{
 					listErrorFn(data['errors']);
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					$('#file').val("");
 					$("body").mLoading('hide');
 				}
 			},

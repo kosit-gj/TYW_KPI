@@ -437,6 +437,16 @@ hr {
 .p-b-xs{
  padding-bottom :10px;
 }
+/* MARGIN */
+.m-n {
+    margin: 0 !important;
+}
+.m-b-n {
+    margin-bottom: 0 !important;
+}
+.m-t-xxs{
+ margin-top :1px;
+}
 .font-gear{
 	font-size: 23px;
 	cursor:pointer;

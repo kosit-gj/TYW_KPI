@@ -7,9 +7,9 @@ var flashSLideUp=function(){
 	
 }
 
-var flashSlideInModalSlideUp=function(id){
-	var txtId="#"+id;
-	$(txtId).slideUp();
+var flashSlideInModalSlideUp=function(){
+	
+	$(".information").slideUp();
 	
 	
 }
@@ -18,7 +18,7 @@ $(document).on("click","#btnCloseSlide",function(){
 });
 $(document).on("click",".btnModalClose",function(){
 	
-	flashSlideInModalSlideUp($(this).parent().attr('id'));
+	flashSlideInModalSlideUp();
 });
 
 var callFlashSlide = function(text,flashType){
