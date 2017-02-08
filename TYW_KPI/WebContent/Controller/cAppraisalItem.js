@@ -90,7 +90,7 @@ var listDataFn = function(data) {
 	var  mainContentHTML="";
 	$.each(data,function(index,indexEntry){
 		//console.log(index);
-	//structure_id
+		//structure_id
 		mainContentHTML+="<div class=\"row\">";
 		mainContentHTML+="	<div class=\"col-lg-12\">";
 		mainContentHTML+="  	<div class=\"ibox-title\">";

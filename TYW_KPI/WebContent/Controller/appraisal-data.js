@@ -205,8 +205,10 @@ var listErrorFn =function(data){
 		
 		
 	});
-	//alert(errorData);callFlashSlideInModal(errorData,"#information","error");
-	callFlashSlideInModal(errorData);
+	//alert(errorData);
+	callFlashSlideInModal(errorData,"#information","error");
+	//callFlashSlideInModal(errorData);
+	
 	/*return errorData;*/
 }
 $(document).ready(function() {
@@ -234,12 +236,12 @@ $(document).ready(function() {
 	$("#app_item").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+restfulPathPositionAutocomplete,
+				 url:restfulURL+restfulPathAutocompleteAppraisalItem,
 				 type:"post",
 				 dataType:"json",
 				 data:{
-					 "structure_id":$().val(),
-					 "appraisal_level_id":request.term,
+					 "structure_id":$("#structure").val(),
+					 "appraisal_level_id":$("#app_item_id").val(),
 					 "appraisal_item_name":request.term},
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
@@ -368,6 +370,9 @@ $(document).ready(function() {
 	$("#btn_import").click(function () {
 		$('#file').val("");
 	});
+	$("#importFileMobile").click(function () {
+		$('#file').val("");
+	});
 	
 	// Variable to store your files
 	var files2;
@@ -413,13 +418,11 @@ $(document).ready(function() {
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import CDS Result Successfully");
-					$('#file').val("");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');
 					$('#ModalImport').modal('hide');
 					
 				}else{
-					$('#file').val("");
 					listErrorFn(data['errors']);
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');

@@ -16,60 +16,24 @@ var restfulPathEmployeeAutocomplete="/tyw_api/public/import_employee/auto_employ
 //Check Validation Start
 var validationFn = function(data){
 	
-	var validate="";
-	if(data['data']['emp_code']!=undefined){
-		
-		validate+="<font color='red'>*</font> "+data['data']['emp_code']+"<br>";
-	}
-	if(data['data']['emp_name']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['emp_name']+"<br>";
-	}
-	if(data['data']['working_start_date']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['working_start_date']+"<br>";
-	}
-	if(data['data']['probation_end_date']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['probation_end_date']+"<br>";
-	}
-	if(data['data']['acting_end_date']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['acting_end_date']+"<br>";
-	}
-	if(data['data']['department_code']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['department_code']+"<br>";
-	}
-	if(data['data']['department_name']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['department_name']+"<br>";
-	}
-	if(data['data']['section_code']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['section_code']+"<br>";
-	}
-	if(data['data']['section_name']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['section_name']+"<br>";
-	}
-	if(data['data']['position_code']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['position_code']+"<br>";
-	}
-	if(data['data']['position_name']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['position_name']+"<br>";
-	}
-	if(data['data']['position_group']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['position_group']+"<br>";
-	}
-	if(data['data']['chief_emp_code']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['chief_emp_code']+"<br>";
-	}
-	if(data['data']['s_amount']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['s_amount']+"<br>";
-	}
-	if(data['data']['erp_user']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['erp_user']+"<br>";
-	}
-	if(data['data']['email']!=undefined){
-		validate+="<font color='red'>*</font> "+data['data']['email']+"<br>";
-	}
+
+	var validate = "";
+	var count = 0;
+	$.each(data['data'], function(index, indexEntry) {
+
+		if (index != undefined) {
+			if (count == 0) {
+				validate += "<font color='red'>* </font>" + indexEntry + "";
+			} else {
+				validate += "<br><font color='red'>* </font> " + indexEntry + " ";
+			}
+		}
+
+		count++;
+	});
 	
-	
-	
-	callFlashSlideInModal(validate);
+	callFlashSlideInModal(validate,"#information2","error");
+	//callFlashSlideInModal(validate);
 };
 
 //Check Validation Edd
@@ -105,13 +69,20 @@ var listErrorFn =function(data){
 		
 
 	});
+	
+	
+	
 	//alert(errorData);
-	callFlashSlideInModal(errorData);
+	callFlashSlideInModal(errorData,"#information","error");
+	//callFlashSlideInModal(errorData);
 	/*return errorData;*/
 }
 
 //--------  Clear Start 
 var clearFn = function() {
+	
+	
+	
 	$("#from_emp_code").val("");
 	$("#from_emp_name").val("");
 	$("#from_emp_wsd").val("");
@@ -332,17 +303,10 @@ var listImportEmployeeFn = function(data) {
 				
 			});
 			$(".edit").on("click",function() {
-			
-//			$("#modalTitleRole").html("Common Data Set");
-//			$("#modalDescription").html("Edit Common Data Set");
-			
+			$(".btnModalClose").click();
 			$(this).parent().parent().parent().children().click();
-			//alert($(this).parent().parent().parent().children().click());
-			//$("#btnAddAnother").hide();
-			//$("#txtSampleData").attr("disabled","disabled"); 
 			
 			findOneFn(this.id);
-			//alert($("#checkboxIsSQL:checked").is(":checked"));
 			
 			$("#from_emp_wsd").datepicker();
 		    $("#from_emp_wsd").datepicker( "option", "dateFormat", "yy-mm-dd" );
@@ -372,6 +336,7 @@ var listImportEmployeeFn = function(data) {
 					 url:restfulURL+restfulPathImportEmployee+"/"+id,
 					 type : "delete",
 					 dataType:"json",
+					 async:false,
 					 headers:{Authorization:"Bearer "+tokenID.token},
 				     success:function(data){    
 				    	 
@@ -382,7 +347,11 @@ var listImportEmployeeFn = function(data) {
 					       clearFn();
 					       $("#confrimModal").modal('hide');
 					       
-					     }else{alert("Error");}
+					     }else if (data['status'] == "400"){
+					    	 $("#confrimModal").modal('hide');
+					    	 callFlashSlide(data['data'],"error");
+					    	}
+					     	  
 					 }
 				});
 				
@@ -630,17 +599,20 @@ var dropDownListSection = function(id){
 
 
 $(document).ready(function() {
-	//paginationSetUpFn(1,1,1);
+
+	$("#search_position").val("");
+	$("#search_position_id").val("");
+	$("#search_emp_name").val("");
+	$("#search_emp_id").val("");
+	
 	$("#employee_list_content").hide();
 	$("#drop_down_department").html(dropDownListDepartment());
 	$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
 	$("#drop_down_department").change(function () {
 		$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
 	});
-	$("#search_position").val("");
-	$("#search_emp_name").val("");
+	
 	$("#btnSearchAdvance").click(function(){
-		//alert("2");
 		
 		searchAdvanceFn(
 				$("#search_department").val(),
@@ -650,7 +622,12 @@ $(document).ready(function() {
 				//$("#search_emp_name").val().split("-", 1)search_emp_id
 				$("#search_emp_id").val()
 				);
+		$("#search_position").val("");
+		$("#search_position_id").val("");
+		$("#search_emp_name").val("");
+		$("#search_emp_id").val("");
 		$("#employee_list_content").show();
+		
 		return false;
 	});
 	listAppraisalLevel();
@@ -864,10 +841,13 @@ $(document).ready(function() {
 	//FILE IMPORT MOBILE START
 	$("#btn_import").click(function () {
 		$('#file').val("");
+		$(".btnModalClose").click();
 	});
-	
+//	$("#importFileMobile").click(function () {
+//		$('#file').val("");
+//	});
 	// Variable to store your files
-	var files2;
+	var files;
 	// Add events
 	$('#file').on('change', prepareUpload2);
 
@@ -910,13 +890,11 @@ $(document).ready(function() {
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import Employee Successfully");
-					$('#file').val("");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$("body").mLoading('hide');
 					$('#ModalImport').modal('hide');
 					
 				}else{
-					$('#file').val("");
 					listErrorFn(data['errors']);
 					$("body").mLoading('hide');
 				}

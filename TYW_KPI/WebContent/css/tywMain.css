@@ -108,13 +108,8 @@ body {
    /* background-color: #ffffff;*/
     border-radius: 0;
     margin-bottom: 0;
-<<<<<<< HEAD
+
     padding: 5px;
-    height: 5px;
-=======
-    padding: 5px;
-    height: 5px;
->>>>>>> refs/remotes/origin/master
     background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
     
 }
@@ -243,11 +238,7 @@ hr {
     margin-bottom: 0;
     min-height: 35px;
     padding: 7px 10px;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> refs/remotes/origin/master
 }
 /*page  start*/
 .btn-primary:hover,
@@ -294,7 +285,8 @@ hr {
     padding: 10px;
     position: fixed;
     top: 0px;
-    width: 1160px;
+    left: 0px;
+    width: 100%;
     z-index: 22;
     text-align:center;
     display:none;
