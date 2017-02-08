@@ -3,7 +3,7 @@ var galbalDataAppData=[];
 var tempAppItemName="";
 var tempAppItemId="";
 var tempEmpName="";
-var tempEmpId=""; 
+var tempEmpId="";  
 
 var restfulPathAppData="/tyw_api/public/appraisal_data";
 
