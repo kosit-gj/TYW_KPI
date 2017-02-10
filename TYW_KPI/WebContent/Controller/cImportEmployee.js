@@ -4,6 +4,7 @@ var tempEmpName="";
 var tempEmpID="";
 var tempPosiName="";
 var tempPosiID="";
+var pageNumberDefault=1;
 var restfulPathImportEmployee="/tyw_api/public/import_employee";
 var restfulPathRole="/tyw_api/public/import_employee/role_list";
 
@@ -236,7 +237,7 @@ var searchAdvanceFn = function (Department,Section,Position,EmployeeName) {
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
-	getDataFn($("#pageNumber").val(),$("#rpp").val());
+	getDataFn(pageNumberDefault,$("#rpp").val());
 	
 	
 }
@@ -605,6 +606,10 @@ $(document).ready(function() {
 	$("#search_emp_name").val("");
 	$("#search_emp_id").val("");
 	
+
+	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
+	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
+	
 	$("#employee_list_content").hide();
 	$("#drop_down_department").html(dropDownListDepartment());
 	$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
@@ -886,12 +891,13 @@ $(document).ready(function() {
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import Employee Successfully");
-					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 					$("body").mLoading('hide');
 					$('#ModalImport').modal('hide');
 					
 				}else{
 					listErrorFn(data['errors']);
+					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 					$("body").mLoading('hide');
 				}
 			},

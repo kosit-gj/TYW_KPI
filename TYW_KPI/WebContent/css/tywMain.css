@@ -431,6 +431,9 @@ hr {
 .p-t-xs{
  padding-top :10px;
 }
+.p-t-lg {
+  padding-top: 30px;
+}
 .p-b-xxs{
  padding-bottom :5px;
 }

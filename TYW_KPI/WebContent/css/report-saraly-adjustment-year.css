@@ -1,24 +1,6 @@
-body{
-	background-color: #f3f3f4;
-}
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-	color: black;
-	
-}
+
 th,td{
 	border-color:#dddddd;
-}
-.p-t-xxs{
- padding-top :5px;
-}
-.p-t-xs {
-  padding-top: 10px;
-}
-.p-t-lg {
-  padding-top: 30px;
-}
-.p-b-xxs{
- padding-bottom :5px;
 }
 .btn-grey{
 	background-color: #777777;
@@ -50,7 +32,7 @@ padding:10px;
 }
 .table-thead-bg{
  background-color: #ffcc33;
- color:black;
+ color:#2C2C2C;
 }
 .btn-primary:hover,
 .btn-primary:focus,

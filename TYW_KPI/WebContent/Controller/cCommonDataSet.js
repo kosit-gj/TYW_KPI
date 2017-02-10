@@ -3,6 +3,7 @@ var galbalDataCDS=[];
 //IP Server : 171.96.201.146
 var tempCdsId ="";
 var tempCdsName ="";
+var pageNumberDefault=1;
 var restfulPathCDS="/tyw_api/public/cds";
 var restfulPathDropDownAppraisalLevel="/tyw_api/public/cds/al_list";
 var restfulPathDropDownConnection="/tyw_api/public/cds/connection_list";
@@ -100,7 +101,7 @@ var getDataFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
-			
+			//alert("Get Data -->  page : " +page+" rpp :"+rpp);
 			listCommonDataSetFn(data['data']);
 			//total
 			galbalDataCDS=data;
@@ -122,8 +123,8 @@ var searchAdvanceFn = function (AppraisalLv,cdsId) {
 	$(".param_Embed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
-	
-	getDataFn($("#pageNumber").val(),$("#rpp").val());
+	//alert("search Data --> page : 1 rpp :"+$("#rpp").val());
+	getDataFn(pageNumberDefault,$("#rpp").val());
 	
 }
 // -------- Search End
@@ -188,7 +189,7 @@ var listCommonDataSetFn = function(data) {
 		if (indexEntry["is_sql"]== "1"){
 			IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
 		}else if (indexEntry["is_sql"]== "0"){
-//			IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
+			IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
 		}
 		if (indexEntry["is_active"]=="1"){
 			IsActive = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
@@ -361,18 +362,17 @@ var insertFn = function (param) {
 		//headers:{Authorization:"Bearer "+tokenID.token},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {
-			
 			if (data['status'] == "200") {
 				 
 				   if(param !="saveAndAnother"){
 					   //alert("!saveAndAnother" );
 					   callFlashSlide("Insert Successfully.");
-				       getDataFn($("#pageNumber").val(),$("#rpp").val());
+				       getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 				       clearFn();
 				 	   $('#ModalCommonData').modal('hide');
 					}else{
 						//alert("saveAndAnother" );
-						getDataFn($("#pageNumber").val(),$("#rpp").val());
+						getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 						clearFn();
 						$("#checkbox_is_sql").prop("checked",true);
 						$("#checkbox_is_active").prop("checked",true);
@@ -469,6 +469,7 @@ var executeSQLFn = function (txtSQL) {
 				listSqlFn(data['data']);
 				
 			} else if (data['status'] == "400") {
+				$("#table_Sql").html("");
 				validationSqlFn(data['data']);
 			}
 		}
@@ -512,14 +513,19 @@ var listSqlFn = function (data) {
 
 $(document).ready(function() {
 	
+
 	// ------------------- Common Data Set -------------------
 	$("#cds_list_content").hide();
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel("","app_lv"));
 	$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel("","f_app_lv"));
 	$("#drop_down_list_connection").html(dropDownListConnection());
 	
+	
 	$("#cds_name").val("");
 	$("#cds_id").val("");
+	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
+	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
+	
 	$("#btn_search_advance").click(function(){
 		///alert($("#cds_name").val().split("-", 1));
 		
@@ -533,7 +539,7 @@ $(document).ready(function() {
 	
 	
 	$("#btnAddCommonDataSet").click(function(){
-		clearFn();
+		
 		$("#f_app_lv").val( $("#f_app_lv option:first-child").val());
 		$("#f_connection").val( $("#f_connection option:first-child").val());
 		$("#btnAddAnother").show();

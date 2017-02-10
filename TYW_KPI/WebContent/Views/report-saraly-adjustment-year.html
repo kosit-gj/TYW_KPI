@@ -22,222 +22,168 @@
     <link href="../css/index.css" rel="stylesheet">
     <link href="../css/report-saraly-adjustment-year.css" rel="stylesheet">
 </head>
-<body>
+<body class="top-navigation gray-bg ">
 
-	<div class="wrapper wrapper-content">
+
 		<div class="container">
-			<div id="includePage" class="ng-view ng-scope">
 			
-<div class="row">
-	<!-- start--row -->
 
-	<div class="col-lg-12">
-		<div class="ibox float-e-margins">
-			<div class="ibox-title">
-				<h5>Parameter</h5>
-			</div>
-
-			<div class="ibox-content">
 				<div class="row">
-					<div class="col-lg-2 col-md-2">
-						<div class="form-group p-xxs">
-							<label class="col-lg-4 col-md-4 p-t-xxs" >Year</label>
-							<div class="col-lg-8 col-md-8" id="dropDownListYear">
-								<select data-toggle="tooltip" title="Year"
-									class="input form-control input-sm col-lg-9" id="paramYear"
-									name="paramYear">
-									<option>All</option>
-									<option>2017</option>
-									<option>2016</option>
-								</select>
+					<!-- start--row -->
+
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Parameter</h5>
 							</div>
 
-						</div>
-					</div>
+							<div class="ibox-content">
+								<div class="row">
+									<div class="col-lg-2 col-md-2">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-4 p-t-xxs">Year</label>
+											<div class="col-lg-8 col-md-8" id="drop_down_list_year">
+												<select data-toggle="tooltip" title="Year"
+													class="input form-control input-sm col-lg-9" id="paramYear"
+													name="paramYear">
+													<option>All</option>
+													<option>2017</option>
+													<option>2016</option>
+												</select>
+											</div>
 
-					<div class="col-lg-3 col-md-3">
-					<div class="form-group p-xxs">
-							<label class="col-lg-5 col-md-6 p-t-xxs">Bonus Period</label>
-							<div class="col-lg-7 col-md-6" id="dropDownListSalaryPeriod">
-								<select data-toggle="tooltip" title="Salary Period"
-									class="input form-control input-sm col-lg-9" id="paramSalaryPeriod"
-									name="paramSalaryPeriod">
-									<option>งวดที่ 1</option>
-									<option>งวดที่ 2</option>
-								</select>
+										</div>
+									</div>
+
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-5 col-md-6 p-t-xxs">Salary Period</label>
+											<div class="col-lg-7 col-md-6" id="drop_down_list_salary_period">
+												<select data-toggle="tooltip" title="Salary Period"
+													class="input form-control input-sm col-lg-9"
+													id="paramSalaryPeriod" name="paramSalaryPeriod">
+													<option>งวดที่ 1</option>
+													<option>งวดที่ 2</option>
+												</select>
+											</div>
+
+										</div>
+
+									</div>
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
+											<div class="col-lg-8 col-md-7 " id="drop_down_list_department">
+												<select data-toggle="tooltip" title="Department"
+													class="input form-control input-sm col-lg-9"
+													id="paramDepartment" name="paramDepartment">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-5 col-md-6 p-t-xxs">Position
+												Group</label>
+											<div class="col-lg-7 col-md-6" id="drop_down_list_position_group">
+												<select data-toggle="tooltip" title="Position Group"
+													class="input form-control input-sm col-lg-9"
+													id="paramPsGroup" name="paramPsGroup">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+
+										</div>
+									</div>
+
+									<div class="col-lg-1 col-md-1 p-b-xxs">
+										<div class="form-group p-xxs ">
+
+											<div class="form-group pull-right  m-b-none">
+
+
+												<button type="button" class="btn btn-grey input-sm"
+													name="btnSearchAdvance" id="btnSearchAdvance">
+													<i class="fa fa-search"></i>&nbsp;View&nbsp;
+												</button>
+
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+
 							</div>
-
+							<!-- content end -->
 						</div>
-					
+
 					</div>
-					<div class="col-lg-3 col-md-3">
-					<div class="form-group p-xxs">
-							<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
-							<div class="col-lg-8 col-md-7 " id="dropDownListDepartment">
-								<select data-toggle="tooltip" title="Department"
-									class="input form-control input-sm col-lg-9" id="paramDepartment"
-									name="paramDepartment">
-									<option>All</option>
-									<option>ระดับบริหาร</option>
-									<option>ระดับการจัดการ</option>
-									<option>ระดับบังคับบัญชา</option>
-									<option>ระดับเจ้าหน้าที่</option>
-									<option>HR</option>
-								</select>
-							</div>
 
-						</div>
-					</div>
-					
-					<div class="col-lg-3 col-md-3">
-					<div class="form-group p-xxs">
-							<label class="col-lg-5 col-md-6 p-t-xxs">Position Group</label>
-							<div class="col-lg-7 col-md-6">
-								<select data-toggle="tooltip" title="Position Group"
-									class="input form-control input-sm col-lg-9" id="paramPsGroup"
-									name="paramPsGroup">
-									<option>All</option>
-									<option>ระดับบริหาร</option>
-									<option>ระดับการจัดการ</option>
-									<option>ระดับบังคับบัญชา</option>
-									<option>ระดับเจ้าหน้าที่</option>
-									<option>HR</option>
-								</select>
-							</div>
-							
-
-						</div>
-					</div>
-					
-					<div class="col-lg-1 col-md-1 p-b-xxs">
-					<div class="form-group p-xxs ">
-	
-							<div class="form-group pull-right  m-b-none">
-
-								
-								<button type="button" class="btn btn-grey input-sm"
-									name="btnSearchAdvance" id="btnSearchAdvance">
-									<i class="fa fa-search"></i>&nbsp;View&nbsp;
-								</button>
-
-							</div>
-
-						</div>
-					</div>
-					
 				</div>
-
-			</div>
-			<!-- content end -->
-		</div>
-
-	</div>
-
-</div>
-<!-- end--row -->
+				<!-- end--row -->
 
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-				  
-                  <div class="ibox-content">
-                  <div class="row text-center p-t-lg">
-				  		<h2>รายงานยอดเงินที่ปรับประจำปี</h2>
-				  </div>
-				  <div class="row text-center p-t-xs">
-				  		<h3>ฝ่ายผลิต</h3>
-				  </div>
-                
-                   
-                   
-                    <!-- pagination start -->
-                    <!-- 
-                      <div class="row">
-                         <div class="col-sm-9 ">
-						 <span class="pagination_top"></span>
-                         </div>
-                          <div class="col-sm-2 object-right paging-text">Results per page</div>
-                          <div class="col-sm-1">
-                         	<select name="account" id='countPaginationTop'  class="form-control input-sm countPagination">
-                               <option>10</option>
-                               <option>20</option>
-                               <option>50</option>
-                               <option>100</option>
-                           </select> 
-                         	</div>
-                       </div> 
-                       -->
-             <!-- pagination end -->
-                   
-                   <div class='row p-t-lg' >
-                   	  <div class='col-sm-12'>
-		                <div class="table-responsive" style="border-color:#dddddd">
-		               <!-- table-striped -->
-		               
-		                        <table class="table " id="reportSumCusImplementedTable" border="1" style="border-color:#dddddd; ">
-		                            <thead style="border-color:#dddddd" >
-									
-									<tr  class="table-thead-bg" >
-		                                 <th style="width:5%; " > ลำดับ</th>
-		                                 <th style="width:13%;" > รหัส</th>
-		                                 <th style="width:24%;" > ชื่อ-สกุล</th>
-		                                 <th style="width:19%;" > ต่ำแหน่ง </th>
-		                                 <th style="width:13%;" > เงินเดือนเก่า </th>
-		                                 <th style="width:13%;" > ยอดเงินปรับ </th>
-		                                 <th style="width:13%;" > ยอดเงินใหม่ </th>
-		                            </tr >
-		                            
-		                            </thead>
-		                            <tbody id="listDataReport">
-		                            
-		                            
-		                       </tbody>
-		                   </table>
-		               </div>
-		          	</div>
-                </div> 
-                
-                
-                <!-- pagination start -->
-                <!-- 
-                    <div class="row">
-                       <div class="col-sm-9 ">
-						<span class="pagination_bottom"></span>
-                       </div>
-                        <div class="col-sm-2 object-right paging-text">Results per page</div>
-                        <div class="col-sm-1">
-                       	<select name="account" id='countPaginationBottom'  class="form-control input-sm countPagination">
-                             <option>10</option>
-                             <option>20</option>
-                             <option>50</option>
-                             <option>100</option>
-                         </select> 
-                       	</div>
-                     </div> 
-                     -->
-              <!-- pagination end -->
-                
-                
-            </div>
-        </div>
-    </div>
+				<div class="row" id="report_list_content">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
 
-</div>
+							<div class="ibox-content">
+								<div class="row text-center p-t-lg">
+									<h2>
+										<strong>รายงานยอดเงินที่ปรับประจำปี</strong>
+									</h2>
+								</div>
+								<div class="row text-center p-t-xs">
+									<h3>
+										<strong>ฝ่ายผลิต</strong>
+									</h3>
+								</div>
 
-<div class='paramEmbedArea'></div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</div>
-		</div>
+								<div class='row p-t-lg'>
+									<div class='col-sm-12'>
+										<div class="table-responsive" style="border-color: #dddddd">
+											<!-- table-striped -->
+											<table class="table " id="report_table"
+												border="1" style="border-color: #dddddd;">
+												<thead style="border-color: #dddddd">
+
+													<tr class="table-thead-bg">
+														<th style="width: 5%;">ลำดับ</th>
+														<th style="width: 13%;">รหัส</th>
+														<th style="width: 24%;">ชื่อ-สกุล</th>
+														<th style="width: 19%;">ต่ำแหน่ง</th>
+														<th style="width: 13%;">เงินเดือนเก่า</th>
+														<th style="width: 13%;">ยอดเงินปรับ</th>
+														<th style="width: 13%;">ยอดเงินใหม่</th>
+													</tr>
+
+												</thead>
+												<tbody id="listDataReport">
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class='paramEmbedArea'></div>
 	</div>
 
 
@@ -274,8 +220,9 @@
     
     
     <script src="../js/jquery.mloading.js"></script>
-    
-    <script src="../Controller/report-saraly-adjustment-year.js"></script> 
+    <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script>
+	<script src="../Controller/report-saraly-adjustment-year.js"></script>
 
 
 </body>
