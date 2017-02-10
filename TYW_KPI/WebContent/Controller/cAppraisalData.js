@@ -6,7 +6,7 @@ var tempEmpName="";
 var tempEmpId="";  
 var pageNumberDefault=1;
 var restfulPathAppData="/tyw_api/public/appraisal_data";
-
+ 
 var restfulPathDropDownStructure=restfulPathAppData+"/structure_list";
 var restfulPathDropDownAppraisalLevel=restfulPathAppData+"/al_list";
 var restfulPathDropDownPeriod=restfulPathAppData+"/period_list";
