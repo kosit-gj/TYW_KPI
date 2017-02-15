@@ -2,6 +2,58 @@
 var tokenID= eval("("+localStorage.getItem("tokenID")+")");
 //Global variable
 var globalData=[];
+var globalData=[];
+var empldoyees_code = [];
+
+
+//Click แล้ว ฝังข้อมูล
+var removeEmbedParamCheckboxAppraisalItem = function(id){
+	var id = id.split("-"); 
+	var appraisal_id=id[1];
+	var structure_id=id[2];
+	$("#embed_appraisal_id-"+appraisal_id+"-"+structure_id).remove();
+}
+var embedParamCheckboxAppraisalItem = function(id){
+	//id-1-1-checkbox
+	var id = id.split("-"); 
+	var appraisal_id=id[1];
+	var structure_id=id[2];
+	var count = 0;
+	$.each($(".embed_appraisal_id-"+structure_id).get(),function(index,indexEnry){
+	//ถ้า id ที่วน == id ที่มี	
+		//console.log($(indexEnry).val());
+		if($(indexEnry).val()==appraisal_id){
+			count+=1;
+		}
+	});
+	
+	if(count>0){
+		$("#embed_appraisal_id-"+appraisal_id+"-"+structure_id).remove();
+		$("body").append("<input type='hidden' class='embed_appraisal_id-"+structure_id+"' id='embed_appraisal_id-"+appraisal_id+"-"+structure_id+"' name='embed_appraisal_id-"+appraisal_id+"-"+structure_id+"' value='"+appraisal_id+"'>");
+	}else{
+		$("body").append("<input type='hidden' class='embed_appraisal_id-"+structure_id+"' id='embed_appraisal_id-"+appraisal_id+"-"+structure_id+"' name='embed_appraisal_id-"+appraisal_id+"-"+structure_id+"' value='"+appraisal_id+"'>");
+	}
+}
+
+var findOneFn = function(id){
+	//alert(id);
+	$("#ModalAssignment").modal();
+	
+	//get structure
+	getTemplateFn();
+	
+	//get data for structure
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/appraisal_assignment/"+id,
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			console.log(data);
+		}
+	});
+}
 
 //Get Data
 var getDataFn = function(page,rpp) {
@@ -112,31 +164,242 @@ var listDataFn = function(data) {
 };
 
 
-//List Error Function Start
-var listErrorFn =function(data){
-	
-}
-//Insert
-var insertFn = function() {
-	
-}
-//Update
-var updateFn = function() {
-	
-};
 
-//Delete
-var deleteFn = function() {
+//Assignment Start
+var actionAssignmentFn2 = function(){
+
+	var appraisal_items=[];
+	var appraisal_item=[];
+	var employees=[];
+	var employee=[];
+	var head_params=[];
 	
-};
-//Cleaning
-var clearFn = function(){
+	
+	
+	//get head_params 
+	head_params.push({
+		'appraisal_type_id':$("#embed_appraisal_type_id").val(),
+		'period_id':$("#assignTo").val(),
+		'action_to':$("#actionAssign").val()
+		
+		});
+
+	
+	//get employees
+	$.each(empldoyees_code,function(index,indexEntry){
+		employee.push({'emp_code':indexEntry});
+	});
+	employees.push(employee);
+	
+	        
+	//loop structure
+	$.each($(".structure_id").get(),function(index,structureEntry){
+		//console.log($(indexEntry).val());
+		//console.log($("#form-"+$(indexEntry).val()).val());
+		
+		
+		if($("#form-"+$(structureEntry).val()).val()=="form1"){
+
+			$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
+				
+				appraisal_item.push({"nof_target_score":"",
+									  "form_id":"1",
+									  "appraisal_item_id":$(appraisalItemEntry).val(),
+									  "target_value":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val(),
+									  "score1_target_start":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-1").val(),
+									  "score1_target_end":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-1").val(),
+									  "score2_target_start":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-2").val(),
+									  "score2_target_end":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-2").val(),
+									  "score3_target_start":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-3").val(),
+									  "score3_target_end":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-3").val(),
+									  "score4_target_start":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-4").val(),
+									  "score4_target_end":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-4").val(),
+									  "score5_target_start":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-5").val(),
+									  "score5_target_end":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-5").val(),
+									  "weight_percent":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val(),
+				});
+			
+			});
+
+			
+			
+		}else if($("#form-"+$(structureEntry).val()).val()=="form2"){
+
+			$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
+				appraisal_item.push({
+					  "appraisal_item_result_id":"11",
+					  "appraisal_item_id":$(appraisalItemEntry).val(),
+					  "form_id":"2",
+					  "target_value":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val(),
+					  "weight_percent":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val(),
+					  });
+			});
+			
+		}else if($("#form-"+$(structureEntry).val()).val()=="form3"){
+			
+			$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
+				appraisal_item.push({
+					  "appraisal_item_result_id":"11",
+					  "appraisal_item_id":$(appraisalItemEntry).val(),
+					  "form_id":"3",
+					  "max_value":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val(),
+					  "deduct_score_unit":$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val(),
+					  });
+				});
+			
+		}
+		
+		
+	});
+	appraisal_items.push(appraisal_item);
+//	console.log(appraisal_items);
+//	console.log(head_params);
+//	console.log(employees);
+
+	console.log(appraisal_items);
+
+
+	
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/appraisal_assignment",
+		type:"post",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		
+//		data:{"head_params":
+//							{
+//							'appraisal_type_id':$("#embed_appraisal_type_id").val(),
+//							'period_id':$("#assignTo").val(),
+//							'action_to':$("#actionAssign").val()
+//							},
+//			"employees": [{"emp_code": "11"},{"emp_code": "22"}],
+//			"appraisal_items":[
+//			                   {
+//			                           "nof_target_score": "",  
+//			                           "form_id": "",     
+//			                           "appraisal_item_id": "",
+//			                           "target_value": "",
+//			                           "score1_target_start": "",
+//			                           "score1_target_end": "",
+//			                           "score2_target_start": "",
+//			                           "score2_target_end": "",        
+//			                           "score3_target_start": "",
+//			                           "score3_target_end": "",      
+//			                           "score4_target_start": "",
+//			                           "score4_target_end": "",      
+//			                           "score5_target_start": "",
+//			                           "score5_target_end": "",                                                                
+//			                           "weight_percent": "",       
+//			                   }
+//			                   ]
+//			},
+		data:{"head_params":
+			{
+			"appraisal_type_id":$("#embed_appraisal_type_id").val(),
+			"period_id":$("#assignTo").val(),
+			"action_to":$("#actionAssign").val()
+			},
+			"employees": [{"emp_code": "11"},{"emp_code": "22"}],
+			"appraisal_items":[
+               {
+                       "nof_target_score": "",  
+                       "form_id": "",     
+                       "appraisal_item_id": "1",
+                       "appraisal_item_name":"ss",
+                       "target_value": "",
+                       "score1_target_start": "",
+                       "score1_target_end": "",
+                       "score2_target_start": "",
+                       "score2_target_end": "",        
+                       "score3_target_start": "",
+                       "score3_target_end": "",      
+                       "score4_target_start": "",
+                       "score4_target_end": "",      
+                       "score5_target_start": "",
+                       "score5_target_end": "",                                                                
+                       "weight_percent": "",       
+               }
+               ]
+		},
+		success:function(data){
+			
+			console.log(data);
+			
+		}
+	});
+	
+	
 	
 }
-//Search for Edit. 
-var findOneFn = function(id) {
+var actionAssignmentFn = function(){
+	var params=[];
+	params+="{";
+	params+="head_params: {";
+		params+=" appraisal_type_id: '1',";
+		params+=" period_id: '1',";
+		params+=" action_to: '1',";
+		params+="},";
+		params+="employees: [";
+		params+="{emp_code: '1'},";
+		params+="{emp_code: '2'}";
+		params+="],";
+		params+="appraisal_items: [";
+			params+="{";
+					params+="nof_target_score: '',";
+					params+="form_id: '1',";      
+					params+="appraisal_item_id: '',";
+					params+="target_value: '',";
+					params+="score1_target_start: '',";
+					params+="score1_target_end: '',";
+					params+="score2_target_start: '',";
+					params+=" score2_target_end: '',";     
+					params+="score3_target_start: '',";
+					params+=" score3_target_end: '',";     
+					params+="score4_target_start: '',";
+					params+="score4_target_end: '',";     
+					params+="score5_target_start: '',";
+					params+=" score5_target_end: '',";                                                             
+					params+="weight_percent: '',";  
+			params+="},";
+		       
+			params+="{";
+				params+="appraisal_item_id: '',";
+				params+="form_id: '2',";
+				params+="target_value: '',";
+				params+="weight_percent: '',  ";      
+			params+="},";
+			params+="{";
+				params+="appraisal_item_id: '',";
+				params+="form_id: '3',";
+				params+="max_value: '',";
+				params+="deduct_score_unit: '',  ";      
+			params+="}";	
+ params+="]";
+params+="}";
+
 	
-}
+//	$.ajax({
+//		url:restfulURL+"/tyw_api/public/appraisal_assignment",
+//		type:"get",
+//		dataType:"json",
+//		async:false,
+//		headers:{Authorization:"Bearer "+tokenID.token},
+//		data:{
+//						
+////			"appraisal_level_id":appraisal_level_id,
+////			"appraisal_type_id":appraisal_type_id,
+////			"period_id":period_id,
+////			"position_code":position_code
+////			"emp_code":emp_code	
+//			
+//		},
+//		success:function(data){
+//			
+//		}
+//	});
+}	
+//Assignment End
 //SearchAdvance
 var searchAdvanceFn = function() {
 	/*

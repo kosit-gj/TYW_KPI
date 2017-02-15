@@ -80,3 +80,27 @@
     min-height: 35px;
     padding: 0px 10px;
 }
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFCC00;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 35px;
+    padding: 0px 10px;
+}
+.result_area{
+	display:none;
+}
+.result_cds_area{
+	display:none;
+}
+.paging-text2{
+	padding-top:5px;
+}

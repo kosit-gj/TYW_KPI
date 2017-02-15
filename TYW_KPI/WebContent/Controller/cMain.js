@@ -268,6 +268,7 @@ var logoutFn = function(){
 $("#logOut").click(function(){
 	logoutFn();
 });
+
 //set paginate start
 var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
 	
