@@ -384,23 +384,8 @@ hr {
 	text-algin:right;
 }
 
-.btnModalClose{
-	color: red;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 5px;
-    position: absolute;
-    right: 20px;
-    text-align: right;
-}
-.alert-warning{
-	text-align: left;
-}
-.modal-body {
-    padding: 10px 15px 5px;
-}
-
+<<<<<<< HEAD
+=======
 /* ---------- Start Css By Auu ---------- */
 @media (max-width : 480px) {
 	.width-100-persen{
@@ -442,5 +427,60 @@ hr {
 	cursor:pointer;
 	color: #993399;
 }
+>>>>>>> refs/remotes/origin/dev
 
+/* ---------- Start Css By Auu ---------- */
+@media (max-width : 480px) {
+	.width-100-persen{
+		width: 100%;
+	}
+	.height-32-px{
+		height: 32px
+	}
+	.txtCountPaginationTop{
+		position:absolute; left:30%; top:38px;width: 41.66666667%;
+	}
+	.selectCountPaginationTop{
+		position:absolute; left:73%; top:38px;width: 24%;
+	}
+	.txtCountPaginationBottom{
+		left: 29.0%;top: -25px;width: 43.96666667%;
+	}
+	.selectCountPaginationBottom{
+		left: 30.1%;top: -25px;width: 25%;
+	}
+
+    }
+
+/* PADDINGS */
+.p-t-xxs{
+ padding-top :5px;
+}
+.p-t-xs{
+ padding-top :10px;
+}
+.p-t-lg {
+  padding-top: 30px;
+}
+.p-b-xxs{
+ padding-bottom :5px;
+}
+.p-b-xs{
+ padding-bottom :10px;
+}
+/* MARGIN */
+.m-n {
+    margin: 0 !important;
+}
+.m-b-n {
+    margin-bottom: 0 !important;
+}
+.m-t-xxs{
+ margin-top :1px;
+}
+.font-gear{
+	font-size: 23px;
+	cursor:pointer;
+	color: #993399;
+}
 /* ---------- End Css By Auu ---------- */

@@ -1,41 +1,52 @@
 //IP Server : 171.96.201.146
-var restfulURL="http://171.96.200.20";
+
 var restfulPathReport=":3001/api/tyw_report_score_bonus/";
+var restfulURL ="http://192.168.1.100";
 
+var restfulPathDropDownYear="/tyw_api/public/cds_result/year_list";
+var restfulPathDropDownBonusPeriod="/tyw_api/public/appraisal_data/period_list";
+var restfulPathDropDownDepartment="/tyw_api/public/import_employee/dep_list";
+var restfulPathDropDownPositionGroup="/tyw_api/public/cds/connection_list";
 
-//-------- SearchFn Start
-var searchAdvanceFn = function (Year,BnPeriod,Department,PsGroup) {
-	//embed parameter start
-	var htmlParam="";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Year' name='param_Year' value='"+Year+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_SalaryPeriod' name='param_BnPeriod' value='"+BnPeriod+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Department' name='param_Department' value='"+Department+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_PsGroup' name='param_PsGroup' value='"+PsGroup+"'>";
-	$(".paramEmbed").remove();
-	$("body").append(htmlParam);
-	//embed parameter end
-
-	
+//--------  GetData Start
+var getDataFn = function(){
+	var year= $("#param_year").val();
+	var bonusPeriod= $("#param_bonus_period").val();
+	var department= $("#param_department").val();
+	var positionGroup= $("#param_position_group").val();
 	$.ajax({
 		url : restfulURL+restfulPathReport,
 		type : "get",
 		dataType : "json",
-//		data:{
-/*		
-		"department_ame":$("#param_Year").val(),
-		"section_name":$("#param_BnPeriod").val(),
-		"position_name":$("#param_Department").val(),
-		"emp_name":$("#param_PsGroup").val(),*/
-
-//		},
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		data:{
+			"current_appraisal_year":year,
+			"appraisal_period_desc":bonusPeriod,
+			"department_code":department,
+			"----------------":positionGroup},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,// w8 data 
 		success : function(data) {
-
-			listReportFn(data);
+			
+			listReportFn(data['data']);
+			
 		}
 	});
 	
 	
+};
+//--------  GetData End
+//-------- SearchFn Start
+var searchAdvanceFn = function (Year,BnPeriod,Department,PsGroup) {
+	//embed parameter start
+	var htmlParam="";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' name='param_year' value='"+Year+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_bonus_period' name='param_bonus_period' value='"+BnPeriod+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_department' name='param_department' value='"+Department+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_position_group' name='param_position_group' value='"+PsGroup+"'>";
+	$(".paramEmbed").remove();
+	$("body").append(htmlParam);
+	//embed parameter end
+	//getDataFn();	
 }
 // -------- SearchFn End
 
@@ -110,20 +121,21 @@ var listReportFn = function(data) {
 
 
 
+
 //DropDownList Year
 var dropDownListYear = function(){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Year\" class=\"input form-control input-sm\" id=\"paramYear\" name=\"paramYear\" >";
+	html+="<select data-toggle=\"tooltip\" title=\"Year\" class=\"input form-control input-sm\" id=\"year\" name=\"year\" >";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
-		url:restfulURL+":3001/api/tyw_year/" ,
+		url:restfulURL+restfulPathDropDownYear ,
 		type:"get" ,
 		dataType:"json" ,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
 			$.each(data,function(index,indexEntry){
-					html+="<option  value="+indexEntry["year"]+">"+indexEntry["year"]+"</option>";	
+					html+="<option  value="+indexEntry["current_appraisal_year"]+">"+indexEntry["current_appraisal_year"]+"</option>";	
 			});	
 		}
 	});	
@@ -131,35 +143,22 @@ var dropDownListYear = function(){
 	return html;
 };
 
-//DropDownList BnPeriod
-var dropDownListBnPeriod = function(year){
+//DropDownList Bonus Period
+var dropDownListBonusPeriod = function(year){
 	//console.log("Year : "+year);
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Bonus Period\" class=\"input form-control input-sm\" id=\"paramBnPeriod\" name=\"paramBnPeriod\" >";
-	//html+="<option  selected value=''>All</option>";
+	html+="<select data-toggle=\"tooltip\" title=\"Bonus Period\" class=\"input form-control input-sm\" id=\"bonus_period\" name=\"bonus_period\" >";
 	$.ajax ({
-		url:restfulURL+":3001/api/tyw_year/" ,
+		url:restfulURL+restfulPathDropDownBonusPeriod ,
 		type:"get" ,
 		dataType:"json" ,
 		//data:{"year":year},
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-			if(year == "2017"){
-				html+="<option  value=\""+"งวดที่ 1"+"\">"+"งวดที่ 1"+"</option>";
-				html+="<option  value=\""+"งวดที่ 2"+"\">"+"งวดที่ 2"+"</option>";
-				html+="<option  value=\""+"งวดที่ 3"+"\">"+"งวดที่ 3"+"</option>";
-				html+="<option  value=\""+"งวดที่ 4"+"\">"+"งวดที่ 4"+"</option>";
-				html+="<option  value=\""+"งวดที่ 5"+"\">"+"งวดที่ 5"+"</option>";
-			}else{
-				html+="<option  value=\""+"งวดที่ 1"+"\">"+"งวดที่ 1"+"</option>";
-				html+="<option  value=\""+"งวดที่ 2"+"\">"+"งวดที่ 2"+"</option>";
-				html+="<option  value=\""+"งวดที่ 3"+"\">"+"งวดที่ 3"+"</option>";
-
-			}
-/*			$.each(data,function(index,indexEntry){
-					html+="<option  value="+indexEntry["year"]+">"+indexEntry["year"]+"</option>";	
-			});	*/
+			$.each(data,function(index,indexEntry){
+				html+="<option  value="+indexEntry["period_id"]+">"+indexEntry["appraisal_period_desc"]+"</option>";	
+			});	
 		}
 	});	
 	html+="</select>";
@@ -170,17 +169,17 @@ var dropDownListBnPeriod = function(year){
 //DropDownList Department
 var dropDownListDepartment = function(){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Department\" class=\"input form-control input-sm\" id=\"paramDepartment\" name=\"paramDepartment\" >";
+	html+="<select data-toggle=\"tooltip\" title=\"Department\" class=\"input form-control input-sm\" id=\"department\" name=\"department\" >";
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
-		url:restfulURL+":3001/api/tyw_import_employee/" ,
+		url:restfulURL+restfulPathDropDownDepartment ,
 		type:"get" ,
 		dataType:"json" ,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
 			$.each(data,function(index,indexEntry){
-				html+="<option  value="+indexEntry["department_ame"]+">"+indexEntry["department_ame"]+"</option>";		
+				html+="<option  value="+indexEntry["department_code"]+">"+indexEntry["department_name"]+"</option>";		
 			});	
 		}
 	});	
@@ -188,51 +187,54 @@ var dropDownListDepartment = function(){
 	return html;
 };
 
-//DropDownList PsGroup
-var dropDownListPsGroup = function(){
+//DropDownList Position Group
+var dropDownListPositionGroup = function(){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Position Group\" class=\"input form-control input-sm\" id=\"paramPsGroup\" name=\"paramPsGroup\" >";
+	html+="<select data-toggle=\"tooltip\" title=\"Position Group\" class=\"input form-control input-sm\" id=\"position_group\" name=\"position_group\" >";
 	html+="<option  selected value=''>All</option>";
-	$.ajax ({
-		url:restfulURL+":3001/api/tyw_import_employee/" ,
+	/*$.ajax ({
+		url:restfulURL+restfulPathDropDownPositionGroup ,
 		type:"get" ,
 		dataType:"json" ,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
 			$.each(data,function(index,indexEntry){
-				html+="<option  value="+indexEntry["position_group"]+">"+indexEntry["position_group"]+"</option>";		
+				html+="<option  value="+indexEntry["------------"]+">"+indexEntry["-------------"]+"</option>";		
 			});	
 		}
-	});	
+	});	*/
 	html+="</select>";
 	return html;
 };
+
 
 
 $(document).ready(function() {
-	$("#dropDownListYear").html(dropDownListYear());
-	$("#dropDownListBnPeriod").html(dropDownListBnPeriod($("#paramYear").val()));
-	$("#dropDownListDepartment").html(dropDownListDepartment());
-	$("#dropDownListPsGroup").html(dropDownListPsGroup());
+	$("#report_list_content").hide();
+	$("#drop_down_list_year").html(dropDownListYear());
+	$("#drop_down_list_bonus_period").html(dropDownListBonusPeriod($("#year").val()));
+	$("#drop_down_list_department").html(dropDownListDepartment());
+	$("#drop_down_list_position_group").html(dropDownListPositionGroup());
 	
-	$("#paramYear").change(function(){  
-		$("#dropDownListBnPeriod").html(dropDownListBnPeriod($("#paramYear").val()));
+	
+	$("#year").change(function(){  
+		$("#drop_down_list_bonus_period").html(dropDownListBonusPeriod($("#year").val()));
 	});
 	
 	$("#btnSearchAdvance").click(function(){
 		searchAdvanceFn(
-				$("#paramYear").val(),
-				$("#paramBnPeriod").val(),
-				$("#paramDepartment").val(),
-				$("#paramPsGroup").val()
+				$("#year").val(),
+				$("#bonus_period").val(),
+				$("#department").val(),
+				$("#position_group").val()
 				);
-		document.getElementById('txtParamYear').innerHTML = $("#paramYear").val();
-		document.getElementById('txtParamBnPeriod').innerHTML = $("#paramBnPeriod").val();
-
+		$("#txtParamYear").html($("#param_year").val());
+		$("#txtParamBnPeriod").html($("#bonus_period option:selected").text());
+		$("#report_list_content").show();
 		return false;
 	});
-	$("#btnSearchAdvance").click();
+	//$("#btnSearchAdvance").click();
 		
 	
 	

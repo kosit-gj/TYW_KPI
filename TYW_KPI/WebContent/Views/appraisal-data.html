@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,29 +26,29 @@
 </head>
 <body>
 
-	<div class="wrapper wrapper-content">
+
 		<div class="container">
-			<div id="includePage" class="ng-view ng-scope">
-				<!--  nav bar -->
-				<div class="row wrapper border-bottom  page-heading" id="naviTitle">
-					<!-- 	style="display: none;" -->
+		<div class='row'>
 
-					<div class="col-lg-12">
-						<div id="slide_status">
-							<div id="btnClose"></div>
-							<div id="slide_status_area"></div>
-						</div>
-						<ol class="breadcrumb">
-							<li><a href="#/"><i class="fa fa-home "></i> Home</a></li>
-							<li><i class="fa fa-gears"></i> System Management</li>
-							<li class="active"><strong id="naviLabelMenu"><i
-									class="fa fa-share-alt"></i> Appraisal Data </strong></li>
-						</ol>
-					</div>
+			<div class='col-xs-12'>
+				<div id="slide_status">
+					<div id="btnCloseSlide">×</div>
+					<div id="slide_status_area"></div>
 				</div>
+			</div>
+
+		</div>
 
 
-				<div class="row" >
+		<h2>
+			<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+				id="modalDescription"> Appraisal Data</span>
+		</h2>
+
+
+
+
+		<div class="row" >
 					<!-- start--row -->
 
 					<div class="col-lg-12">
@@ -240,8 +241,7 @@
 
 
 
-			</div>
-		</div>
+			
 	</div>
 	<!-- Modal Import App Data -->
 
@@ -298,7 +298,7 @@
 <!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-						<div class="alert alert-warning" id="information"
+						<div class="alert alert-warning information" id="information"
 						style="display: none;"></div>
 				</div>
 			</div>
@@ -343,8 +343,7 @@
     <script src="../js/jquery.mloading.js"></script>
     <script src="../Controller/cConfig.js"></script> 
 	<script src="../Controller/cMain.js"></script> 
-    <script src="../Controller/appraisal-data.js"></script>
+    <script src="../Controller/cAppraisalData.js"></script>
 
 
 </body>
-</html>
