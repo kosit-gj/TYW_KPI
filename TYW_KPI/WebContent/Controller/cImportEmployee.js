@@ -17,7 +17,7 @@ var restfulPathEmployeeAutocomplete="/tyw_api/public/import_employee/auto_employ
 //Check Validation Start
 var validationFn = function(data){
 	
-
+ 
 	var validate = "";
 	var count = 0;
 	$.each(data['data'], function(index, indexEntry) {

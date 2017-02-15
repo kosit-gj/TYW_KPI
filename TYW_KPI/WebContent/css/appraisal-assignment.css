@@ -30,43 +30,6 @@
   }
   /* Landscape phones and down End##########################*/
      
-     /*  desktop Start#########################################*/
-    @media (min-width: 980px) and (max-width: 1199px) {
-    
-    	
-     }
-    /*  desktop End############################################*/
-    
-    /* Portrait tablet to landscape and desktop Start##########*/
-    @media (min-width: 768px) and (max-width: 979px) {
-    	
-     }
-    /* Portrait tablet to landscape and desktop End############*/ 
-    
-    /* Landscape phone to portrait tablet Start################*/
-    @media (max-width: 767px) { 
-   	 	
-     }
-    /* Landscape phone to portrait tablet End##################*/ 
-    
-    /* Landscape phones and down Start#########################*/
-    @media (max-width: 480px) { 
-    	
-     }
-     /* Landscape phones and down End##########################*/
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-
-
-
 .form-input-customs{
 	float:left;
 	width: 250px;
@@ -77,7 +40,6 @@
 	padding-top: 1px;
 	width:170px;
 }
-	
 
 .input-contact-customs{
 	width:70px;
@@ -109,9 +71,11 @@
     padding-top: 7px;
     text-align: right;
 }
+
 #btnSearchArea{
 	/*padding-top:35px;*/
 }
+
 .titlePanel{
 	/*display: inline;*/
     font-size: 14px;
@@ -121,6 +85,7 @@
     width:200px;
     float:left;
 }
+
 .totalWeight{
 	width:145px;
     float:right;
@@ -129,6 +94,7 @@
     margin-right: 5px;
     padding-top: 5px;
 }
+
 .titlePanel2{
 	/*display: inline;*/
     font-size: 13px;
@@ -137,6 +103,7 @@
     padding-top: 5px;
     
 }
+
 .titlePanelSearch{
 	
     font-size: 14px;
@@ -198,7 +165,6 @@
 }
 .text_info{
 	float:left;
-
 	padding-top:1px;
     padding-bottom:1px;
 }
@@ -208,7 +174,45 @@
 .search_result{
 	display:none;
 }
-/*
+.modal-footer{
+	text-align:'';
+}
+
+.labelAssign{
+	float:left;
+	width:75px;	
+	padding-top:5px;
+}
+.dropdownListAssign{
+	float:left;
+	width:100px;
+}
+
+.btnManagement{
+	float:right;
+}
+.btnAssignment{
+	float:right;
+	margin-right:10px;
+}
+.crandTotalWeight{
+	padding:15px;
+	font-size: 14px;
+    font-weight: bold;
+}
+.perscentage{
+	background: #dddddd none repeat scroll 0 0;
+    padding: 3px 5px;
+}
+
+.modal-footer{
+	padding: 0 15px 15px;
+}
+.hidden{
+	display:none;
+}
+
+*
 .modal-body {
     padding: 20px 30px 5px;
 }

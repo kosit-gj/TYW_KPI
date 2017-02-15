@@ -2,7 +2,6 @@
 var tokenID= eval("("+localStorage.getItem("tokenID")+")");
 //Global variable
 var globalData=[];
-var globalData=[];
 var empldoyees_code = [];
 
 
@@ -100,7 +99,7 @@ var embedParam = function(id){
 
 //List Data
 var listDataFn = function(data) {
-	console.log(data);
+	//console.log(data);
 	htmlHTML="";
 	$.each(data,function(index,indexEntry){
 		//alert(index);
@@ -116,7 +115,7 @@ var listDataFn = function(data) {
 		*/
 		
 		htmlHTML+="<tr>";
-		htmlHTML+="	<td class='object-center'><input type='checkbox'></td>";
+		htmlHTML+="	<td class='object-center'><input class='asign_emp' id='id-"+indexEntry['emp_code']+"' type='checkbox' value="+indexEntry['emp_code']+"></td>";
 		htmlHTML+="  <td>"+indexEntry['status']+"</td>";
 		htmlHTML+="  <td>"+indexEntry['emp_code']+"</td>";
 		htmlHTML+="  <td>"+indexEntry['department_name']+"</td>";
@@ -124,7 +123,7 @@ var listDataFn = function(data) {
 		htmlHTML+="	<td>"+indexEntry['appraisal_type_name']+"</td>";
 		htmlHTML+="	<td>"+indexEntry['position_name']+"</td>";
 		htmlHTML+="  <td style=\"text-align:center\">";
-		htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+		htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-xs btn-gear edit' id='edit-"+indexEntry['emp_code']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+indexEntry['emp_code']+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
 		htmlHTML+="  </td>";
 		htmlHTML+="</tr>";
 		
@@ -154,15 +153,13 @@ var listDataFn = function(data) {
 		$(".edit").on("click",function() {
 			var edit=this.id.split("-");
 			var id=edit[1];
-			var form_url=edit[2];
-			//alert(id+"-----"+form_url);
-			findOneFn(id,form_url);
+
+			findOneFn(id);
 			$(this).parent().parent().parent().children().click();
 		});
 	});	
 	
 };
-
 
 
 //Assignment Start
@@ -522,6 +519,68 @@ var periodFrequencyFn = function(nameArea){
 	
 }
 
+var dropDrowAsignToFn = function(nameArea){
+
+
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/appraisal_assignment/new_assign_to",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"appraisal_level_id":$("#embed_appraisal_level_id").val()},
+		success:function(data){
+			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['to_appraisal_level_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['to_appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['to_appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+				}
+			});
+			$("#assignTo"+nameArea).html(htmlOption);
+		}
+	});
+}
+
+var dropDrowActionFn = function(paramStageID,nameArea){
+
+
+
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/appraisal_assignment/new_action_to",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"stage_id":paramStageID},
+		success:function(data){
+			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['stage_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['stage_id']+">"+indexEntry['to_action']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['stage_id']+">"+indexEntry['to_action']+"</option>";
+				}
+			});
+			$("#actionAssign"+nameArea).html(htmlOption);
+		}
+	});
+}
+
+
+
+
 var periodFn = function(nameArea){
 //	var data=['ทุกเดือน','ทุก 3 เดือน','ทุก 6 เดือน','ทุก 12 เดือน'];
 //	var htmlOption="";
@@ -561,6 +620,7 @@ var periodFn = function(nameArea){
 		}
 	});
 }
+//form2
 var assignTemplateQualityFn = function(structureName,data){
 	
 	var htmlTemplateQuality="";
@@ -568,6 +628,8 @@ var assignTemplateQualityFn = function(structureName,data){
 	htmlTemplateQuality+="<div class=\"row\">";
 	htmlTemplateQuality+="<div class=\"col-lg-12\">";
 	htmlTemplateQuality+="<div class=\"ibox-title\">";
+
+	
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
 		htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
 	htmlTemplateQuality+="</div>";
@@ -586,14 +648,19 @@ var assignTemplateQualityFn = function(structureName,data){
 					
 					$.each(data['items'],function(index,indexEntry){
 					htmlTemplateQuality+="<tr>";
-						htmlTemplateQuality+="<td class='object-center'><input class='' type='checkbox'></td>";
+						htmlTemplateQuality+="<td class='object-center'><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox' type='checkbox'></td>";
 						htmlTemplateQuality+="<td style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
-						htmlTemplateQuality+="<td><input class='input form-control input-sm-small' type='text'></td>";
-						htmlTemplateQuality+="<td><input class='input form-control input-sm-small' type='text'></td>";
+						htmlTemplateQuality+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small' type='text'></td>";
+						htmlTemplateQuality+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight input form-control input-sm-small' type='text'></td>";
 					htmlTemplateQuality+="</tr>";
 					});
 					htmlTemplateQuality+="</tbody>";
 					htmlTemplateQuality+="</table>";
+					
+					//htmlTemplateQuality+="<div class='formName hidden'>form2</div>";
+					htmlTemplateQuality+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
+					htmlTemplateQuality+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form2\">";
+					
 					htmlTemplateQuality+="</div>";
 					htmlTemplateQuality+="<br style=\"clear:both\">";				
 		htmlTemplateQuality+="</div>";
@@ -630,16 +697,19 @@ var assignTemplateDeductFn = function(structureName,data){
 					
 					$.each(data['items'],function(index,indexEntry){
 					htmlTemplateDeduct+="<tr>";
-							htmlTemplateDeduct+="<td class='object-center'><input class='' type='checkbox'></td>";
+							htmlTemplateDeduct+="<td class='object-center'><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox' type='checkbox'></td>";
 							htmlTemplateDeduct+="<td style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
-							htmlTemplateDeduct+="<td><input class='input form-control input-sm-small' type='text'></td>";
-							htmlTemplateDeduct+="<td><input class='input form-control input-sm-small' type='text'></td>";
+							htmlTemplateDeduct+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small' type='text'></td>";
+							htmlTemplateDeduct+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit  input form-control input-sm-small' type='text'></td>";
 					htmlTemplateDeduct+="</tr>";
 					});
 						
 						
 					htmlTemplateDeduct+="</tbody>";
 					htmlTemplateDeduct+="</table>";
+					htmlTemplateDeduct+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
+					htmlTemplateDeduct+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form3\">";
+					
 				htmlTemplateDeduct+="</div>";
 			htmlTemplateDeduct+="<br style=\"clear:both\">"			
 		htmlTemplateDeduct+="</div>";
@@ -650,11 +720,12 @@ var assignTemplateDeductFn = function(structureName,data){
 };
 
 var assignTemplateQuantityFn = function(structureName,data){
-	
+	var appraisal_item_id_array=[];
 	var htmlTemplateQuantity = "";
 	htmlTemplateQuantity+="<div class=\"row\">";
 	htmlTemplateQuantity+="	<div class=\"col-lg-12\">";
 	htmlTemplateQuantity+="  <div class=\"ibox-title\">";
+	
 	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
 	htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
 	htmlTemplateQuantity+="  </div>";
@@ -682,7 +753,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<tbody id=\"\">";
 			$.each(data['items'],function(index,indexEntry){
 				
-				
+				appraisal_item_id_array.push(indexEntry['appraisal_item_id']);
 				/*
 				appraisal_item_id
 				appraisal_item_name
@@ -695,25 +766,29 @@ var assignTemplateQuantityFn = function(structureName,data){
 				weight_percent
 				*/
 				htmlTemplateQuantity+="<tr>";
-					htmlTemplateQuantity+="<td class='object-center'><input class='' type='checkbox'></td>";
-					htmlTemplateQuantity+="<td class='' style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
-					htmlTemplateQuantity+="<td><input class='input form-control input-sm-small' type='text'></td>";
+					htmlTemplateQuantity+="<td class='object-center'><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox' type='checkbox'></td>";
+					htmlTemplateQuantity+="<td class='id-"+indexEntry['structure_id']+"-appraisal_item_name' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
+					htmlTemplateQuantity+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small' type='text'></td>";
 					for(var i=1;i<=5;i++){
 						if(i<=data['count']){
-							htmlTemplateQuantity+="<td><input  class='input form-control input-sm-small' type='text'></td>";
-							htmlTemplateQuantity+="<td><input  class='input form-control input-sm-small' type='text'></td>";
+							htmlTemplateQuantity+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"' class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small' type='text'></td>";
+							htmlTemplateQuantity+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small' type='text'></td>";
 						}else{
-							htmlTemplateQuantity+="<td><input disabled class='input form-control input-sm-small' type='text'></td>";
-							htmlTemplateQuantity+="<td><input disabled class='input form-control input-sm-small' type='text'></td>";
+							htmlTemplateQuantity+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small' type='text'></td>";
+							htmlTemplateQuantity+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small' type='text'></td>";
 						}
 					}
-					
-					htmlTemplateQuantity+="<td><input class='input form-control input-sm-small' type='text'></td>";
+					htmlTemplateQuantity+="<td><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight input form-control input-sm-small' type='text'></td>";
 				htmlTemplateQuantity+="</tr>";
 				
 			});
 			htmlTemplateQuantity+="</tbody>";
 			htmlTemplateQuantity+="</table>";
+			htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
+			htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
+			htmlTemplateQuantity+="<input type='hidden' id='appraisal_item_id_array-"+data['structure_id']+"' class='appraisal_item_id_array' value=\""+appraisal_item_id_array+"\">";
+			
+			
 			htmlTemplateQuantity+="</div>";
 			htmlTemplateQuantity+="<br style=\"clear:both\">";	
 		htmlTemplateQuantity+="</div>";
@@ -726,7 +801,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	//console.log(data['structure_id']);
 	
 }
-var getTemplateAssignmentFn = function(data){
+var createTemplateAssignmentFn = function(data){
 	$("#appraisal_template_area").empty();
 	$.each(data['group'],function(index,indexEntry){
 		//console.log(indexEntry['form_url']);
@@ -741,7 +816,7 @@ var getTemplateAssignmentFn = function(data){
 		//console.log(index);
 	});
 };
-var assignKPIFn = function(){
+var getTemplateFn = function(){
 	$.ajax({
 		//http://192.168.1.52/tyw_api/public/appraisal_assignment/period_list
 		url:restfulURL+"/tyw_api/public/appraisal_assignment/template",
@@ -753,7 +828,7 @@ var assignKPIFn = function(){
 		success:function(data){
 			
 			//console.log(data);
-			getTemplateAssignmentFn(data);
+			createTemplateAssignmentFn(data);
 			
 		}
 	});
@@ -841,9 +916,54 @@ $(document).ready(function(){
 	//btn assignment start
 	$("#btnAssignment").click(function(){
 		
-		assignKPIFn();
+		$(".embed_appraisal_id").remove();
+		
+			$.each($(".asign_emp").get(),function(index,indexEntry){
+				if($(indexEntry).is(":checked")){
+					empldoyees_code.push($(indexEntry).val());
+				}
+				
+				
+			});
+		//console.log(empldoyees_code);
+		if(empldoyees_code.length==0){
+			callFlashSlide("Please choose Employee for Assignment.");
+			return false;
+		}else{
+			getTemplateFn();
+			dropDrowAsignToFn();
+			$("#assignTo").off("change");
+			$("#assignTo").change(function(){
+				//alert($(this).val());
+				dropDrowActionFn($(this).val());
+				
+			});
+			$("#assignTo").change();
+		}
+		
+		//check choose appraisal item start
+		
+		//click ที่ checkox Close แล้ว แยกไอดี ส่งไปฝัง(embed) 
+		$(document).on("click",".appraisalItem-checkbox",function(){	
+			//alert(this.id);
+			if($(this).prop("checked")==true){
+				embedParamCheckboxAppraisalItem(this.id);	
+			}else{
+				removeEmbedParamCheckboxAppraisalItem(this.id);
+			}
+		});
+
 		
 	});
 	//btn assignment end
+	//btn action assign start
+		$("#btnSubmit").click(function(){
+			//biding action assignment start
+			actionAssignmentFn2();
+			//biding action assignment end
+		});
+	//btn action assign end
+		
+	//embed emp_code
 	
 });
