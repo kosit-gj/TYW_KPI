@@ -654,7 +654,7 @@ $(document).ready(function() {
 //		    if ($('.from_data_role:checked').length == $('.from_data_role').length ){
 //		        $("#form_role_item_all").prop('checked', true);
 //		    }
-//		});  
+//		});   
 		
 	}); 
     $(".from_data_role").click(function(){  // เมื่อคลิก checkbox  ใดๆ  
