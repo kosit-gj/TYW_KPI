@@ -637,6 +637,7 @@ $(document).ready(function() {
 	$("#btn_add_role").click(function() {
 		clearFn();
 		$("#txtAssignEmpName").hide();
+
 		//listAppraisalLevel();
 		
 //		$("#form_role_item_all").change(function(){  //"select all" change 
@@ -656,6 +657,12 @@ $(document).ready(function() {
 //		});
 		
 	});
+    $(".from_data_role").click(function(){  // เมื่อคลิก checkbox  ใดๆ  
+        if($(this).prop("checked")==true){ // ตรวจสอบ property  การ ของ   
+            var indexObj=$(this).index(".from_data_role"); //   
+            $(".from_data_role").not(":eq("+indexObj+")").prop( "checked", false ); // ยกเลิกการคลิก รายการอื่น  
+        }  
+    });  
 	$("#btnEmpSubmit").click(function(){
 		if ($("#action").val() == "add"|| $("#action").val() == "") {
 			//insertFn();
