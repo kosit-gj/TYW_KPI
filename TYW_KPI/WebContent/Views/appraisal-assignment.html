@@ -28,7 +28,13 @@
 
 
 <!--  #####################Content data here ######################-->
+<div id="slide_status">
+	<div id="btnCloseSlide">×</div>
+	<div id="slide_status_area"></div>
+</div>
 <div class="container">
+
+
 
 
 <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal Assignment</span> </h2>
@@ -442,13 +448,67 @@
                 <!-- content end -->
             </div>
             <div class="modal-footer">
-           	 	<input type="hidden" name="id" id="id" value="">
-   				<input type="hidden" name="action" id="action" value="add">
-   				
-   				<button class="btn btn-primary" type="button" id="btnSubmit">Save</button>
-   				<button class="btn btn-primary" type="button" id="btnAddAnother">Save & Add Another</button>
-                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
-                <div class="alert alert-warning" id="information" style="display: none;"></div>
+            
+            	<div class="row">
+            		<div class='col-xs-12 crandTotalWeight' >
+            		Grand Total Weight % <span class='perscentage'>0.00</span>
+            		</div>
+            	</div>
+            	
+            	<div class="row">
+            		<div class='col-xs-12'>
+            			
+            			<div class='btnManagement'>
+		   					<input type="hidden" name="id" id="id" value="">
+			   				<input type="hidden" name="action" id="action" value="add">
+			   				<button class="btn btn-primary" type="button" id="btnSubmit">Save</button>
+			   				<button class="btn btn-primary" type="button" id="btnAddAnother">Save & Add Another</button>
+			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
+			                <div class="alert alert-warning" id="information" style="display: none;"></div>
+		   				</div>
+		   				
+		   				<div class='btnAssignment'>
+		   					
+			   				
+	            			<div class='labelAssign'>Assign to:&nbsp; </div>
+	            			<div class='dropdownListAssign' id='assignToArea'>
+	            			
+		            			<select id='assignTo' class='input form-control input-sm'>
+		            			<!-- 
+				   					<option>1</option>
+				   					<option>2</option>
+				   					<option>3</option>
+				   				 -->
+				   				</select>
+			   				</div>
+			   				
+			   				
+			   				<div class='labelAssign'>Action:&nbsp; </div>
+	            			<div class='dropdownListAssign' id='actionAssignArea'>
+		            			<select id='actionAssign' class='input form-control input-sm'>
+		            			<!-- 
+				   					<option>Save Draft</option>
+				   					<option>Review</option>
+				   				 -->	
+				   				</select>
+			   				</div>
+			   				
+		   				
+		   				</div>
+		   				
+            		
+		            		
+		   				
+		   				
+		   			</div>
+		   			<div class='row'>
+			   			<div class='col-xs-12'>
+			   				<div class="alert alert-warning" id="information" style="display: none;"></div>
+			   			</div>
+		   			</div>
+   				</div>
+            	
+           	 	
             </div>
         </div>
     </div>

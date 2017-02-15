@@ -85,11 +85,11 @@ var insertQualityFn = function(param) {
 			if(data['status']==200){
 				if(param !="saveAndAnother"){
 					   callFlashSlide("Insert Successfully.");
-				       getDataFn();
+				       getDataFn($("#pageNumber").val(),$("#rpp").val());
 				       clearQualityFormFn();
 				 	   $('#modal-quality').modal('hide');
 					}else{
-						getDataFn();
+						getDataFn($("#pageNumber").val(),$("#rpp").val());
 						clearQualityFormFn();
 						callFlashSlideInModal("Insert Data is Successfully.","#informationQuality");
 					}
@@ -158,7 +158,8 @@ is_active
 $(document).ready(function(){
 //click modal quality start.
 	
-	$("button[data-target='#modal-quality']").click(function(){
+	//$("button[data-target='#modal-quality']").click(function(){
+	$(document).on("click","button[data-target='#modal-quality']",function(){
 		
 		var structureId=$(this).prev().prev().get();
 		var structureName=$(this).prev().prev().prev().get();
@@ -168,7 +169,8 @@ $(document).ready(function(){
 	
 	
 	//Search Quality Start
-	$("#SearchQuality").click(function(){
+	//$("#SearchQuality").click(function(){
+	$(document).on("click","#SearchQuality",function(){
 		var embedParam="" +
 				"<input type='hidden' class='param_quality_form' id='embed_appraisal_level_quality' name='embed_appraisal_level_quality' value='"+$("#appraisalLevelSearchQuality").val()+"'>" +
 				"<input type='hidden' class='param_quality_form' id='embed_cds_name_quality' name='embed_cds_name_quality' value='"+$("#cdsNameSearchQuality").val()+"'>";
@@ -181,7 +183,8 @@ $(document).ready(function(){
 	//Search Quality End
 	
 	//Submit Quality Start
-	$("#btnSubmitQuality").click(function(){
+	//$("#btnSubmitQuality").click(function(){
+	$(document).on("click","#btnSubmitQuality",function(){
 		
 		if($("#actionQuality").val()=="add"){
 			insertQualityFn("saveOnly");
@@ -190,8 +193,8 @@ $(document).ready(function(){
 		}
 		
 	});
-	$("#btnAddAnotherQuality").click(function(){
-		
+	//$("#btnAddAnotherQuality").click(function(){
+	$(document).on("click","#btnAddAnotherQuality",function(){
 		insertQualityFn("saveAndAnother");
 		
 	});

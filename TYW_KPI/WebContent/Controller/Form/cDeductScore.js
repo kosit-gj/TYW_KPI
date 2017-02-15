@@ -122,11 +122,11 @@ var insertDeductScoreFn = function(param) {
 			if(data['status']==200){
 				if(param !="saveAndAnother"){
 					   callFlashSlide("Insert Successfully.");
-				       getDataFn();
+				       getDataFn($("#pageNumber").val(),$("#rpp").val());
 				       clearDeductScoreFormFn();
 				 	   $('#modal-deduct').modal('hide');
 					}else{
-						getDataFn();
+						getDataFn($("#pageNumber").val(),$("#rpp").val());
 						clearDeductScoreFormFn();
 						callFlashSlideInModal("Insert Data is Successfully.","#informationDeductScore");
 					}
@@ -200,7 +200,8 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 $(document).ready(function(){
 //click modal deduct start.
 	
-	$("button[data-target='#modal-deduct']").click(function(){
+	//$("button[data-target='#modal-deduct']").click(function(){
+	$(document).on("click","button[data-target='#modal-deduct']",function(){
 		
 		var structureId=$(this).prev().prev().get();
 		var structureName=$(this).prev().prev().prev().get();
@@ -212,7 +213,8 @@ $(document).ready(function(){
 	
 	
 	//Submit DeductScore Start
-	$("#btnSubmitDeductScore").click(function(){
+	$(document).on("click","#btnSubmitDeductScore",function(){
+	//$("#btnSubmitDeductScore").click(function(){
 		
 		if($("#actionDeductScore").val()=="add"){
 			insertDeductScoreFn("saveOnly");
@@ -221,7 +223,8 @@ $(document).ready(function(){
 		}
 		
 	});
-	$("#btnAddAnotherDeductScore").click(function(){
+	$(document).on("click","#btnAddAnotherDeductScore",function(){
+	//$("#btnAddAnotherDeductScore").click(function(){
 		
 		insertDeductScoreFn("saveAndAnother");
 		
