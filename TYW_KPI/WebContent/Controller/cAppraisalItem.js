@@ -309,11 +309,14 @@ var searchAdvanceFn = function() {
 	*/
 	
 	$(".embed_param_search").remove();
+	
+	var apraisalItemId=$("#appraisalItemName").val().split("-");
+	apraisalItemId=apraisalItemId[0];
 	var embedParam="";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_structure_id' name='embed_structure_id' value='"+$("#structure").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_perspective_id' name='embed_perspective_id' value='"+$("#perspective").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_item_id' name='embed_appraisal_item_id' value='"+$("#appraisalLevel").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_item_id' name='embed_appraisal_item_id' value='"+apraisalItemId+"'>";
 	$("#embedParamSearch").append(embedParam);
 	
 	getDataFn();
@@ -429,7 +432,7 @@ var structureListFn = function(nameArea){
 		success:function(data){
 			
 			var htmlOption="";
-			htmlOption+="<option value=''>All</option>";
+			//htmlOption+="<option value=''>All</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value='"+indexEntry['structure_id']+"'>"+indexEntry['structure_name']+"</option>";
 			});
@@ -513,8 +516,8 @@ $(document).ready(function(){
 				 success:function(data){
 						response($.map(data, function (item) {
                             return {
-                                label: item.appraisal_item_name,
-                                value: item.appraisal_item_name
+                                label: item.appraisal_item_id+"-"+item.appraisal_item_name,
+                                value: item.appraisal_item_id+"-"+item.appraisal_item_name
                             };
                         }));
 				},
