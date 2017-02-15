@@ -655,7 +655,7 @@ $(document).ready(function() {
 //		        $("#form_role_item_all").prop('checked', true);
 //		    }
 //		});   
-		
+		 
 	}); 
     $(".from_data_role").click(function(){  // เมื่อคลิก checkbox  ใดๆ  
         if($(this).prop("checked")==true){ // ตรวจสอบ property  การ ของ   
