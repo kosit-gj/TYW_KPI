@@ -1,45 +1,48 @@
 //Global variable
-var galbalDataCDSResult=[];
+var galbalDataAppData=[];
+var tempAppItemName="";
+var tempAppItemId="";
 var tempEmpName="";
-var tempEmpId="";
-var tempPosiName="";
-var tempPosiId="";
-var restfulPathCdsResult="/tyw_api/public/cds_result";
+var tempEmpId="";  
+var pageNumberDefault=1;
+var restfulPathAppData="/tyw_api/public/appraisal_data";
+ 
+var restfulPathDropDownStructure=restfulPathAppData+"/structure_list";
+var restfulPathDropDownAppraisalLevel=restfulPathAppData+"/al_list";
+var restfulPathDropDownPeriod=restfulPathAppData+"/period_list";
 
-var restfulPathDropDownYear=restfulPathCdsResult+"/year_list";
-var restfulPathDropDownMonth=restfulPathCdsResult+"/month_list";
-var restfulPathDropDownAppraisalLevel=restfulPathCdsResult+"/al_list";
 
-var restfulPathPositionAutocomplete=restfulPathCdsResult+"/auto_position_name";
-var restfulPathEmployeeAutocomplete=restfulPathCdsResult+"/auto_emp_name";
-
+var restfulPathAutocompleteAppraisalItem=restfulPathAppData+"/auto_appraisal_item";
+var restfulPathAutocompleteEmployeeName=restfulPathAppData+"/auto_emp_name";
 
 
 //------------------- GetData FN Start ---------------------
 var getDataFn = function(page,rpp){
-	var year= $("#param_year").val();
-	var month= $("#param_month").val();
+	var structure= $("#param_structure").val();
 	var app_lv= $("#param_app_lv").val();
-	var position= $("#param_position_code").val();
-	var emp_name= $("#param_emp_code").val();
+	var app_item= $("#param_app_item").val();
+	var period= $("#param_period").val();
+	var emp_code= $("#param_emp_code").val();
 	$.ajax({
-		url : restfulURL+restfulPathCdsResult,
+		url : restfulURL+restfulPathAppData,
 		type : "get",
 		dataType : "json",
 		data:{"page":page,"rpp":rpp,
-			"current_appraisal_year":year,
-			"month_id":month,
+			
+			"structure_id":structure,
 			"appraisal_level_id":app_lv,
-			"position_code":position,
-			"emp_code":emp_name		
+			"appraisal_item_id":app_item,
+			"period_id":period,
+			"emp_code":emp_code
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
 			
-			listCdsResultFn(data['data']);
-			galbalDataCDSResult=data;
-			paginationSetUpFn(galbalDataCDSResult['current_page'],galbalDataCDSResult['last_page'],galbalDataCDSResult['last_page']);
+			listAppraisalDataFn(data['data']);
+			//total
+			galbalDataAppData=data;
+			paginationSetUpFn(galbalDataAppData['current_page'],galbalDataAppData['last_page'],galbalDataAppData['last_page']);
 		}
 	});
 	
@@ -48,55 +51,56 @@ var getDataFn = function(page,rpp){
 
 //------------------- GetData FN END ---------------------
 
-//-------------------  Appraisal Data FN ---------------------
-var searchAdvanceFn = function (year,month,app_lv,position,emp_name) {
-//embed parameter start
+//------------------- Search Appraisal Data FN Start ---------------------
+
+var searchAdvanceFn = function (Structure,AppLv,AppItem,Period,EmpName) {
+	//embed parameter start
 	
 	var htmlParam="";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' name='param_year' value='"+year+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_month' name='param_month' value='"+month+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' name='param_app_lv' value='"+app_lv+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_position_code' name='param_position_code' value='"+position+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_code' name='param_emp_code' value='"+emp_name+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_structure' name='param_structure' value='"+Structure+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' name='param_app_lv' value='"+AppLv+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_item' name='param_app_item' value='"+AppItem+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' name='param_period' value='"+Period+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_code' name='param_emp_code' value='"+EmpName+"'>";
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
-	getDataFn($("#pageNumber").val(),$("#rpp").val());
+	getDataFn(pageNumberDefault,$("#rpp").val());
+	
 }
 
-var listCdsResultFn = function (data) {
+//------------------- Search Appraisal Data FN END ---------------------
+
+//------------------- List Appraisal Data FN Start ---------------------
+
+var listAppraisalDataFn = function (data) {
 	var htmlTable = "";
 	$.each(data,function(index,indexEntry) {
-// 		console.log(indexEntry["period"]+indexEntry["structure"]
-// 		+indexEntry["appraisal_level"]+indexEntry["appraisal_item"]);
-	
-		htmlTable += "<tr class='rowSearch'>";//cds_result_id
+		
+		htmlTable += "<tr class='rowSearch'>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_period_desc"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["structure_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_item_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_level_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["cds_id"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["cds_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_year"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["month_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["cds_value"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["actual_value"]+ "</td>";
 		htmlTable += "</tr>";
 	});
-	$("#listCdsResult").html(htmlTable);
+	$("#listAppraisalData").html(htmlTable);
 }
 
-//-------------------  Appraisal Data FN END ---------------------
+//------------------- List Appraisal Data FN END ---------------------
 
+//-------------------  Drop Down List Structure FN Strart ---------------------
 
-//-------------------  Drop Down List Month FN Strart ---------------------
-
-var dropDownListMonth = function(){
+var dropDownListStructure = function(){
 	var html="";
 	
 	
-	html+="<select id=\"month\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Month\" name=\"month\">";
-	//html+="<option  selected value=''>All</option>";
+	html+="<select id=\"structure\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Structure\" name=\"structure\">";
+	html+="<option  selected value=''>All</option>";
 	$.ajax ({
-		url:restfulURL+restfulPathDropDownMonth ,
+		url:restfulURL+restfulPathDropDownStructure,
 		type:"get" ,
 		dataType:"json" ,
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -104,7 +108,7 @@ var dropDownListMonth = function(){
 		success:function(data){
 			$.each(data,function(index,indexEntry){
 
-					html+="<option  value="+indexEntry["month_id"]+">"+indexEntry["month_name"]+"</option>";	
+					html+="<option  value="+indexEntry["structure_id"]+">"+indexEntry["structure_name"]+"</option>";	
 		
 			});	
 
@@ -113,36 +117,8 @@ var dropDownListMonth = function(){
 	html+="</select>";
 	return html;
 };
-//-------------------  Drop Down List Month FN END ---------------------
+//-------------------  Drop Down List Structure FN END ---------------------
 
-//-------------------  Drop Down List Year FN Strart ---------------------
-
-var dropDownListYear = function(){
-	var html="";
-	
-	
-	html+="<select id=\"year\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Year\" name=\"year\">";
-	//html+="<option  selected value=''>All</option>";
-	$.ajax ({
-		url:restfulURL+restfulPathDropDownYear ,
-		type:"get" ,
-		dataType:"json" ,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,
-		success:function(data){
-				//galbalDqsRoleObj=data;
-			$.each(data,function(index,indexEntry){
-
-					html+="<option  value="+indexEntry["current_appraisal_year"]+">"+indexEntry["current_appraisal_year"]+"</option>";	
-		
-			});	
-
-		}
-	});	
-	html+="</select>";
-	return html;
-};
-//-------------------  Drop Down List Year FN END ---------------------
 
 //-------------------  Drop Down List Appraisal Level FN Strart ---------------------
 
@@ -153,13 +129,12 @@ var dropDownListAppraisalLevel = function(){
 	html+="<select id=\"app_lv\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
-		url:restfulURL+restfulPathDropDownAppraisalLevel,
+		url:restfulURL+restfulPathDropDownAppraisalLevel ,
 		type:"get" ,
 		dataType:"json" ,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
 
 					html+="<option  value="+indexEntry["appraisal_level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";	
@@ -171,75 +146,111 @@ var dropDownListAppraisalLevel = function(){
 	html+="</select>";
 	return html;
 };
+//-------------------  Drop Down List Appraisal Level FN END ---------------------
+
+
+//-------------------  Drop Down List Period FN Strart ---------------------
+
+var dropDownListPeriod = function(){
+	var html="";
+	
+	
+	html+="<select id=\"period\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Period\" name=\"period\">";
+	html+="<option  selected value=''>All</option>";
+	$.ajax ({
+		url:restfulURL+restfulPathDropDownPeriod,
+		type:"get" ,
+		dataType:"json" ,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+			$.each(data,function(index,indexEntry){
+
+					html+="<option  value="+indexEntry["period_id"]+">"+indexEntry["appraisal_period_desc"]+"</option>";	
+		
+			});	
+
+		}
+	});	
+	html+="</select>";
+	return html;
+};
+//-------------------  Drop Down List Appraisal Item FN END ---------------------
+
 var listErrorFn =function(data){
 	var errorData="";
-	//alert(data['errors'] instanceof  Array);
-		$.each(data,function(index,indexEntry){	
+	
+	$.each(data,function(index,indexEntry){	
 		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
 			if(data[index]['employee_code']== null){//The employee code field is null
 				errorData+="<font color='red'>*</font> employee code : null ↓<br>";
 			}else{
 				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  ↓<br>";}
 		}
-		
 		if(typeof data[index]['errors'] != 'object'){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']+"<br>";
 		}
 		if(data[index]['errors']['employee_code']!=undefined){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']['employee_code']+"<br>";
 		}
-		if(data[index]['errors']['cds_id']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['cds_id']+"<br>";
+		if(data[index]['errors']['period_id']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['period_id']+"<br>";
 		}
-		if(data[index]['errors']['year']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['year']+"<br>";
+		if(data[index]['errors']['appraisal_item_id']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['appraisal_item_id']+"<br>";
 		}
-		if(data[index]['errors']['month']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['month']+"<br>";
-		}
-		if(data[index]['errors']['cds_value']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['cds_value']+"<br>";
+		if(data[index]['errors']['data_value']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['data_value']+"<br>";
 		}
 		
 		
 	});
-
 	//alert(errorData);
-	//callFlashSlideInModal(errorData);
 	callFlashSlideInModal(errorData,"#information","error");
+	//callFlashSlideInModal(errorData);
+	
 	/*return errorData;*/
 }
-//-------------------  Drop Down List Appraisal Level FN END ---------------------
-
 $(document).ready(function() {
-	$("#cds_result_list_content").hide();
-	$("#drop_down_list_year").html(dropDownListYear());
-	$("#drop_down_list_month").html(dropDownListMonth());
+	// -------------------  Appraisal Data  ---------------------	
+	$("#appraisal_data_list_content").hide();
+	$("#drop_down_list_structure").html(dropDownListStructure());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
-	$("#btnSearchAdvance").click(function(){
-	$("#position").val("");
-	$("#emp_name").val("");
+	$("#drop_down_list_period").html(dropDownListPeriod());
 	
+	$("#app_item").val("");
+	$("#emp_name").val("");
+	$("#app_item_id").val("");
+	$("#emp_name_id").val("");
+	
+	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
+	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
+	
+	$("#btnSearchAdvance").click(function(){
+		
 		searchAdvanceFn(
-				$("#year").val(),
-				$("#month").val(),
+				$("#structure").val(),
 				$("#app_lv").val(),
-				$("#position_id").val(),
+				$("#app_item_id").val(),
+				$("#period").val(),
 				$("#emp_name_id").val());
-		$("#cds_result_list_content").show();
+		$("#appraisal_data_list_content").show();
 		return false;
 	});
 	//$("#btnSearchAdvance").click();
 	
+	
 	//Autocomplete Search Position Start
-	$("#position").autocomplete({
+	$("#app_item").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+restfulPathPositionAutocomplete,
+				 url:restfulURL+restfulPathAutocompleteAppraisalItem,
 				 type:"post",
 				 dataType:"json",
 				 data:{
-					 "position_name":request.term},
+					 "structure_id":$("#structure").val(),
+					 "appraisal_level_id":$("#app_item_id").val(),
+					 "appraisal_item_name":request.term},
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
@@ -249,9 +260,9 @@ $(document).ready(function() {
 					  
 						response($.map(data, function (item) {
                             return {
-                                label: item.position_name,
-                                value: item.position_name,
-                                position_code : item.position_code
+                                label: item.appraisal_item_name,
+                                value: item.appraisal_item_name,
+                                appraisal_item_id : item.appraisal_item_id
                                 
                             };
                         }));
@@ -264,20 +275,20 @@ $(document).ready(function() {
 				});
         },
 		select:function(event, ui) {
-			$("#position").val(ui.item.value);
-            $("#position_id").val(ui.item.position_code);
-            tempPosiName = ui.item.label;
-            tempPosiId=ui.item.position_code;
+			$("#app_item").val(ui.item.value);
+            $("#app_item_id").val(ui.item.appraisal_item_id);
+            tempAppItemName = ui.item.label;
+            tempAppItemId=ui.item.appraisal_item_id;
             return false;
         },change: function(e, ui) {  
 
  
-			if ($("#position").val() == tempPosiName) {
-				$("#position_id").val(tempPosiId);
+			if ($("#app_item").val() == tempAppItemName) {
+				$("#app_item_id").val(tempAppItemId);
 			}  else if (ui.item != null){
-				$("#position_id").val(ui.item.position_code);
+				$("#app_item_id").val(ui.item.appraisal_item_id);
 			}else {
-				$("#position_id").val("");
+				$("#app_item_id").val("");
 			}
          }
     });
@@ -293,7 +304,7 @@ $(document).ready(function() {
 		
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+restfulPathEmployeeAutocomplete,
+				 url:restfulURL+restfulPathAutocompleteEmployeeName,
 				 type:"post",
 				 dataType:"json",
 				 data:{
@@ -342,40 +353,35 @@ $(document).ready(function() {
   //Auto Complete Employee Name end
 	
 	
-	
-	
-	
+    // -------------------  Appraisal Data END ---------------------	
 	
 	//#### Call Export User Function Start ####
 	$("#exportToExcel").click(function(){
-		var paramYear=$("#param_year").val();
-		var paramMonth=$("#param_month").val();
-		var paramAppLv=$("#param_app_lv").val();
-		var paramPositionCode=$("#param_position_code").val();
-		var paramEmpCode=$("#param_emp_code").val();
-
+		var paramStructure= $("#param_structure").val();
+		var paramAppLv= $("#param_app_lv").val();
+		var paramAppItem= $("#param_app_item").val();
+		var paramPeriod= $("#param_period").val();
+		var paramEmpCode= $("#param_emp_code").val();
 		
 		var param="";
-		param+="&current_appraisal_year="+paramYear;
-		param+="&month_id="+paramMonth;
+		param+="&structure_id="+paramStructure;
 		param+="&appraisal_level_id="+paramAppLv;
-		param+="&position_code="+paramPositionCode;
+		param+="&appraisal_item_id="+paramAppItem;
+		param+="&period_id="+paramPeriod;
 		param+="&emp_code="+paramEmpCode;
 		//alert(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
-		$("form#formExportToExcel").attr("action",restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
+		$("form#formExportToExcel").attr("action",restfulURL+restfulPathAppData+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").submit();
 	});
-    //#### Call Export User Function End ####
-	
+    //#### Call Export User Function End ####	
 	//FILE IMPORT MOBILE START
 	$("#btn_import").click(function () {
 		$('#file').val("");
+		$(".btnModalClose").click();
 	});
-	$("#importFileMobile").click(function () {
-		$('#file').val("");
-	});
+	
 	// Variable to store your files
-	var files;
+	var files2;
 	// Add events
 	$('#file').on('change', prepareUpload2);
 
@@ -384,7 +390,7 @@ $(document).ready(function() {
 	{
 	  files = event.target.files;
 	}
-	$('form#fileImportCdsResult').on('submit', uploadFiles);
+	$('form#fileImportEmployee').on('submit', uploadFiles);
 
 	// Catch the form submit and upload the files
 	function uploadFiles(event)
@@ -403,7 +409,7 @@ $(document).ready(function() {
 		});
 		$("body").mLoading();
 		jQuery_1_1_3.ajax({
-			url:restfulURL+restfulPathCdsResult,
+			url:restfulURL+restfulPathAppData,
 			type: 'POST',
 			data: data,
 			cache: false,
@@ -418,13 +424,15 @@ $(document).ready(function() {
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import CDS Result Successfully");
-					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
+					$('#file').val("");
 					$("body").mLoading('hide');
 					$('#ModalImport').modal('hide');
 					
 				}else{
 					listErrorFn(data['errors']);
-					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
+					$('#file').val("");
 					$("body").mLoading('hide');
 				}
 			},
@@ -439,4 +447,3 @@ $(document).ready(function() {
 	}
 	
 });
-

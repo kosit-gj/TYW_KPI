@@ -4,6 +4,7 @@ var tempEmpName="";
 var tempEmpID="";
 var tempPosiName="";
 var tempPosiID="";
+var pageNumberDefault=1;
 var restfulPathImportEmployee="/tyw_api/public/import_employee";
 var restfulPathRole="/tyw_api/public/import_employee/role_list";
 
@@ -236,7 +237,7 @@ var searchAdvanceFn = function (Department,Section,Position,EmployeeName) {
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
-	getDataFn($("#pageNumber").val(),$("#rpp").val());
+	getDataFn(pageNumberDefault,$("#rpp").val());
 	
 	
 }
@@ -261,18 +262,18 @@ var listImportEmployeeFn = function(data) {
 //			IsActive = "<input disabled type='checkbox' name='is_active' id='is_active'  value='0'>";
 //		}
 		htmlTable += "<tr class='rowSearch'>";
-		htmlTable += "<td class='objectCenter '>"+"<div class='checkbox m-n '><input  style=\"margin-top:1px;\" type=\"checkbox\" class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" value=\""+indexEntry["emp_code"]+"\"><label> </label></div>"+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["department_name"]+"</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["section_name"]+"</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["position_name"]+"</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["position_group"]+"</td>";
-		htmlTable += "<td class='columnSearch'>"+indexEntry["chief_emp_code"]+"</td>";
+		htmlTable += "<td class='objectCenter 'style=\"vertical-align: middle;\">"+"<div class='checkbox m-b-n m-t-xxs'><input  style=\"margin-top:1px;\" type=\"checkbox\" class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" value=\""+indexEntry["emp_code"]+"\"><label> </label></div>"+ "</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_code"]+ "</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["department_name"]+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["section_name"]+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_name"]+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_group"]+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["chief_emp_code"]+"</td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalRole data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalRole data-toggle='modal'&gt;Role&lt;/button&gt;
-		htmlTable += "<td class='objectCenter'><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
+		htmlTable += "<td class='objectCenter' style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
 				"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_code"]+ " data-target=#ModalRole data-toggle='modal'>Role</button>&nbsp;" +
 				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
@@ -605,6 +606,10 @@ $(document).ready(function() {
 	$("#search_emp_name").val("");
 	$("#search_emp_id").val("");
 	
+
+	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
+	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
+	
 	$("#employee_list_content").hide();
 	$("#drop_down_department").html(dropDownListDepartment());
 	$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
@@ -622,10 +627,6 @@ $(document).ready(function() {
 				//$("#search_emp_name").val().split("-", 1)search_emp_id
 				$("#search_emp_id").val()
 				);
-		$("#search_position").val("");
-		$("#search_position_id").val("");
-		$("#search_emp_name").val("");
-		$("#search_emp_id").val("");
 		$("#employee_list_content").show();
 		
 		return false;
@@ -890,12 +891,13 @@ $(document).ready(function() {
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import Employee Successfully");
-					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 					$("body").mLoading('hide');
 					$('#ModalImport').modal('hide');
 					
 				}else{
 					listErrorFn(data['errors']);
+					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 					$("body").mLoading('hide');
 				}
 			},

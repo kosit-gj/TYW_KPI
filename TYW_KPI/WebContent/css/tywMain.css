@@ -384,22 +384,6 @@ hr {
 	text-algin:right;
 }
 
-.btnModalClose{
-	color: red;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 5px;
-    position: absolute;
-    right: 20px;
-    text-align: right;
-}
-.alert-warning{
-	text-align: left;
-}
-.modal-body {
-    padding: 10px 15px 5px;
-}
 
 /* ---------- Start Css By Auu ---------- */
 @media (max-width : 480px) {
@@ -431,16 +415,28 @@ hr {
 .p-t-xs{
  padding-top :10px;
 }
+.p-t-lg {
+  padding-top: 30px;
+}
 .p-b-xxs{
  padding-bottom :5px;
 }
 .p-b-xs{
  padding-bottom :10px;
 }
+/* MARGIN */
+.m-n {
+    margin: 0 !important;
+}
+.m-b-n {
+    margin-bottom: 0 !important;
+}
+.m-t-xxs{
+ margin-top :1px;
+}
 .font-gear{
 	font-size: 23px;
 	cursor:pointer;
 	color: #993399;
 }
-
 /* ---------- End Css By Auu ---------- */
