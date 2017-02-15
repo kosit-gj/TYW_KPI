@@ -178,7 +178,7 @@
 	   			</div>
                 <!-- panel2 end -->
                 <!-- panel3 start -->
-                <div class="row">
+                <div class="row ">
 	  					<div class="col-lg-12">
 	                      <div class="ibox-title">
 	                          <div class='titlePanel'>CDS List</div>
@@ -189,17 +189,18 @@
 	   							<!-- content table start-->	
 	   							<!-- pagination top start -->
 	   							<div class="row">
-	                                  	<div class="col-sm-9 m-b-xs">
-										
+	                                  	<div class="col-sm-9 ">
+										 <div class="pagination_top2"></div>
+										 <!-- 
 										<ul class="pagination bootpag"><li data-lp="1" class="first disabled"><a href="javascript:void(0);">←</a></li><li data-lp="1" class="prev disabled"><a href="javascript:void(0);">prev</a></li><li class="active" data-lp="1"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li><li data-lp="2" class="last"><a href="javascript:void(0);">→</a></li></ul>
-										
+										 -->
 	                 
 	                                  	</div>
 	                                  
-	                                   <div class="col-sm-2 object-right paging-text">Results per page</div>
+	                                   <div class="col-sm-2 object-right paging-text"><div class='paging-text2'>Results per page</div></div>
 	                                   <div class="col-sm-1">
 	                                   
-	                                  	<select class="form-control input-sm " id="countPaginationTop" name="countPagination">
+	                                  	<select class="form-control input-sm countPagination2" id="countPaginationTop2" name="countPagination2">
 	                                       <option>10</option>
 	                                    	<option>20</option>
 	                                    	<option>50</option>
@@ -233,17 +234,18 @@
                                   
                                   <!-- pagination bottom start -->
                                   <div class="row">
-	                                   	<div class="col-sm-9 m-b-xs">
+	                                   	<div class="col-sm-9 ">
 	
-											<!--  <p class="pagination_bottom"></p>-->
+											 <div class="pagination_bottom2"></div>
+											<!-- 
 											<ul class="pagination bootpag"><li data-lp="1" class="first disabled"><a href="javascript:void(0);">←</a></li><li data-lp="1" class="prev disabled"><a href="javascript:void(0);">prev</a></li><li class="active" data-lp="1"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li><li data-lp="2" class="last"><a href="javascript:void(0);">→</a></li></ul>
-	                  
+	                  						-->
 	                                   	</div>
 	                                   
-	                                    <div class="col-sm-2 object-right paging-text">Results per page</div>
+	                                    <div class="col-sm-2 object-right paging-text"><div class='paging-text2'>Results per page</div></div>
 	                                    <div class="col-sm-1">
 	                                   
-		                                   	<select class="form-control input-sm " id="countPaginationBottom" name="countPagination">
+		                                   	<select class="form-control input-sm countPagination2" id="countPaginationBottom2" name="countPagination2">
 		                                        <option>10</option>
 		                                     	<option>20</option>
 		                                     	<option>50</option>
@@ -300,6 +302,7 @@
             </div>
         </div>
     </div>
-</div>                      
+</div>       
+<div class='paramPagingCDS'></div>               
 <!-- Modal Quantity End  -->
 <script src="../Controller/Form/cQuantity.js"></script>

@@ -5,11 +5,13 @@ var globalData=[];
 //Get Data
 var getDataFn = function(page,rpp) {
 	
-	var appraisal_level_id = $("embed_appraisal_level_id").val();
-	var structure_id= $("embed_structure_id").val();
-	var perspective_id= $("embed_perspective_id").val();
-	var appraisal_item_id= $("embed_appraisal_item_id").val();
 	
+	var appraisal_level_id = $("#embed_appraisal_level_id").val();
+	var structure_id= $("#embed_structure_id").val();
+	var perspective_id= $("#embed_perspective_id").val();
+	var appraisal_item_id= $("#embed_appraisal_item_id").val();
+	
+
 	$.ajax({
 		url:restfulURL+"/tyw_api/public/appraisal_item",
 		type:"get",
@@ -19,11 +21,10 @@ var getDataFn = function(page,rpp) {
 		data:{
 			"page":page,
 			"rpp":rpp,
-			
-//			"appraisal_level_id":appraisal_level_id,
-//			"structure_id":structure_id,
-//			"perspective_id":perspective_id,
-//			"appraisal_item_id":appraisal_item_id
+			"appraisal_level_id":appraisal_level_id,
+			"structure_id":structure_id,
+			"perspective_id":perspective_id,
+			"appraisal_item_id":appraisal_item_id
 			
 		},
 		success:function(data){
@@ -33,6 +34,7 @@ var getDataFn = function(page,rpp) {
 			globalData=data;
 			//paginationSetUpFn(1,1,1);
 			paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
+			$(".result_area").show();
 		}
 	})
 	
@@ -69,7 +71,7 @@ var validationFn = function(data){
 }
 var displayTypeFn  = function(dataValue,dataType){
 	
-	console.log(dataType);
+	//console.log(dataType);
 	var displayType="";	
 	
 	if(dataType=="text"){
@@ -211,6 +213,64 @@ var deleteFn = function(id) {
    });
 };
 
+
+//set paginate local start
+var paginationSetUpFn2 = function(pageIndex,pageButton,pageTotal){
+	if(pageTotal==0){
+		pageTotal=1
+	}
+	$('.pagination_top2,.pagination_bottom2').off("page");
+	$('.pagination_top2,.pagination_bottom2').bootpag({
+	    total: pageTotal,//page Total
+	    page: pageIndex,//page index
+	    maxVisible: 5,//จำนวนปุ่ม
+	    leaps: true,
+	    firstLastUse: true,
+	    first: '←',
+	    last: '→',
+	    wrapClass: 'pagination',
+	    activeClass: 'active',
+	    disabledClass: 'disabled',
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    next: 'next',
+	    prev: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first'
+	}).on("page", function(event, num){
+		var rpp=10;
+		if($("#rpp2").val()==undefined){
+			rpp=10;
+		}else{
+			rpp=$("#rpp2").val();
+			
+		}
+		
+		findOneFn($("#validate_header_id").val(),num,rpp);
+		
+	    $(".pagingNumber2").remove();
+	    var htmlPageNumber= "<input type='hidden' id='pageNumber2' name='pageNumber2' class='pagingNumber2' value='"+num+"'>";
+	    
+	    $("#paramPagingCDS").append(htmlPageNumber);
+	   
+	}); 
+
+	$(".countPagination2").off("change");
+	$(".countPagination2").on("change",function(){
+
+		$("#countPaginationTop2").val($(this).val());
+		$("#countPaginationBottom2").val($(this).val());
+		
+		//getDataFn(1,$(this).val());
+		findOneFn($("#validate_header_id").val(),1,$(this).val());
+		
+		$(".rpp2").remove();
+	    var htmlRrp= "<input type='hidden' id='rpp2' name='rpp2' class='rpp2' value='"+$(this).val()+"'>";
+	    $("#paramPagingCDS").append(htmlRrp);
+	});
+}
+//set paginate local end
+
 //Search for Edit. 
 
 var findOneFn = function(id,form_url) {
@@ -304,6 +364,7 @@ var perspectiveListFn = function(nameArea,id){
 		success:function(data){
 			
 			var htmlOption="";
+			
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['perspective_id']){
 					htmlOption+="<option selected value='"+indexEntry['perspective_id']+"'>"+indexEntry['perspective_name']+"</option>";
@@ -368,6 +429,7 @@ var structureListFn = function(nameArea){
 		success:function(data){
 			
 			var htmlOption="";
+			htmlOption+="<option value=''>All</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value='"+indexEntry['structure_id']+"'>"+indexEntry['structure_name']+"</option>";
 			});
@@ -387,6 +449,39 @@ $(document).ready(function(){
 	
 	
 	//load form start
+	
+//	$.ajax({
+//		url:"../Form/deduct-score.html",
+//		type:"get",
+//		dataType:"html",
+//		async:false,
+//		headers:{Authorization:"Bearer "+tokenID.token},
+//		success:function(data){
+//			$('#include_deduct_score').html(data);
+//		}
+//	});
+//	$.ajax({
+//		url:"../Form/quality.html",
+//		type:"get",
+//		dataType:"html",
+//		async:false,
+//		headers:{Authorization:"Bearer "+tokenID.token},
+//		success:function(data){
+//			$('#include_quality').html(data);
+//		}
+//	});
+//	$.ajax({
+//		url:"../Form/quantity.html",
+//		type:"get",
+//		dataType:"html",
+//		async:false,
+//		headers:{Authorization:"Bearer "+tokenID.token},
+//		success:function(data){
+//			$('#include_quantity_form').html(data);
+//		}
+//	});
+	
+	
 	$('#include_deduct_score').load('../Form/deduct-score.html');
 	$('#include_quality').load('../Form/quality.html');
 	$('#include_quantity_form').load('../Form/quantity.html');
@@ -437,7 +532,7 @@ $(document).ready(function(){
 		
 		searchAdvanceFn();
 	});
-	$("#btnSearchAdvance").click();
+	//$("#btnSearchAdvance").click();
 	//Search End
 	
 	

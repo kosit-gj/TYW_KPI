@@ -17,7 +17,6 @@ $(document).on("click","#btnCloseSlide",function(){
 	flashSLideUp();
 });
 $(document).on("click",".btnModalClose",function(){
-	
 	flashSlideInModalSlideUp();
 });
 
@@ -61,7 +60,7 @@ var callFlashSlideInModal =function(text,id,flashType){
 			}else{
 				$("#information").hide("slow");
 			}
-		},8000);
+		},3000);
 	}
 	
 
@@ -268,6 +267,7 @@ var logoutFn = function(){
 $("#logOut").click(function(){
 	logoutFn();
 });
+
 //set paginate start
 var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
 	

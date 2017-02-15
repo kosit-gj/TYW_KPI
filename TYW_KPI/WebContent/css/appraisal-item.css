@@ -80,3 +80,12 @@
     min-height: 35px;
     padding: 0px 10px;
 }
+.result_area{
+	display:none;
+}
+.result_cds_area{
+	display:none;
+}
+.paging-text2{
+	padding-top:5px;
+}

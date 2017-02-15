@@ -1,4 +1,5 @@
-
+//Global Start.
+var globalCDSData="";
 //Cleaning
 var clearQuantityFormFn = function(){
 	
@@ -7,9 +8,9 @@ var clearQuantityFormFn = function(){
 	//$("#appraisalLevelQuantity").val("");
 	$("#appraisalLevelQuantity option:first").attr('selected','selected');
 	
-	$("#perspectiveQuantity").val("");
+	$("#perspectiveQuantity option:first").attr('selected','selected');
 	$("#baselineValueQuantity").val("");
-	$("#uomQuantity").val("");
+	$("#uomQuantity option:first").attr('selected','selected');
 	$("#isActiveQuantity").prop("checked",false);
 	$("#formulaDescriptionQuantity").val("");
 	$("#structure_id_quantity").val("");
@@ -135,11 +136,11 @@ var insertQuantityFn = function(param) {
 			if(data['status']==200){
 				if(param !="saveAndAnother"){
 					   callFlashSlide("Insert Successfully.");
-				       getDataFn();
+				     	getDataFn($("#pageNumber").val(),$("#rpp").val());
 				       clearQuantityFormFn();
-				 	   $('#managementModal').modal('hide');
+				 	   $('#modal-quantity').modal('hide');
 					}else{
-						getDataFn();
+						getDataFn($("#pageNumber").val(),$("#rpp").val());
 						clearQuantityFormFn();
 						callFlashSlideInModal("Insert Data is Successfully.","#informationQuantity");
 					}
@@ -169,6 +170,7 @@ var cdsListFn = function(data){
 	$("#listCDS").html(cdsListHTML);
 }
 var cdsGetFn = function(page,rpp){
+
 	/*
 	embed_appraisal_level_quantity
 	embed_cds_name_quantity
@@ -183,14 +185,17 @@ var cdsGetFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
 			
-			"appraisal_level_id":1,
-//			"cds_name":embed_cds_name_quantity,
-//			"page":page,
-//			"rpp":rpp
+			"appraisal_level_id":appraisal_level,
+			"cds_name":cds_name,
+			"page":page,
+			"rpp":rpp
 			},
 		success:function(data){
 			//console.log(data);
 			cdsListFn(data);
+			globalCDSData=data;
+			paginationSetUpFn2(globalCDSData['current_page'],globalCDSData['last_page'],globalCDSData['last_page']);
+			
 		}
 	});
 }
@@ -297,7 +302,7 @@ structure_name
 	
 		
 	}else if(action=='add'){
-		
+	
 		clearQuantityFormFn();
 		appraisalLevelListFn("Quantity");			
 		perspectiveListFn("Quantity");
@@ -369,17 +374,28 @@ structure_name
 }
 $(document).ready(function(){
 //click modal quality start.
-	$("button[data-target='#modal-quantity']").click(function(){
-		
+
+
+	
+	$(document).on("click","button[data-target='#modal-quantity']",function(){
+
 		var structureId=$(this).prev().prev().get();
 		var structureName=$(this).prev().prev().prev().get();
 		initailQuantityFormFn('add',$(structureId).val(),$(structureName).val());
 		
+		//run search cds default 
+		var embedParam="" +
+		"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelSearchQuantity").val()+"'>" +
+		"<input type='hidden' class='param_quantity_form' id='embed_cds_name_quantity' name='embed_cds_name_quantity' value='"+$("#cdsNameSearchQuantity").val()+"'>";
+		$(".param_quantity_form").remove();
+		$("#embedParamSearchQuantity").html(embedParam);
+		cdsGetFn();
 	});
 	
 	
 	//Search Quantity Start
-	$("#SearchQuantity").click(function(){
+	//$("#SearchQuantity").click(function(){
+	$(document).on("click","#SearchQuantity",function(){	
 		var embedParam="" +
 				"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelSearchQuantity").val()+"'>" +
 				"<input type='hidden' class='param_quantity_form' id='embed_cds_name_quantity' name='embed_cds_name_quantity' value='"+$("#cdsNameSearchQuantity").val()+"'>";
@@ -387,22 +403,23 @@ $(document).ready(function(){
 		$("#embedParamSearchQuantity").html(embedParam);
 		cdsGetFn();
 	});
-	$("#SearchQuantity").click();
+
+	
+	//$("#SearchQuantity").click();
 	
 	//Search Quantity End
 	
 	//Submit Quantity Start
-	$("#btnSubmitQuantity").click(function(){
-		
+	$(document).on("click","#btnSubmitQuantity",function(){
+	//$("#btnSubmitQuantity").click(function(){
 		if($("#actionQuantity").val()=="add"){
 			insertQuantityFn("saveOnly");
 		}else{
 			updateQuantityFn();
 		}
-		
-		
 	});
-	$("#btnAddAnotherQuantity").click(function(){
+	$(document).on("click","#btnAddAnotherQuantity",function(){
+	//$("#btnAddAnotherQuantity").click(function(){
 		
 		insertQuantityFn("saveAndAnother");
 		
