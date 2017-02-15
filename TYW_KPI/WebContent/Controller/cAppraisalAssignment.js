@@ -4,6 +4,7 @@ var tokenID= eval("("+localStorage.getItem("tokenID")+")");
 var globalData=[];
 var empldoyees_code = [];
 
+
 //Click แล้ว ฝังข้อมูล
 var removeEmbedParamCheckboxAppraisalItem = function(id){
 	var id = id.split("-"); 

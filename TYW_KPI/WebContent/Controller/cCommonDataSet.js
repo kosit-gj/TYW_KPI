@@ -1,3 +1,4 @@
+
 //Global variable
 var galbalDataCDS=[];
 //IP Server : 171.96.201.146
@@ -653,5 +654,5 @@ $(document).ready(function() {
 	
 	// ------------------- Common Data Set END -------------------
 	
-	
+
 });
