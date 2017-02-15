@@ -656,7 +656,7 @@ $(document).ready(function() {
 //		    }
 //		});   
 		 
-	}); 
+	});  
     $(".from_data_role").click(function(){  // เมื่อคลิก checkbox  ใดๆ  
         if($(this).prop("checked")==true){ // ตรวจสอบ property  การ ของ   
             var indexObj=$(this).index(".from_data_role"); //   
