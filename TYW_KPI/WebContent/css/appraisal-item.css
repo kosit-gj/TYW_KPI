@@ -1,3 +1,41 @@
+/*main css start*/
+.ibox-title2 {
+	  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffe57f;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 35px;
+    padding: 0px 10px;
+    
+}
+.ibox-title3 {
+	  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffe57f;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 30px;
+    padding: 0px 10px;
+    
+}
+.ui-front {
+    z-index: 10000;
+}
+/*main css end*/
+
 .form-input-customs{
 	float:left;
 	width: 250px;
@@ -30,7 +68,7 @@
 }
 .form-input-customs-title{
 	float:left;
-	width: 100px;
+	width: 50%;
 }
 .form-input-customs-address{
 	float:left;
@@ -63,7 +101,7 @@
 
 }
 .modal-body {
-    padding: 20px 30px 5px;
+    padding: 20px 20px 5px;
 }
 .ibox-title {
     -moz-border-bottom-colors: none;
@@ -89,3 +127,49 @@
 .paging-text2{
 	padding-top:5px;
 }
+
+#textarea_cds {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+   /* border: 1px solid gray;*/
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 150px;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    width: 660px;
+    
+}
+.font-blue{
+
+	color: blue;
+	font-weight:bold;
+	display:inline;
+	
+	
+}
+.not-allowed{
+	cursor:not-allowed;
+	display: inline;
+	color:red;
+}
+.formula_unit{
+	width:100%;
+}
+.cds_id_inline{
+	display:none;
+}
+.formula_cds_id_area{
+	display:none;
+}
+#btnCheckFormula{
+	font-size:16px;
+	font-weight:bold;
+	color: blue;
+	padding:5px;
+	cursor:pointer;
+	margin-top:5px;
+	top: 5px;
+}
+

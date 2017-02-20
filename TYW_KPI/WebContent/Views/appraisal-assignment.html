@@ -23,7 +23,9 @@
     <link href="../css/appraisal-assignment.css" rel="stylesheet">
     
 </head>
+<style>
 
+</style>
 <body class="top-navigation gray-bg ">
 
 
@@ -87,7 +89,7 @@
 						                                    
 							                                  
 																
-																<input type="text" id="Position" placeholder="" class="form-control input-sm numberOnly">
+																<input type="text" id="Position" placeholder="Position" class="form-control input-sm">
 																
 						                                    </div>
 						                                </div>
@@ -143,7 +145,7 @@
 						                                    <div class="col-lg-7" id="empNameArea">
 						                                    
 							                                    
-																<input type="text" class="form-control input-sm numberOnly" placeholder="" id="empName">
+																<input type="text" class="form-control input-sm numberOnly" placeholder="Emp Name" id="empName">
 																
 																
 						                                    </div>
@@ -185,12 +187,7 @@
                                     	<!-- pagination start -->
                                     	<div class="row">
 	                                    	<div class="col-xs-9">
-												 
-												<p class="pagination_top"></p>
-												<!--  
-												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
-												 -->
-	                   
+												<div class="pagination_top"></div>
 	                                    	</div>
 	                                    
 		                                    <div class="col-xs-3 object-right paging-text">
@@ -207,25 +204,14 @@
 												<div class='pagingText'>Results per page</div>
 		                                    
 		                                    </div>
-		                                    <!-- 
-		                                    <div class="col-xs-1">
-	                                     
-	                                    	<select name="countPagination" id='countPaginationTop'  class="form-control input-sm countPagination">
-		                                        <option>10</option>
-		                                     	<option>20</option>
-		                                     	<option>50</option>
-		                                     	<option>100</option>
-		                                    </select> 
-	                                        
-	                                    	</div>
-	                                    	 -->
+		                                    
                                     	</div> 
                                     	 <!-- pagination end -->
                                     	 
                                     	 <!-- content row 1 start-->
                                     	  <div class="row">
 				         					<div class="col-lg-12">
-		                                    	<div class="ibox-title">
+		                                    	<div class="ibox-title2">
 					                                 <div class='titlePanel2'>ประเมินผลการปฎิบัติงานประจำปี 2017 ครั้งที่1 Start Date 01/11/2016 End Date 30/04/2017 </div> 
 					                                
 					                            </div>
@@ -241,6 +227,7 @@
 						                                            <th class='object-center' style='width:5%'>Select</th>
 						                                            <th  style='width:10%'>Status</th>
 						                                            <th  style='width:10%'>Emp Code</th>
+						                                            <th  style='width:10%'>Emp Name</th>
 						                                            <th  style='width:10%'>Department</th>
 						                                            <th  style='width:10%'>Section</th>
 						                                            <th  style='width:10%'>Appraisal Type</th>
@@ -379,56 +366,56 @@
                
              
                 <!-- panel0 start -->
-                <div class="row " style='display:none;'>
+                <div class="row cus_information_area" >
 	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
+	                      <div class="ibox-title2">
 	                          <div class='titlePanel'>Employee Information</div>
 	                      </div>
 	   					
 	   					<div class="ibox-content">
 	   							
 	   							<!-- content table start-->	
-	   								<div class='row wrapper'>
+	   								<div class='row wrapper employee_information_area'>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Employee Code:</div>
-	   										<div class='text_info' id='employee_code'>0004</div>
+	   										<div class='text_info' id='employee_code'></div>
 	   									</div>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Section:</div>
-	   										<div class='text_info' id='section'>แผนกบัญชีต้นทุน </div>
+	   										<div class='text_info' id='section'> </div>
 	   									</div>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Appraisal Type:</div>
-	   										<div class='text_info' id='appraisal_type'>ประจำปี</div>
+	   										<div class='text_info' id='appraisal_type'></div>
 	   									</div>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Employee Name:</div>
-	   										<div class='text_info' id='employee_name'>นางสาวงามตา ใจดี </div>
+	   										<div class='text_info' id='employee_name'></div>
 	   									</div>
 	   								
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Department:</div>
-	   										<div class='text_info' id='department'>บัญชีการเงิน </div>
+	   										<div class='text_info' id='department'></div>
 	   									</div>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Period:</div>
-	   										<div class='text_info' id='period'>ประเมินผลการปฏิบัติงานประจำปี 2017 ครั้งที่ 1 </div>
+	   										<div class='text_info' id='period'> </div>
 	   									</div>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Start Working Date:</div>
-	   										<div class='text_info' id='start_working_date'>05/04/2005 </div>
+	   										<div class='text_info' id='start_working_date'> </div>
 	   									</div>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Chief Employee Code:</div>
-	   										<div class='text_info' id='chief_employee_code'>0001 </div>
+	   										<div class='text_info' id='chief_employee_code'> </div>
 	   									</div>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Position:</div>
-	   										<div class='text_info' id='position'>หัวหน้าแผนกพัฒนาลูกค้า </div>
+	   										<div class='text_info' id='position'> </div>
 	   									</div>
 	   									<div class='col-xs-4'>
 	   										<div class='label_info'>Chief Employee Name:</div>
-	   										<div class='text_info'id='chief_employee_name'> นายสมใจ พร้อมพงศ์</div>
+	   										<div class='text_info'id='chief_employee_name'> </div>
 	   									</div>
 	   									
 	   								</div>
@@ -451,7 +438,7 @@
             
             	<div class="row">
             		<div class='col-xs-12 crandTotalWeight' >
-            		Grand Total Weight % <span class='perscentage'>0.00</span>
+            		Grand Total Weight % <span id="crandTotalWeight" class='perscentage'>0.00</span>
             		</div>
             	</div>
             	
@@ -464,7 +451,7 @@
 			   				<button class="btn btn-primary" type="button" id="btnSubmit">Save</button>
 			   				<button class="btn btn-primary" type="button" id="btnAddAnother">Save & Add Another</button>
 			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
-			                <div class="alert alert-warning" id="information" style="display: none;"></div>
+			                
 		   				</div>
 		   				
 		   				<div class='btnAssignment'>
@@ -498,20 +485,20 @@
 		   				
             		
 		            		
-		   				
-		   				
+		   				<br style='clear:both'>
+		   				<div class="alert alert-warning information" id="information" style="display: none;"></div>
+			   			<br style='clear:both'>
+			   			<br style='clear:both'>
 		   			</div>
-		   			<div class='row'>
-			   			<div class='col-xs-12'>
-			   				<div class="alert alert-warning" id="information" style="display: none;"></div>
-			   			</div>
-		   			</div>
+		   		
+		   			
    				</div>
             	
            	 	
             </div>
         </div>
     </div>
+    
 </div>                      
 <!-- Modal KPI End Edit -->
 
@@ -580,18 +567,14 @@
 	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
     <!-- table data end -->
     
-    <!-- load angular fame work start-->
-    <script src="../js/angular.min.js"></script>
-    <script src="../js/angular-route.js"></script>
-    <!-- load angular fame work end -->
-    
-    
+
+	
     <script src="../js/jquery.mloading.js"></script>
     <script src="../Controller/cConfig.js"></script>
     <script src="../Controller/cMain.js"></script> 
     <script src="../Controller/cAppraisalAssignment.js"></script>
 
-
+	
 </body>
 
 </html>

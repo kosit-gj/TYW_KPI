@@ -188,7 +188,7 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		is_active
 		*/	
 		clearDeductScoreFormFn();
-		appraisalLevelListFn("DeductScore");	
+		appraisalLevelListFn("DeductScore",$("#embed_appraisal_level_id").val());	
 		$("#btnAddAnotherDeductScore").show();
 
 		//set header

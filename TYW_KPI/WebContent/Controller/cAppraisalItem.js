@@ -46,29 +46,7 @@ var embedParam = function(id){
 	
 }
 
-var validationFn = function(data){
-//	var data={"status":400,"data":{"appraisal_item_name":["The appraisal item name field is required."],"baseline_value"
-//		:["The baseline value field is required."],"formula_cds_id":["The formula cds id field is required."
-//		],"formula_cds_name":["The formula cds name field is required."]}};
-	var errorData="";
-	var count=0;
-	$.each(data['data'],function(index,indexEntry){
-		
-		
-		if(index!=undefined){
-			if(count==0){
-				errorData+=""+indexEntry+"";
-			}else{
-				errorData+="<br>"+indexEntry+" ";
-			}
-		}
-		
-		count++;
-	});
-	
-	return errorData;
-	
-}
+
 var displayTypeFn  = function(dataValue,dataType){
 	
 	//console.log(dataType);
@@ -95,10 +73,10 @@ var listDataFn = function(data) {
 		//structure_id
 		mainContentHTML+="<div class=\"row\">";
 		mainContentHTML+="	<div class=\"col-lg-12\">";
-		mainContentHTML+="  	<div class=\"ibox-title\">";
+		mainContentHTML+="  	<div class=\"ibox-title2\">";
 		mainContentHTML+=" 			<input type='hidden' name='structure_name' class='' value='"+index+"'>";
 		mainContentHTML+=" 			<input type='hidden' name='structure_id' class='' value='"+indexEntry['structure_id']+"'>";
-		mainContentHTML+="          <b>"+index+"</b>&nbsp;&nbsp;<button data-toggle=\"modal\" data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" class=\"btn btn-info input-sm\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
+		mainContentHTML+="          <b style='position:relative;top:7px'>"+index+"</b>&nbsp;&nbsp;<button style='float:right;' data-toggle=\"modal\" data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" class=\"btn btn-info input-sm\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
 		mainContentHTML+="      </div>";
 				
 		mainContentHTML+="		<div class=\"ibox-content\">";
@@ -206,7 +184,7 @@ var deleteFn = function(id) {
 			   
 		}else if(data['status']=="400"){
 			
-			callFlashSlide(data['data'],"error");  
+			callFlashSlide(validationFn(data),"error");  
 			
 		}
      }
@@ -246,7 +224,8 @@ var paginationSetUpFn2 = function(pageIndex,pageButton,pageTotal){
 			
 		}
 		
-		findOneFn($("#validate_header_id").val(),num,rpp);
+		//findOneFn($("#validate_header_id").val(),num,rpp);
+		cdsGetFn(num,rpp);
 		
 	    $(".pagingNumber2").remove();
 	    var htmlPageNumber= "<input type='hidden' id='pageNumber2' name='pageNumber2' class='pagingNumber2' value='"+num+"'>";
@@ -262,7 +241,8 @@ var paginationSetUpFn2 = function(pageIndex,pageButton,pageTotal){
 		$("#countPaginationBottom2").val($(this).val());
 		
 		//getDataFn(1,$(this).val());
-		findOneFn($("#validate_header_id").val(),1,$(this).val());
+		
+		cdsGetFn(1,$(this).val());
 		
 		$(".rpp2").remove();
 	    var htmlRrp= "<input type='hidden' id='rpp2' name='rpp2' class='rpp2' value='"+$(this).val()+"'>";
@@ -432,7 +412,7 @@ var structureListFn = function(nameArea){
 		success:function(data){
 			
 			var htmlOption="";
-			//htmlOption+="<option value=''>All</option>";
+			htmlOption+="<option value=''>All</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value='"+indexEntry['structure_id']+"'>"+indexEntry['structure_name']+"</option>";
 			});

@@ -36,7 +36,7 @@
 					<div class="col-lg-12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>Advance Search</h5>
+								<div class='titlePanel'>Advance Search</div>
 							</div>
 
 							<div class="ibox-content">
@@ -45,10 +45,10 @@
 										<div class="form-group p-xxs">
 											<label class="col-lg-5 p-t-xxs">Appraisal Year</label>
 											<div class="col-lg-7">
-												<select data-toggle="tooltip" title="Appraisal Year"
+												<select data-toggle="tooltip" title=""
 													class="input form-control input-sm col-lg-9" id="AppraisalYear"
 													name="AppraisalYear">
-													<option>All</option>
+													
 												</select>
 											</div>
 
@@ -59,7 +59,7 @@
 										<div class="form-group p-xxs">
 											<label class="col-lg-6 p-t-xxs">Appraisal Period</label>
 											<div class="col-lg-6">
-												<select data-toggle="tooltip" title="Appraisal Period"
+												<select data-toggle="tooltip" title=""
 													class="input form-control input-sm col-lg-9"
 													id="AppraisalPeriod" name="AppraisalPeriod">
 													<option>All</option>
@@ -73,7 +73,7 @@
 										<div class="form-group p-xxs">
 											<label class="col-lg-5 p-t-xxs">Appraisal Level</label>
 											<div class="col-lg-7">
-												<select data-toggle="tooltip" title="Appraisal Level"
+												<select data-toggle="tooltip" title=""
 													class="input form-control input-sm col-lg-9"
 													id="AppraisalLevel" name="AppraisalLevel">
 													<option>All</option>
@@ -91,7 +91,7 @@
 										<div class="form-group p-xxs">
 											<label class="col-lg-4 p-t-xxs">Department</label>
 											<div class="col-lg-8">
-												<select data-toggle="tooltip" title="Department"
+												<select data-toggle="tooltip" title=""
 													class="input form-control input-sm col-lg-9"
 													id="Department" name="Department">
 													<option>All</option>
@@ -104,7 +104,7 @@
 										<div class="form-group p-xxs">
 											<label class="col-lg-3 p-t-xxs">Section</label>
 											<div class="col-lg-9">
-												<select data-toggle="tooltip" title="Section"
+												<select data-toggle="tooltip" title=""
 													class="input form-control input-sm col-lg-9"
 													id="Section" name="Section">
 													<option>All</option>
@@ -118,7 +118,7 @@
 										<div class="form-group p-xxs">
 											<label class="col-lg-3 p-t-xxs">Position</label>
 											<div class="col-lg-9">
-												<input data-toggle="tooltip" title="Position"
+												<input data-toggle="tooltip" title=""
 													class="form-control input-sm" placeholder="Position"
 													type="text" id="Position" name="Position">
 											</div>
@@ -129,7 +129,7 @@
 										<div class="form-group p-xxs m-b-none">
 											<label class="col-lg-4 p-t-xxs">Employee Name</label>
 											<div class="col-lg-7">
-												<input data-toggle="tooltip" title="Employee Name"
+												<input data-toggle="tooltip" title=""
 													class="form-control input-sm" placeholder="Employee Name"
 													type="text" id="EmpName" name="EmpName">
 											</div>
@@ -163,10 +163,10 @@
 				</div>
 				<!-- end--row -->
 
-				<div class="row">
+				<div class="row search_result" >
 					<div class="col-lg-12">
 						<div class="ibox-title">
-							<h5>Appraisal List</h5>
+							<div class='titlePanel'>Appraisal List</div>
 						</div>
 
 
@@ -174,34 +174,59 @@
 
 							<!-- start table -->
 							<!-- pagination start -->
-							<div class="row">
-								<div class="col-lg-9 col-sm-8 col-xs-6 m-b-xs">
+                                    	<div class="row">
+	                                    	<div class="col-xs-9">
+												<div class="pagination_top"></div>
+	                                    	</div>
+	                                    
+		                                    <div class="col-xs-3 object-right paging-text">
+		                                    
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+		                                 		
+		                                 		</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                    
+                                    	</div> 
+                                    	 <!-- pagination end -->
+						
 
-									<p class="pagination_top"></p>
-
-								</div>
-
-								<div class="col-lg-2 col-sm-2 col-xs-4 object-right paging-text">Results
-									per page</div>
-								<div class="col-lg-1 col-sm-2 col-xs-2 p-b-xxs">
-
-									<select name="account" id='countPaginationTop'
-										class="form-control input-sm countPagination">
-										<option>10</option>
-										<option>20</option>
-										<option>50</option>
-										<option>100</option>
-									</select>
-
-								</div>
-							</div>
-							<!-- pagination end -->
 
 
-
-							<div class="table-responsive p-b-xxs" >
-								<table class="table table-striped" id="tableCdsResult" border="1" style="border-color:#dddddd">
+							
+							
+							
+							
+							
+							
+						<div class="row">
+		         					<div class="col-lg-12">
+                                    	<div class="ibox-title2">
+			                                 <div class='titlePanel2'>ประเมินผลการปฎิบัติงานประจำปี 2017 ครั้งที่1 Start Date 01/11/2016 End Date 30/04/2017 </div> 
+			                                
+			                            </div>
+			         					
+			         					<div class="ibox-content">
+         									<!--content start-->
+		         					
+		         							<!--content end-->
+		         							
+										</div>
+			         				</div>
+			         			</div>
+        						<!-- content row 1 end-->
+	         							
+	         				<div class="table-responsive p-b-xxs" >		
+								<table class="table table-striped " id="tableCdsResult" >
 									<thead >
+									<!-- 
 										<tr class="table-tr-bg">
 											<th colspan=7>
 												<span> การประเมินผลการปฏิบัติงาน ประจำปี&nbsp;&nbsp;</span>
@@ -214,6 +239,7 @@
 		                                 		
 											</th>
 										</tr>
+									-->
 										<tr>
 											<th style='width: auto'>Emp Code</th>
 											<th style='width: auto'>Emp Name</th>
@@ -225,6 +251,7 @@
 										</tr>
 									</thead>
 									<tbody id="listAppraisal">
+									<!-- 
 										<tr>
 											<td><a href="#" id="idEmpCode" data-target='#ModalAppraisal' data-toggle='modal'>000001</a></td>
 											<td></td>
@@ -234,7 +261,7 @@
 											<td></td>
 											<td></td>
 										</tr>
-					
+					 				-->
 									</tbody>
 								</table>
 
@@ -244,26 +271,25 @@
 
 							<!-- pagination start -->
 							<div class="row">
-								<div class="col-lg-9 col-sm-8 col-xs-6 m-b-xs">
-
-									<p class="pagination_bottom"></p>
-
-								</div>
-
-								<div class="col-lg-2 col-sm-2 col-xs-4 object-right paging-text">Results
-									per page</div>
-								<div class="col-lg-1 col-sm-2 col-xs-2 p-b-xxs">
-
-									<select name="account" id='countPaginationBottom'
-										class="form-control input-sm countPagination">
-										<option>10</option>
-										<option>20</option>
-										<option>50</option>
-										<option>100</option>
-									</select>
-
-								</div>
-							</div>
+	                                    	<div class="col-xs-9">
+	
+												  <p class="pagination_bottom"></p>
+												
+	                                    	</div>
+	                                    
+		                                    <div class="col-xs-3 object-right paging-text">
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select> 
+			                                 	</div>
+												<div class='pagingText'>Results per page</div>
+		                                    </div>
+		                                   
+                                    	</div> 
 							<!-- pagination end -->
 							<!-- end table -->
 						</div>
@@ -280,7 +306,7 @@
 
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalAppraisal"
 		class="modal inmodal" style="display: none;">
-		<div class="modal-dialog w-95-p" ">
+		<div class="modal-dialog w-95-p" >
 			<div class="modal-content animated bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button">
@@ -306,10 +332,10 @@
 					<div class="col-lg-12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>Employee Information</h5>
+								<div class='titlePanel'>Employee Information</div>
 							</div>
-					
-							<div class="ibox-content ibox-content-radius">
+							<!-- ibox-content-radius -->
+							<div class="ibox-content ">
 								<div class="row">
 									<div class="col-md-5 col-sm-5 col-xs-12">
 											
@@ -361,348 +387,12 @@
 					<div class="col-lg-12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>Appraisal</h5>
+								<div class='titlePanel'>Appraisal</div>
 							</div>
 					
 							<div class="ibox-content ibox-content-radius">
 									
-									<!-- -------------Table KPI Start------------- -->
-									<div class="row p-t-xs">
-										<div class="col-lg-12">
-											<div class="ibox float-e-margins">
-												<div class="ibox-title ibox-title-radius">
-													<div class="text-left col-"><h5 style="padding-top: 5px;">KPI</h5></div>
-													<div class="text-right col-">
-														<span style="color: black;font-weight: bold">Total Weight %  </span>
-														<input class="input-xs text-center text-muted" type="text" id="numKPITotalWeight" name="numKPITotalWeight" disabled="disabled" value="50" style="font-weight: bold;">
-													</div>
-												</div>
-
-												<div class="ibox-content ibox-content-radius ">
-													<div class="row">
-														<div class="table-responsive">
-															<table class="table table-striped "
-																id="tableCdsResult" 
-																style="border-color: #dddddd">
-																<thead>
-																	<tr>
-																		<th style='width: auto'>Perspective</th>
-																		<th style='width: auto'>Appraisal Item Name</th>
-																		<th style='width: auto'>Target</th>
-																		<th style='width: auto'>Actual</th>
-																		<th style='width: auto'>Score</th>
-																		<th style='width: auto'>%Weight To</th>
-																		<th style='width: auto'>Weigh Score</th>
-																	</tr>
-																</thead>
-																<tbody id="listAppraisal" >
-																	<tr>
-																		<td>1</td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																	</tr>
-																	
-																</tbody>
-																<tfoot>
-																	<tr>
-																		<td colspan="7" class="text-right" >
-																		<span style="color: black; font-weight: bold">Total</span> 
-																		<input
-																			class="input-xs text-center text-muted" type="text"
-																			id="numKPITotal" name="numTotalWeight"
-																			disabled="disabled" value="50"
-																			style="font-weight: bold;"></td>
-
-																	</tr>
-
-																</tfoot>
-															</table>
-
-
-														</div>
-
-													</div>
-
-												</div>
-											</div>
-
-										</div>
-
-									</div>
-									<!-- -------------Table KPI Start------------- -->
-
-								<!-- -------------Table Competency Start------------- -->
-									<div class="row p-t-xs">
-										<div class="col-lg-12">
-											<div class="ibox float-e-margins">
-												<div class="ibox-title ibox-title-radius">
-													<div class="text-left col-"><h5 style="padding-top: 5px;">Competency</h5></div>
-													<div class="text-right col-">
-														<span style="color: black;font-weight: bold">Total Weight %  </span>
-														<input class="input-xs text-center text-muted" type="text" id="numCompetencyTotalWeight" name="numCompetencyTotalWeight" disabled="disabled" value="50" style="font-weight: bold;">
-													</div>
-												</div>
-
-												<div class="ibox-content ibox-content-radius ">
-													<div class="row">
-														<div class="table-responsive">
-															<table class="table table-striped "
-																id="tableCdsResult" 
-																style="border-color: #dddddd">
-																<thead>
-																	<tr>
-																		<th style='width: auto'>Appraisal Item Name</th>
-																		<th style='width: auto'>Target</th>
-																		<th style='width: auto'>Actual</th>
-																		<th style='width: auto'>Score</th>
-																		<th style='width: auto'>%Weight To</th>
-																		<th style='width: auto'>Weigh Score</th>
-																	</tr>
-																</thead>
-																<tbody id="listAppraisal" >
-																	<tr>
-																		<td>1</td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																	</tr>
-																	
-																</tbody>
-																<tfoot>
-																	<tr>
-																		<td colspan="7" class="text-right" >
-																		<span style="color: black; font-weight: bold">Total</span> 
-																		<input
-																			class="input-xs text-center text-muted" type="text"
-																			id="numCompetencyTotal" name="numCompetencyTotal"
-																			disabled="disabled" value="50"
-																			style="font-weight: bold;"></td>
-
-																	</tr>
-
-																</tfoot>
-															</table>
-
-
-														</div>
-
-													</div>
-
-												</div>
-											</div>
-
-										</div>
-
-									</div>								
-								<!-- -------------Table Competency Start------------- -->								
-								
-								<!-- -------------Table Work Behavior Start------------- -->
-									<div class="row p-t-xs">
-										<div class="col-lg-12">
-											<div class="ibox float-e-margins">
-												<div class="ibox-title ibox-title-radius">
-													<div class="text-left col-"><h5 style="padding-top: 5px;">Work Behavior</h5></div>
-													<div class="text-right col-">
-														<span style="color: black;font-weight: bold">Total Weight %  </span>
-														<input class="input-xs text-center text-muted" type="text" id="numWorkBehaviorWeight" name="numWorkBehaviorWeight" disabled="disabled" value="50" style="font-weight: bold;">
-													</div>
-												</div>
-
-												<div class="ibox-content ibox-content-radius ">
-													<div class="row">
-														<div class="table-responsive">
-															<table class="table table-striped "
-																id="tableCdsResult" 
-																style="border-color: #dddddd">
-																<thead>
-																	<tr>
-																		<th style='width: auto'>Appraisal Item Name</th>
-																		<th style='width: auto'>Max Value</th>
-																		<th style='width: auto'>Actual Value</th>
-																		<th style='width: auto'>Over Value</th>
-																		<th style='width: auto'>Deduct Score/Unit</th>
-																		<th style='width: auto'>Weigh Score</th>
-																	</tr>
-																</thead>
-																<tbody id="listAppraisal" >
-																	<tr>
-																		<td>1</td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																	</tr>
-																	
-																</tbody>
-																<tfoot>
-																	<tr>
-																		<td colspan="7" class="text-right" >
-																		<span style="color: black; font-weight: bold">Total</span> 
-																		<input
-																			class="input-xs text-center text-muted" type="text"
-																			id="numWorkBehaviorTotal" name="numWorkBehaviorTotal"
-																			disabled="disabled" value="50"
-																			style="font-weight: bold;"></td>
-																	</tr>
-
-																</tfoot>
-															</table>
-
-
-														</div>
-
-													</div>
-
-												</div>
-											</div>
-
-										</div>
-
-									</div>								
-								<!-- -------------Table Work Behavior Start------------- -->	
-
-								<!-- -------------Table Organization Development Start------------- -->
-									<div class="row p-t-xs">
-										<div class="col-lg-12">
-											<div class="ibox float-e-margins">
-												<div class="ibox-title ibox-title-radius">
-													<div class="text-left col-"><h5 style="padding-top: 5px;">Organization Development</h5></div>
-													<div class="text-right col-">
-														<span style="color: black;font-weight: bold">Total Weight %  </span>
-														<input class="input-xs text-center text-muted" type="text" id="numOrgDevWeight" name="numOrgDevWeight" disabled="disabled" value="50" style="font-weight: bold;">
-													</div>
-												</div>
-
-												<div class="ibox-content ibox-content-radius ">
-													<div class="row">
-														<div class="table-responsive">
-															<table class="table table-striped "
-																id="tableCdsResult" 
-																style="border-color: #dddddd">
-																<thead>
-																	<tr>
-																		<th style='width: auto'>Appraisal Item Name</th>
-																		<th style='width: auto'>Max Value</th>
-																		<th style='width: auto'>Actual Value</th>
-																		<th style='width: auto'>Over Value</th>
-																		<th style='width: auto'>Deduct Score/Unit</th>
-																		<th style='width: auto'>Weigh Score</th>
-																	</tr>
-																</thead>
-																<tbody id="listAppraisal" >
-																	<tr>
-																		<td>1</td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																	</tr>
-																	
-																</tbody>
-																<tfoot>
-																	<tr>
-																		<td colspan="7" class="text-right" >
-																		<span style="color: black; font-weight: bold">Total</span> 
-																		<input
-																			class="input-xs text-center text-muted" type="text"
-																			id="numOrgDevTotal" name="numOrgDevTotal"
-																			disabled="disabled" value="50"
-																			style="font-weight: bold;"></td>
-																	</tr>
-
-																</tfoot>
-															</table>
-
-
-														</div>
-
-													</div>
-
-												</div>
-											</div>
-
-										</div>
-
-									</div>									
-								<!-- -------------Table Organization Development Start------------- -->	
-
-								<!-- -------------Table Disciplinary Punishment Start------------- -->
-									<div class="row p-t-xs">
-										<div class="col-lg-12">
-											<div class="ibox float-e-margins">
-												<div class="ibox-title ibox-title-radius">
-													<div class="text-left col-"><h5 style="padding-top: 5px;">Disciplinary Punishment</h5></div>
-													<div class="text-right col-">
-														<span style="color: black;font-weight: bold">Total Weight %  </span>
-														<input class="input-xs text-center text-muted" type="text" id="numDisPunishmentWeight" name="numDisPunishmentWeight" disabled="disabled" value="50" style="font-weight: bold;">
-													</div>
-												</div>
-
-												<div class="ibox-content ibox-content-radius ">
-													<div class="row">
-														<div class="table-responsive">
-															<table class="table table-striped "
-																id="tableCdsResult" 
-																style="border-color: #dddddd">
-																<thead>
-																	<tr>
-																		<th style='width: auto'>Appraisal Item Name</th>
-																		<th style='width: auto'>Max Value</th>
-																		<th style='width: auto'>Actual Value</th>
-																		<th style='width: auto'>Over Value</th>
-																		<th style='width: auto'>Deduct Score/Unit</th>
-																		<th style='width: auto'>Weigh Score</th>
-																	</tr>
-																</thead>
-																<tbody id="listAppraisal" >
-																	<tr>
-																		<td>1</td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																		<td></td>
-																	</tr>
-																	
-																</tbody>
-																<tfoot>
-																	<tr>
-																		<td colspan="7" class="text-right" >
-																		<span style="color: black; font-weight: bold">Total</span> 
-																		<input
-																			class="input-xs text-center text-muted" type="text"
-																			id="numDisPunishmentTotal" name="numDisPunishmentTotal"
-																			disabled="disabled" value="50"
-																			style="font-weight: bold;"></td>
-																	</tr>
-
-																</tfoot>
-															</table>
-
-
-														</div>
-
-													</div>
-
-												</div>
-											</div>
-
-										</div>
-
-									</div>									
-								<!-- -------------Table Disciplinary Punishment Start------------- -->	
+									<div id='appraisal_template_area'></div>
 
 
 								</div>
@@ -721,7 +411,7 @@
 						<div class="form-group text-left p-xxs">
 							<label class="">Assign to:</label> 
 							<select
-								data-toggle="tooltip" title="Appraisal Level"
+								data-toggle="tooltip" title=""
 								class="input form-control input-sm" id="assignTo" name="assignTo">
 								<option>All</option>
 								<option>ผู้บริหาร</option>
@@ -735,7 +425,7 @@
 						<div class="form-group text-left p-xxs">
 							<label class="">Action:</label> 
 							<select
-								data-toggle="tooltip" title="Appraisal Level"
+								data-toggle="tooltip" title=""
 								class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
 								<option>All</option>
 								<option>ผู้บริหาร</option>
@@ -748,6 +438,7 @@
 						</div>
 						
 							<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
+							<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
 					<!-- 				<button class="btn btn-success" type="button" id="btnAddAnother">Save -->
 					<!-- 					& Add Another</button> -->
 							<button data-dismiss="modal" class="btn btn-danger btnCancle"
@@ -769,7 +460,9 @@
 
 
 
-
+	<div id="embedParamSearch"></div>
+	
+	
     <!-- Mainly scripts -->
      <script src="../js/jquery3.1.1.js"></script>
 	 <script type="text/javascript">
@@ -789,20 +482,15 @@
     <!-- Custom and plugin javascript -->
     <script src="../js/inspinia.js"></script>
     <script src="../js/plugins/pace/pace.min.js"></script>
-     <!-- table data start -->
-    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
-    <!-- table data end -->
     
-    <!-- load angular fame work start-->
-    <script src="../js/angular.min.js"></script>
-    <script src="../js/angular-route.js"></script>
-    <!-- load angular fame work end -->
+    
+
     
     
     <script src="../js/jquery.mloading.js"></script>
-    
-    <!-- <script src="../Controller/appraisal.js"></script> -->
+     <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script> 
+    <script src="../Controller/appraisal.js"></script>
     
     	
     
