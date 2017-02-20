@@ -1,30 +1,4 @@
-<<<<<<< HEAD
-<button id="btnSubmit">Login</button>
-<script src="js/jquery-2.1.1.js"></script> 
-<script>
-$("#btnSubmit").click(function(){
-		$.ajax({
-			
-			url:"http://192.168.1.58/tyw_api/public/session",
-			//url:"http://58.9.74.76/dqs_api/public/session",
-			type:"POST",
-			dataType:"text",
-			data:{"username":"tyw","password":"P@ssw0rd"},
-			error: function(jqXHR, textStatus, errorThrown) {
-				$("#information").html("<font color='red'>***</font> invalid credentials.").show();
-			},
-			success:function(data){
-				//console.log(data);
-				localStorage.setItem("tokenID",data);
-				alert("Login is Success");
-				
-			}
-		})			
-		return false;
-	});
-	
-	
-=======
+
 <button id="btnSubmit">Login</button>
 <script src="js/jquery-2.1.1.js"></script> 
 <script>
@@ -32,7 +6,7 @@ $("#btnSubmit").click(function(){
 		$.ajax({
 			
 			url:"http://192.168.1.240/tyw_api/public/session",
-			//url:"http://58.9.74.76/dqs_api/public/session",
+			//url:"http://171.96.200.138/tyw_api/public/session",
 			type:"POST",
 			dataType:"text",
 			data:{"username":"tyw","password":"P@ssw0rd"},
@@ -48,7 +22,4 @@ $("#btnSubmit").click(function(){
 		})			
 		return false;
 	});
-	
-	
->>>>>>> refs/remotes/origin/dev
 </script>
