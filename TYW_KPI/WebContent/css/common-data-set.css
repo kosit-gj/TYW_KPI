@@ -1,4 +1,8 @@
-
+@media (min-width : 1200px) {
+.width-col-lg-2{
+    width: 11.66666667%;
+}
+}
 .countPagination {
     width: 92%;
 }
