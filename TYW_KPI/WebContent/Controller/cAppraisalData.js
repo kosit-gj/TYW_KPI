@@ -156,7 +156,7 @@ var dropDownListPeriod = function(){
 	
 	
 	html+="<select id=\"period\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Period\" name=\"period\">";
-	html+="<option  selected value=''>All</option>";
+	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownPeriod,
 		type:"get" ,
