@@ -250,7 +250,7 @@ var listImportEmployeeFn = function(data) {
 	//alert("listCommonDataSetFn");
 	//clear ฟังก์ชัน  data ข้อมูลเก่าทิ้ง 
 	$("#listEmployee").empty();
-	
+	var htmlAppraisalLevel= "";
 	var htmlTable = "";
 //	var IsSQL ="";
 //	var IsActive ="";
@@ -261,6 +261,9 @@ var listImportEmployeeFn = function(data) {
 //		}else if (indexEntry["IsActive"]=="0"){
 //			IsActive = "<input disabled type='checkbox' name='is_active' id='is_active'  value='0'>";
 //		}
+		$.each(indexEntry["appraisal_level"],function(index,indexEntry){
+			htmlAppraisalLevel+=indexEntry["appraisal_level_name"]+"<br>";
+		});
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td class='objectCenter 'style=\"vertical-align: middle;\">"+"<div class='checkbox m-b-n m-t-xxs'><input  style=\"margin-top:1px;\" type=\"checkbox\" class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" value=\""+indexEntry["emp_code"]+"\"><label> </label></div>"+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_code"]+ "</td>";
@@ -270,6 +273,7 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_name"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_group"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["chief_emp_code"]+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+htmlAppraisalLevel+"</td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalRole data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalRole data-toggle='modal'&gt;Role&lt;/button&gt;
@@ -278,6 +282,8 @@ var listImportEmployeeFn = function(data) {
 				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
+		
+		htmlAppraisalLevel="";
 	});
 	
 	//alert("ผ่าน");
@@ -292,7 +298,7 @@ var listImportEmployeeFn = function(data) {
 			$(".role").on("click",function(){
 				$("#txtAssignEmpName").show();
 				$(this).parent().parent().parent().children().click();
-				$("#from_role_emp_name").html($(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().text());
+				$("#from_role_emp_name").html($(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().text());
 				//listAppraisalLevel();
 				findOneRoleFn(this.id);
 				$("#id").val(this.id);
@@ -495,6 +501,7 @@ var insertRoleFn = function () {
 			success : function(data) {
 				if(data['status']==200){
 					callFlashSlide("Add Role Successfully.");
+					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$('#ModalRole').modal('hide');
 					
 				}
@@ -528,6 +535,7 @@ var updateRoleFn = function () {
 					if(data['status']==200){
 						clearFn();
 						callFlashSlide("Update Role Successfully.");
+						getDataFn($("#pageNumber").val(),$("#rpp").val());
 						$('#ModalRole').modal('hide');
 						
 					}
