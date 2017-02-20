@@ -22,7 +22,7 @@
 				                </div>
 				                
 				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="appraisalItemNameQuantity">
+				                	<input type="text" class="form-control input-sm numberOnly" placeholder="Appraisal Item Name" id="appraisalItemNameQuantity">
 				                	
 				                </div>
 				                <br style="clear:both">
@@ -68,9 +68,9 @@
 				                	Formula Description <span class='redFont'>*</span>
 				                </div>
 				                
-				                <div class="form-input-customs-title" id="formulaDescriptionAreaQuantity">
+				                <div class="form-input-customs-title " id="formulaDescriptionAreaQuantity">
 				                
-				                	<textarea class="form-control input-sm" id="formulaDescriptionQuantity"  style="width: 389px; height: 81px;"></textarea>
+				                	<textarea class="form-control input-sm" id="formulaDescriptionQuantity"  placeholder="Formula Description" style="width: 389px; height: 81px;"></textarea>
 				                	
 				                </div>
 				                <br style="clear:both">
@@ -101,7 +101,7 @@
 				                
 				                <div class="form-input-customs">
 				                
-				                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="baselineValueQuantity">
+				                	<input type="text" class="form-control input-sm numberOnly" placeholder="Baseline Value" id="baselineValueQuantity">
 				                </div>
 				                <br style="clear:both">
 			                </div>
@@ -124,7 +124,7 @@
                 <!-- panel2 start -->
                 <div class="row">
 	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
+	                      <div class="ibox-title3">
 	                          <div class='titlePanel'>Advanced Search </div>
 	                      </div>
 	   					
@@ -152,7 +152,7 @@
 						                                    <div class="col-lg-9" id="cdsNameSearchAreaQuantity">
 						                                    
 							                                    
-																<input type='text' name='cdsNameSearchQuantity' id='cdsNameSearchQuantity' class='input form-control input-sm' title="CDS Name" data-toggle="tooltip">
+																<input type='text'  placeholder="CDS Name"  name='cdsNameSearchQuantity' id='cdsNameSearchQuantity' class='input form-control input-sm' title="CDS Name" data-toggle="tooltip">
 																
 						                                    </div>
 						                                </div>
@@ -180,7 +180,7 @@
                 <!-- panel3 start -->
                 <div class="row ">
 	  					<div class="col-lg-12">
-	                      <div class="ibox-title">
+	                      <div class="ibox-title3">
 	                          <div class='titlePanel'>CDS List</div>
 	                      </div>
 	   					
@@ -268,8 +268,10 @@
 								                </div>
 								                
 								                <div class="form-input-customs-title">
-								                
+								                	<!-- 
 								                	<textarea id="formulaDescriptionQuantity" class="form-control input-sm"  style="width: 664px; height: 100px;">([sum:จำนวนยอดขายสุทธิต่อไตรมาส]/[sum:จำนวนเป้าหมายยอดขายสุทธิต่อไตรมาส]*100)</textarea>
+								                	 -->
+								                	<div id="textarea_cds" class="form-control input-sm" contenteditable> </div>
 								                	
 								                </div>
 								               
@@ -294,7 +296,8 @@
            	 	<input type="hidden" name="appraisalItemIdQuantity" id="appraisalItemIdQuantity" value="">
            	 	<input type="hidden" name="structure_id_quantity" id="structure_id_quantity" value="">
    				<input type="hidden" name="actionQuantity" id="actionQuantity" value="add">
-   				
+   				<span aria-hidden="true" class="glyphicon glyphicon-refresh" id="btnCheckFormula"></span>
+   			
    				<button class="btn btn-primary" type="button" id="btnSubmitQuantity">Save</button>
    				<button class="btn btn-primary" type="button" id="btnAddAnotherQuantity">Save & Add Another</button>
                 <button data-dismiss="modal" class="btn btn-white btnCancleQuantity" type="button">Cancel</button>
@@ -303,6 +306,9 @@
         </div>
     </div>
 </div>       
-<div class='paramPagingCDS'></div>               
+<div class='paramPagingCDS'></div> 
+<div class='formula_cds_id_area'></div>    
+<div class='formula_cds_name_area'></div>       
+<div class='test_formula_cds_name_area'></div>       
 <!-- Modal Quantity End  -->
 <script src="../Controller/Form/cQuantity.js"></script>

@@ -69,7 +69,7 @@ var callFlashSlideInModal =function(text,id,flashType){
 //check value not null
 var notNullFn = function(data){
 	var dataNotNull="";
-	if((data == '' || data == 'undefinided' || data == null )){
+	if((data == '' || data == 'undefinided' || data == null  )){
 		dataNotNull="";
 	}else{
 		dataNotNull=data;
@@ -77,7 +77,29 @@ var notNullFn = function(data){
 	return dataNotNull;
 }
 
-
+var validationFn = function(data){
+//	var data={"status":400,"data":{"appraisal_item_name":["The appraisal item name field is required."],"baseline_value"
+//		:["The baseline value field is required."],"formula_cds_id":["The formula cds id field is required."
+//		],"formula_cds_name":["The formula cds name field is required."]}};
+	var errorData="";
+	var count=0;
+	$.each(data['data'],function(index,indexEntry){
+		
+		
+		if(index!=undefined){
+			if(count==0){
+				errorData+=""+indexEntry+"";
+			}else{
+				errorData+="<br>"+indexEntry+" ";
+			}
+		}
+		
+		count++;
+	});
+	
+	return errorData;
+	
+}
 var searchMultiFn=function(search,searchName){
 	var paramSearchName="";
 	 if(searchName==undefined){

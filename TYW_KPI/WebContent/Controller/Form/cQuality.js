@@ -146,7 +146,7 @@ is_active
 		is_active
 		*/	
 		clearQualityFormFn();
-		appraisalLevelListFn("Quality");	
+		appraisalLevelListFn("Quality",$("#embed_appraisal_level_id").val());	
 		$("#btnAddAnotherQuality").show();
 
 		//set header

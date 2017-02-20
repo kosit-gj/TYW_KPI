@@ -2,7 +2,7 @@
 var globalCDSData="";
 //Cleaning
 var clearQuantityFormFn = function(){
-	
+	$("#actionQuantity").val("add");
 	$("#informationQuantity").hide();
 	$("#appraisalItemNameQuantity").val("");
 	//$("#appraisalLevelQuantity").val("");
@@ -13,7 +13,9 @@ var clearQuantityFormFn = function(){
 	$("#uomQuantity option:first").attr('selected','selected');
 	$("#isActiveQuantity").prop("checked",false);
 	$("#formulaDescriptionQuantity").val("");
-	$("#structure_id_quantity").val("");
+	//$("#structure_id_quantity").val("");
+	$("#textarea_cds").html("");
+	
 	
 }
 //List Data
@@ -51,8 +53,11 @@ var updateQuantityFn  = function(){
 	 var uom_id=$("#uomQuantity").val();
 	 var baseline_value=$("#baselineValueQuantity").val();
 	 var formula_desc=$("#formulaDescriptionQuantity").val();
-	 var formula_cds_id="1";
-	 var formula_cds_name="1";
+	
+	 $(".formula_cds_id_area .cds_name_inline").remove();
+	 var formula_cds_name=$("#textarea_cds").html();
+	 var formula_cds_id=$(".formula_cds_id_area").text();
+		
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
 		 is_active=1;
@@ -83,7 +88,7 @@ var updateQuantityFn  = function(){
 				 $('#modal-quantity').modal('hide');
 			     callFlashSlide("Update Successfully.");
 				 getDataFn($("#pageNumber").val(),$("#rpp").val());
-		      	//clearFn();
+		      	 clearQuantityFormFn
 		     }else if(data['status']==400) {
 				callFlashSlideInModal(validationFn(data),"#informationQuantity","error");
 			 }
@@ -94,7 +99,11 @@ var updateQuantityFn  = function(){
 //Insert
 var insertQuantityFn = function(param) {
 	
+	$(".formula_cds_id_area .cds_name_inline").remove();
+	var formula_cds_name=$("#textarea_cds").html();
+	var formula_cds_id=$(".formula_cds_id_area").text();
 	
+
 	 var appraisal_item_name=$("#appraisalItemNameQuantity").val();
 	 var appraisal_level_id=$("#appraisalLevelQuantity").val();
 	 var perspective_id=$("#perspectiveQuantity").val();
@@ -102,8 +111,8 @@ var insertQuantityFn = function(param) {
 	 var uom_id=$("#uomQuantity").val();
 	 var baseline_value=$("#baselineValueQuantity").val();
 	 var formula_desc=$("#formulaDescriptionQuantity").val();
-	 var formula_cds_id="1";
-	 var formula_cds_name="1";
+	 
+		
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
 		 is_active=1;
@@ -159,11 +168,11 @@ var cdsListFn = function(data){
 	$.each(data['data'],function(index,indexEntry){
 	//cds_id,cds_name
 		cdsListHTML+="<tr>";
-			cdsListHTML+="<td>"+indexEntry['cds_id']+"</td>";
-			cdsListHTML+="<td>"+indexEntry['cds_name']+"</td>";
+			cdsListHTML+="<td >"+indexEntry['cds_id']+"</td>";
+			cdsListHTML+="<td id=\"cds_name-"+indexEntry['cds_id']+"\">"+indexEntry['cds_name']+"</td>";
 			cdsListHTML+="<td style=\"text-align:center\">";
-			cdsListHTML+="<button class=\"btn btn-warning btn-xs btn-gear edit\" id=\"1\" >Sum</button>&nbsp;";
-			cdsListHTML+="<button id=\"1\" class=\"btn btn-danger btn-xs btn-gear del\">Average</button>";
+			cdsListHTML+="<button class=\"btn btn-warning btn-xs btn-gear sum\" id=\"sum-"+indexEntry['cds_id']+"\" >Sum</button>&nbsp;";
+			cdsListHTML+="<button  class=\"btn btn-danger btn-xs btn-gear average\" id=\"avg-"+indexEntry['cds_id']+"\">Average</button>";
 			cdsListHTML+="</td>";
 		cdsListHTML+="</tr>";
 	});
@@ -221,6 +230,8 @@ updated_by
 updated_dttm
 structure_name
 */
+	$(".formula_cds_id_area").empty();
+	$("#cdsNameSearchQuantity").val("");
 	if(action=='edit'){
 		clearQuantityFormFn();
 		appraisalLevelListFn("Quantity",data['appraisal_level_id']);			
@@ -228,8 +239,17 @@ structure_name
 		uomListFn("Quantity",data['uom_id']);
 		$("#baselineValueQuantity").val(data['baseline_value']);
 		$("#formulaDescriptionQuantity").val(data['formula_desc']);
-		$("#appraisalItemNameQuantity").val(data['appraisal_item_name']);
-		$("#formulaDescriptionQuantity").val(data['formula_cds_name']);
+		$("#appraisalItemNameQuantity").val(data['appraisal_item_name']);	
+		$("#textarea_cds").html(data['formula_cds_name']);
+		
+		//get formula cds id start
+		$("#textarea_cds").keyup(function(){
+			//formula_cds_id_area
+			$(".formula_cds_id_area").html($(this).html());
+		});
+		$("#textarea_cds").keyup();
+		//get formula cds id end
+		
 		
 		if(data['is_active']==1){
 			$("#isActiveQuantity").prop("checked",true);
@@ -267,7 +287,7 @@ structure_name
 		
 		
 		//Autocomplete Search Start.
-		$("#cdsNameSearch").autocomplete({
+		$("#cdsNameSearchQuantity").autocomplete({
 
 	        source: function (request, response) {
 	        	$.ajax({
@@ -275,7 +295,7 @@ structure_name
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevel").val()},
+					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevelSearchQuantity").val()},
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
 	                        console.log('Error: ' + xhr.responseText);
@@ -283,6 +303,7 @@ structure_name
 					 success:function(data){
 							response($.map(data, function (item) {
 	                            return {
+	                            	
 	                                label: item.cds_name,
 	                                value: item.cds_name
 	                            };
@@ -295,17 +316,27 @@ structure_name
 					});
 	        }
 	    });
+		$(".ui-autocomplete").css({"z-index":"10000;"});
 		//Autocomplete Search End
 		appraisalLevelListFn("SearchQuantity");
 		
-	
-	
 		
+		//run search cds default 
+		var embedParam="" +
+		"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelSearchQuantity").val()+"'>" +
+		"<input type='hidden' class='param_quantity_form' id='embed_cds_name_quantity' name='embed_cds_name_quantity' value='"+$("#cdsNameSearchQuantity").val()+"'>";
+		$(".param_quantity_form").remove();
+		$("#embedParamSearchQuantity").html(embedParam);
+		//setTimeout(function(){
+			cdsGetFn();
+		//},3000);
+		 
+
 	}else if(action=='add'){
 	
 		clearQuantityFormFn();
-		appraisalLevelListFn("Quantity");			
-		perspectiveListFn("Quantity");
+		appraisalLevelListFn("Quantity",$("#embed_appraisal_level_id").val());			
+		perspectiveListFn("Quantity",$("#embed_perspective_id").val());
 		uomListFn("Quantity");
 		$("#btnAddAnotherQuantity").show();
 		//SEARCH
@@ -316,7 +347,7 @@ structure_name
 		$("#structure_id_quantity").val(structureId);
 		$("#modalQuantityDescription").html("Add "+structureName);
 		
-		$("#cdsNameSearch").autocomplete({
+		$("#cdsNameSearchQuantity").autocomplete({
 
 	        source: function (request, response) {
 	        	$.ajax({
@@ -324,7 +355,7 @@ structure_name
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevel").val()},
+					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevelSearchQuantity").val()},
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
 	                        console.log('Error: ' + xhr.responseText);
@@ -372,6 +403,25 @@ structure_name
 	
 	
 }
+var formulaEngineFn = function(id){
+	
+	var cds=id.split("-");
+	var cds_id=cds[1];
+	var cds_type=cds[0];
+	var cds_name=$("#cds_name-"+cds_id).text();
+
+	//([sum:จำนวนยอดขายสุทธิต่อไตรมาส]/[sum:จำนวนเป้าหมายยอดขายสุทธิต่อไตรมาส]*100)
+	var wrap="&nbsp;<span  class='not-allowed' contenteditable='false'><div class='font-blue'>[</div>"+cds_type+":<span class='cds_name_inline'>"+cds_name+"</span><span class='cds_id_inline '>cds"+cds_id+"</span><div class='font-blue'>]</div></span>";
+	//var wrap="&nbsp;<input class='formula_unit' type=\"text\" disabled value=\"["+cds_type+":"+cds_name+"]\">&nbsp;";
+	
+	$("#textarea_cds").append(wrap);
+	$("#textarea_cds").keyup(function(){
+		//formula_cds_id_area
+		$(".formula_cds_id_area").html($(this).html());
+	});
+	$("#textarea_cds").keyup();
+	
+}
 $(document).ready(function(){
 //click modal quality start.
 
@@ -389,12 +439,12 @@ $(document).ready(function(){
 		"<input type='hidden' class='param_quantity_form' id='embed_cds_name_quantity' name='embed_cds_name_quantity' value='"+$("#cdsNameSearchQuantity").val()+"'>";
 		$(".param_quantity_form").remove();
 		$("#embedParamSearchQuantity").html(embedParam);
+		$(".formula_cds_id_area").empty();
 		cdsGetFn();
 	});
 	
 	
 	//Search Quantity Start
-	//$("#SearchQuantity").click(function(){
 	$(document).on("click","#SearchQuantity",function(){	
 		var embedParam="" +
 				"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelSearchQuantity").val()+"'>" +
@@ -425,5 +475,27 @@ $(document).ready(function(){
 		
 	});
 	//Submit Quantity end
+	
+	//Check form start
+	$(document).on("click","#btnCheckFormula",function(){
+		$(".formula_cds_id_area .cds_name_inline").remove();
+		var formula_cds_name=$("#textarea_cds").html();
+		var formula_cds_id=$(".formula_cds_id_area").text();
+		
+		callFlashSlideInModal("<b>Formula</b>: "+formula_cds_id,"#informationQuantity","error");
+		
+	});
+	
+	//check form end
+	
 	//click modal quality end.
+	
+	//calculation start
+	$(document).on("click",".sum",function(){
+		formulaEngineFn(this.id);
+	});
+	$(document).on("click",".average",function(){
+		formulaEngineFn(this.id);
+	});
+	//calculation end
 });
