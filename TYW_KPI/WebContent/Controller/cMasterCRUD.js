@@ -277,7 +277,7 @@ formHTML+="            <button data-dismiss=\"modal\" class=\"close\" type=\"but
 formHTML+="            <h4 class=\"modal-title\" id=\""+options['formDetail']['id']+"\">"+options['formDetail']['formName']+"</h4>";
 formHTML+="        </div>";
 formHTML+="        <div class=\"modal-body\">";
-formHTML+="            <h2><i class=\"fa fa fa-pencil-square-o icon-title\"></i> <span id=\"modalDescription\"> Add Database Connection</span> </h2>";
+formHTML+="            <h2><i class=\"fa fa fa-pencil-square-o icon-title\"></i> <span id=\"modalDescription\"> Add "+options['formDetail']['formName']+"</span> </h2>";
 formHTML+="            <hr>";
 
 $.each(options['form'],function(index,indexEntry){
