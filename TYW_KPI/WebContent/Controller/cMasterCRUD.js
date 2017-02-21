@@ -394,9 +394,6 @@ var createDataTableFn = function(options){
 					
 					updateFn(data,options);
 				}
-				
-				
-				
 			});
 			
 			
