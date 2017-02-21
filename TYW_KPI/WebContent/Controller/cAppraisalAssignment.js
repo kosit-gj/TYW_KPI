@@ -843,9 +843,9 @@ var dropDrowAsignToFn = function(nameArea){
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['to_appraisal_level_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['to_appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+					htmlOption+="<option selected='selected' value="+indexEntry['stage_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 				}else{
-					htmlOption+="<option value="+indexEntry['to_appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+					htmlOption+="<option value="+indexEntry['stage_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 				}
 			});
 			$("#assignTo"+nameArea).html(htmlOption);
@@ -1237,7 +1237,7 @@ var getTemplateFn = function(){
 		type:"get",
 		dataType:"json",
 		async:false,
-		//data:{'appraisal_level_id':$("#appraisalLevel").val()},
+		data:{'appraisal_level_id':$("#appraisalLevel").val()},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			
@@ -1351,7 +1351,7 @@ $(document).ready(function(){
 	
 	//btn assignment start
 	$("#btnAssignment").click(function(){
-		
+		empldoyees_code=[];
 		$(".information").hide();
 		$("#btnAddAnother").show();
 		$(".embed_appraisal_id").remove();
@@ -1363,7 +1363,7 @@ $(document).ready(function(){
 				
 				
 			});
-		//console.log(empldoyees_code);
+		console.log(empldoyees_code);
 		if(empldoyees_code.length==0){
 			callFlashSlide("Please choose Employee for Assignment.");
 			return false;

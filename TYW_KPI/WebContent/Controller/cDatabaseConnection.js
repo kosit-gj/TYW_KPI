@@ -5,20 +5,20 @@
     	//alert(createTableFn());
     	var options={
     			"colunms":[
-    			           {"colunmsDisplayName":"Connection Name","width":"20%","id":"connectionName","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Database Type","width":"65%","id":"databaseType","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Connection Name","width":"20%","id":"connection_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Database Type","width":"65%","id":"database_type","colunmsType":"radio"},
     			          ],
     			"form":[{
     					"label":"Connection Name","inputType":"text","default":"DefultText",
-    					"id":"connectionName","width":"350px","required":true
+    					"id":"connection_name","width":"350px","required":true,
     					},
     			        {
     					"label":"Database Type","inputType":"dropdown","default":"All",
-    					"id":"databaseType","width":"250px","url":"../Services/databaseType.txt","required":true
+    					"id":"database_type_id","width":"250px","url":"../Services/databaseType.txt","required":true
     					},
     			        {
     					"label":"IP Address","inputType":"text","default":"All",
-    					"id":"ipAddress","width":"350px"
+    					"id":"ip_address","width":"350px"
     					},
     			        {
     					"label":"Port","inputType":"text","default":"All",
@@ -26,22 +26,31 @@
     					},
     			        {
     					"label":"Database Name","inputType":"text","default":"All",
-    					"id":"databaseName","width":"350px"
+    					"id":"database_name","width":"350px"
     					},
     			        {
     					"label":"User","inputType":"text","default":"All",
-    					"id":"user","width":"250px"
+    					"id":"user_name","width":"250px"
     					},
     			        {
     					"label":"Password","inputType":"text","default":"All",
     					"id":"password","width":"250px"
-    					}
+    					},
+    					{
+        					"label":"Test","inputType":"checkbox","default":"1",
+        					"id":"test","width":"250px"
+        					}
+    					
     			     ],
-    			 "formDetail":{"formSize":"modal-dialog","formName":"Database Connection","id":"databaseConnection"},       
-    			 "serviceName":["http://192.168.1.42:3001/api/tyw_database_connectoin"],
+    			 "formDetail":{"formSize":"modal-dialog","formName":"Database Connection","id":"databaseConnection","pk_id":"connection_id"},       
+    			 "serviceName":[restfulURL+"/tyw_api/public/database_connection"],
+    			 "tokenID":tokenID,
+    			 "pagignation":false,
+    			 "expressSearch":false
     	}
-    	//console.log(options['colunms'][0]);
+    	console.log(options['tokenID'].token);
     	createDataTableFn(options);
+    	
     	
     	
     });

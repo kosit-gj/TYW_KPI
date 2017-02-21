@@ -1,5 +1,5 @@
 //Global Variable
-var golbalDataBranch =[];
+var golbalDataCRUD =[];
 
 var searchMultiFn=function(search,searchName){
 	var paramSearchName="";
@@ -34,9 +34,9 @@ var insertFn = function(data,options){
 		type : "POST",
 		dataType : "json",
 		data : data,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(data,status) {
-			if(status=="success"){
+			if(data['status']=="200"){
 				alert("Insert Success");
 				getDataFn(options);
 				clearFn(options);
@@ -53,7 +53,7 @@ var deleteFn = function(id,options){
 		type : "delete",
 		dataType : "json",
 		async:false,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(status) {
 			
 			getDataFn(options);
@@ -79,12 +79,12 @@ var updateFn = function(data,options){
 	
 	$.ajax({
 			url:options['serviceName']+"/"+$("#id").val(),
-			type : "put",
+			type : "patch",
 			dataType : "json",
 			data : data,
-			//headers:{Authorization:"Bearer "+tokenID.token},
+			headers:{Authorization:"Bearer "+options['tokenID'].token},
 			success : function(data,status) {
-				if(status=="success"){
+				if(data['status']=="200"){
 					alert("Update Success");
 					getDataFn(options);
 					clearFn(options);
@@ -127,24 +127,45 @@ var fineOneFn = function(id,options){
 		type : "GET",
 		dataType : "json",
 		async:false,
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(data) {
-			$("#id").val(data['_id']);
+			$("#id").val(data[options['formDetail']['pk_id']]);
 			$("#action").val('edit');
 			mapObjectToFormFn(data,options);
 		}
 	});
 }
+var displayTypeFn = function(colunms,options){
+	var htmlTbody="";
+	if(colunms['colunmsType']=='checkbox'){
+	htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\">"+indexEntry[indexEntry2['id']]+"</td>";
+	}else{
+	htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\">"+indexEntry[indexEntry2['id']]+"</td>";	
+	}
+	return htmlTbody;
+};
 var listDataFn = function(data,options){
 	
 	var htmlTbody="";
 	$.each(data,function(index,indexEntry) {
 		htmlTbody+="    	<tr class=\"rowSearch"+options['formDetail']['id']+"\">";
 		$.each(options['colunms'],function(index2,indexEntry2){
-		htmlTbody+="    		<td class=\"columnSearch"+options['formDetail']['id']+"\">"+index+"-"+indexEntry[indexEntry2['id']]+"</td>";
+			
+			if(indexEntry2['colunmsType']=='checkbox'){
+				if(indexEntry[indexEntry2['id']]==1){
+					htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' checked='checked'></td>";
+				}else{
+					htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' ></td>";
+				}
+				
+			}else if(indexEntry2['colunmsType']=='text'){
+				
+				htmlTbody+="    		<td class=\"columnSearch"+options['formDetail']['id']+"\">"+indexEntry[indexEntry2['id']]+"</td>";
+			
+			}
 		});
 		htmlTbody+="    		<td style=\"text-align:center\">";
-		htmlTbody+="    		<i data-content=\"&lt;button class='btn btn-warning btn-xs btn-gear edit' id="+indexEntry['_id']+" data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id="+indexEntry['_id']+" class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+		htmlTbody+="    		<i data-content=\"&lt;button class='btn btn-warning btn-xs btn-gear edit' id='id-"+indexEntry[options['formDetail']['pk_id']]+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='id-"+indexEntry[options['formDetail']['pk_id']]+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 		htmlTbody+="    		</td>";
 		htmlTbody+="    	</tr>";
 		
@@ -157,12 +178,16 @@ var listDataFn = function(data,options){
 		//Delete Start
 		$(".del").on("click",function() {
 			//alert(this.id);
-			deleteFn(this.id,options);
+			var id=this.id.split("-");
+			id=id[1];
+			deleteFn(id,options);
 		});
 		//findOne Start
 		$(".edit").on("click",function() {
 			//alert(this.id);
-			fineOneFn(this.id,options);
+			var id=this.id.split("-");
+			id=id[1];
+			fineOneFn(id,options);
 		});
 	});	
 	
@@ -177,18 +202,21 @@ var getDataFn = function(options){
 		dataType : "json",
 		async:false,
 		//data:{"page":page,"rpp":rpp},
-		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(data) {
 			listDataFn(data,options);
-			golbalDataBranch=data;
-			//paginationSetUpFn(golbalDataBranch['current_page'],golbalDataBranch['last_page'],golbalDataBranch['last_page']);
+			golbalDataCRUD=data;
+			if(options['pagignation']==true){
+				paginationSetUpFn(golbalDataCRUD['current_page'],golbalDataCRUD['last_page'],golbalDataCRUD['last_page']);
+			}
+			
 		}
 	});
 }
 //getDataFn();
 
 
-var createInputTypeFn  = function(object){
+var createInputTypeFn  = function(object,tokenID){
 	var inputType="";
 /*
 {
@@ -204,19 +232,38 @@ var createInputTypeFn  = function(object){
 			dataType:"json",
 			type:"get",
 			async:false,
+			headers:{Authorization:"Bearer "+tokenID.token},
 			success:function(data){
 				inputType="<select class='form-control input-sm' id="+object['id']+" name=\""+object['id']+"\" style='width:"+object['width']+"'>";			
 				$.each(data,function(index,indexEntry){
-					inputType+="<option>"+indexEntry+"</option>";
+					inputType+="<option value="+index+">"+indexEntry+"</option>";
 				});
 				inputType+="<select>";
 			}
 		})
 		
 	}else if(object['inputType']=="text"){
+	
 		inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+	
+	}else if(object['inputType']=="checkbox"){
+		
+		inputType+="<input type='checkbox' class=\" \" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+	
+	}else if(object['inputType']=="radio"){
+		
+		inputType+="<input type='radio' class=\" \" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+	
 	}
 	return inputType;
+}
+var createExpressSearchFn = function(){
+var expressSearch="";
+expressSearch+="<div class=\"input-group\"><input type=\"text\" class=\"input-sm form-control\" id=\"searchText\" placeholder=\"Search\"> <span class=\"input-group-btn\">";
+expressSearch+="<button id=\"btnSearch\" class=\"btn btn-sm btn-primary\" type=\"button\">&nbsp;<i class=\"fa fa-search\"></i></button> </span>";
+expressSearch+="</div>";
+
+return expressSearch;
 }
 var createFormFn = function(options){
 	
@@ -243,7 +290,7 @@ $.each(options['form'],function(index,indexEntry){
 								}
 	formHTML+="                </div>";
 	formHTML+="                <div class=\"form-input-customs\">";
-	formHTML+=					createInputTypeFn(indexEntry);
+	formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
 	formHTML+="                </div>";
 	formHTML+="                <br style=\"clear:both\">";
 	formHTML+="            </div>";
@@ -278,6 +325,11 @@ var createDataTableFn = function(options){
 			
 			
 			$("#mainContent").html(data);
+			
+			if(options['expressSearch']==true){
+				$("#expressSearchArea").html(createExpressSearchFn());
+			}
+			
 			
 			$("#titilePage").html(options['formDetail']['formName']);
 			$("#titlePanel").html(options['formDetail']['formName']+" List");
@@ -330,6 +382,7 @@ var createDataTableFn = function(options){
 				
 				
 			});
+			
 			
 			$("#btnSearch")	.click(function(){
 				searchMultiFn($("#searchText").val(),options['formDetail']['id']);
