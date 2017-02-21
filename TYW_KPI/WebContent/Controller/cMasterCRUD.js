@@ -237,7 +237,7 @@ var createInputTypeFn  = function(object,tokenID){
 				inputType="<select class='form-control input-sm' id="+object['id']+" name=\""+object['id']+"\" style='width:"+object['width']+"'>";			
 				$.each(data,function(index,indexEntry){
 					
-					console.log(Object.keys(indexEntry)[0]);
+					//console.log(Object.keys(indexEntry)[0]);
 					//inputType+="<option value="+index+">"+indexEntry+"</option>";
 					
 					inputType+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
@@ -252,12 +252,14 @@ var createInputTypeFn  = function(object,tokenID){
 	
 	}else if(object['inputType']=="checkbox"){
 		
-		inputType+="<input type='checkbox' class=\" \" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
-	
+		inputType+="<input type=\"hidden\"  id=\""+object['id']+"\" name=\""+object['id']+"\" value='0'>";
+		inputType+="<input type='checkbox' class=\"checkbox\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+		
+		
 	}else if(object['inputType']=="radio"){
 		
-		inputType+="<input type='radio' class=\" \" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
-	
+		inputType+="<input type='radio' class=\"radio\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+		
 	}
 	return inputType;
 }
@@ -361,7 +363,7 @@ var createDataTableFn = function(options){
 			
 			
 			//Get Data Start
-				
+			
 			getDataFn(options);
 			
 			//Get Data End
@@ -370,6 +372,17 @@ var createDataTableFn = function(options){
 			$("#btnSubmit").click(function(){
 				//
 				//alert("hellojquery");
+				var checkboxes = $("form#"+options['formDetail']['id']).find('input[type="checkbox"]');
+				$.each( checkboxes, function( key, value ) {
+				    if (value.checked === false) {
+				        value.value = 0;
+				       
+				    } else {
+				        value.value = 1;
+				    
+				    }
+				   // $(value).attr('type', 'hidden');
+				});
 				
 				var data = $("form#"+options['formDetail']['id']).serialize();
 				//console.log(data);
