@@ -6,7 +6,7 @@
     	var options={
     			"colunms":[
     			           {"colunmsDisplayName":"Connection Name","width":"20%","id":"connection_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Database Type","width":"65%","id":"database_type","colunmsType":"radio"},
+    			           {"colunmsDisplayName":"Database Type","width":"65%","id":"database_type","colunmsType":"text"},
     			          ],
     			"form":[{
     					"label":"Connection Name","inputType":"text","default":"DefultText",
@@ -14,7 +14,7 @@
     					},
     			        {
     					"label":"Database Type","inputType":"dropdown","default":"All",
-    					"id":"database_type_id","width":"250px","url":"../Services/databaseType.txt","required":true
+    					"id":"database_type_id","width":"250px","url":""+restfulURL+"/tyw_api/public/database_connection/db_type_list","required":true
     					},
     			        {
     					"label":"IP Address","inputType":"text","default":"All",

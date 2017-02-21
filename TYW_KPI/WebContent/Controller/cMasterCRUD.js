@@ -236,7 +236,11 @@ var createInputTypeFn  = function(object,tokenID){
 			success:function(data){
 				inputType="<select class='form-control input-sm' id="+object['id']+" name=\""+object['id']+"\" style='width:"+object['width']+"'>";			
 				$.each(data,function(index,indexEntry){
-					inputType+="<option value="+index+">"+indexEntry+"</option>";
+					
+					console.log(Object.keys(indexEntry)[0]);
+					//inputType+="<option value="+index+">"+indexEntry+"</option>";
+					
+					inputType+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
 				});
 				inputType+="<select>";
 			}
@@ -329,8 +333,7 @@ var createDataTableFn = function(options){
 			if(options['expressSearch']==true){
 				$("#expressSearchArea").html(createExpressSearchFn());
 			}
-			
-			
+			$("#btnAddData").html(options['formDetail']['formName']);
 			$("#titilePage").html(options['formDetail']['formName']);
 			$("#titlePanel").html(options['formDetail']['formName']+" List");
 			//data-target="#modal-databaseConnection"
@@ -343,7 +346,7 @@ var createDataTableFn = function(options){
 			$.each(options['colunms'],function(index,indexEntry){
 				tableHTML+="            <th  style='width:"+indexEntry['width']+"'>"+indexEntry['colunmsDisplayName']+"</th>";
 			});
-			tableHTML+="           	 	<th>Manage</th>";
+			tableHTML+="           	 	<th style='text-align:center;'>Manage</th>";
 			
 			tableHTML+="        </tr>";
 			tableHTML+="    </thead>";

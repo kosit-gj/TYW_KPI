@@ -1,1 +1,7 @@
-["mySql","Oracle","Mssql"]
+[
+
+    {
+        "current_appraisal_year": 2017
+    }
+
+]
