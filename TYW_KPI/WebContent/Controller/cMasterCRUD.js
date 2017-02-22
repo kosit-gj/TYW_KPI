@@ -1,6 +1,60 @@
 //Global Variable
 var golbalDataCRUD =[];
 
+//set paginate start
+var paginationSetUpCRUDFn = function(pageIndex,pageTotal,options){
+	
+	if(pageTotal==0){
+		pageTotal=1
+	}
+	$('.pagination_top,.pagination_bottom').off("page");
+	$('.pagination_top,.pagination_bottom').bootpag({
+	    total: pageTotal,//page Total
+	    page: pageIndex,//page index
+	    maxVisible: 5,//จำนวนปุ่ม
+	    leaps: true,
+	    firstLastUse: true,
+	    first: '←',
+	    last: '→',
+	    wrapClass: 'pagination',
+	    activeClass: 'active',
+	    disabledClass: 'disabled',
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    next: 'next',
+	    prev: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first'
+	}).on("page", function(event, num){
+		var rpp=10;
+		if($("#rpp").val()==undefined){
+			rpp=10;
+		}else{
+			rpp=$("#rpp").val();
+		}
+		
+		getDataFn(num,rpp,options);
+		
+	    $(".pagingNumber").remove();
+	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+	    $("body").append(htmlPageNumber);
+	   
+	}); 
+
+	$(".countPagination").off("change");
+	$(".countPagination").on("change",function(){
+
+		$("#countPaginationTop").val($(this).val());
+		$("#countPaginationBottom").val($(this).val());
+		
+		getDataFn(1,$(this).val(),options);
+		
+		$(".rpp").remove();
+	    var htmlRrp= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+	    $("body").append(htmlRrp);
+	});
+}
+//set paginate end
 var searchMultiFn=function(search,searchName){
 	var paramSearchName="";
 	 if(searchName==undefined){
@@ -38,7 +92,7 @@ var insertFn = function(data,options){
 		success : function(data,status) {
 			if(data['status']=="200"){
 				alert("Insert Success");
-				getDataFn(options);
+				getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
 				clearFn(options);
 			}
 			
@@ -56,7 +110,7 @@ var deleteFn = function(id,options){
 		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(status) {
 			
-			getDataFn(options);
+			getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
 			clearFn(options);
 		}
 	});
@@ -86,7 +140,7 @@ var updateFn = function(data,options){
 			success : function(data,status) {
 				if(data['status']=="200"){
 					alert("Update Success");
-					getDataFn(options);
+					getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
 					clearFn(options);
 				}
 				
@@ -195,20 +249,26 @@ var listDataFn = function(data,options){
 	
 	
 }
-var getDataFn = function(options){
+var getDataFn = function(page,rpp,options){
 	
 	$.ajax({
 		url : options['serviceName'],
 		type : "get",
 		dataType : "json",
 		async:false,
-		//data:{"page":page,"rpp":rpp},
+		data:{"page":page,"rpp":rpp},
 		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(data) {
 			listDataFn(data,options);
 			golbalDataCRUD=data;
+			
 			if(options['pagignation']==true){
-				paginationSetUpFn(golbalDataCRUD['current_page'],golbalDataCRUD['last_page'],golbalDataCRUD['last_page']);
+				//alert(golbalDataCRUD['current_page']);
+				if(golbalDataCRUD['current_page']==undefined){
+					paginationSetUpCRUDFn(1,1,options);
+				}else{
+					paginationSetUpCRUDFn(golbalDataCRUD['current_page'],golbalDataCRUD['last_page'],options);
+				}
 			}
 			
 		}
@@ -365,7 +425,7 @@ var createDataTableFn = function(options){
 			
 			//Get Data Start
 			
-			getDataFn(options);
+			getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
 			
 			//Get Data End
 			
