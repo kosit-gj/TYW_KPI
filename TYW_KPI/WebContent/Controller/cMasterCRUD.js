@@ -70,7 +70,7 @@ var clearFn = function(options){
 		if(indexEntry['inputType']=="text"){
 			$("#"+indexEntry['id']).val("");
 		}else if(indexEntry['inputType']=="dropdown"){
-			$("#"+indexEntry['id']).val("");
+			$("#"+indexEntry['id']).val($("#"+indexEntry['id']+" option:first").val());
 		}
 	});
 	
@@ -153,9 +153,9 @@ var listDataFn = function(data,options){
 			
 			if(indexEntry2['colunmsType']=='checkbox'){
 				if(indexEntry[indexEntry2['id']]==1){
-					htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' checked='checked'></td>";
+					htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' disabled='disabled' checked='checked'></td>";
 				}else{
-					htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' ></td>";
+					htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' disabled='disabled'></td>";
 				}
 				
 			}else if(indexEntry2['colunmsType']=='text'){
@@ -188,6 +188,7 @@ var listDataFn = function(data,options){
 			var id=this.id.split("-");
 			id=id[1];
 			fineOneFn(id,options);
+			$("#action").val("edit");
 		});
 	});	
 	
@@ -401,7 +402,9 @@ var createDataTableFn = function(options){
 				searchMultiFn($("#searchText").val(),options['formDetail']['id']);
 			});
 			
-			
+			$("#btnAdd").click(function(){
+				clearFn(options);
+			});
 	
 		}
 	});
