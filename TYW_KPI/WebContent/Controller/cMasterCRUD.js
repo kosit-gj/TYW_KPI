@@ -263,12 +263,15 @@ var getDataFn = function(page,rpp,options){
 			golbalDataCRUD=data;
 			
 			if(options['pagignation']==true){
+				$(".paginationControl").show();
 				//alert(golbalDataCRUD['current_page']);
 				if(golbalDataCRUD['current_page']==undefined){
 					paginationSetUpCRUDFn(1,1,options);
 				}else{
 					paginationSetUpCRUDFn(golbalDataCRUD['current_page'],golbalDataCRUD['last_page'],options);
 				}
+			}else{
+				$(".paginationControl").hide();
 			}
 			
 		}

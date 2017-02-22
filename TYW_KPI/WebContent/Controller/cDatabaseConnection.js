@@ -45,7 +45,7 @@
     			 "formDetail":{"formSize":"modal-dialog","formName":"Database Connection","id":"databaseConnection","pk_id":"connection_id"},       
     			 "serviceName":[restfulURL+"/tyw_api/public/database_connection"],
     			 "tokenID":tokenID,
-    			 "pagignation":true,
+    			 "pagignation":false,
     			 "expressSearch":false
     	}
     	console.log(options['tokenID'].token);
