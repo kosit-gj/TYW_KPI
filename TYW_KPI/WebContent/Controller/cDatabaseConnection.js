@@ -42,21 +42,34 @@
         					}
     					
     			     ],
+			     "advanceSearch":[{
+ 					"label":"Connection Name0","inputType":"text","placeholder":"DefultText",
+ 					"id":"connection_name0","width":"100%"
+			     	},{
+ 					"label":"Connection Name1","inputType":"dropdown",
+ 					"id":"connection_name1","width":"100%",
+ 					"url":""+restfulURL+"/tyw_api/public/database_connection/db_type_list"
+ 					},{
+ 					"label":"Connection Name2","inputType":"dropdown",
+ 					"id":"connection_name2","width":"100%",
+ 					"url":""+restfulURL+"/tyw_api/public/database_connection/db_type_list"
+ 					}],
     			 "formDetail":{"formSize":"modal-dialog","formName":"Database Connection","id":"databaseConnection","pk_id":"connection_id"},       
     			 "serviceName":[restfulURL+"/tyw_api/public/database_connection"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
-    			 "expressSearch":false
+    			 "expressSearch":false,
+    			 "advanceSearchSet":true,
+    			 "btnManageOption":{"id":"BtnID","name":"BtnName"}
     	}
-    	console.log(options['tokenID'].token);
+    	
     	createDataTableFn(options);
     	
     	
-    	//advance search start
+    
     	
     	
     	
-    	//advance search end
     	
     	
     	

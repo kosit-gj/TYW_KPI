@@ -80,7 +80,7 @@ var searchMultiFn=function(search,searchName){
 }
 
 
-var insertFn = function(data,options){
+var insertFn = function(data,options,param){
 	
 	$.ajax({
 		
@@ -91,9 +91,30 @@ var insertFn = function(data,options){
 		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(data,status) {
 			if(data['status']=="200"){
-				alert("Insert Success");
-				getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
-				clearFn(options);
+				//alert("Insert Success");
+//				callFlashSlide("Insert success.");
+//				getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
+//				clearFn(options);
+				
+				
+				
+				  if(param !="saveAndAnother"){
+					  	callFlashSlide("Insert success.");
+						getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
+						clearFn(options);
+						$("#modal-"+options['formDetail']['id']).modal('hide');
+					}else{
+						
+						//callFlashSlide("Insert success.");
+						callFlashSlideInModal("Insert success.","#information","");
+						getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
+						clearFn(options);
+						
+					}
+				  
+				  
+			}else if(data['status']=="400"){
+				callFlashSlideInModal(validationFn(data),"#information","error");
 			}
 			
 		}
@@ -108,10 +129,12 @@ var deleteFn = function(id,options){
 		dataType : "json",
 		async:false,
 		headers:{Authorization:"Bearer "+options['tokenID'].token},
-		success : function(status) {
-			
+		success : function(data) {
+			if(data['status']==200){
 			getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
 			clearFn(options);
+			$("#confrimModal").modal('hide');
+			}
 		}
 	});
 }
@@ -139,7 +162,8 @@ var updateFn = function(data,options){
 			headers:{Authorization:"Bearer "+options['tokenID'].token},
 			success : function(data,status) {
 				if(data['status']=="200"){
-					alert("Update Success");
+					//alert("Update Success");
+					callFlashSlide("Update success.");
 					getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
 					clearFn(options);
 				}
@@ -185,6 +209,7 @@ var fineOneFn = function(id,options){
 		success : function(data) {
 			$("#id").val(data[options['formDetail']['pk_id']]);
 			$("#action").val('edit');
+			$("#btnAddAnother").hide();
 			mapObjectToFormFn(data,options);
 		}
 	});
@@ -219,10 +244,16 @@ var listDataFn = function(data,options){
 			}
 		});
 		htmlTbody+="    		<td style=\"text-align:center\">";
-		htmlTbody+="    		<i data-content=\"&lt;button class='btn btn-warning btn-xs btn-gear edit' id='id-"+indexEntry[options['formDetail']['pk_id']]+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='id-"+indexEntry[options['formDetail']['pk_id']]+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+		htmlTbody+="    		<i data-content=\"";
+		
+		if(options['btnManageOption']!=undefined){
+		htmlTbody+="    		&lt;button id='"+options['btnManageOption']['id']+"-"+indexEntry[options['formDetail']['pk_id']]+"' class='btn btn-info btn-xs btn-gear "+options['btnManageOption']['id']+"'&gt;"+options['btnManageOption']['name']+"&lt;/button&gt;";
+		}
+		
+		htmlTbody+="			&lt;button class='btn btn-warning btn-xs btn-gear edit' id='edit-"+indexEntry[options['formDetail']['pk_id']]+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+indexEntry[options['formDetail']['pk_id']]+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 		htmlTbody+="    		</td>";
 		htmlTbody+="    	</tr>";
-		
+		//&lt;button id='id-"+indexEntry[options['formDetail']['pk_id']]+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;
 	});
 	
 	$("#listData").html(htmlTbody);
@@ -234,11 +265,17 @@ var listDataFn = function(data,options){
 			//alert(this.id);
 			var id=this.id.split("-");
 			id=id[1];
-			deleteFn(id,options);
+			$("#confrimModal").modal();
+			$(this).parent().parent().parent().children().click();
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(){
+				deleteFn(id,options);
+			});
 		});
 		//findOne Start
 		$(".edit").on("click",function() {
 			//alert(this.id);
+			$(this).parent().parent().parent().children().click();
 			var id=this.id.split("-");
 			id=id[1];
 			fineOneFn(id,options);
@@ -249,14 +286,20 @@ var listDataFn = function(data,options){
 	
 	
 }
-var getDataFn = function(page,rpp,options){
-	
+var getDataFn = function(page,rpp,options,search){
+	var data="";
+	if(search!=undefined){
+		data=search+"&page="+page+"&rpp="+rpp;
+	}else{
+		data="page="+page+"&rpp="+rpp;
+	}
 	$.ajax({
 		url : options['serviceName'],
 		type : "get",
 		dataType : "json",
 		async:false,
-		data:{"page":page,"rpp":rpp},
+		//data:{"page":page,"rpp":rpp},
+		data:data,
 		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(data) {
 			listDataFn(data,options);
@@ -311,9 +354,14 @@ var createInputTypeFn  = function(object,tokenID){
 		})
 		
 	}else if(object['inputType']=="text"){
-	
-		inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
-	
+		if(object['placeholder']!=undefined){
+			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			
+		}else{
+			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			
+		}
+		
 	}else if(object['inputType']=="checkbox"){
 		
 		inputType+="<input type=\"hidden\"  id=\""+object['id']+"\" name=\""+object['id']+"\" value='0'>";
@@ -374,7 +422,7 @@ formHTML+="				<input type=\"hidden\" name=\"action\" id=\"action\" value=\"add\
 formHTML+="				<button class=\"btn btn-primary\" type=\"button\" id=\"btnSubmit\">Save</button>";
 formHTML+="				<button class=\"btn btn-primary\" type=\"button\" id=\"btnAddAnother\">Save & Add Another</button>";
 formHTML+="            <button data-dismiss=\"modal\" class=\"btn btn-white btnCancle\" type=\"button\">Cancel</button>";
-formHTML+="            <div class=\"alert alert-warning\" id=\"information\" style=\"display: none;\"></div>";
+formHTML+="            <div class=\"alert alert-warning information\" id=\"information\" style=\"display: none;\"></div>";
 formHTML+="        </div>";
 formHTML+="    </div>";
 formHTML+="</div>";
@@ -382,7 +430,45 @@ formHTML+="</div>";
 formHTML+="</form>"; 
 return formHTML;
 }
+var createAvanceSearchFn = function(options){
+	var avanceSearchHTML="";
+	$.each(options['advanceSearch'],function(index,indexEntry){
+		
+		
+		
+		
+		
+		if(indexEntry['inputType']=='dropdown'){
+		
+			avanceSearchHTML+="<div class=\"col-sm-6 m-b-xs\">";
+				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-4 control-label\">"+indexEntry['label']+"</label>";
+					avanceSearchHTML+="<div class=\"col-lg-6\" id=\""+indexEntry['id']+"\">";
+					avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
+					avanceSearchHTML+="</div>";
+				avanceSearchHTML+="</div>";
+			avanceSearchHTML+="</div>";
+			
+		}else if(indexEntry['inputType']=='text'){
+		
+			avanceSearchHTML+="<div class=\"col-sm-6 m-b-xs\">";
+				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-4 control-label\">"+indexEntry['label']+"</label>";
+				avanceSearchHTML+="<div class=\"col-lg-6\" id='"+indexEntry['id']+"'>";
+				avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
+				avanceSearchHTML+="</div>";
+				avanceSearchHTML+="</div>";
+			avanceSearchHTML+="</div>";
+			
+		}
+	});
+	
+	
 
+	return avanceSearchHTML;
+	
+
+	
+	
+}
 var createDataTableFn = function(options){
 	
 	
@@ -392,6 +478,7 @@ var createDataTableFn = function(options){
 		type:"get",
 		async:false,
 		success:function(data){
+			
 			
 			
 			$("#mainContent").html(data);
@@ -431,7 +518,15 @@ var createDataTableFn = function(options){
 			getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
 			
 			//Get Data End
+		
+			if(options['advanceSearchSet']==true){
+				
+				$("#advanceSearchParamArea").html(createAvanceSearchFn(options));
+				$("#advanceSearchArea").show();
 			
+			}else{
+				$("#advanceSearchArea").hide();
+			}
 			
 			$("#btnSubmit").click(function(){
 				//
@@ -461,13 +556,32 @@ var createDataTableFn = function(options){
 			});
 			
 			
+			$("#btnAddAnother").click(function(){
+				var data = $("form#"+options['formDetail']['id']).serialize();
+				insertFn(data,options,'saveAndAnother');
+			});
+			
 			$("#btnSearch")	.click(function(){
 				searchMultiFn($("#searchText").val(),options['formDetail']['id']);
 			});
 			
 			$("#btnAdd").click(function(){
 				clearFn(options);
+				$("#btnAddAnother").show();
+				
 			});
+			
+			//advance search start
+	    	$("form#searchAdvanceForm").submit(function(){
+	    		
+	    		
+	    		sessionStorage.setItem("searchAdvanceForm",$(this).serialize());
+	    		var dataSearch = sessionStorage.getItem("searchAdvanceForm");
+	    		getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
+	    		
+	    		return false;
+	    	});
+	    	//advance search end
 	
 		}
 	});
