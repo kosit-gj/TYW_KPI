@@ -40,7 +40,8 @@
     			     ],
 			     "advanceSearch":[{
  					"label":"Connection Name0","inputType":"text","placeholder":"DefultText",
- 					"id":"connection_name0","width":"100%"
+ 					"id":"connection_name0","width":"100%",
+ 					"dataTypeInput":"number"
 			     	},{
  					"label":"Connection Name1","inputType":"dropdown",
  					"id":"connection_name1","width":"100%",

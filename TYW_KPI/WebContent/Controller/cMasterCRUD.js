@@ -462,9 +462,9 @@ var createAvanceSearchFn = function(options){
 			avanceSearchHTML+="</div>";
 			
 		}else if(indexEntry['inputType']=='text'){
-		
+			var dataTypeInput =(indexEntry['dataTypeInput'] == 'number' ? "numberOnly" : "");
 			avanceSearchHTML+="<div class=\"col-sm-6 m-b-xs\">";
-				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-4 control-label\">"+indexEntry['label']+"</label>";
+				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-4 control-label "+dataTypeInput+"\">"+indexEntry['label']+"</label>";
 				avanceSearchHTML+="<div class=\"col-lg-6\" id='"+indexEntry['id']+"'>";
 				avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 				avanceSearchHTML+="</div>";
