@@ -354,11 +354,15 @@ var createInputTypeFn  = function(object,tokenID){
 		})
 		
 	}else if(object['inputType']=="text"){
+
+		
+		var dataTypeInput =(object['dataTypeInput'] == 'number' ? "numberOnly" : "");
 		if(object['placeholder']!=undefined){
-			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			
+			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm "+dataTypeInput+"\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}else{
-			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm "+dataTypeInput+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}
 		
@@ -372,6 +376,15 @@ var createInputTypeFn  = function(object,tokenID){
 		
 		inputType+="<input type='radio' class=\"radio\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 		
+	}else if(object['inputType']=="password"){
+		
+		if(object['placeholder']!=undefined){
+			inputType+="<input type=\"password\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			
+		}else{
+			inputType+="<input type=\"password\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			
+		}
 	}
 	return inputType;
 }
@@ -527,6 +540,24 @@ var createDataTableFn = function(options){
 			}else{
 				$("#advanceSearchArea").hide();
 			}
+			
+			
+			$(".numberOnly").keydown(function (e) {
+				        // Allow: backspace, delete, tab, escape, enter and .
+					
+				        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+				             // Allow: Ctrl+A, Command+A
+				            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				             // Allow: home, end, left, right, down, up
+				            (e.keyCode >= 35 && e.keyCode <= 40)) {
+				                 // let it happen, don't do anything
+				                 return;
+				        }
+				        // Ensure that it is a number and stop the keypress
+				        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				            e.preventDefault();
+				        }
+				});
 			
 			$("#btnSubmit").click(function(){
 				//
