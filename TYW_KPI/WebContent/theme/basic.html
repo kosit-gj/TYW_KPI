@@ -10,10 +10,24 @@
     padding-right: 5px;
     padding-top: 1px;
     text-align: right;
-    width: 120px;
+    width: 150px;
 }
 #advanceSearchArea{
 	display:none;
+}
+.resultArea{
+display:none;
+}
+.inputFormSearch{
+	 padding-right: 0;
+}
+.ibox-content {
+    background-color: #fff;
+    border: 1px solid #ffe57f;
+    color: inherit;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 </style>
 <div class="container">
@@ -22,7 +36,7 @@
 <div id='advanceSearchArea'>
 
 <form id='searchAdvanceForm' name='searchAdvanceForm' >
-<div class="row"><!-- start--row -->
+<div class="row "><!-- start--row -->
 
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
@@ -32,22 +46,27 @@
          					</div>
          					
          						<div class="ibox-content"> 
-         							<div class="row">
-										<div class='col-sm-11'>
-											<div class='row' >											
+         							<div class="row container-fluid">
+										<div class='col-sm-10'>
+																				
 												<div id='advanceSearchParamArea'>
 
 													
 												</div>
-											</div>
+												
+											
 										</div>
 										
-										<div class='col-sm-1' align="right">
+										<div class='col-sm-2 ' align="right">
 										
 												
 												
-			                                     	<div class="input-group" >
+			                                     	
+			                                     	
+		                                         	<div class="input-group" >
 				                                     	<div id="btnSearchArea">
+				                                     		<span id='btnAdvanceSearchOption'>
+				                                     		</span>
 			                                         		<button type="submit" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
 			                                         	</div>
 		                                         	</div>
@@ -71,14 +90,14 @@
          			
          			
 </div>	
-         			<div class="row">
+         			<div class="row resultArea" style='display:none;'>
 				         		<div class="col-lg-12">
 					         	<div class="ibox-title">
 	                                <div id='titlePanel' class='titlePanel'>Database Connection List </div>
 	         					</div>
 	         					<div class="ibox-content"> 
 
-         							<div class="row">
+         							<div class="row container-fluid">
          								<div class="col-sm-9">
 	                    					<button type="button" class="btn btn-info" id="btnAdd" data-target="#modal-databaseConnection" data-toggle="modal" ><i class="fa fa-plus-square"></i>&nbsp;Add&nbsp;<span id='btnAddData'></span></button>	 
                                      	</div>

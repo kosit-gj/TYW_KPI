@@ -3,6 +3,7 @@
     	
     	
     	//alert(createTableFn());
+
     	var options={
     			"colunms":[
     			           {"colunmsDisplayName":"Connection Name","width":"20%","id":"connection_name","colunmsType":"text"},
@@ -39,35 +40,33 @@
     					
     			     ],
 			     "advanceSearch":[{
- 					"label":"Connection Name0","inputType":"text","placeholder":"DefultText",
+ 					"label":"aaa Name0","inputType":"text","placeholder":"DefultText",
  					"id":"connection_name0","width":"100%",
  					"dataTypeInput":"number"
 			     	},{
- 					"label":"Connection Name1","inputType":"dropdown",
+ 					"label":"bbb Name1","inputType":"dropdown",
  					"id":"connection_name1","width":"100%",
- 					"url":""+restfulURL+"/tyw_api/public/database_connection/db_type_list"
+ 					"url":""+restfulURL+"/tyw_api/public/database_connection/db_type_list",
+ 					"initValue":"All Data1"
  					},{
- 					"label":"Connection Name2","inputType":"dropdown",
+ 					"label":"ccc Name2","inputType":"dropdown",
  					"id":"connection_name2","width":"100%",
- 					"url":""+restfulURL+"/tyw_api/public/database_connection/db_type_list"
+ 					"url":""+restfulURL+"/tyw_api/public/database_connection/db_type_list",
+ 					"initValue":"All Data2"
  					}],
+ 					
     			 "formDetail":{"formSize":"modal-dialog","formName":"Database Connection","id":"databaseConnection","pk_id":"connection_id"},       
     			 "serviceName":[restfulURL+"/tyw_api/public/database_connection"],
     			 "tokenID":tokenID,
-    			 "pagignation":true,
-    			 "expressSearch":true,
+    			 "pagignation":false,
+    			 "expressSearch":false,
     			 "advanceSearchSet":true,
-    			 "btnManageOption":{"id":"BtnID","name":"BtnName"}
+    			 "btnManageOption":{"id":"BtnID","name":"BtnName"},
+    			 "btnAdvanceSearchOption":{"id":"BtnID","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Btn"}
     	}
     	
     	createDataTableFn(options);
     	
-    	
-    
-    	
-    	
-    	
-    	
-    	
+   
     	
     });

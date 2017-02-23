@@ -227,6 +227,7 @@ var listDataFn = function(data,options){
 	
 	var htmlTbody="";
 	$.each(data,function(index,indexEntry) {
+		console.log(indexEntry);
 		htmlTbody+="    	<tr class=\"rowSearch"+options['formDetail']['id']+"\">";
 		$.each(options['colunms'],function(index2,indexEntry2){
 			
@@ -287,11 +288,17 @@ var listDataFn = function(data,options){
 	
 }
 var getDataFn = function(page,rpp,options,search){
+	
+	var paramPage =(page == undefined || page == ""  ? "1" : page);
+	var paramrpp =(rpp == undefined || rpp == "" ? "" : rpp);
+	var pagignation =(options['pagignation'] == '' || options['pagignation'] == undefined  ? false : options['pagignation']);
+	
+	
 	var data="";
 	if(search!=undefined){
-		data=search+"&page="+page+"&rpp="+rpp;
+		data=search+"&page="+paramPage+"&rpp="+paramrpp;
 	}else{
-		data="page="+page+"&rpp="+rpp;
+		data="page="+paramPage+"&rpp="+paramrpp;
 	}
 	$.ajax({
 		url : options['serviceName'],
@@ -302,20 +309,29 @@ var getDataFn = function(page,rpp,options,search){
 		data:data,
 		headers:{Authorization:"Bearer "+options['tokenID'].token},
 		success : function(data) {
-			listDataFn(data,options);
-			golbalDataCRUD=data;
-			
-			if(options['pagignation']==true){
-				$(".paginationControl").show();
-				//alert(golbalDataCRUD['current_page']);
-				if(golbalDataCRUD['current_page']==undefined){
-					paginationSetUpCRUDFn(1,1,options);
+			//alert(data['data'].length);
+			//if(data['data'].length>0){
+				var dataResult="";
+				if(pagignation==true){
+					dataResult=data['data'];
 				}else{
-					paginationSetUpCRUDFn(golbalDataCRUD['current_page'],golbalDataCRUD['last_page'],options);
+					dataResult=data;
 				}
-			}else{
-				$(".paginationControl").hide();
-			}
+				listDataFn(dataResult,options);
+				golbalDataCRUD=data;
+				
+				if(pagignation==true){
+					$(".paginationControl").show();
+					//alert(golbalDataCRUD['current_page']);
+					paginationSetUpCRUDFn(golbalDataCRUD['current_page'],golbalDataCRUD['last_page'],options);
+					
+				}else{
+					$(".paginationControl").hide();
+				}
+			
+				$(".resultArea").show();
+			//}
+			
 			
 		}
 	});
@@ -324,6 +340,9 @@ var getDataFn = function(page,rpp,options,search){
 
 
 var createInputTypeFn  = function(object,tokenID){
+	
+	var initValue =(object['initValue'] == '' || object['initValue'] == undefined  ? false : object['initValue']);
+	
 	var inputType="";
 /*
 {
@@ -342,6 +361,10 @@ var createInputTypeFn  = function(object,tokenID){
 			headers:{Authorization:"Bearer "+tokenID.token},
 			success:function(data){
 				inputType="<select class='form-control input-sm' id="+object['id']+" name=\""+object['id']+"\" style='width:"+object['width']+"'>";			
+				//initValue
+				if(object['initValue']!=undefined){
+					inputType+="<option value=''>"+object['initValue']+"</option>";
+				}
 				$.each(data,function(index,indexEntry){
 					
 					//console.log(Object.keys(indexEntry)[0]);
@@ -415,11 +438,11 @@ $.each(options['form'],function(index,indexEntry){
 
 	formHTML+="            <div class='form-file-mangement'>";
 	formHTML+="                <div class=\"form-label-customs\">";
-	formHTML+="                	"+indexEntry['label']+"";
+	formHTML+="                <b>	"+indexEntry['label']+"";
 								if(indexEntry['required']==true){
 									formHTML+="<span class='redFont '>*</span>";
 								}
-	formHTML+="                </div>";
+	formHTML+="                </b></div>";
 	formHTML+="                <div class=\"form-input-customs\">";
 	formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
 	formHTML+="                </div>";
@@ -443,19 +466,26 @@ formHTML+="</div>";
 formHTML+="</form>"; 
 return formHTML;
 }
+var createBtnAdvanceSearchOptionFn = function(object){
+	
+	var AdvanceSearchOption="";
+	//AdvanceSearchOption+="	<div class=\"input-group\" >";
+	//AdvanceSearchOption+="     	<div id=\"btnSearchArea\">";
+	AdvanceSearchOption+="    		<button type=\"button\" class=\"btn btn-info input-sm\" name=\""+object['id']+"\" id=\""+object['id']+"\">"+object['name']+"</button>";
+	//AdvanceSearchOption+="     	</div>";
+	//AdvanceSearchOption+=" 	</div>";
+ 	
+ 	return AdvanceSearchOption;
+}
 var createAvanceSearchFn = function(options){
 	var avanceSearchHTML="";
 	$.each(options['advanceSearch'],function(index,indexEntry){
-		
-		
-		
-		
-		
+
 		if(indexEntry['inputType']=='dropdown'){
 		
-			avanceSearchHTML+="<div class=\"col-sm-6 m-b-xs\">";
-				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-4 control-label\">"+indexEntry['label']+"</label>";
-					avanceSearchHTML+="<div class=\"col-lg-6\" id=\""+indexEntry['id']+"\">";
+			avanceSearchHTML+="<div class=\"col-sm-4 m-b-xs inputFormSearch\">";
+				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-5 control-label\">"+indexEntry['label']+"</label>";
+					avanceSearchHTML+="<div class=\"col-lg-7 inputFormSearch\" id=\""+indexEntry['id']+"\">";
 					avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 					avanceSearchHTML+="</div>";
 				avanceSearchHTML+="</div>";
@@ -463,9 +493,9 @@ var createAvanceSearchFn = function(options){
 			
 		}else if(indexEntry['inputType']=='text'){
 			var dataTypeInput =(indexEntry['dataTypeInput'] == 'number' ? "numberOnly" : "");
-			avanceSearchHTML+="<div class=\"col-sm-6 m-b-xs\">";
-				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-4 control-label "+dataTypeInput+"\">"+indexEntry['label']+"</label>";
-				avanceSearchHTML+="<div class=\"col-lg-6\" id='"+indexEntry['id']+"'>";
+			avanceSearchHTML+="<div class=\"col-sm-4 m-b-xs inputFormSearch\">";
+				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-5 control-label "+dataTypeInput+"\">"+indexEntry['label']+"</label>";
+				avanceSearchHTML+="<div class=\"col-lg-7 inputFormSearch\" id='"+indexEntry['id']+"'>";
 				avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 				avanceSearchHTML+="</div>";
 				avanceSearchHTML+="</div>";
@@ -484,6 +514,9 @@ var createAvanceSearchFn = function(options){
 }
 var createDataTableFn = function(options){
 	
+	//options['advanceSearchSet']
+	var advanceSearchSet =(options['advanceSearchSet'] == '' || options['advanceSearchSet'] == undefined  ? false : options['advanceSearchSet']);
+	var expressSearch =(options['expressSearch'] == '' || options['expressSearch'] == undefined  ? false : options['expressSearch']);
 	
 	$.ajax({
 		url:"../theme/basic.html",
@@ -496,7 +529,7 @@ var createDataTableFn = function(options){
 			
 			$("#mainContent").html(data);
 			
-			if(options['expressSearch']==true){
+			if(expressSearch==true){
 				$("#expressSearchArea").html(createExpressSearchFn());
 			}
 			$("#btnAddData").html(options['formDetail']['formName']);
@@ -524,17 +557,14 @@ var createDataTableFn = function(options){
 			$("#tableArea").html(tableHTML);
 			
 			$("#modalFormArea").html(createFormFn(options));
-			
-			
-			//Get Data Start
-			
-			getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
-			
-			//Get Data End
 		
-			if(options['advanceSearchSet']==true){
+		
+			if(advanceSearchSet==true){
 				
 				$("#advanceSearchParamArea").html(createAvanceSearchFn(options));
+				if(options['btnAdvanceSearchOption']!=undefined){
+					$("#btnAdvanceSearchOption").html(createBtnAdvanceSearchOptionFn(options['btnAdvanceSearchOption']));
+				}
 				$("#advanceSearchArea").show();
 			
 			}else{
@@ -612,6 +642,10 @@ var createDataTableFn = function(options){
 	    		
 	    		return false;
 	    	});
+	    	
+	    	if(advanceSearchSet==false){
+	    		getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
+	    	}
 	    	//advance search end
 	
 		}
