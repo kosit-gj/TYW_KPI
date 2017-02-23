@@ -9,6 +9,7 @@ var restfulPathAppData="/tyw_api/public/appraisal_data";
  
 var restfulPathDropDownStructure=restfulPathAppData+"/structure_list";
 var restfulPathDropDownAppraisalLevel=restfulPathAppData+"/al_list";
+var restfulPathDropDownAppraisalType=restfulPathAppData+"/appraisal_type_list";
 var restfulPathDropDownPeriod=restfulPathAppData+"/period_list";
 
 
@@ -20,6 +21,7 @@ var restfulPathAutocompleteEmployeeName=restfulPathAppData+"/auto_emp_name";
 var getDataFn = function(page,rpp){
 	var structure= $("#param_structure").val();
 	var app_lv= $("#param_app_lv").val();
+	var app_type= $("#param_app_type").val();
 	var app_item= $("#param_app_item").val();
 	var period= $("#param_period").val();
 	var emp_code= $("#param_emp_code").val();
@@ -31,6 +33,7 @@ var getDataFn = function(page,rpp){
 			
 			"structure_id":structure,
 			"appraisal_level_id":app_lv,
+			//"appraisal_type_id":app_type,
 			"appraisal_item_id":app_item,
 			"period_id":period,
 			"emp_code":emp_code
@@ -53,12 +56,13 @@ var getDataFn = function(page,rpp){
 
 //------------------- Search Appraisal Data FN Start ---------------------
 
-var searchAdvanceFn = function (Structure,AppLv,AppItem,Period,EmpName) {
+var searchAdvanceFn = function (Structure,AppLv,AppItem,Period,EmpName,app_type) {
 	//embed parameter start
 	
 	var htmlParam="";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_structure' name='param_structure' value='"+Structure+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' name='param_app_lv' value='"+AppLv+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' name='param_app_type' value='"+app_type+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_item' name='param_app_item' value='"+AppItem+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' name='param_period' value='"+Period+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_code' name='param_emp_code' value='"+EmpName+"'>";
@@ -80,6 +84,7 @@ var listAppraisalDataFn = function (data) {
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_period_desc"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["structure_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ "ประจำปี"/*indexEntry["appraisal_type_name"]*/+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_item_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
@@ -147,7 +152,33 @@ var dropDownListAppraisalLevel = function(){
 	return html;
 };
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
+//-------------------  Drop Down List Appraisal Type FN Strart ---------------------
 
+var dropDownListAppraisalType = function(){
+	var html="";
+	
+	
+	html+="<select id=\"app_type\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Appraisal Type\" name=\"app_type\">";
+	html+="<option  selected value=''>All</option>";
+	$.ajax ({
+		url:restfulURL+restfulPathDropDownAppraisalType ,
+		type:"get" ,
+		dataType:"json" ,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+			$.each(data,function(index,indexEntry){
+
+					html+="<option  value="+indexEntry["appraisal_type_id"]+">"+indexEntry["appraisal_type_name"]+"</option>";	
+		
+			});	
+
+		}
+	});	
+	html+="</select>";
+	return html;
+};
+//-------------------  Drop Down List Appraisal Type FN END ---------------------
 
 //-------------------  Drop Down List Period FN Strart ---------------------
 
@@ -216,6 +247,7 @@ $(document).ready(function() {
 	$("#appraisal_data_list_content").hide();
 	$("#drop_down_list_structure").html(dropDownListStructure());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
+	$("#drop_down_list_appraisal_type").html(dropDownListAppraisalType());
 	$("#drop_down_list_period").html(dropDownListPeriod());
 	
 	$("#app_item").val("");
@@ -233,7 +265,9 @@ $(document).ready(function() {
 				$("#app_lv").val(),
 				$("#app_item_id").val(),
 				$("#period").val(),
-				$("#emp_name_id").val());
+				$("#emp_name_id").val()
+				//,$("#app_type").val()
+				);
 		$("#appraisal_data_list_content").show();
 		return false;
 	});

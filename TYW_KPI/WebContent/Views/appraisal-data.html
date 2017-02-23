@@ -79,6 +79,21 @@
 									</div>
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Appraisal Type</label>
+											<div class="col-lg-8 col-md-7" id="drop_down_list_appraisal_type">
+											<select id="app_type" class="input span12 m-b-n"
+												data-toggle="tooltip" title="Appraisal Level" name="app_type">
+												<option value="1">ประจำปี</option>
+												<option value="2">ทดลองงาน</option>
+												<option value="3">รักษาการ</option>
+											</select>
+											</div>
+
+										</div>
+
+									</div>
+									<div class="col-lg-4 col-md-4">
+										<div class="form-group p-xxs">
 											<label class="col-lg-4 col-md-5 p-t-xxs">Appraisal Item</label>
 											<div class="col-lg-8 col-md-7" >
 												<input data-toggle="tooltip" title="Appraisal Item"
@@ -93,8 +108,8 @@
 
 									<div class="col-lg-4 col-md-4">
 										<div class="form-group p-xxs">
-											<label class="col-lg-3  col-md-3 p-t-xxs">Period</label>
-											<div class="col-lg-8 col-md-8" id="drop_down_list_period"></div>
+											<label class="col-lg-4 col-md-5 p-t-xxs">Period</label>
+											<div class="col-lg-8 col-md-7" id="drop_down_list_period"></div>
 										</div>
 									</div>
 									<div class="col-lg-4 col-md-4">
@@ -110,7 +125,7 @@
 
 										</div>
 									</div>
-									<div class="col-lg-4 col-md-4">
+									<div class="col-lg-12 col-md-12">
 										<div class="form-group ">
 											<div class="form-group pull-right p-xxs m-b-none">
 												<button id="btn_import" type="button"
@@ -195,10 +210,11 @@
 										<tr>
 											<th style='width: auto'>Period</th>
 											<th style='width: auto'>Structure</th>
+											<th style='width: auto'>Appraisal Type</th>
 											<th style='width: auto'>Appraisal Item</th>
 											<th style='width: auto'>Emp Code</th>
 											<th style='width: auto'>Emp Name</th>
-											<th style='width: auto'>CDS Value</th>
+											<th style='width: auto'>Data Value</th>
 										</tr>
 									</thead>
 									<tbody id="listAppraisalData">
