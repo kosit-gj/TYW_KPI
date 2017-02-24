@@ -94,7 +94,7 @@ var dropDownListMonth = function(){
 	var html="";
 	
 	
-	html+="<select id=\"month\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Month\" name=\"month\">";
+	html+="<select id=\"month\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Month\" name=\"month\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownMonth ,
@@ -122,7 +122,7 @@ var dropDownListYear = function(){
 	var html="";
 	
 	
-	html+="<select id=\"year\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Year\" name=\"year\">";
+	html+="<select id=\"year\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Year\" name=\"year\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownYear ,
@@ -151,7 +151,7 @@ var dropDownListAppraisalLevel = function(){
 	var html="";
 	
 	
-	html+="<select id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
+	html+="<select id=\"app_lv\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel,
@@ -219,7 +219,6 @@ $(document).ready(function() {
 	$("#emp_name_id").val("");
 	
 	$("#cds_result_list_content").hide();
-	$(".sr-only").hide();
 	$("#drop_down_list_year").html(dropDownListYear());
 	$("#drop_down_list_month").html(dropDownListMonth());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());

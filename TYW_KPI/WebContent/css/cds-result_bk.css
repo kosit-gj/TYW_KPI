@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+body{
+	background-color: #f3f3f4;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+	color: black;
+	
+}
+.countPagination {
+    width: 92%;
+}
+
+.p-t-xxs{
+ padding-top :5px;
+}
+.p-b-xxs{
+ padding-bottom :5px;
+}
+.btn-primary {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #ffffff;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary.active:focus {
+  background-color: #1da58a;
+  border-color: #1da58a;
+  color: #FFFFFF;
+}

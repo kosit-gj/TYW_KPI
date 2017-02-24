@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Import Employee | Management</title>
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+<link rel="stylesheet"
+	href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+<link href="../css/animate.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="../css/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+
+
+<link rel="stylesheet" href="../css/jquery.mloading.css">
+
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/tywMain.css" rel="stylesheet">
+<link href="../css/index.css" rel="stylesheet">
+<link href="../css/import-employee.css" rel="stylesheet">
+
+</head>
+<body class="top-navigation gray-bg ">
+
+	
+		<div class="container">
+				<!--  nav bar -->
+				<div class='row'>
+
+					<div class='col-xs-12'>
+						<div id="slide_status">
+						
+							<div id="btnCloseSlide">×</div>
+							<div id="slide_status_area"></div>
+						</div>
+					</div>
+
+				</div>
+
+				<h2>
+					<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+						id="modalDescription"> Import Employee</span>
+				</h2>
+
+
+				<div class="row">
+					<!-- start--row -->
+
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Advance Search</h5>
+							</div>
+
+							<div class="ibox-content">
+								<div class="row">
+									<div class="col-lg-4 col-md-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
+											<div class="col-lg-7 col-md-7" id="drop_down_department">
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-4 col-md-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-3 col-md-3 p-t-xxs">Section</label>
+											<div class="col-lg-7 col-md-7" id="drop_down_section">
+											</div>
+
+										</div>
+
+									</div>
+
+
+									<div class="col-lg-4 col-md-4">
+										<div class="form-group p-xxs">
+											<label class="col-lg-3 col-md-3 p-t-xxs">Position</label>
+											<div class="col-lg-9 col-md-9">
+												<input data-toggle="tooltip" title="Position"
+													class="form-control input-sm" placeholder="Position"
+													type="text" id="search_position" name="search_position">
+												<input class="form-control input-sm"
+													type="hidden" id="search_position_id"
+													name="search_position_id">
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4">
+										<div class="form-group p-xxs m-b-none">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Employee Name</label>
+											<div class="col-lg-8 col-md-7">
+												<input data-toggle="tooltip" title="Employee Name"
+													class="form-control input-sm" placeholder="Employee Name"
+													type="text" id="search_emp_name" name="search_emp_name">
+												<input class="form-control input-sm"
+													type="hidden" id="search_emp_id"
+													name="search_emp_id">
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-8 col-md-8">
+										<div class="form-group  ">
+											<div class=" pull-right p-xxs m-b-none">
+												<button id="btn_add_role" type="button"
+													class="btn btn-success btn-sm" data-target="#ModalRole"
+													data-toggle="modal">
+													&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
+												</button>
+
+
+											</div>
+
+
+
+
+											<div class=" pull-right p-xxs m-b-none">
+												<button id="btn_import" type="button"
+													class="btn btn-primary btn-sm" data-target="#ModalImport"
+													data-toggle="modal">
+													<i class="fa fa-upload"></i>&nbsp;Import
+												</button>
+
+											</div>
+											<div class=" pull-right p-xxs m-b-none">
+												<form id='formExportToExcel' action="" method="post">
+													<button id="exportToExcel" class="btn btn-warning btn-sm" 
+														type="submit">
+														<i class="fa fa-download"></i> Download
+													</button>
+												</form>
+
+											</div>
+											<div class=" pull-right p-xxs m-b-none">
+
+
+												<button type="button" class="btn btn-info input-sm"
+													name="btnSearchAdvance" id="btnSearchAdvance">
+													<i class="fa fa-search"></i>&nbsp;Search
+												</button>
+
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+							<!-- content end -->
+						</div>
+
+					</div>
+
+				</div>
+				<!-- end--row -->
+
+
+
+				<div class="row" id="employee_list_content">
+					<div class="col-lg-12">
+						<div class="ibox-title">
+							<h5>Employee List</h5>
+						</div>
+
+
+						<div class="ibox-content">
+						<!-- pagination start -->
+							
+							<div class="row">
+							<div class="col-sm-12 height-32-px"></div>
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs width-100-persen">
+
+									<p class="pagination_top m-b-none" ></p>
+
+								</div>
+
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right paging-text p-t-xs txtCountPaginationTop">Results
+									per page</div>
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs selectCountPaginationTop">
+
+									<select name="account" id='countPaginationTop'
+										class="form-control input-sm countPagination">
+										<option>10</option>
+										<option>20</option>
+										<option>50</option>
+										<option>100</option>
+									</select>
+
+								</div>
+							</div>
+							<!-- pagination end -->
+							<!-- start table -->
+							<div class="table-responsive">
+								<table class="table table-striped" id="tableEmployee">
+									<thead>
+										<tr>
+											<th style='width: auto text-align:center;'>Select</th>
+											<th style='width: auto'>Emp Code</th>
+											<th style='width: auto'>Emp Name</th>
+											<th style='width: auto'>Department Name</th>
+											<th style='width: auto'>Section Name</th>
+											<th style='width: auto'>Position Name</th>
+											<th style='width: auto'>Position Group</th>
+											<th style='width: auto'>Shief Emp Code</th>
+											<th style='width: auto'>Appraisal Level</th>
+<!-- 											<th style='width: auto text-align:center;'>IsActive</th> -->
+											<th style='width: auto' class='objectCenter'>Manage</th>
+										</tr>
+									</thead>
+									<tbody id="listEmployee">
+
+									</tbody>
+								</table>
+							</div>
+
+							<!-- end table -->
+				<!-- pagination start -->
+							<div class="row">
+								<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6 m-b-xs width-100-persen">
+
+									<p class="pagination_bottom"></p>
+
+								</div>
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 object-right  paging-text p-t-xs txtCountPaginationBottom">Results
+									per page</div>
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 p-b-xxs selectCountPaginationBottom">
+
+									<select name="account" id='countPaginationBottom'
+										class="form-control input-sm countPagination">
+										<option>10</option>
+										<option>20</option>
+										<option>50</option>
+										<option>100</option>
+									</select>
+
+								</div>
+							</div>
+							<!-- pagination end -->
+					
+						</div>
+						<!-- content end -->
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+			
+		</div>
+	
+<!-- Modal Import Employee Role -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalImport"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="">Import Employee</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<h2>
+						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+							id="">Import Employee</span>
+					</h2>
+					<hr>
+
+					<!-- form start -->
+					
+
+					<div class="form-group">
+					<form id="fileImportEmployee">
+						
+							<h3>FILE IMPORT</h3>
+							<div class="fileUpload ">
+								<span>Browse File</span> <input type="file" name="file"
+									id="file" > <span></span>
+							</div>
+							<br>
+							<h6 class="label-content-import-export">
+
+								<input class="btn btn-primary" type="submit"
+									name="importFileMobile" id="importFileMobile" value="Import">
+<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
+
+							</h6>
+						
+					</form>
+					
+						<!-- start table -->
+					</div>
+					<!-- form End -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+<!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+						<div class="alert alert-warning information" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End Role -->
+
+
+
+	<!-- Modal Start Role -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalRole"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="modalTitleRole">Role</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<h2>
+						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+							id="modalDescription">Assign Role</span>
+					</h2>
+					<hr>
+
+					<!-- form start -->
+					<div class="form-inline p-b-xs" id="txtAssignEmpName">
+						<div class="form-group">
+							<div class="form-group m-n " >
+								<label class="form-label-emp">Employee Name: </label>&nbsp; <label
+									id="from_role_emp_name" class="form-label-emp">สมใจ
+									พร้อมเสมอนะ </label>&nbsp;
+							</div>
+
+						</div>
+					</div>
+
+					<div>
+						<!-- start table -->
+						<div class="table-responsive">
+							<table class="table table-striped" id="formTableRole">
+								<thead>
+									<tr>
+										<th style='width: auto; '>Select</th>
+										<th style='width: 70%'>Role Name</th>
+									</tr>
+								</thead>
+								<tbody id="formListRuld">
+
+								</tbody>
+							</table>
+						</div>
+
+						<!-- end table -->
+
+
+
+					</div>
+					<!-- form End -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button>
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+<!-- 					<div class="alert alert-warning" id="information" -->
+<!-- 						style="display: none;"></div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End Role -->
+
+
+
+	<!-- Modal Start Edit -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalEditEmp"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="modalTitleRole">Employee</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<h2>
+						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+							id="modalDescription">Edit Employee</span>
+					</h2>
+					<hr>
+
+
+
+					<!-- form start -->
+					<div class="form-horizontal">
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5   form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Emp Code: </label>&nbsp; 
+										<span class='redFont p-t-xs'>*</span> 
+								</div>
+
+							</div>
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_emp_code">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Emp Name: </label>&nbsp;
+										<span class='redFont p-t-xs'>*</span>
+								</div>
+
+							</div>
+							<!-- <label class="col-lg-4 form-label-emp">CDS Description:<span class='redFont'>*</span></label> -->
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_emp_name">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Working Start Date: </label>&nbsp; 
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_emp_wsd">
+							</div>
+
+						</div>
+						<div class="form-group ">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Probation End Date: </label>&nbsp;
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_emp_ped">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Acting End Date: </label>&nbsp; 
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_emp_aed">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Department Code: </label>&nbsp;
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_department_code">
+							</div>
+
+						</div>
+
+							<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Department Name: </label>&nbsp; 
+<!-- 										class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_department_name">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Section Code: </label>&nbsp;
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_section_code">
+							</div>
+
+						</div>
+											<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Section Name: </label>&nbsp; 
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_section_name">
+							</div>
+
+						</div>
+
+			
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Position Code: </label>&nbsp; 
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_position_code">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Position Name: </label>&nbsp; 
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_position_name">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Position Group: </label>&nbsp; 
+<!-- 										<span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_position_group">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Supervisor Emp Code: </label>&nbsp; 
+<!-- 										 <span class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_sup_emp_code">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Email: </label>&nbsp; 
+										 <span class='redFont p-t-xs'>*</span>
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_emp_email">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">Salary: </label>&nbsp; 
+										 <span class='redFont p-t-xs'>*</span>
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm numberOnly" placeholder=""
+									id="from_emp_salary">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4 col-sm-4 col-xs-5 form-inline text-right">
+								<div class="form-group m-n">
+									<label class="form-label-emp">ERP User: </label>&nbsp; 
+<!-- 									<span	class='redFont p-t-xs'>*</span> -->
+								</div>
+
+							</div>
+							
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<input type="text" class="form-control input-sm " placeholder=""
+									id="from_emp_erp_user">
+							</div>
+
+						</div>
+						<div class="form-group" style="margin-bottom: 0px;">
+
+							<label class="col-lg-4 col-sm-4 col-xs-5 text-right">Is Corporate KPI: </label>
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<div class="checkbox checkbox-inline">
+
+									<input id="from_checkboxIs_corporate_kpi" name="from_checkboxIs_corporate_kpi"
+										type="checkbox" value="" class="p-t-xs"> <label
+										for="checkboxIsCorporateKPI"></label>
+								</div>
+							</div>
+
+						</div>
+						<div class="form-group">
+
+							<label class="col-lg-4 col-sm-4 col-xs-5 text-right">Is Active: </label>
+							<div class="col-lg-6 col-sm-7 col-xs-7">
+								<div class="checkbox checkbox-inline">
+
+									<input id="from_checkboxIs_active" name="from_checkboxIs_active"
+										type="checkbox" value=""> <label
+										for="from_checkboxIs_active"></label>
+								</div>
+							</div>
+
+						</div>
+
+
+
+					</div>
+
+
+					<!-- form End -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="button" id="btnEmpSubmit">Save</button>
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+					<div class="alert alert-warning information" id="information2"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End Edit -->
+
+
+
+	<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
+		class="modal inmodal in" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label>Confirm to Delete Data?</label>
+						</div>
+					</div>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+					<div class="alert alert-warning information" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
+	
+<input type="hidden" name="id" id="id" value="">
+<input type="hidden" name="action" id="action" value="add">
+
+	<!-- Mainly scripts -->
+	<script src="../js/jquery3.1.1.js"></script>
+	<script type="text/javascript">
+		var jQuery_1_1_3 = $.noConflict(true);
+	</script>
+
+	<script src="../js/jquery-2.1.1.js"></script>
+	<script src="../js/jquery-ui-1.10.4.min.js"></script>
+	<script src="../js/jquery.bootpag.min.js"></script>
+
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+	<script src="../js/bootstrap.min.js"></script>
+
+	<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Custom and plugin javascript -->
+	<script src="../js/inspinia.js"></script>
+	<script src="../js/plugins/pace/pace.min.js"></script>
+	<!-- table data start -->
+	<script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+	<!-- table data end -->
+
+	<!-- load angular fame work start-->
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/angular-route.js"></script>
+	<!-- load angular fame work end -->
+
+
+	<script src="../js/jquery.mloading.js"></script>
+	<script src="../Controller/cConfig.js"></script> 
+	<script src="../Controller/cMain.js"></script> 
+	<script src="../Controller/cImportEmployee.js"></script> 
+
+
+</body>
+</html>

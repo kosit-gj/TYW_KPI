@@ -71,7 +71,6 @@ var clearFn = function() {
 	$("#f_cds_description").val("");
 	$("#txt_sql").val("");
 	$("#table_Sql").html("");
-	$("#table_Sql").hide();
 	$("#txt_sample_data").removeAttr("disabled");
 	
 	$("#btn_Execute").removeAttr("disabled");
@@ -187,30 +186,24 @@ var listCommonDataSetFn = function(data) {
 	var IsSQL ="";
 	var IsActive ="";
 	$.each(data,function(index,indexEntry) {
-		
 		//console.log(indexEntry["cdsName"]+indexEntry["appraisalLevel"]+indexEntry["isSql"]+indexEntry["isActive"]);
 		if (indexEntry["is_sql"]== "1"){
-			//IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
-			IsSQL ="<input disabled type=\"checkbox\"  value=\"1\" checked>";
+			IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
 		}else if (indexEntry["is_sql"]== "0"){
-			//IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
-			IsSQL ="<input disabled type=\"checkbox\"  value=\"0\">";
+			IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
 		}
 		if (indexEntry["is_active"]=="1"){
-			//IsActive = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
-			
-			IsActive ="<input disabled type=\"checkbox\"  value=\"1\" checked>";
+			IsActive = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
 		}else if (indexEntry["is_active"]=="0"){
-			//IsActive = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
-			IsActive ="<input disabled type=\"checkbox\"  value=\"0\" >";
+			IsActive = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
 		}
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["cds_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["appraisal_level_name"]+ "</td>";
-		htmlTable += "<td id=\"objectCenter\" >"+IsSQL+"</td>";
-		htmlTable += "<td id=\"objectCenter\" >"+IsActive+"</td>";
+		htmlTable += "<td class='objectCenter' style=\"vertical-align: middle;\">"+IsSQL+"</td>";
+		htmlTable += "<td class='objectCenter' style=\"vertical-align: middle;\">"+IsActive+"</td>";
 		
-		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["cds_id"]+ " data-target=#ModalCommonData data-toggle='modal'>Edit</button>&nbsp;" ;
+		htmlTable += "<td class='objectCenter' style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["cds_id"]+ " data-target=#ModalCommonData data-toggle='modal'>Edit</button>&nbsp;" ;
 		htmlTable += "<button id="+indexEntry["cds_id"]+" class='btn btn-danger btn-xs del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 	});
@@ -408,7 +401,7 @@ var dropDownListAppraisalLevel = function(id,inputId){
 	//id = f_app_lv
 	//id = app_lv
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
+	html+="<select data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input form-control input-sm\" id=\""+inputId+"\" name=\""+inputId+"\">";
 	if(inputId == "app_lv"){html+="<option selected value=''>All</option>";}
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel,
@@ -437,7 +430,7 @@ var dropDownListAppraisalLevel = function(id,inputId){
 var dropDownListConnection = function(id){
 	var html="";
 	
-	html+="<select data-toggle=\"tooltip\" title=\"Connection\" class=\"input span12 m-b-n\" id=\"f_connection\" name=\"f_connection\">";
+	html+="<select data-toggle=\"tooltip\" title=\"Connection\" class=\"input form-control input-sm\" id=\"f_connection\" name=\"f_connection\">";
 	//html+="<option  value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownConnection ,
@@ -477,7 +470,6 @@ var executeSQLFn = function (txtSQL) {
 				listSqlFn(data['data']);
 				
 			} else if (data['status'] == "400") {
-				$("#table_Sql").hide();
 				$("#table_Sql").html("");
 				validationSqlFn(data['data']);
 			}
@@ -514,7 +506,6 @@ var listSqlFn = function (data) {
 	tableSqlHead+="</tr></thead>";
 	tableSqlBody+="</tbody>";
 	tableSql=tableSqlHead+tableSqlBody;
-	$("#table_Sql").show();
 	$("#table_Sql").html(tableSql);
 	
 }
@@ -526,7 +517,6 @@ $(document).ready(function() {
 
 	// ------------------- Common Data Set -------------------
 	$("#cds_list_content").hide();
-	$(".sr-only").hide();
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel("","app_lv"));
 	$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel("","f_app_lv"));
 	$("#drop_down_list_connection").html(dropDownListConnection());

@@ -264,7 +264,7 @@ var listImportEmployeeFn = function(data) {
 			htmlAppraisalLevel+=indexEntry["appraisal_level_name"]+"<br>";
 		});
 		htmlTable += "<tr class='rowSearch'>";
-		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" value=\""+indexEntry["emp_code"]+"\">"+ "</td>";
+		htmlTable += "<td class='objectCenter 'style=\"vertical-align: middle;\">"+"<div class='checkbox m-b-n m-t-xxs'><input  style=\"margin-top:1px;\" type=\"checkbox\" class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" value=\""+indexEntry["emp_code"]+"\"><label> </label></div>"+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["department_name"]+"</td>";
@@ -276,7 +276,7 @@ var listImportEmployeeFn = function(data) {
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalRole data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalRole data-toggle='modal'&gt;Role&lt;/button&gt;
-		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
+		htmlTable += "<td class='objectCenter' style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
 				"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_code"]+ " data-target=#ModalRole data-toggle='modal'>Role</button>&nbsp;" +
 				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
@@ -384,8 +384,10 @@ var listAppraisalLevel = function() {
 			$.each(data,function(index,indexEntry){
 				htmlTable+="<tr>";
 				htmlTable+="<td>";
-				htmlTable+="<input  style=\"margin-bottom: 2px;\" id=\"form_role_item-"+indexEntry["appraisal_level_id"]+"\" class=\"from_data_role\"";
-				htmlTable+="type='checkbox' value=\""+indexEntry["appraisal_level_id"]+"\">";
+				htmlTable+="<div class=\"checkbox m-n \">";
+				htmlTable+="<input style=\"margin-top:1px;\" id=\"form_role_item-"+indexEntry["appraisal_level_id"]+"\" class=\"from_data_role\"";
+				htmlTable+="type='checkbox' value=\""+indexEntry["appraisal_level_id"]+"\"> <label> </label>";
+				htmlTable+="</div>";
 				htmlTable+="</td>";
 				htmlTable+="<td style=\"vertical-align:middle\">"+indexEntry["appraisal_level_name"]+"</td>";
 				htmlTable+="</tr>";
@@ -550,7 +552,7 @@ var updateRoleFn = function () {
 //DropDownList Department
 var dropDownListDepartment = function(){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Department\" class=\"input span12 m-b-n\" id=\"search_department\" name=\"search_department\" >";
+	html+="<select data-toggle=\"tooltip\" title=\"Department\" class=\"input form-control input-sm\" id=\"search_department\" name=\"search_department\" >";
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownDepartment ,
@@ -576,7 +578,7 @@ var dropDownListDepartment = function(){
 //DropDownList Section
 var dropDownListSection = function(id){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Section\" class=\"input span12 m-b-n\" id=\"search_section\" name=\"search_section\" >";
+	html+="<select data-toggle=\"tooltip\" title=\"Section\" class=\"input form-control input-sm\" id=\"search_section\" name=\"search_section\" >";
 	
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
@@ -616,7 +618,6 @@ $(document).ready(function() {
 	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
 	
 	$("#employee_list_content").hide();
-	$(".sr-only").hide();
 	$("#drop_down_department").html(dropDownListDepartment());
 	$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
 	$("#drop_down_department").change(function () {

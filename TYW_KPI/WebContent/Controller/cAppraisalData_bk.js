@@ -33,7 +33,7 @@ var getDataFn = function(page,rpp){
 			
 			"structure_id":structure,
 			"appraisal_level_id":app_lv,
-			"appraisal_type_id":app_type,
+			//"appraisal_type_id":app_type,
 			"appraisal_item_id":app_item,
 			"period_id":period,
 			"emp_code":emp_code
@@ -84,7 +84,7 @@ var listAppraisalDataFn = function (data) {
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_period_desc"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["structure_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_type_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ "ประจำปี"/*indexEntry["appraisal_type_name"]*/+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_item_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
@@ -102,7 +102,7 @@ var dropDownListStructure = function(){
 	var html="";
 	
 	
-	html+="<select id=\"structure\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Structure\" name=\"structure\">";
+	html+="<select id=\"structure\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Structure\" name=\"structure\">";
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownStructure,
@@ -131,7 +131,7 @@ var dropDownListAppraisalLevel = function(){
 	var html="";
 	
 	
-	html+="<select id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
+	html+="<select id=\"app_lv\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel ,
@@ -152,15 +152,14 @@ var dropDownListAppraisalLevel = function(){
 	return html;
 };
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
-
 //-------------------  Drop Down List Appraisal Type FN Strart ---------------------
 
 var dropDownListAppraisalType = function(){
 	var html="";
 	
 	
-	html+="<select id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Type\" name=\"app_type\">";
-	
+	html+="<select id=\"app_type\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Appraisal Type\" name=\"app_type\">";
+	html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType ,
 		type:"get" ,
@@ -187,7 +186,7 @@ var dropDownListPeriod = function(){
 	var html="";
 	
 	
-	html+="<select id=\"period\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Period\" name=\"period\">";
+	html+="<select id=\"period\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Period\" name=\"period\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownPeriod,
@@ -246,7 +245,6 @@ var listErrorFn =function(data){
 $(document).ready(function() {
 	// -------------------  Appraisal Data  ---------------------	
 	$("#appraisal_data_list_content").hide();
-	$(".sr-only").hide();
 	$("#drop_down_list_structure").html(dropDownListStructure());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
 	$("#drop_down_list_appraisal_type").html(dropDownListAppraisalType());
@@ -268,9 +266,8 @@ $(document).ready(function() {
 				$("#app_item_id").val(),
 				$("#period").val(),
 				$("#emp_name_id").val()
-				,$("#app_type").val()
-		);
-				
+				//,$("#app_type").val()
+				);
 		$("#appraisal_data_list_content").show();
 		return false;
 	});
@@ -396,16 +393,13 @@ $(document).ready(function() {
 	$("#exportToExcel").click(function(){
 		var paramStructure= $("#param_structure").val();
 		var paramAppLv= $("#param_app_lv").val();
-		var paramAppType= $("#param_app_type").val();
 		var paramAppItem= $("#param_app_item").val();
 		var paramPeriod= $("#param_period").val();
 		var paramEmpCode= $("#param_emp_code").val();
 		
-		
 		var param="";
 		param+="&structure_id="+paramStructure;
 		param+="&appraisal_level_id="+paramAppLv;
-		param+="&appraisal_type_id="+paramAppType;
 		param+="&appraisal_item_id="+paramAppItem;
 		param+="&period_id="+paramPeriod;
 		param+="&emp_code="+paramEmpCode;
