@@ -12,11 +12,13 @@ body {
 .top-navigation .navbar-brand{
 	background: #FFCC00 none ;
 }
+/*
 .btn-primary {
     background-color: #FFCC00;
     border-color: #FFCC00;
     color: #ffffff;
 }
+*/
 .top-navigation .nav > li.active > a {
     color: #FFCC00;
 }
@@ -241,6 +243,7 @@ hr {
 
 }
 /*page  start*/
+/*
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -254,6 +257,7 @@ hr {
   border-color: #FFCC00;
   color: #FFFFFF;
 }
+*/
 .ibox {
     clear: both;
     margin-bottom: 5px;

@@ -336,7 +336,9 @@ var listDataFn = function(data) {
 		
 		htmlHTML+="<tr>";
 		htmlHTML+="	<td class='object-center'><input class='asign_emp' id='id-"+indexEntry['emp_code']+"' type='checkbox' value="+indexEntry['emp_code']+"></td>";
-		htmlHTML+="  <td id='status-"+indexEntry['emp_code']+"'>"+indexEntry['status']+"</td>";
+		htmlHTML+="  <td id='status-"+indexEntry['emp_code']+"'>"+indexEntry['status']+"";
+		htmlHTML+="  <input type='hidden' id='emp_result_id-"+indexEntry['emp_code']+"' name='emp_result_id-"+indexEntry['emp_code']+"' value='"+indexEntry['emp_result_id']+"'>";
+		htmlHTML+="  </td>";
 		htmlHTML+="  <td>"+indexEntry['emp_code']+"</td>";
 		htmlHTML+="  <td>"+indexEntry['emp_name']+"</td>";
 		htmlHTML+="  <td>"+indexEntry['department_name']+"</td>";
@@ -383,7 +385,8 @@ var listDataFn = function(data) {
 				callFlashSlide("Can't edit. because unassigned status.","error");
 				$(this).parent().parent().parent().children().click();
 			}else{
-				findOneFn(id);
+				var emp_result_id = $("#emp_result_id-"+id).val();
+				findOneFn(emp_result_id);
 				$(this).parent().parent().parent().children().click();
 
 			}
