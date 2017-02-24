@@ -245,7 +245,7 @@ var listDataFn = function(data,options){
 			}
 		});
 		htmlTbody+="    		<td style=\"text-align:center\">";
-		htmlTbody+="    		<i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"";
+		htmlTbody+="    		<i data-content=\"";
 		
 		if(options['btnManageOption']!=undefined){
 		htmlTbody+="    		&lt;button id='"+options['btnManageOption']['id']+"-"+indexEntry[options['formDetail']['pk_id']]+"' class='btn btn-info btn-xs btn-gear "+options['btnManageOption']['id']+"'&gt;"+options['btnManageOption']['name']+"&lt;/button&gt;";
@@ -360,7 +360,7 @@ var createInputTypeFn  = function(object,tokenID){
 			async:false,
 			headers:{Authorization:"Bearer "+tokenID.token},
 			success:function(data){
-				inputType="<select class='span12 m-b-n' id="+object['id']+" name=\""+object['id']+"\" style='width:"+object['width']+"'>";			
+				inputType="<select class='form-control input-sm' id="+object['id']+" name=\""+object['id']+"\" style='width:"+object['width']+"'>";			
 				//initValue
 				if(object['initValue']!=undefined){
 					inputType+="<option value=''>"+object['initValue']+"</option>";
@@ -382,10 +382,10 @@ var createInputTypeFn  = function(object,tokenID){
 		var dataTypeInput =(object['dataTypeInput'] == 'number' ? "numberOnly" : "");
 		if(object['placeholder']!=undefined){
 			
-			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm "+dataTypeInput+"\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}else{
-			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"form-control input-sm "+dataTypeInput+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}
 		
@@ -402,10 +402,10 @@ var createInputTypeFn  = function(object,tokenID){
 	}else if(object['inputType']=="password"){
 		
 		if(object['placeholder']!=undefined){
-			inputType+="<input type=\"password\" style='width:"+object['width']+"' class=\"span12 m-b-n numberOnly\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			inputType+="<input type=\"password\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}else{
-			inputType+="<input type=\"password\" style='width:"+object['width']+"' class=\"span12 m-b-n numberOnly\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			inputType+="<input type=\"password\" style='width:"+object['width']+"' class=\"form-control input-sm numberOnly\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}
 	}
@@ -425,49 +425,39 @@ var formHTML="";
 formHTML+="<form id='"+options['formDetail']['id']+"' name='"+options['formDetail']['id']+"'>";
 formHTML+="<div aria-hidden=\"true\" role=\"dialog\" tabindex=\"-1\" id=\"modal-"+options['formDetail']['id']+"\" class=\"modal inmodal\" style=\"display: none;\">";
 formHTML+="<div class=\"modal-dialog\">";
-formHTML+="<div class=\"modal-content  bounceInRight\">";
+formHTML+="<div class=\"modal-content animated bounceInRight\">";
 formHTML+="        <div class=\"modal-header\">";
-formHTML+="            <button style=\"padding-top:5px\" data-dismiss=\"modal\" class=\"close\" type=\"button\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\" style=\"display: none;\">Close</span></button>";
+formHTML+="            <button data-dismiss=\"modal\" class=\"close\" type=\"button\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\">Close</span></button>";
 formHTML+="            <h4 class=\"modal-title\" id=\""+options['formDetail']['id']+"\">"+options['formDetail']['formName']+"</h4>";
 formHTML+="        </div>";
 formHTML+="        <div class=\"modal-body\">";
-formHTML+="            <div class=\"row-fluid\"><div class=\"col-lg-12\"><div class=\"span12\" style=\"padding: 0px 10px; height:65px;\"><h1><i class=\"fa fa fa-pencil-square-o icon-title\"></i><small id=\"modalDescription\" style=\" position:absolute;top:37px;left:85px\">Database Connection</small>";
-formHTML+="           </h1></div></div></div> <hr>";
-formHTML+="           <div class=\"row-fluid\">";
-formHTML+="           <div class=\"span12 form-horizontal p-t-xxs\">";
+formHTML+="            <h2><i class=\"fa fa fa-pencil-square-o icon-title\"></i> <span id=\"modalDescription\"> Add "+options['formDetail']['formName']+"</span> </h2>";
+formHTML+="            <hr>";
 
-/*
-="row-fluid"
-	                		<div class="form-group p-xxs">
-								<label class="control-label">Emp Code:<span class="redFont">*</span></label>
-								<div class="controls">
-									<input class="form-control input-sm span12" placeholder="" id="from_emp_code" type="text">
-								</div>
-							</div>
- */
- 
 $.each(options['form'],function(index,indexEntry){
-	formHTML+="           <div class=\"form-group p-xxs\">";
-	formHTML+="                <label class=\"control-label\">";
-	formHTML+="                "+indexEntry['label']+"";
+
+	formHTML+="            <div class='form-file-mangement'>";
+	formHTML+="                <div class=\"form-label-customs\">";
+	formHTML+="                <b>	"+indexEntry['label']+"";
 								if(indexEntry['required']==true){
 									formHTML+="<span class='redFont '>*</span>";
 								}
-	formHTML+="                </label>";
-	formHTML+="                <div class=\"controls\">";
+	formHTML+="                </b></div>";
+	formHTML+="                <div class=\"form-input-customs\">";
 	formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
 	formHTML+="                </div>";
-	formHTML+="                </div>";
-
+	formHTML+="                <br style=\"clear:both\">";
+	formHTML+="            </div>";
 
 });
-formHTML+="        </div></div></div></div>";
+
+formHTML+="        </div>";
 formHTML+="        <div class=\"modal-footer\">";
 formHTML+="       	 	<input type=\"hidden\" name=\"id\" id=\"id\" value=\"\">";
 formHTML+="				<input type=\"hidden\" name=\"action\" id=\"action\" value=\"add\">";
 formHTML+="				<button class=\"btn btn-primary\" type=\"button\" id=\"btnSubmit\">Save</button>";
 formHTML+="				<button class=\"btn btn-primary\" type=\"button\" id=\"btnAddAnother\">Save & Add Another</button>";
-formHTML+="            <button data-dismiss=\"modal\" class=\"btn btn-danger btnCancle\" type=\"button\">Cancel</button>";
+formHTML+="            <button data-dismiss=\"modal\" class=\"btn btn-white btnCancle\" type=\"button\">Cancel</button>";
 formHTML+="            <div class=\"alert alert-warning information\" id=\"information\" style=\"display: none;\"></div>";
 formHTML+="        </div>";
 formHTML+="    </div>";
@@ -481,7 +471,7 @@ var createBtnAdvanceSearchOptionFn = function(object){
 	var AdvanceSearchOption="";
 	//AdvanceSearchOption+="	<div class=\"input-group\" >";
 	//AdvanceSearchOption+="     	<div id=\"btnSearchArea\">";
-	AdvanceSearchOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\""+object['id']+"\" id=\""+object['id']+"\">"+object['name']+"</button>";
+	AdvanceSearchOption+="    		<button type=\"button\" class=\"btn btn-info input-sm\" name=\""+object['id']+"\" id=\""+object['id']+"\">"+object['name']+"</button>";
 	//AdvanceSearchOption+="     	</div>";
 	//AdvanceSearchOption+=" 	</div>";
  	
@@ -490,24 +480,12 @@ var createBtnAdvanceSearchOptionFn = function(object){
 var createAvanceSearchFn = function(options){
 	var avanceSearchHTML="";
 	$.each(options['advanceSearch'],function(index,indexEntry){
-/*
- <div class=\"span4 form-horizontal \">
-										<div class="form-group p-xxs ">
-											<label class="control-label">CDS Name</label>
-											<div class="controls">
-												<input data-toggle="tooltip" title="CDS Name" class="span12 m-b-n ui-autocomplete-input" placeholder="CDS Name" id="cds_name" name="cds_name" type="text">
-												<input class="form-control input-sm" id="cds_id" name="cds_id" value="" type="hidden">
-											</div>
-											
 
-										</div>
-									</div>
- */
 		if(indexEntry['inputType']=='dropdown'){
 		
-			avanceSearchHTML+="<div class=\"span6 form-horizontal \">";
-				avanceSearchHTML+="<div class=\"form-group p-xxs\"><label class=\"control-label\">"+indexEntry['label']+"</label>";
-					avanceSearchHTML+="<div class=\"controls\" id=\""+indexEntry['id']+"\">";
+			avanceSearchHTML+="<div class=\"col-sm-4 m-b-xs inputFormSearch\">";
+				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-5 control-label\">"+indexEntry['label']+"</label>";
+					avanceSearchHTML+="<div class=\"col-lg-7 inputFormSearch\" id=\""+indexEntry['id']+"\">";
 					avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 					avanceSearchHTML+="</div>";
 				avanceSearchHTML+="</div>";
@@ -515,9 +493,9 @@ var createAvanceSearchFn = function(options){
 			
 		}else if(indexEntry['inputType']=='text'){
 			var dataTypeInput =(indexEntry['dataTypeInput'] == 'number' ? "numberOnly" : "");
-			avanceSearchHTML+="<div class=\"span6 form-horizontal\">";
-				avanceSearchHTML+="<div class=\"form-group p-xxs\"><label class=\"control-label "+dataTypeInput+"\">"+indexEntry['label']+"</label>";
-				avanceSearchHTML+="<div class=\"controls\" id='"+indexEntry['id']+"'>";
+			avanceSearchHTML+="<div class=\"col-sm-4 m-b-xs inputFormSearch\">";
+				avanceSearchHTML+="<div class=\"form-group\"><label class=\"col-lg-5 control-label "+dataTypeInput+"\">"+indexEntry['label']+"</label>";
+				avanceSearchHTML+="<div class=\"col-lg-7 inputFormSearch\" id='"+indexEntry['id']+"'>";
 				avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 				avanceSearchHTML+="</div>";
 				avanceSearchHTML+="</div>";

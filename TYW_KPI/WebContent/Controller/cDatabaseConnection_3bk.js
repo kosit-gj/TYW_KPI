@@ -59,7 +59,7 @@
     			 "serviceName":[restfulURL+"/tyw_api/public/appraisal_grade"],
     			 "tokenID":tokenID,
     			 "pagignation":true,
-    			 "expressSearch":false,
+    			 "expressSearch":true,
     			 "advanceSearchSet":true,
     			 "btnManageOption":{"id":"BtnID","name":"BtnName"},
     			 "btnAdvanceSearchOption":{"id":"BtnID","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Btn"}
