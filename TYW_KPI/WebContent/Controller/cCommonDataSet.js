@@ -550,7 +550,7 @@ $(document).ready(function() {
 	
 	
 	$("#btnAddCommonDataSet").click(function(){
-		
+		clearFn();
 		$("#f_app_lv").val( $("#f_app_lv option:first-child").val());
 		$("#f_connection").val( $("#f_connection option:first-child").val());
 		$("#btnAddAnother").show();
