@@ -84,7 +84,7 @@
 
 .control-label{
 	margin-bottom: 0;
-    padding-top: 7px;
+    padding-top: 5px;
     text-align: right;
 }
 #btnSearchArea{
@@ -119,26 +119,35 @@
 	font-size: 13px;
     font-weight: bold;
     margin-right: 5px;
-    padding-top: 5px;
+    padding-top: 0px;
    
 }
 .modal-body {
     padding: 20px 30px 5px;
 }
 .yellow2{
-	background:#ffe100;
+	background:#ffe57f;
 }
 .title2{
 	padding:5px;
-	padding-left:5px;
+	padding-left:10px;
 }
 #ibox-content-bsc{
 	
     background-color: #ffffff;
-    border-color: #e7eaec;
+    
     border-image: none;
-    border-style: solid solid none;
-    border-width: 1px 0;
+   
+  
     color: inherit;
     padding: 0px;
 } 
+.ibox-content{
+	border: 1px solid #ffe57f;
+}
+.object-right{
+	text-align:right;
+}
+.clickable{
+	cursor:pointer;
+}

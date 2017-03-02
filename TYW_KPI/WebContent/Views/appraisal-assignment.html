@@ -83,17 +83,21 @@
 						                                </div>
 													</div>
 													<div class="col-sm-4 m-b-xs">
-					                                    <div class="form-group"><label class="col-lg-5 control-label">Position </label>
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Year </label>
 			
-						                                    <div class="col-lg-7" id='PositionArea'>
+						                                    <div class="col-lg-7" id='yearArea'>
 						                                    
 							                                  
-																
-																<input type="text" id="Position" placeholder="Position" class="form-control input-sm">
+																  <select data-toggle="tooltip" title="Year" class="input form-control input-sm"  id="YearList" name="YearList">
+							                                    	
+							                                    	<option value="0"></option>
+																	
+																</select>
 																
 						                                    </div>
 						                                </div>
 													</div>
+													
 													
 													<div class="col-sm-4 m-b-xs" id="periodfrequencyArea">
 					                                    <div class="form-group"><label class="col-lg-5 control-label">Period frequency</label>
@@ -131,7 +135,7 @@
 						                                    
 							                                    <select data-toggle="Period" title="Period" class="input form-control input-sm"  id="period" name="period">
 							                                    	
-							                                    	<option value="">All</option>
+							                                    	<option value="">ทุกรอบการประเมิน</option>
 																	
 																</select>
 																
@@ -151,7 +155,19 @@
 						                                    </div>
 						                                </div>
 													</div>
-													<div class='col-sm-8 object-right' style='text-align:right;' >
+													<div class="col-sm-4 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Position </label>
+			
+						                                    <div class="col-lg-7" id='PositionArea'>
+						                                    
+							                                  
+																
+																<input type="text" id="Position" placeholder="Position" class="form-control input-sm">
+																
+						                                    </div>
+						                                </div>
+													</div>
+													<div class='col-sm-4 object-right' style='text-align:right;' >
 										
 												
 														
@@ -438,7 +454,7 @@
             
             	<div class="row">
             		<div class='col-xs-12 crandTotalWeight' >
-            		Grand Total Weight % <span id="crandTotalWeight" class='perscentage'>0.00</span>
+            		Grand Total Weight % <span  class='perscentage'>0.00</span>
             		</div>
             	</div>
             	

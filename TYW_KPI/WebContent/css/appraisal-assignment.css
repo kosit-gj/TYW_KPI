@@ -87,12 +87,13 @@
 }
 
 .totalWeight{
-	width:150px;
-    float:right;
+	float: right;
     font-size: 14px;
     font-weight: bold;
     margin-right: 5px;
     padding-top: 5px;
+    text-align: right;
+    width: 200px;
 }
 
 .titlePanel2{
@@ -215,6 +216,9 @@
 	padding:15px;
 	font-size: 14px;
     font-weight: bold;
+}
+#crandTotalWeight{
+	
 }
 .perscentage{
 	background: #dddddd none repeat scroll 0 0;

@@ -345,6 +345,7 @@ var splitData = function(data){
 var listAppraisalDetailFn = function(data){
 	//console.log(data);
 	console.log('-----------');
+	$("#appraisal_template_area").empty();
 	$.each(data['group'],function(index,groupEntry){
 		
 //		console.log(index);
@@ -375,21 +376,24 @@ var listAppraisalDetailFn = function(data){
 		 $("#txtChiefEmpCode").html(data['head'][0]['chief_emp_code']);
 		 $("#txtChiefEmpName").html(data['head'][0]['chief_emp_name']);
 		 $("#txtAppraisalType").html(data['head'][0]['appraisal_type_name']);
-		 $("#txtPeriod").html("empty");
+		 $("#txtPeriod").html(data['head'][0]['appraisal_period_desc']);
 		 $("#txtGrandTotalWeigh").html(data['head'][0]['result_score']);
 		 
 		 
 		//set header end
+
+	});
+	
+	dropDrowAsignToEditFn(data['head'][0]['stage_id']);
+	$("#assignTo").off("change");
+	$("#assignTo").on("change",function(){
+		//alert($(this).val());
+		dropDrowActionEditFn(data['head'][0]['stage_id'],$(this).val());
 		
-		dropDrowAsignToEditFn(data['head'][0]['stage_id']);
-		$("#assignTo").change(function(){
-			//alert($(this).val());
-			dropDrowActionEditFn($(this).val());
-			
-		});
-		$("#assignTo").change();
-		$("#ModalAppraisal").modal();
-	})
+	});
+	$("#assignTo").change();
+	$("#ModalAppraisal").modal();
+	
 };
 var findOneFn = function(id){
 
@@ -427,7 +431,7 @@ var listDataFn = function(data){
 		
 		htmlHTML+="<tr>";
 		
-		htmlHTML+="	<td class=''><a href=\"#\" class='emp_code' id=\"id-"+indexEntry['emp_code']+"\" >"+indexEntry['emp_code']+"</a></td>";
+		htmlHTML+="	<td class=''><a href=\"#\" class='emp_code' id=\"id-"+indexEntry['emp_result_id']+"\" >"+indexEntry['emp_code']+"</a></td>";
 		htmlHTML+=" <td>"+indexEntry['emp_name']+"</td>";
 		htmlHTML+=" <td>"+indexEntry['appraisal_level_name']+"</td>";
 		htmlHTML+=" <td>"+indexEntry['appraisal_type_name']+"</td>";
@@ -544,14 +548,14 @@ var dropDrowAsignToEditFn = function(paramStageID){
 		}
 	});
 }
-var dropDrowActionEditFn = function(paramStageID){
+var dropDrowActionEditFn = function(stage_id,to_appraisal_level_id){
 	$.ajax({
 		url:restfulURL+"/tyw_api/public/appraisal_assignment/edit_action_to",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"stage_id":paramStageID},
+		data:{"stage_id":stage_id,"to_appraisal_level_id":to_appraisal_level_id},
 		success:function(data){
 			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
 			var htmlOption="";
@@ -701,6 +705,7 @@ $(document).ready(function() {
 		});
 		
 		//get appraisal detail.
+		$(document).off("click",".emp_code");
 		$(document).on("click",".emp_code",function(){	
 
 		
@@ -708,9 +713,7 @@ $(document).ready(function() {
 			id=id[1];
 			findOneFn(id);
 			$("#emp_result_id").val(id);
-			
-			
-			
+
 			return false;
 		});
 		

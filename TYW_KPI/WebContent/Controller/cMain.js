@@ -237,7 +237,7 @@ var checkSession = function(){
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-		
+			localStorage.setItem('is_hr',data['is_hr']);
 			if(data['status']!="200"){
 				window.location.href = "../login.html"; 
 			}else{

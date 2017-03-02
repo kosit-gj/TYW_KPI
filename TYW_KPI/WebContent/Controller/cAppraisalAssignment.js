@@ -1,5 +1,5 @@
 /*#########################  Main Function Data #######################*/
-var tokenID= eval("("+localStorage.getItem("tokenID")+")");
+//var tokenID= eval("("+localStorage.getItem("tokenID")+")");
 //Global variable
 var globalData=[];
 var empldoyees_code = [];
@@ -73,7 +73,7 @@ var embedParamCheckboxAppraisalItem = function(id){
 		$("body").append("<input type='hidden' class='embed_appraisal_id-"+structure_id+" embed_appraisal_id' id='embed_appraisal_id-"+appraisal_id+"-"+structure_id+"' name='embed_appraisal_id-"+appraisal_id+"-"+structure_id+"' value='"+appraisal_id+"'>");
 	}
 }
-var setDataToTemplateFn = function(data){
+var setDataToTemplateFn = function(data,actionType){
 	var head = data['head'][0]
 	var data = data['data'];
 	/*
@@ -122,14 +122,46 @@ var setDataToTemplateFn = function(data){
 	//get data assignTo and action for edit start
 
 	dropDrowAsignToEditFn(head['stage_id']);
-	$("#assignTo").change(function(){
+	$("#assignTo").off('change');
+	$("#assignTo").on('change',function(){
 		//alert($(this).val());
-		dropDrowActionEditFn($(this).val());
+		
+		dropDrowActionEditFn(head['stage_id'],$(this).val());
 		
 	});
 	$("#assignTo").change();
 	//dropDrowActionEditFn(head['stage_id']);
+	
+	
+	//set premission button management start
+	//alert(head['stage_id']);
+	if(    head['stage_id']==17
+		|| head['stage_id']==18
+		|| head['stage_id']==19
+		|| head['stage_id']==20
+		|| head['stage_id']==21
+		|| head['stage_id']==22
+		|| head['stage_id']==23
+		|| head['stage_id']==24
+	    || head['stage_id']==25 
+	    || head['stage_id']==27
+	    || head['stage_id']==28
+	    || head['stage_id']==29
+	    || actionType=='view'
 			
+			){
+		//alert(head['stage_id']);
+		$(".btnAssignment").hide();
+		$("#btnSubmit").hide();
+		$("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled'); 
+		$("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled'); 
+	}else{
+		$(".btnAssignment").show();
+		$("#btnSubmit").show();
+		$("#ModalAssignment").find('input[type="text"]').removeAttr('disabled'); 
+		$("#ModalAssignment").find('input[type="checkbox"]').removeAttr('disabled'); 
+	}
+	//set premission button management end		
 	
 	
 	
@@ -219,29 +251,24 @@ weight_percent
 		
 	});
 	
-	//console.log($(".appraisalItem-checkbox").get());
-	
-//	$.each($(".appraisalItem-checkbox").get(),function(index,indexEntry2){
-//		var appraisal_item_id="";
-//		var structure_id="";
-//		var data_id="";
-//		data_id=$(indexEntry2).attr("id").split("-");
-//		appraisal_item_id=data_id[1];
-//		structure_id=data_id[2];
-//		
-//		
-//		if(indexEntry['appraisal_item_id']==appraisal_item_id){
-//			
-//		}
-//		console.log(appraisal_item_id);
-//		console.log(structure_id);
-//
-//		
-//	});
+//	if(actionType=='view'){
+//	alert("view 1");	
+//		$(".btnAssignment").hide();
+//		$("#btnSubmit").hide();
+//		$("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled'); 
+//		$("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled'); 
+//	}else if(actionType=='edit'){
+//	alert("view 2");
+//		$(".btnAssignment").show();
+//		$("#btnSubmit").show();
+//		$("#ModalAssignment").find('input[type="text"]').removeAttr('disabled'); 
+//		$("#ModalAssignment").find('input[type="checkbox"]').removeAttr('disabled');
+//	
+//	}
 	
 }
 
-var findOneFn = function(id){
+var findOneFn = function(id,actionType){
 	//alert(id);
 	
 	
@@ -258,7 +285,7 @@ var findOneFn = function(id){
 		success:function(data){
 			//console.log(data['head'].length);
 			if(data['head'].length>0){
-				setDataToTemplateFn(data);
+				setDataToTemplateFn(data,actionType);
 				$("#ModalAssignment").modal();
 				$("#action").val("edit");
 				$("#id").val(id);
@@ -319,7 +346,9 @@ var embedParam = function(id){
 
 //List Data
 var listDataFn = function(data) {
-	//console.log(data);
+
+	var is_hr = localStorage.getItem("is_hr");
+
 	htmlHTML="";
 	$.each(data,function(index,indexEntry){
 		//alert(index);
@@ -346,7 +375,14 @@ var listDataFn = function(data) {
 		htmlHTML+="	<td>"+indexEntry['appraisal_type_name']+"</td>";
 		htmlHTML+="	<td>"+indexEntry['position_name']+"</td>";
 		htmlHTML+="  <td style=\"text-align:center\">";
-		htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-xs btn-gear edit' id='edit-"+indexEntry['emp_code']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+indexEntry['emp_code']+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+		
+		if(is_hr==1){
+			//htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-xs btn-gear view' id='view-"+indexEntry['emp_code']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-xs btn-gear edit' id='edit-"+indexEntry['emp_code']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+indexEntry['emp_code']+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+			htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-xs btn-gear edit' id='edit-"+indexEntry['emp_code']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+indexEntry['emp_code']+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+		}else if(is_hr==0){
+			htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-xs btn-gear view' id='view-"+indexEntry['emp_code']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;&nbsp;&lt;button id='del-"+indexEntry['emp_code']+"' class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+		}
+		
 		htmlHTML+="  </td>";
 		htmlHTML+="</tr>";
 		
@@ -391,6 +427,20 @@ var listDataFn = function(data) {
 
 			}
 		});
+		$(".view").on("click",function() {
+			var view=this.id.split("-");
+			var id=view[1];
+			if($("#status-"+id).text().trim()=="Unassigned"){
+				callFlashSlide("Can't edit. because unassigned status.","error");
+				$(this).parent().parent().parent().children().click();
+			}else{
+				var emp_result_id = $("#emp_result_id-"+id).val();
+				findOneFn(emp_result_id,"view");
+				$(this).parent().parent().parent().children().click();
+
+			}
+		});
+		
 	});	
 	
 };
@@ -659,11 +709,21 @@ var actionAssignmentFn = function(param){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		
+		
+		/*
+		appraisal_type_id: '',
+        frequency_id: '',
+        appraisal_year: '',
+        period: '',
+        action_to: '',
+		 */
 		data:{"head_params":
 			{
 			"appraisal_type_id":$("#embed_appraisal_type_id").val(),
 			"period_id":$("#assignTo").val(),
-			"action_to":$("#actionAssign").val()
+			"action_to":$("#actionAssign").val(),
+			 "frequency_id":$("#embed_period_frequencyr").val() ,
+			 "appraisal_year":$("#embed_year_list").val()
 			},
 			"employees": employeesObj,
 			"appraisal_items":appraisal_itemsObj
@@ -721,9 +781,12 @@ var searchAdvanceFn = function() {
 	var embedParam="";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_type_id' name='embed_appraisal_type_id' value='"+$("#appraisalType").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_id' name='embed_period_id' value='"+$("#periodFrequency").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_id' name='embed_period_id' value='"+$("#period").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_position_code' name='embed_position_code' value='"+Position+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_emp_code' name='embed_emp_code' value='"+$("#empName").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_frequency' name='embed_period_frequency' value='"+$("#periodFrequency").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='"+$("#YearList").val()+"'>";
+	
 	$("#embedParamSearch").append(embedParam);
 	
 	getDataFn();
@@ -754,6 +817,33 @@ var appraisalLevelListFn = function(nameArea,id){
 				}
 			});
 			$("#appraisalLevel"+nameArea).html(htmlOption);
+		}
+	});
+}
+
+var yearListFn = function(nameArea,id){
+	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/appraisal/year_list",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['appraisal_year_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_year_id']+">"+indexEntry['appraisal_year']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['appraisal_year_id']+">"+indexEntry['appraisal_year']+"</option>";
+					
+				}
+			});
+			$("#YearList"+nameArea).html(htmlOption);
 		}
 	});
 }
@@ -813,10 +903,10 @@ var periodFrequencyFn = function(nameArea){
 			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['frequency_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['frequency_id']+">"+indexEntry['frequency_name']+"</option>";
+				if(id==indexEntry['frequency_month_value']){
+					htmlOption+="<option selected='selected' value="+indexEntry['frequency_month_value']+">"+indexEntry['frequency_name']+"</option>";
 				}else{
-					htmlOption+="<option value="+indexEntry['frequency_id']+">"+indexEntry['frequency_name']+"</option>";
+					htmlOption+="<option value="+indexEntry['frequency_month_value']+">"+indexEntry['frequency_name']+"</option>";
 					
 				}
 			});
@@ -826,6 +916,25 @@ var periodFrequencyFn = function(nameArea){
 	
 	
 }
+var dropDrowPeriodFn = function(paramPeriod,paramAssignFrequency){
+	
+	var htmlOption="";
+	
+	var periodFrequency = parseInt(paramPeriod);
+	var period = 12/periodFrequency;
+	
+	if(paramAssignFrequency==1){
+
+		htmlOption+="<option value=''>ทุกรอบการประเมิน</option>";
+	}else{
+		for(var i=1;i<=period;i++){	
+			htmlOption+="<option value="+i+">รอบการประเมินที่ "+i+"</option>";
+		}
+	}
+	$("#period").html(htmlOption);
+	
+}
+
 
 var dropDrowAsignToFn = function(nameArea){
 
@@ -858,7 +967,7 @@ var dropDrowAsignToFn = function(nameArea){
 var dropDrowAsignToEditFn = function(paramStageID){
 
 
-	
+
 	$.ajax({
 		url:restfulURL+"/tyw_api/public/appraisal_assignment/edit_assign_to",
 		type:"get",
@@ -911,7 +1020,7 @@ var dropDrowActionFn = function(paramStageID,nameArea){
 	});
 }
 
-var dropDrowActionEditFn = function(paramStageID){
+var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
 
 
 
@@ -922,7 +1031,7 @@ var dropDrowActionEditFn = function(paramStageID){
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"stage_id":paramStageID},
+		data:{"stage_id":paramStageID,"to_appraisal_level_id":paramToAppraisalLevel},
 		success:function(data){
 			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
 			var htmlOption="";
@@ -1282,9 +1391,25 @@ $(document).ready(function(){
 	appraisalLevelListFn();
 	appraisalTypeFn('','1');
 	periodFrequencyFn();
+	yearListFn();
+	
+	$("#periodFrequency").change(function(){
+		
+		
+		//alert(period);
+		
+		dropDrowPeriodFn($(this).val(),$("#assignFrequency").val());
+		
+	});
+	
+	
+	$("#assignFrequency").change(function(){
+		dropDrowPeriodFn($("#periodFrequency").val(),$(this).val())
+	});
+	//htmlOption+="<option value="+i+">รอบการประเมิน"+i+"</option>";
+	
 	
 	//Auto complete Start
-	//http://192.168.1.52/tyw_api/public/appraisal_assignment/auto_position_name
 	$("#Position").autocomplete({
         source: function (request, response) {
         	$.ajax({
@@ -1366,7 +1491,7 @@ $(document).ready(function(){
 				
 				
 			});
-		console.log(empldoyees_code);
+		//console.log(empldoyees_code);
 		if(empldoyees_code.length==0){
 			callFlashSlide("Please choose Employee for Assignment.");
 			return false;
@@ -1425,5 +1550,7 @@ $(document).ready(function(){
 				removeEmbedParamCheckboxAppraisalItem(this.id);
 			}
 		});
+		
+		
 	
 });

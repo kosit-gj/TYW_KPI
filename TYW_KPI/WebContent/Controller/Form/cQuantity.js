@@ -295,7 +295,7 @@ structure_name
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevelSearchQuantity").val()},
+					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevelQuantity").val()},
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
 	                        console.log('Error: ' + xhr.responseText);
@@ -323,7 +323,7 @@ structure_name
 		
 		//run search cds default 
 		var embedParam="" +
-		"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelSearchQuantity").val()+"'>" +
+		"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelQuantity").val()+"'>" +
 		"<input type='hidden' class='param_quantity_form' id='embed_cds_name_quantity' name='embed_cds_name_quantity' value='"+$("#cdsNameSearchQuantity").val()+"'>";
 		$(".param_quantity_form").remove();
 		$("#embedParamSearchQuantity").html(embedParam);
@@ -355,7 +355,7 @@ structure_name
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevelSearchQuantity").val()},
+					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevelQuantity").val()},
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
 	                        console.log('Error: ' + xhr.responseText);
@@ -376,7 +376,7 @@ structure_name
 	        }
 	    });
 		//Autocomplete Search End
-		appraisalLevelListFn("SearchQuantity");
+		//appraisalLevelListFn("SearchQuantity");
 		
 		//กำหนดค่า CIF ต้องเปนตัวเลข
 		$("#baselineValueQuantity").keydown(function (e) {
@@ -435,7 +435,7 @@ $(document).ready(function(){
 		
 		//run search cds default 
 		var embedParam="" +
-		"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelSearchQuantity").val()+"'>" +
+		"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelQuantity").val()+"'>" +
 		"<input type='hidden' class='param_quantity_form' id='embed_cds_name_quantity' name='embed_cds_name_quantity' value='"+$("#cdsNameSearchQuantity").val()+"'>";
 		$(".param_quantity_form").remove();
 		$("#embedParamSearchQuantity").html(embedParam);
@@ -447,7 +447,7 @@ $(document).ready(function(){
 	//Search Quantity Start
 	$(document).on("click","#SearchQuantity",function(){	
 		var embedParam="" +
-				"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelSearchQuantity").val()+"'>" +
+				"<input type='hidden' class='param_quantity_form' id='embed_appraisal_level_quantity' name='embed_appraisal_level_quantity' value='"+$("#appraisalLevelQuantity").val()+"'>" +
 				"<input type='hidden' class='param_quantity_form' id='embed_cds_name_quantity' name='embed_cds_name_quantity' value='"+$("#cdsNameSearchQuantity").val()+"'>";
 		$(".param_quantity_form").remove();
 		$("#embedParamSearchQuantity").html(embedParam);

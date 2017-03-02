@@ -1,128 +1,488 @@
-$(document).ready(function(){
-	$(".sparkline").sparkline([10,12,12,9,7], {
-	    type: 'bullet'});
+
+var yearListFn = function(){
+
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/dashboard/year_list",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+			
+					htmlOption+="<option value="+indexEntry['appraisal_year']+">"+indexEntry['appraisal_year']+"</option>";
+					
+			});
+			$("#paramYear").html(htmlOption);
+		}
+	});
+}
+var monthListFn = function(appraisal_year){
+
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/dashboard/month_list",
+		type:"post",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"appraisal_year":appraisal_year},
+		success:function(data){
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+					//alert(indexEntry['"period_id']);
+					//console.log(indexEntry['period_id']);
+					htmlOption+="<option value='"+indexEntry['period_id']+"'>"+indexEntry['monthname']+"</option>";
+					
+				
+			});
+			$("#paramMonth").html(htmlOption);
+		}
+	});
+}
+var getDataUninuqe = function(object,key){
+
+	var dataObject = [];
+	$.each(object,function(index,indexEntry){
+
+		if(jQuery.inArray(indexEntry[key],dataObject) == -1){
+			
+			dataObject.push(indexEntry[key]);
+		}
+	});
+
+	return dataObject;
 	
-	//chart1 binding start
-	 var s1 = [2, 6, 7, 10];
-     var s2 = [7, 5, 3, 2];
-     var ticks = ['a', 'b', 'c', 'd'];
-      
-     plot2 = $.jqplot('chart1', [s1, s2], {
-         seriesDefaults: {
-             renderer:$.jqplot.BarRenderer,
-             pointLabels: { show: true }
-         },
-         axes: {
-             xaxis: {
-                 renderer: $.jqplot.CategoryAxisRenderer,
-                 ticks: ticks
-             }
-         }
-     });
-  
-     $('#chart1').bind('jqplotDataHighlight', 
-         function (ev, seriesIndex, pointIndex, data) {
-             $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-         }
-     );
-          
-     $('#chart1').bind('jqplotDataUnhighlight', 
-         function (ev) {
-             $('#info2').html('Nothing');
-         }
-     );
-	//chart1 binding end
-     
-   //chart2 binding start
-	 var s1 = [2, 6, 7, 10];
-     var s2 = [7, 5, 3, 2];
-     var ticks = ['a', 'b', 'c', 'd'];
-      
-     plot2 = $.jqplot('chart2', [s1, s2], {
-         seriesDefaults: {
-             renderer:$.jqplot.BarRenderer,
-             pointLabels: { show: true }
-         },
-         axes: {
-             xaxis: {
-                 renderer: $.jqplot.CategoryAxisRenderer,
-                 ticks: ticks
-             }
-         }
-     });
-  
-     $('#chart2').bind('jqplotDataHighlight', 
-         function (ev, seriesIndex, pointIndex, data) {
-             $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-         }
-     );
-          
-     $('#chart2').bind('jqplotDataUnhighlight', 
-         function (ev) {
-             $('#info2').html('Nothing');
-         }
-     );
-	//chart2 binding end
-     
-   //chart3 binding start
-	 var s1 = [2, 6, 7, 10];
-     var s2 = [7, 5, 3, 2];
-     var ticks = ['a', 'b', 'c', 'd'];
-      
-     plot2 = $.jqplot('chart3', [s1, s2], {
-         seriesDefaults: {
-             renderer:$.jqplot.BarRenderer,
-             pointLabels: { show: true }
-         },
-         axes: {
-             xaxis: {
-                 renderer: $.jqplot.CategoryAxisRenderer,
-                 ticks: ticks
-             }
-         }
-     });
-  
-     $('#chart3').bind('jqplotDataHighlight', 
-         function (ev, seriesIndex, pointIndex, data) {
-             $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-         }
-     );
-          
-     $('#chart3').bind('jqplotDataUnhighlight', 
-         function (ev) {
-             $('#info2').html('Nothing');
-         }
-     );
-	//chart3 binding end
-     
-   //chart4 binding start
-	 var s1 = [2, 6, 7, 10];
-     var s2 = [7, 5, 3, 2];
-     var ticks = ['a', 'b', 'c', 'd'];
-      
-     plot2 = $.jqplot('chart4', [s1, s2], {
-         seriesDefaults: {
-             renderer:$.jqplot.BarRenderer,
-             pointLabels: { show: true }
-         },
-         axes: {
-             xaxis: {
-                 renderer: $.jqplot.CategoryAxisRenderer,
-                 ticks: ticks
-             }
-         }
-     });
-  
-     $('#chart4').bind('jqplotDataHighlight', 
-         function (ev, seriesIndex, pointIndex, data) {
-             $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-         }
-     );
-          
-     $('#chart4').bind('jqplotDataUnhighlight', 
-         function (ev) {
-             $('#info2').html('Nothing');
-         }
-     );
-	//chart4 binding end
+
+}
+
+var listBalanceScorecardFn = function(data){
+	
+	var balanceScorecardHTML="";
+	var perspective_name = getDataUninuqe(data,'perspective_name');
+	
+	//console.log(perspective_name);
+	
+	$.each(perspective_name,function(index,indexEntry){
+		//console.log(index);
+		//console.log(indexEntry);
+		
+		balanceScorecardHTML+=" <div class='title2 yellow2'>";
+		balanceScorecardHTML+="<b>"+indexEntry+"</b>";
+		balanceScorecardHTML+=" </div>";
+		balanceScorecardHTML+=" <table class='table table-hover'>";
+		balanceScorecardHTML+="<tbody>";
+		
+		$.each(data,function(index,indexEntry2){
+			if(indexEntry==indexEntry2['perspective_name']){
+//				console.log(indexEntry);
+//				console.log(indexEntry2['appraisal_item_id']);
+//				console.log(indexEntry2['appraisal_item_name']);
+//				console.log(indexEntry2['target_value']);
+//				console.log(indexEntry2['actual_value']);
+				
+				var percentage=(parseInt(indexEntry2['actual_value'])/parseInt(indexEntry2['target_value'])*100).toFixed(2);
+				
+				balanceScorecardHTML+="<tr id='id-"+indexEntry2['appraisal_item_id']+"' class='clickable appraisalItem'>";
+				balanceScorecardHTML+="<td>"+indexEntry2['appraisal_item_name']+"</td>";
+				balanceScorecardHTML+="<td style='width:50px;'><div class='sparkline'>"+parseInt(indexEntry2['target_value'])+","+parseInt(indexEntry2['actual_value'])+",120,80,40</div></td>";
+				balanceScorecardHTML+="<td style='width:60px;'>"+percentage+"%</td>";
+				balanceScorecardHTML+="</tr>";   
+			}
+			
+		});
+		balanceScorecardHTML+="</tbody>";
+		balanceScorecardHTML+="</table>";
+		//console.log("--------------------");
+	});
+
+	$("#ibox-content-bsc").html(balanceScorecardHTML);
+	
+};
+
+var getBalanceScorecardFn = function(period_id){
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/dashboard/balance_scorecard",
+		type:"post",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"period_id":period_id},
+		success:function(data){
+			
+			listBalanceScorecardFn(data);
+			
+		}
+	});
+}
+createGraphMonthlyVarianceFn = function(data){
+	option=[];
+	option['cateRotate']=-30;
+	//option['theme']=theme;
+	//1#0075c2,2#62c78f,3#f3d965
+	option['theme']=["#62c78f","#0075c2","#f3d965"];
+	option['stackSeries']=false;
+	option['tooltipTextColor']='white';
+	option['location']='e';
+	option['placement']='inside';
+	option['title']="Month";
+	option['pointLabels']=true;
+	option['pointLabelsFont']='13px';
+	//show hide tooltip
+	option['tooltip']=true;
+	option['y2axis']=true;
+	option['barWidth']="15";
+	
+	$("#monthlyVariance").empty();
+	barChart("monthlyVariance",data,option);	
+	
+
+	
+}
+
+getDataMonthlyVarianceFn = function(appraisal_year,appraisal_item_id){
+	
+	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "1" : appraisal_item_id);
+	
+	$.ajax({
+		//url:"../Model/barChartMutiSeries.jsp",
+		url:restfulURL+"/tyw_api/public/dashboard/monthly_variance",
+		type:"post",
+		dataType:"json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		success:function(data){
+			
+			if(data==""){
+				
+				return false;
+			}
+			/*
+			[["May","Hotel","200"],["June","Hotel","600"],["Junly","Hotel","700"],["Agust","Hotel","1000"],["Octember","Hotel","1000"],
+			 ["May","Event Regristration","400"],["June","Event Regristration","210"],["Junly","Event Regristration","690"],["Agust","Event Regristration","820"],["Octember","Event Regristration","820"],
+			 ["May","Airfare","260"],["June","Airfare","440"],["Junly","Airfare","320"],["Agust","Airfare","200"],["Octember","Airfare","200"]] 
+			*/
+			//console.log(data[0]);
+			
+			//var objFormat="[["+data[0]['substr(monthname(p.start_date),1,3)']+",\"Target\","+data[0]['target_value']+"]]";
+			var objFormat="";
+			var category="[{\"target_value\":\"Target\"},{\"actual_value\":\"Actual\"},{\"variance_value\":\"Variance\"}]";
+			category = eval("("+category+")");
+			objFormat+="[";
+			$.each(category,function(index,indexEntry){
+				if(index==0){
+					objFormat+="[";
+				}else{
+					objFormat+=",[";
+				}//Actual,Variance
+//				console.log(index);
+//				console.log(Object.keys(indexEntry)[0]);
+//				console.log(indexEntry[Object.keys(indexEntry)]);
+				$.each(data,function(index2,indexEntry2){
+					if(index2==0){
+						
+					}else{
+						objFormat+=",[";
+					}//Actual,Variance
+						objFormat+="\""+indexEntry2['substr(monthname(p.start_date),1,3)']+"\",\""+indexEntry[Object.keys(indexEntry)]+"\",\""+indexEntry2[Object.keys(indexEntry)[0]]+"\"";
+					objFormat+="]";
+				});
+				
+			});
+				
+			objFormat+="]";
+			
+			//console.log(objFormat);
+			var objJsonFormat = eval("("+objFormat+")");
+			createGraphMonthlyVarianceFn(objJsonFormat);
+			
+		}
+	});
+}
+var createGraphMonthlyGrowthFn = function(data){
+//	option=[];
+//	option['cateRotate']=-30;
+//	option['theme']=theme;
+//	option['stackSeries']=false;
+//	option['tooltipTextColor']='white';
+//	option['location']='e';
+//	option['placement']='inside';
+//	option['title']="Month";
+//	option['pointLabels']=true;
+//	option['pointLabelsFont']='13px';
+//	//show hide tooltip
+//	option['tooltip']=true;
+//	option['barWidth']="15";	
+//	barChart("monthlyGrowth",data,option);
+//	
+	option=[];
+	option['cateRotate']=0;
+	//option['theme']=theme;
+	option['theme']=["#62c78f","#0075c2","#f3d965"];
+	option['tooltipTextColor']='white';
+	option['location']='e';
+	option['placement']='inside';
+	option['title']="Month";
+	option['pointLabels']=true;
+	option['pointLabelsFont']='13px';
+	//show hide tooltip
+	option['tooltip']=true;
+	//show y2axis
+	option['y2axis']=true;
+	$("#monthlyGrowth").empty();
+	barLineChart("monthlyGrowth",data,option);	
+	
+}
+getDataMonthlyGrowthFn = function(appraisal_year,appraisal_item_id){
+	
+	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "1" : appraisal_item_id);
+	
+	$.ajax({
+		//url:"../Model/barChartMutiSeries.jsp",
+		url:restfulURL+"/tyw_api/public/dashboard/monthly_growth",
+		type:"post",
+		dataType:"json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		success:function(data){
+			if(data==""){
+				//alert("ok")
+				return false;
+			}
+			var objFormat="";
+			var category="[{\"pyear\":\"Previous Year\"},{\"cyear\":\"Actual\"},{\"growth_percent\":\"%Growth\"}]";
+			category = eval("("+category+")");
+			objFormat+="[";
+			$.each(category,function(index,indexEntry){
+				if(index==0){
+					objFormat+="[";
+				}else{
+					objFormat+=",[";
+				}//Actual,Variance
+//				console.log(index);
+//				console.log(Object.keys(indexEntry)[0]);
+//				console.log(indexEntry[Object.keys(indexEntry)]);
+				$.each(data,function(index2,indexEntry2){
+					if(index2==0){
+						
+					}else{
+						objFormat+=",[";
+					}
+						objFormat+="\""+indexEntry2['period_desc']+"\",\""+indexEntry[Object.keys(indexEntry)]+"\",\""+indexEntry2[Object.keys(indexEntry)[0]]+"\"";
+					objFormat+="]";
+				});
+				
+			});
+				
+			objFormat+="]";
+			
+			console.log(objFormat);
+			var objJsonFormat = eval("("+objFormat+")");
+			createGraphMonthlyGrowthFn(objJsonFormat);
+			
+		}
+	});
+}
+
+
+
+var createGraphYTDGrowthFn = function(data){
+//	option=[];
+//	option['cateRotate']=-30;
+//	//option['theme']=theme;
+//	option['theme']=["#62c78f","#0075c2","#f3d965"];
+//	option['stackSeries']=false;
+//	option['tooltipTextColor']='white';
+//	option['location']='e';
+//	option['placement']='inside';
+//	option['title']="Month";
+//	option['pointLabels']=true;
+//	option['pointLabelsFont']='13px';
+//	//show hide tooltip
+//	option['tooltip']=true;
+//	option['barWidth']="15";	
+//	$("#ytdGrowth").empty();
+//	
+//	barChart("ytdGrowth",data,option);
+	
+	option=[];
+	option['cateRotate']=0;
+	option['theme']=["#62c78f","#0075c2","#f3d965"];
+	option['tooltipTextColor']='white';
+	option['location']='e';
+	option['placement']='inside';
+	option['title']="Month";
+	option['pointLabels']=true;
+	option['pointLabelsFont']='13px';
+	//show hide tooltip
+	option['tooltip']=true;
+	//show y2axis
+	option['y2axis']=true;
+	$("#ytdGrowth").empty();
+	barLineChart("ytdGrowth",data,option);	
+	
+}
+getDataYTDGrowthFn = function(appraisal_year,appraisal_item_id){
+	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "1" : appraisal_item_id);
+	
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/dashboard/ytd_monthly_growth",
+		type:"post",
+		dataType:"json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		success:function(data){
+			if(data==""){
+				//alert("ok")
+				return false;
+			}
+			var objFormat="";
+			var category="[{\"pyear\":\"Previous Year\"},{\"cyear\":\"Actual\"},{\"growth_percent\":\"%Growth\"}]";
+			category = eval("("+category+")");
+			objFormat+="[";
+			$.each(category,function(index,indexEntry){
+				if(index==0){
+					objFormat+="[";
+				}else{
+					objFormat+=",[";
+				}//Actual,Variance
+				$.each(data,function(index2,indexEntry2){
+					if(index2==0){
+						
+					}else{
+						objFormat+=",[";
+					}
+						objFormat+="\""+indexEntry2['period_desc']+"\",\""+indexEntry[Object.keys(indexEntry)]+"\",\""+indexEntry2[Object.keys(indexEntry)[0]]+"\"";
+					objFormat+="]";
+				});
+				
+			});
+				
+			objFormat+="]";
+			
+			console.log(objFormat);
+			var objJsonFormat = eval("("+objFormat+")");
+			createGraphYTDGrowthFn(objJsonFormat);
+			
+		}
+	});
+}
+
+var createGraphYTDVarianceFn = function(data){
+	option=[];
+	option['cateRotate']=-30;
+	option['theme']=["#62c78f","#0075c2","#f3d965"];
+	option['stackSeries']=false;
+	option['tooltipTextColor']='white';
+	option['location']='e';
+	option['placement']='inside';
+	option['title']="Month";
+	option['pointLabels']=true;
+	option['pointLabelsFont']='13px';
+	//show hide tooltip
+	option['tooltip']=true;
+	option['barWidth']="15";	
+	
+	$("#ytdVariance").empty();
+	barChart("ytdVariance",data,option);
+}
+getDataYTDVarianceFn = function(appraisal_year,appraisal_item_id){
+	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "1" : appraisal_item_id);
+	
+	$.ajax({
+		url:restfulURL+"/tyw_api/public/dashboard/ytd_monthly_variance",
+		type:"post",
+		dataType:"json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		success:function(data){
+			if(data==""){
+				//alert("ok")
+				return false;
+			}
+			var objFormat="";
+			var category="[{\"target_value\":\"Target\"},{\"actual_value\":\"Actual\"},{\"variance_value\":\"Variance\"}]";
+			category = eval("("+category+")");
+			objFormat+="[";
+			$.each(category,function(index,indexEntry){
+				if(index==0){
+					objFormat+="[";
+				}else{
+					objFormat+=",[";
+				}//Target,Actual,Variance
+			  
+				$.each(data,function(index2,indexEntry2){
+					if(index2==0){
+						
+					}else{
+						objFormat+=",[";
+					}
+						objFormat+="\""+indexEntry2['month_name']+"\",\""+indexEntry[Object.keys(indexEntry)]+"\",\""+indexEntry2[Object.keys(indexEntry)[0]]+"\"";
+					objFormat+="]";
+				});
+				
+			});
+				
+			objFormat+="]";
+			
+			console.log(objFormat);
+			var objJsonFormat = eval("("+objFormat+")");
+			createGraphYTDVarianceFn(objJsonFormat);
+			
+		}
+	});
+}
+var bindingBulletFn = function(){
+	$(".sparkline").sparkline('html', {
+	    type: 'bullet',
+	    targetColor: '#7d3f2d',
+	    performanceColor: '#0075c2',
+	    rangeColors: ['#62c78f','#f3d965','#e2855a']});
+	
+}
+
+$(document).ready(function(){
+	
+	
+	
+	
+	yearListFn();
+	$("#paramYear").change(function(){
+		monthListFn($(this).val());
+		getDataMonthlyVarianceFn($(this).val(),$("#embed_appraisal_item_id").val());
+		getDataMonthlyGrowthFn($(this).val(),$("#embed_appraisal_item_id").val());
+		getDataYTDVarianceFn($(this).val(),$("#embed_appraisal_item_id").val());
+		getDataYTDGrowthFn($(this).val(),$("#embed_appraisal_item_id").val());
+		bindingBulletFn();
+	});
+	$("#paramYear").change();
+	
+	$("#paramMonth").change(function(){
+		getBalanceScorecardFn($(this).val());
+		bindingBulletFn();
+	});
+	$("#paramMonth").change();
+
+	//bindingBulletFn();
+	
+	//getDataMonthlyVarianceFn("2017","1");
+	//getDataMonthlyGrowthFn("2017","1");
+//	getDataYTDVarianceFn("2017","1");
+//	getDataYTDGrowthFn("2017","1");
+	
+	$(document).on("click",".appraisalItem",function(){
+
+		var id = $(this).attr("id").split("-");
+		id = id[1];
+		$(".embed_appraisal_item_id").remove();
+		$("body").append("<input type='hidden' id='embed_appraisal_item_id' class='embed_appraisal_item_id' name='embed_appraisal_item_id' value='"+id+"'>");
+		getDataMonthlyVarianceFn($("#paramYear").val(),id);
+		getDataMonthlyGrowthFn($("#paramYear").val(),id);
+		getDataYTDVarianceFn($("#paramYear").val(),id);
+		getDataYTDGrowthFn($("#paramYear").val(),id);
+		
+	});
+	
+	
+	
 });
