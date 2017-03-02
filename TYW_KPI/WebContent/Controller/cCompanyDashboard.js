@@ -37,6 +37,7 @@ var monthListFn = function(appraisal_year){
 				
 			});
 			$("#paramMonth").html(htmlOption);
+			$("#paramAppraisal_year").html(appraisal_year);
 		}
 	});
 }
@@ -82,6 +83,9 @@ var listBalanceScorecardFn = function(data){
 //				console.log(indexEntry2['actual_value']);
 				
 				var percentage=(parseInt(indexEntry2['actual_value'])/parseInt(indexEntry2['target_value'])*100).toFixed(2);
+				if(percentage == 'NaN'){
+					var percentage = 0;
+				}
 				
 				balanceScorecardHTML+="<tr id='id-"+indexEntry2['appraisal_item_id']+"' class='clickable appraisalItem'>";
 				balanceScorecardHTML+="<td>"+indexEntry2['appraisal_item_name']+"</td>";
@@ -123,15 +127,15 @@ createGraphMonthlyVarianceFn = function(data){
 	option['theme']=["#62c78f","#0075c2","#f3d965"];
 	option['stackSeries']=false;
 	option['tooltipTextColor']='white';
-	option['location']='e';
+	option['location']='n';
 	option['placement']='inside';
-	option['title']="Month";
+	option['title']="Monthly Variance";
 	option['pointLabels']=true;
 	option['pointLabelsFont']='13px';
 	//show hide tooltip
 	option['tooltip']=true;
 	option['y2axis']=true;
-	option['barWidth']="15";
+	//option['barWidth']="15";
 	
 	$("#monthlyVariance").empty();
 	barChart("monthlyVariance",data,option);	
@@ -152,7 +156,7 @@ getDataMonthlyVarianceFn = function(appraisal_year,appraisal_item_id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
-			
+
 			if(data==""){
 				
 				return false;
@@ -220,9 +224,9 @@ var createGraphMonthlyGrowthFn = function(data){
 	//option['theme']=theme;
 	option['theme']=["#62c78f","#0075c2","#f3d965"];
 	option['tooltipTextColor']='white';
-	option['location']='e';
+	option['location']='n';
 	option['placement']='inside';
-	option['title']="Month";
+	option['title']="Monthly Growth";
 	option['pointLabels']=true;
 	option['pointLabelsFont']='13px';
 	//show hide tooltip
@@ -309,9 +313,9 @@ var createGraphYTDGrowthFn = function(data){
 	option['cateRotate']=0;
 	option['theme']=["#62c78f","#0075c2","#f3d965"];
 	option['tooltipTextColor']='white';
-	option['location']='e';
+	option['location']='n';
 	option['placement']='inside';
-	option['title']="Month";
+	option['title']="YTD Growth";
 	option['pointLabels']=true;
 	option['pointLabelsFont']='13px';
 	//show hide tooltip
@@ -374,14 +378,14 @@ var createGraphYTDVarianceFn = function(data){
 	option['theme']=["#62c78f","#0075c2","#f3d965"];
 	option['stackSeries']=false;
 	option['tooltipTextColor']='white';
-	option['location']='e';
+	option['location']='n';
 	option['placement']='inside';
-	option['title']="Month";
+	option['title']="YTD Variance";
 	option['pointLabels']=true;
 	option['pointLabelsFont']='13px';
 	//show hide tooltip
 	option['tooltip']=true;
-	option['barWidth']="15";	
+	//option['barWidth']="15";	
 	
 	$("#ytdVariance").empty();
 	barChart("ytdVariance",data,option);
@@ -442,10 +446,7 @@ var bindingBulletFn = function(){
 }
 
 $(document).ready(function(){
-	
-	
-	
-	
+		
 	yearListFn();
 	$("#paramYear").change(function(){
 		monthListFn($(this).val());
@@ -483,6 +484,9 @@ $(document).ready(function(){
 		
 	});
 	
-	
+	$("#YTD_tab").click(function(){
+			getDataYTDVarianceFn($("#paramYear").val(),$("#embed_appraisal_item_id").val());
+			getDataYTDGrowthFn($("#paramYear").val(),$("#embed_appraisal_item_id").val());
+	});
 	
 });

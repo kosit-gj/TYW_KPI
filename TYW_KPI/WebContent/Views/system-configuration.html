@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>System Configuration| Management</title>
+
+    <link href="../css/plugins/bootstrap2.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/plugins/bootstrap2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+<!--     <link href="../css/style.css" rel="stylesheet"> -->
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/systemConfiguration.css" rel="stylesheet">
+    
+</head>
+
+<!-- <body class="top-navigation  gray-bg" > -->
+
+<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="titilePage"> System Configuration </span> </h2> -->
+
+<!-- 	<!-- search start --> 
+
+<!-- 	<!-- search end --> 
+	
+	
+<!-- 	<div id="mainContent"> -->
+<!-- 	</div> -->
+
+<!--  #####################Content data here ######################-->
+
+<body class="top-navigation gray-bg ">
+
+	
+		<div class="container">
+				<div class='row-fluid'>
+
+					<div class='col-xs-12'>
+						<div id="slide_status">
+							<div id="btnCloseSlide">×</div>
+							<div id="slide_status_area"></div>
+						</div>
+					</div>
+
+				</div>
+
+					<div class="row-fluid">
+					<div class="col-lg-12">
+						<div class="span12" style="padding: 0px 10px; height:65px;">
+							<h1>
+							<i class="fa fa fa-pencil-square-o icon-title"></i>
+							<small style=" position:absolute;top:37px;left:85px">System Configuration</small>
+							</h1>
+						</div>
+					</div>
+				</div>
+				
+<div class="row"><!-- start--row -->
+
+                   </div><!-- end--row -->
+         			<div class="row-fluid">
+				         		<div class="span12">
+					         	<div class="ibox-title">
+	                                <h5>System Configuration </h5>
+	         					</div>
+	         					
+	         					
+	         					<div class="ibox-content"> 
+								<div class="row-fluid" id="sysconf">
+								
+									
+								<div class="span10"></div> 
+							
+<!-- 							<div class="span12  offset2"> -->
+							
+         							<div class="span12">
+         								<div class="span6" >
+											<label>  Period start Month &nbsp;:</label>
+										</div>
+										<div class="span1" id="drop_down_list_month"></div>
+									</div>
+								
+								
+									<div class="span12">
+										<div class="span6" >
+											<label>  Appraisal Frequency &nbsp;:</label>
+										</div>
+										<div class="span1" id="appraisalSystem"></div>
+									</div>
+									
+									<div class="span12">
+										<div class="span6" >
+											<label>   Bonus Frequency  &nbsp;:</label>
+												
+										</div>
+									<div class="span1" id="bonusfreSystem"></div>
+	                	
+									</div>
+									
+									
+								<div class="span12">
+								
+									<div class="span6" >
+										<label>    Bonus Prorate   &nbsp;:</label>
+										
+									</div>
+									
+									<div class="span1">
+	                	<select data-toggle="tooltip" title="TypeDatabase" class="input form-control input-sm"  id="bonusprorateSystem" name="flag_2">
+											<option value="คิดสัดส่วนตามปี">คิดสัดส่วนตามปี</option>
+											<option value="คิดสัดส่วนตามรอบจ่ายโบนัส">คิดสัดส่วนตามรอบจ่ายโบนัส</option>								
+										</select>
+									 	 
+									</div>
+									
+								</div>
+								
+								<div class="span12">
+	                             
+									<div class="span6" >
+										<label> Bonus Rate  &nbsp;:</label>
+									</div>
+									
+									<div class="span1" >
+										<input class="form-control input-data numberOnly" type="date"id="bonusRateSystem">
+									</div>
+								</div>
+								
+									<div class="span12">
+	                             
+									<div class="span6" >
+										<label> Working Day for Bonus Payment  &nbsp;:</label>
+									</div>
+									
+									<div class="span1" >
+										<input class="form-control input-data numberOnly" type="date"id="workingSystem">  
+									</div>
+									
+								</div>
+								
+								
+									<div class="span12">
+								
+									<div class="span6" >
+										<label>  Salary Raise Frequency &nbsp;:</label>
+										
+									</div>
+									<div class="span1" id="salarySystem"></div>
+
+                                     	</div> 
+               
+         	
+         	  <div class="modal-footers" align="right">
+         	     
+           	 	<input type="hidden" name="id" id="id" value="">
+   				<input type="hidden" name="action" id="action" value="add">
+   				
+   				<button class=" btn btn-primary " type="button" id="btnSubmit" >Save</button>
+                <button data-dismiss="modal" class=" btn btn-danger btnCancle" type="button">Cancel</button>
+                
+               
+            </div>
+            </div>
+            <div class="row-fluid" >
+            <div class="alert alert-warning" id="information" style=""></div>
+            </div>
+           
+          </div>
+        </div>          
+     </div>
+  </div>
+  
+  <!--  #####################Content data here ######################-->
+		
+	
+
+
+
+
+    <!-- Mainly scripts -->
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<script src="../css/plugins/bootstrap2.3.2/js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     <!-- table data start -->
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- table data end -->
+    
+    <!-- load angular fame work start-->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <!-- load angular fame work end -->
+    
+    
+    <script src="../js/jquery.mloading.js"></script>
+    
+    <script src="../Controller/cConfig.js"></script> 
+    <script src="../Controller/cMain.js"></script> 
+    
+    <script src="../Controller/system-configuration.js"></script> 
+
+  
+</body>
+
+</html>
