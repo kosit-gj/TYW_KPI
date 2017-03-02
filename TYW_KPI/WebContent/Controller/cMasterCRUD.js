@@ -164,6 +164,7 @@ var updateFn = function(data,options){
 				if(data['status']=="200"){
 					//alert("Update Success");
 					callFlashSlide("Update success.");
+					$("#modal-"+options['formDetail']['id']).modal('hide');
 					getDataFn($("#pageNumber").val(),$("#rpp").val(),options);
 					clearFn(options);
 				}
@@ -245,7 +246,7 @@ var listDataFn = function(data,options){
 			}
 		});
 		htmlTbody+="    		<td style=\"text-align:center\">";
-		htmlTbody+="    		<i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"";
+		htmlTbody+="    		<i data-content=\"";
 		
 		if(options['btnManageOption']!=undefined){
 		htmlTbody+="    		&lt;button id='"+options['btnManageOption']['id']+"-"+indexEntry[options['formDetail']['pk_id']]+"' class='btn btn-info btn-xs btn-gear "+options['btnManageOption']['id']+"'&gt;"+options['btnManageOption']['name']+"&lt;/button&gt;";
