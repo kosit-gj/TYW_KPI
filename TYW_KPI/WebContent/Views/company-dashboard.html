@@ -27,7 +27,9 @@
     <!-- jqplot end -->
     
     <link href="../css/companyDashboard.css" rel="stylesheet">
-    
+    <style>
+    .jqplot-table-legend-label{width: 79px;}
+    </style>
 </head>
 
 <body class="top-navigation gray-bg ">
@@ -45,16 +47,16 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-								<div class='row container'>
-									<div class='col-md-8'>
-									  <div class='titlePanelSearch'>KPI DASHBOARD</div>
+								<div class='row '>
+									<div class='col-lg-7 col-md-6 col-sm-5'>
+									  <div class="titlePanelSearch" style="margin-left:15px;margin-bottom:10px;">KPI DASHBOARD</div>
 									</div>
-									<div class='col-md-4 object-right'>
+									<div class='col-lg-4 col-md-5 col-sm-6 col-xs-12 object-right'>
 									
-										<div class="col-sm-6  inputFormSearch">
+										<div class="col-sm-6 col-xs-6 inputFormSearch">
 											<div class="form-group">
-												<label class="col-lg-4 control-label numberOnly">Year:</label>
-												<div id="connection_name0" class="col-lg-8 inputFormSearch">
+												<label class="col-lg-4 col-md-4 col-sm-4 col-xs-3 control-label numberOnly">Year:</label>
+												<div id="connection_name0" class="col-lg-8 col-md-8 col-sm-8 col-xs-9 inputFormSearch">
 												
 												<select style="width:100%" name="paramYear" id="paramYear" class="form-control input-sm">
 												
@@ -63,10 +65,10 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-sm-6 inputFormSearch">
+										<div class="col-sm-6 col-xs-6 inputFormSearch">
 											<div class="form-group">
-												<label class="col-lg-4 control-label numberOnly">Period:</label>
-												<div id="connection_name0" class="col-lg-8 inputFormSearch">
+												<label class="col-lg-4 col-md-4 col-sm-4 col-xs-3 control-label numberOnly">Period:</label>
+												<div id="connection_name0" class="col-lg-8 col-md-8 col-sm-8 col-xs-9 inputFormSearch">
 												
 												<select style="width:100%" name="paramMonth" id="paramMonth" class="form-control input-sm">
 												
@@ -86,7 +88,7 @@
          							<div class='row'>
          								
          								
-	         							<div class="col-lg-3">
+	         							<div class="col-lg-3 col-md-3 col-sm-4">
 							                    <div class="ibox float-e-margins">
 							                        <div class="ibox-title">
 							                            <div class='titlePanelSearch2'>Balance Scorecard</div>
@@ -98,7 +100,7 @@
 							                    </div>
 							            </div>
 							            
-							            <div class="col-lg-9">
+							            <div class="col-lg-9 col-md-9 col-sm-8">
 	<ul class="nav nav-tabs" style="width:30">
 		<li class="active"><a data-toggle="tab" href="#monthly" id="Monthly_tab" >Monthly</a></li>
 		<li><a data-toggle="tab" href="#YTD" id="YTD_tab" >YTD</a></li>
