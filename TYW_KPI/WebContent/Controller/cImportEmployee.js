@@ -356,6 +356,7 @@ var listImportEmployeeFn = function(data) {
 					     }else if (data['status'] == "400"){
 					    	 $("#confrimModal").modal('hide');
 					    	 callFlashSlide(data['data'],"error");
+					    	 //backToTopFn();
 					    	}
 					     	  
 					 }
@@ -602,7 +603,12 @@ var dropDownListSection = function(id){
 	return html;
 };
 
-
+var backToTopFn = function(){
+	$('body,html').animate({
+		scrollTop: 0
+	}, 800);
+	return false;
+}
 
 $(document).ready(function() {
 

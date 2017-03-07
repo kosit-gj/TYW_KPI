@@ -74,6 +74,7 @@ var clearFn = function() {
 	$("#table_Sql").hide();
 	$("#txt_sample_data").removeAttr("disabled");
 	
+	$("#f_connection").removeAttr("disabled");
 	$("#btn_Execute").removeAttr("disabled");
 	
 	$("#checkbox_is_sql").prop("checked",false);
@@ -155,9 +156,11 @@ var findOneFn = function(id) {
 			if(data['is_sql']==1){
 				$('#checkbox_is_sql').prop('checked', true);
 				$("#btn_Execute").removeAttr("disabled");
+				$("#f_connection").removeAttr("disabled");
 			}else{
 				$('#checkbox_is_sql').prop('checked', false);
 				$("#btn_Execute").attr("disabled","disabled");
+				$("#f_connection").attr("disabled","disabled");
 			}
 			
 			//IsAction
@@ -518,7 +521,12 @@ var listSqlFn = function (data) {
 	$("#table_Sql").html(tableSql);
 	
 }
-
+var backToTopFn = function(){
+	$('body,html').animate({
+		scrollTop: 0
+	}, 800);
+	return false;
+}
 
 
 $(document).ready(function() {
@@ -579,9 +587,11 @@ $(document).ready(function() {
 	$("#checkbox_is_sql").change(function name() {
 		if($("#checkbox_is_sql:checked").is(":checked")){
 			$("#btn_Execute").removeAttr("disabled");
+			$("#f_connection").removeAttr("disabled");
 			//executeFn();
 		}else{
 			$("#btn_Execute").attr("disabled","disabled");
+			$("#f_connection").attr("disabled","disabled");
 		}
 	});
 	

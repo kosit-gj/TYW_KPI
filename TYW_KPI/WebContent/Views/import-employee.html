@@ -29,12 +29,12 @@
 <body class="top-navigation gray-bg ">
 
 	
-		<div class="container1">
+		<div id="container" class="container">
 				<!--  nav bar -->
 				<div class='row-fluid'>
 
 					<div class='col-xs-12'>
-						<div id="slide_status">
+						<div id="slide_status" class="span12">
 						
 							<div id="btnCloseSlide">×</div>
 							<div id="slide_status_area"></div>
@@ -111,7 +111,7 @@
 
 										
 										<div class="pull-right ">
-											<button id="btn_add_role" type="button" data-target="#ModalRole"
+											<button id="btn_add_role" type="submit" data-target="#ModalRole"
 											data-toggle="modal" class="btn btn-primary btn-sm "
 											style="margin-left: 5px">
 											&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
@@ -127,7 +127,7 @@
 										<form id="formExportToExcel" action="" method="post"
 											class="pull-right " style="margin-bottom: 5px; margin-left: 5px">
 											<button id="exportToExcel" class="btn btn-warning btn-sm"
-												type="button">
+												type="submit">
 												<i class="fa fa-download"></i> Download
 											</button>
 										</form>

@@ -146,13 +146,16 @@ h5 {
 }
 #table_Sql {    border-left-width: 1px;}
 .modal{top:3%;}
+#container{width: 93.5%;}
 /* Large desktop */
 @media ( min-width : 1200px) {
 	#confrimModal{left: 55%;}
+	
 }
 
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 980px) and (max-width: 1199px) {
+	
 	#confrimModal{left: 57%;}
 }
 @media ( min-width : 768px) and (max-width: 979px) {
