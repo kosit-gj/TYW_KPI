@@ -411,8 +411,10 @@ var dropDownListAppraisalLevel = function(id,inputId){
 	//id = f_app_lv
 	//id = app_lv
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
-	if(inputId == "app_lv"){html+="<option selected value=''>All</option>";}
+	html+="<select  data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
+	if(inputId == "app_lv"){
+		html+="<option selected value=''>All</option>";}
+
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel,
 		type:"get" ,

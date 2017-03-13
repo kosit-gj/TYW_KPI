@@ -1,11 +1,22 @@
 @CHARSET "ISO-8859-1";
-body{
-	background-color: #f3f3f4;
-}
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-	color: black;
+
+	.breadcrumbs2 {
+		background: rgba(0, 0, 0, 0)
+			linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat
+			scroll 0 0;
+		border-radius: 0;
+		margin-bottom: 0;
+		padding-bottom: 0px
+	}
 	
-}
+	#breadcrumbs {
+		margin-bottom: 0px;
+	}
+	
+	.portlet-content, .portlet-minimized .portlet-content-container
+		{
+		background-color: #fafafa;
+	}
 .countPagination {
     width: 70px;
 }
