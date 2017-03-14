@@ -1,13 +1,11 @@
 
 <button id="btnSubmit">Login</button>
 <script src="js/jquery-2.1.1.js"></script> 
+<script src="Controller/cConfig.js"></script>
 <script>
 $("#btnSubmit").click(function(){
 		$.ajax({
-			//url:"http://192.168.1.240/tyw_api/public/session",
-			url:"http://192.168.1.50/tyw_api/public/session",
-
-
+			url:restfulURL+"/tyw_api/public/session",
 			type:"POST",
 			dataType:"text",
 			data:{"username":"joe","password":"test"},
@@ -17,7 +15,7 @@ $("#btnSubmit").click(function(){
 			},
 			success:function(data){
 				//console.log(data);
-				localStorage.setItem("tokenID",data);
+				sessionStorage.setItem("tokenID",data);
 				alert("Login is Success");
 				
 			}
