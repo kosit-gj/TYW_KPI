@@ -1,6 +1,31 @@
-var tokenID= eval("("+localStorage.getItem("tokenID")+")");
-
-
+//var tokenID= eval("("+localStorage.getItem("tokenID")+")");
+/* for portlet*/
+var tokenID=[];
+tokenID= eval("("+sessionStorage.getItem("tokenID")+")");
+var getNewSessionFn = function(){
+	$.ajax({
+			
+			url:restfulURL+"/tyw_api/public/session",
+			type:"POST",
+			dataType:"text",
+			data:{"username":"joe","password":"test"},
+			error: function(jqXHR, textStatus, errorThrown) {
+				$("#information").html("<font color='red'>***</font> invalid credentials.").show();
+			},
+			success:function(data){
+				//console.log(data);
+				sessionStorage.setItem("tokenID",data);
+				//alert("Login is Success");
+				
+			}
+		});			
+}
+if(tokenID==null){
+	
+	getNewSessionFn();	
+}
+getNewSessionFn();
+/* for portlet*/
 var flashSLideUp=function(){
 	
 	$("#slide_status").slideUp();
@@ -237,7 +262,7 @@ var checkSession = function(){
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			localStorage.setItem('is_hr',data['is_hr']);
+			//sessionStorage.setItem('is_hr',data['is_hr']);
 			if(data['status']!="200"){
 				window.location.href = "../login.html"; 
 			}else{
@@ -267,7 +292,7 @@ var logoutFn = function(){
 			if(data['status']=="200"){
 			
 				window.location.href = "../login.html"; 
-				localStorage.setItem("tokenID","{}");
+				sessionStorage.setItem("tokenID","{}");
 				
 			}
 			
