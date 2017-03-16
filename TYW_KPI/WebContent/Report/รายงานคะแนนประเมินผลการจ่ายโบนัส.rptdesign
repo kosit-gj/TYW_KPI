@@ -1048,7 +1048,7 @@ order by r.emp_code]]></xml-property>
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select period_id, concat(appraisal_period_desc,' - ',salary_period_desc) as salary_period_desc
+            <xml-property name="queryText"><![CDATA[select period_id, concat(appraisal_period_desc,' - ',bonus_period_desc) as salary_period_desc
 from appraisal_period 
 where appraisal_year = ?
 and is_bonus  = true
@@ -1119,7 +1119,6 @@ order by period_id desc]]></xml-property>
                 </structure>
                 <structure>
                     <property name="columnName">salary_period_desc</property>
-                    <property name="alias">salary_period_desc</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">salary_period_desc</text-property>
                     <text-property name="heading">salary_period_desc</text-property>
@@ -1173,12 +1172,12 @@ order by period_id desc]]></xml-property>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">salary_period_desc</property>
-                    <property name="nativeName">salary_period_desc</property>
+                    <property name="nativeName">bonus_period_desc</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select period_id, salary_period_desc
+            <xml-property name="queryText"><![CDATA[select period_id, bonus_period_desc as salary_period_desc
 from appraisal_period 
 where appraisal_year = ?
 and period_id = ?
@@ -1187,23 +1186,6 @@ order by period_id desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
-  <DataSetParameters>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>2</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -1702,696 +1684,676 @@ order by r.structure_id]]></xml-property>
     </styles>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
-            <property name="borderBottomStyle">solid</property>
-            <property name="borderBottomWidth">medium</property>
-            <property name="borderLeftStyle">solid</property>
-            <property name="borderLeftWidth">medium</property>
-            <property name="borderRightStyle">solid</property>
-            <property name="borderRightWidth">medium</property>
-            <property name="borderTopStyle">solid</property>
-            <property name="borderTopWidth">medium</property>
+            <property name="type">a4</property>
+            <property name="orientation">portrait</property>
             <property name="headerHeight">0in</property>
             <property name="footerHeight">0in</property>
         </simple-master-page>
     </page-setup>
     <body>
-        <grid id="482">
-            <property name="height">10.416666666666666in</property>
-            <column id="483">
-                <property name="width">2%</property>
+        <table id="1479">
+            <property name="dataSet">report_list_data</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">num</property>
+                    <text-property name="displayName">num</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["num"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">department_name</property>
+                    <text-property name="displayName">department_name</text-property>
+                    <expression name="expression" type="javascript">"ฝ่าย"+dataSetRow["department_name"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">emp_result_id</property>
+                    <text-property name="displayName">emp_result_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["emp_result_id"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">emp_code</property>
+                    <text-property name="displayName">emp_code</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["emp_code"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">txt_emp_code</property>
+                    <text-property name="displayName">txt_emp_code</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["txt_emp_code"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">emp_name</property>
+                    <text-property name="displayName">emp_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["emp_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">position_name</property>
+                    <text-property name="displayName">position_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["position_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">working_start_date_old</property>
+                    <text-property name="displayName">working_start_date_old</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["working_start_date_old"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">working_start_date</property>
+                    <text-property name="displayName">working_start_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["working_start_date"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">age_of_employees</property>
+                    <text-property name="displayName">age_of_employees</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["age_of_employees"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">working_age</property>
+                    <text-property name="displayName">working_age</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["working_age"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">result_score</property>
+                    <text-property name="displayName">result_score</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["result_score"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">s_amount</property>
+                    <text-property name="displayName">s_amount</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["s_amount"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">b_rate</property>
+                    <text-property name="displayName">b_rate</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["b_rate"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">b_amount</property>
+                    <text-property name="displayName">b_amount</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["b_amount"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sum_s_amount</property>
+                    <text-property name="displayName">sum_s_amount</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Department</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["s_amount"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">sum_b_amount</property>
+                    <text-property name="displayName">sum_b_amount</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Department</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["b_amount"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <column id="1543">
+                <property name="width">7%</property>
             </column>
-            <column id="484"/>
-            <column id="485">
-                <property name="width">2%</property>
+            <column id="1544">
+                <property name="width">25%</property>
             </column>
-            <row id="486">
-                <property name="height">10.416666666666666in</property>
-                <cell id="487">
-                    <property name="width">10%</property>
-                </cell>
-                <cell id="488">
-                    <table id="1325">
-                        <property name="dataSet">report_list_data</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">num</property>
-                                <text-property name="displayName">num</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["num"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                            <structure>
-                                <property name="name">department_name</property>
-                                <text-property name="displayName">department_name</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["department_name"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">emp_result_id</property>
-                                <text-property name="displayName">emp_result_id</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["emp_result_id"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                            <structure>
-                                <property name="name">emp_code</property>
-                                <text-property name="displayName">emp_code</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["emp_code"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">txt_emp_code</property>
-                                <text-property name="displayName">txt_emp_code</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["txt_emp_code"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">emp_name</property>
-                                <text-property name="displayName">emp_name</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["emp_name"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">position_name</property>
-                                <text-property name="displayName">position_name</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["position_name"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">working_start_date_old</property>
-                                <text-property name="displayName">working_start_date_old</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["working_start_date_old"]</expression>
-                                <property name="dataType">date</property>
-                            </structure>
-                            <structure>
-                                <property name="name">working_start_date</property>
-                                <text-property name="displayName">working_start_date</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["working_start_date"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">age_of_employees</property>
-                                <text-property name="displayName">age_of_employees</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["age_of_employees"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">working_age</property>
-                                <text-property name="displayName">working_age</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["working_age"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">result_score</property>
-                                <text-property name="displayName">result_score</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["result_score"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                            <structure>
-                                <property name="name">s_amount</property>
-                                <text-property name="displayName">s_amount</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["s_amount"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">b_rate</property>
-                                <text-property name="displayName">b_rate</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["b_rate"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                            <structure>
-                                <property name="name">b_amount</property>
-                                <text-property name="displayName">b_amount</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["b_amount"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">sum_s_amount</property>
-                                <text-property name="displayName">sum_s_amount</text-property>
-                                <property name="dataType">float</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>Department</value>
-                                </simple-property-list>
-                                <property name="aggregateFunction">SUM</property>
-                                <list-property name="arguments">
+            <column id="1545"/>
+            <column id="1546">
+                <property name="width">6%</property>
+            </column>
+            <column id="1547">
+                <property name="width">12%</property>
+            </column>
+            <column id="1548">
+                <property name="width">12%</property>
+            </column>
+            <column id="1549">
+                <property name="width">12%</property>
+            </column>
+            <group id="1480">
+                <property name="groupName">Department</property>
+                <expression name="keyExpr" type="javascript">row["department_name"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["department_name"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <method name="onCreate"><![CDATA[rowCount=0;]]></method>
+                <property name="pageBreakAfter">always</property>
+                <header>
+                    <row id="1481">
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="textAlign">left</property>
+                        <cell id="1482">
+                            <property name="colSpan">7</property>
+                            <property name="rowSpan">1</property>
+                            <image id="1483">
+                                <property name="masterPage">Simple MasterPage</property>
+                                <property name="pageBreakAfter">auto</property>
+                                <property name="height">30px</property>
+                                <property name="width">90px</property>
+                                <property name="source">embed</property>
+                                <property name="imageName">logoTYW.png</property>
+                            </image>
+                        </cell>
+                    </row>
+                    <row id="1484">
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="textAlign">center</property>
+                        <cell id="1485">
+                            <property name="colSpan">7</property>
+                            <property name="rowSpan">1</property>
+                            <label id="1486">
+                                <property name="backgroundColor">#FFCC00</property>
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">18pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="color">black</property>
+                                <property name="paddingLeft">1pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="pageBreakAfter">auto</property>
+                                <property name="pageBreakBefore">auto</property>
+                                <property name="pageBreakInside">avoid</property>
+                                <text-property name="text">รายงานคะแนนประเมินผลการจ่ายโบนัส</text-property>
+                            </label>
+                        </cell>
+                    </row>
+                    <row id="1487">
+                        <property name="textAlign">center</property>
+                        <cell id="1488">
+                            <property name="colSpan">7</property>
+                            <property name="rowSpan">1</property>
+                            <property name="paddingTop">20pt</property>
+                            <data id="1489">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">16pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="resultSetColumn">department_name</property>
+                            </data>
+                        </cell>
+                    </row>
+                    <row id="1490">
+                        <property name="backgroundColor">#FFD940</property>
+                        <property name="borderLeftColor">#E6E6E6</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#E6E6E6</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="textAlign">center</property>
+                        <cell id="1491">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">2</property>
+                            <property name="borderBottomColor">#E6E6E6</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <label id="1492">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="color">black</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">ลำดับ</text-property>
+                            </label>
+                        </cell>
+                        <cell id="1493">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">2</property>
+                            <property name="borderBottomColor">#E6E6E6</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <label id="1494">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">รายระเอียด</text-property>
+                            </label>
+                        </cell>
+                        <cell id="1495">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">2</property>
+                            <property name="borderBottomColor">#E6E6E6</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                        </cell>
+                        <cell id="1496">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">2</property>
+                            <property name="borderBottomColor">#E6E6E6</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <label id="1497">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">รวม</text-property>
+                            </label>
+                            <label id="1498">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">(100)</text-property>
+                            </label>
+                        </cell>
+                        <cell id="1499">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="borderBottomColor">#E6E6E6</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-data id="1500">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="dataSet">param_bonus_period_name</property>
+                                <list-property name="boundDataColumns">
                                     <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["s_amount"]</expression>
+                                        <property name="name">salary_period_desc</property>
+                                        <text-property name="displayName">salary_period_desc</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["salary_period_desc"]</expression>
+                                        <property name="dataType">string</property>
                                     </structure>
                                 </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">sum_b_amount</property>
-                                <text-property name="displayName">sum_b_amount</text-property>
-                                <property name="dataType">float</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>Department</value>
-                                </simple-property-list>
-                                <property name="aggregateFunction">SUM</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["b_amount"]</expression>
-                                    </structure>
-                                </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                        </list-property>
-                        <column id="1350">
-                            <property name="width">7%</property>
-                        </column>
-                        <column id="1351">
-                            <property name="width">29%</property>
-                        </column>
-                        <column id="1352"/>
-                        <column id="1353">
-                            <property name="width">6%</property>
-                        </column>
-                        <column id="1354">
-                            <property name="width">12%</property>
-                        </column>
-                        <column id="1355">
-                            <property name="width">12%</property>
-                        </column>
-                        <column id="1356">
-                            <property name="width">12%</property>
-                        </column>
-                        <group id="1357">
-                            <property name="groupName">Department</property>
-                            <expression name="keyExpr" type="javascript">row["department_name"]</expression>
-                            <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["department_name"]</expression>
-                            </structure>
-                            <property name="hideDetail">false</property>
-                            <method name="onCreate"><![CDATA[rowCount=0;]]></method>
-                            <property name="pageBreakAfter">always</property>
-                            <header>
-                                <row id="1476">
-                                    <property name="borderBottomColor">#FFFFFF</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftColor">#FFFFFF</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightColor">#FFFFFF</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopColor">#FFFFFF</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <property name="textAlign">left</property>
-                                    <cell id="1477">
-                                        <property name="colSpan">7</property>
-                                        <property name="rowSpan">1</property>
-                                        <image id="584">
-                                            <property name="masterPage">Simple MasterPage</property>
-                                            <property name="pageBreakAfter">auto</property>
-                                            <property name="height">30px</property>
-                                            <property name="width">90px</property>
-                                            <property name="source">embed</property>
-                                            <property name="imageName">logoTYW.png</property>
-                                        </image>
-                                    </cell>
-                                </row>
-                                <row id="1467">
-                                    <property name="borderBottomColor">#FFFFFF</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftColor">#FFFFFF</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightColor">#FFFFFF</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopColor">#FFFFFF</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <property name="textAlign">center</property>
-                                    <cell id="1468">
-                                        <property name="colSpan">7</property>
-                                        <property name="rowSpan">1</property>
-                                        <label id="627">
-                                            <property name="backgroundColor">#FFCC00</property>
+                                <expression name="valueExpr">"โบนัสจริงประจำปี "+(params["year"].value+543)+" "+row["salary_period_desc"]</expression>
+                                <property name="contentType">html</property>
+                            </text-data>
+                        </cell>
+                    </row>
+                    <row id="1501">
+                        <property name="backgroundColor">#FFD940</property>
+                        <property name="borderBottomColor">#E6E6E6</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#E6E6E6</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="textAlign">center</property>
+                        <cell id="1502">
+                            <property name="borderBottomColor">#E6E6E6</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <label id="1503">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">เงินเดือน</text-property>
+                            </label>
+                        </cell>
+                        <cell id="1504">
+                            <property name="borderBottomColor">#E6E6E6</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <label id="1505">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">เดือนโบนัส</text-property>
+                            </label>
+                        </cell>
+                        <cell id="1506">
+                            <property name="borderBottomColor">#E6E6E6</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <label id="1507">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">ยอดโบนัส</text-property>
+                            </label>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="1508">
+                        <property name="backgroundColor">#FFF1B9</property>
+                        <property name="borderBottomColor">#E6E6E6</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#E6E6E6</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <cell id="1509">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <label id="1510">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="color">black</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">รวม</text-property>
+                            </label>
+                        </cell>
+                        <cell id="1511">
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                        </cell>
+                        <cell id="1512">
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1513">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="paddingRight">2pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Fixed</property>
+                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                    <property name="locale">th_TH</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">sum_s_amount</property>
+                            </data>
+                        </cell>
+                        <cell id="1514">
+                            <property name="borderRightColor">#E6E6E6</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                        </cell>
+                        <cell id="1515">
+                            <data id="1516">
+                                <property name="fontFamily">"Angsana New"</property>
+                                <property name="fontSize">14pt</property>
+                                <property name="paddingRight">2pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Fixed</property>
+                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                    <property name="locale">th_TH</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">sum_b_amount</property>
+                            </data>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="1517">
+                    <method name="onCreate"><![CDATA[rowCount++;]]></method>
+                    <property name="borderBottomColor">#E6E6E6</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#E6E6E6</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#E6E6E6</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="height">1.583%</property>
+                    <cell id="1518">
+                        <property name="fontFamily">"Angsana New"</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="textAlign">left</property>
+                        <text-data id="1519">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="paddingLeft">2pt</property>
+                            <expression name="valueExpr">rowCount;</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
+                    </cell>
+                    <cell id="1520">
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1521">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="resultSetColumn">txt_emp_code</property>
+                        </data>
+                        <data id="1522">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="resultSetColumn">emp_name</property>
+                        </data>
+                        <data id="1523">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="resultSetColumn">position_name</property>
+                        </data>
+                        <data id="1524">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="resultSetColumn">working_start_date</property>
+                        </data>
+                        <data id="1525">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="resultSetColumn">age_of_employees</property>
+                        </data>
+                    </cell>
+                    <cell id="1526">
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <table id="1527">
+                            <property name="dataSet">report_list_sub_data</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">param_1</property>
+                                    <simple-property-list name="expression">
+                                        <value type="javascript">row["emp_result_id"]</value>
+                                    </simple-property-list>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">structure_name</property>
+                                    <text-property name="displayName">structure_name</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["structure_name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">weigh_score</property>
+                                    <text-property name="displayName">weigh_score</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["weigh_score"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
+                            <column id="1533"/>
+                            <column id="1534">
+                                <property name="width">20%</property>
+                            </column>
+                            <detail>
+                                <row id="1528">
+                                    <cell id="1529">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <data id="1530">
                                             <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">18pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="color">black</property>
-                                            <property name="paddingLeft">1pt</property>
-                                            <property name="textAlign">center</property>
-                                            <property name="pageBreakAfter">auto</property>
-                                            <property name="pageBreakBefore">auto</property>
-                                            <property name="pageBreakInside">avoid</property>
-                                            <text-property name="text">รายงานคะแนนประเมินผลการจ่ายโบนัส</text-property>
-                                        </label>
-                                    </cell>
-                                </row>
-                                <row id="1358">
-                                    <property name="textAlign">center</property>
-                                    <cell id="1359">
-                                        <property name="colSpan">7</property>
-                                        <property name="rowSpan">1</property>
-                                        <property name="paddingTop">20pt</property>
-                                        <data id="1374">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">16pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="resultSetColumn">department_name</property>
+                                            <property name="fontSize">14pt</property>
+                                            <property name="paddingLeft">2pt</property>
+                                            <property name="paddingBottom">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="resultSetColumn">structure_name</property>
                                         </data>
                                     </cell>
-                                </row>
-                                <row id="1417">
-                                    <property name="backgroundColor">#FFD940</property>
-                                    <property name="borderLeftColor">#E6E6E6</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopColor">#E6E6E6</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <property name="textAlign">center</property>
-                                    <cell id="1418">
-                                        <property name="colSpan">1</property>
-                                        <property name="rowSpan">2</property>
-                                        <property name="borderBottomColor">#E6E6E6</property>
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <label id="1425">
+                                    <cell id="1531">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <data id="1532">
                                             <property name="fontFamily">"Angsana New"</property>
                                             <property name="fontSize">14pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="color">black</property>
-                                            <property name="textAlign">center</property>
-                                            <text-property name="text">ลำดับ</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="1419">
-                                        <property name="colSpan">1</property>
-                                        <property name="rowSpan">2</property>
-                                        <property name="borderBottomColor">#E6E6E6</property>
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <label id="1426">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="textAlign">center</property>
-                                            <text-property name="text">รายระเอียด</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="1420">
-                                        <property name="colSpan">1</property>
-                                        <property name="rowSpan">2</property>
-                                        <property name="borderBottomColor">#E6E6E6</property>
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                    </cell>
-                                    <cell id="1421">
-                                        <property name="colSpan">1</property>
-                                        <property name="rowSpan">2</property>
-                                        <property name="borderBottomColor">#E6E6E6</property>
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <label id="1427">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="textAlign">center</property>
-                                            <text-property name="text">รวม (100)</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="1422">
-                                        <property name="colSpan">3</property>
-                                        <property name="rowSpan">1</property>
-                                        <property name="borderBottomColor">#E6E6E6</property>
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <text-data id="1432">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="dataSet">param_bonus_period_name</property>
-                                            <list-property name="boundDataColumns">
-                                                <structure>
-                                                    <property name="name">salary_period_desc</property>
-                                                    <text-property name="displayName">salary_period_desc</text-property>
-                                                    <expression name="expression" type="javascript">dataSetRow["salary_period_desc"]</expression>
-                                                    <property name="dataType">string</property>
-                                                </structure>
-                                            </list-property>
-                                            <expression name="valueExpr">"โบนัสจริงประจำปี "+(params["year"].value+543)+" "+row["salary_period_desc"]</expression>
-                                            <property name="contentType">html</property>
-                                        </text-data>
-                                    </cell>
-                                </row>
-                                <row id="1392">
-                                    <property name="backgroundColor">#FFD940</property>
-                                    <property name="borderBottomColor">#E6E6E6</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftColor">#E6E6E6</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="textAlign">center</property>
-                                    <cell id="1397">
-                                        <property name="borderBottomColor">#E6E6E6</property>
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <label id="1428">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="textAlign">center</property>
-                                            <text-property name="text">เงินเดือน</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="1398">
-                                        <property name="borderBottomColor">#E6E6E6</property>
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <label id="1429">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="textAlign">center</property>
-                                            <text-property name="text">เดือนโบนัส</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="1399">
-                                        <property name="borderBottomColor">#E6E6E6</property>
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <label id="1430">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="textAlign">center</property>
-                                            <text-property name="text">ยอดโบนัส</text-property>
-                                        </label>
-                                    </cell>
-                                </row>
-                            </header>
-                            <footer>
-                                <row id="1366">
-                                    <property name="backgroundColor">#FFF1B9</property>
-                                    <property name="borderBottomColor">#E6E6E6</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftColor">#E6E6E6</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <cell id="1367">
-                                        <property name="colSpan">3</property>
-                                        <property name="rowSpan">1</property>
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <label id="1450">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="color">black</property>
-                                            <property name="textAlign">center</property>
-                                            <text-property name="text">รวม</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="1370">
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                    </cell>
-                                    <cell id="1371">
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <data id="1447">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
+                                            <property name="paddingBottom">1pt</property>
                                             <property name="paddingRight">2pt</property>
                                             <structure name="numberFormat">
                                                 <property name="category">Fixed</property>
-                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
-                                                <property name="locale">th_TH</property>
+                                                <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
                                             </structure>
                                             <property name="textAlign">right</property>
-                                            <property name="resultSetColumn">sum_s_amount</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="1372">
-                                        <property name="borderRightColor">#E6E6E6</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                    </cell>
-                                    <cell id="1373">
-                                        <data id="1449">
-                                            <property name="fontFamily">"Angsana New"</property>
-                                            <property name="fontSize">14pt</property>
-                                            <property name="paddingRight">2pt</property>
-                                            <structure name="numberFormat">
-                                                <property name="category">Fixed</property>
-                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
-                                                <property name="locale">th_TH</property>
-                                            </structure>
-                                            <property name="textAlign">right</property>
-                                            <property name="resultSetColumn">sum_b_amount</property>
+                                            <property name="resultSetColumn">weigh_score</property>
                                         </data>
                                     </cell>
                                 </row>
-                            </footer>
-                        </group>
-                        <detail>
-                            <row id="1334">
-                                <method name="onCreate"><![CDATA[rowCount++;]]></method>
-                                <property name="borderBottomColor">#E6E6E6</property>
-                                <property name="borderBottomStyle">solid</property>
-                                <property name="borderBottomWidth">thin</property>
-                                <property name="borderLeftColor">#E6E6E6</property>
-                                <property name="borderLeftStyle">solid</property>
-                                <property name="borderLeftWidth">thin</property>
-                                <property name="borderRightColor">#E6E6E6</property>
-                                <property name="borderRightStyle">solid</property>
-                                <property name="borderRightWidth">thin</property>
-                                <property name="height">1.583%</property>
-                                <cell id="1335">
-                                    <property name="fontFamily">"Angsana New"</property>
-                                    <property name="fontSize">14pt</property>
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="paddingLeft">2pt</property>
-                                    <property name="textAlign">left</property>
-                                    <text-data id="616">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="paddingLeft">2pt</property>
-                                        <expression name="valueExpr">rowCount;</expression>
-                                        <property name="contentType">html</property>
-                                    </text-data>
-                                </cell>
-                                <cell id="1336">
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <data id="1436">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingLeft">2pt</property>
-                                        <property name="paddingBottom">2pt</property>
-                                        <property name="resultSetColumn">txt_emp_code</property>
-                                    </data>
-                                    <data id="1437">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingLeft">2pt</property>
-                                        <property name="paddingBottom">2pt</property>
-                                        <property name="resultSetColumn">emp_name</property>
-                                    </data>
-                                    <data id="1438">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingLeft">2pt</property>
-                                        <property name="paddingBottom">2pt</property>
-                                        <property name="resultSetColumn">position_name</property>
-                                    </data>
-                                    <data id="1439">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingLeft">2pt</property>
-                                        <property name="paddingBottom">2pt</property>
-                                        <property name="resultSetColumn">working_start_date</property>
-                                    </data>
-                                    <data id="1440">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingLeft">2pt</property>
-                                        <property name="paddingBottom">2pt</property>
-                                        <property name="resultSetColumn">age_of_employees</property>
-                                    </data>
-                                </cell>
-                                <cell id="1337">
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <table id="1451">
-                                        <property name="dataSet">report_list_sub_data</property>
-                                        <list-property name="paramBindings">
-                                            <structure>
-                                                <property name="paramName">param_1</property>
-                                                <simple-property-list name="expression">
-                                                    <value type="javascript">row["emp_result_id"]</value>
-                                                </simple-property-list>
-                                            </structure>
-                                        </list-property>
-                                        <list-property name="boundDataColumns">
-                                            <structure>
-                                                <property name="name">structure_name</property>
-                                                <text-property name="displayName">structure_name</text-property>
-                                                <expression name="expression" type="javascript">dataSetRow["structure_name"]</expression>
-                                                <property name="dataType">string</property>
-                                            </structure>
-                                            <structure>
-                                                <property name="name">weigh_score</property>
-                                                <text-property name="displayName">weigh_score</text-property>
-                                                <expression name="expression" type="javascript">dataSetRow["weigh_score"]</expression>
-                                                <property name="dataType">decimal</property>
-                                            </structure>
-                                        </list-property>
-                                        <column id="1465"/>
-                                        <column id="1466">
-                                            <property name="width">20%</property>
-                                        </column>
-                                        <detail>
-                                            <row id="1457">
-                                                <cell id="1458">
-                                                    <property name="paddingTop">0pt</property>
-                                                    <property name="paddingLeft">0pt</property>
-                                                    <property name="paddingRight">1pt</property>
-                                                    <data id="1459">
-                                                        <property name="fontFamily">"Angsana New"</property>
-                                                        <property name="fontSize">14pt</property>
-                                                        <property name="paddingLeft">2pt</property>
-                                                        <property name="paddingBottom">1pt</property>
-                                                        <property name="textAlign">left</property>
-                                                        <property name="resultSetColumn">structure_name</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="1460">
-                                                    <property name="paddingTop">0pt</property>
-                                                    <property name="paddingRight">0pt</property>
-                                                    <data id="1461">
-                                                        <property name="fontFamily">"Angsana New"</property>
-                                                        <property name="fontSize">14pt</property>
-                                                        <property name="paddingBottom">1pt</property>
-                                                        <property name="paddingRight">2pt</property>
-                                                        <structure name="numberFormat">
-                                                            <property name="category">Fixed</property>
-                                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
-                                                        </structure>
-                                                        <property name="textAlign">right</property>
-                                                        <property name="resultSetColumn">weigh_score</property>
-                                                    </data>
-                                                </cell>
-                                            </row>
-                                        </detail>
-                                    </table>
-                                </cell>
-                                <cell id="1338">
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <data id="1441">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingRight">2pt</property>
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">result_score</property>
-                                    </data>
-                                </cell>
-                                <cell id="1339">
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <data id="1442">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingRight">2pt</property>
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
-                                            <property name="locale">th_TH</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">s_amount</property>
-                                    </data>
-                                </cell>
-                                <cell id="1340">
-                                    <property name="borderRightColor">#E6E6E6</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <data id="1443">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingRight">2pt</property>
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
-                                            <property name="locale">th_TH</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">b_rate</property>
-                                    </data>
-                                </cell>
-                                <cell id="1341">
-                                    <data id="1444">
-                                        <property name="fontFamily">"Angsana New"</property>
-                                        <property name="fontSize">14pt</property>
-                                        <property name="paddingRight">2pt</property>
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
-                                            <property name="locale">th_TH</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">b_amount</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </detail>
-                    </table>
-                </cell>
-                <cell id="529">
-                    <property name="paddingLeft">50pt</property>
-                    <property name="paddingBottom">1pt</property>
-                </cell>
-            </row>
-        </grid>
+                            </detail>
+                        </table>
+                    </cell>
+                    <cell id="1535">
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1536">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">result_score</property>
+                        </data>
+                    </cell>
+                    <cell id="1537">
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1538">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                <property name="locale">th_TH</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">s_amount</property>
+                        </data>
+                    </cell>
+                    <cell id="1539">
+                        <property name="borderRightColor">#E6E6E6</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1540">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                <property name="locale">th_TH</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">b_rate</property>
+                        </data>
+                    </cell>
+                    <cell id="1541">
+                        <data id="1542">
+                            <property name="fontFamily">"Angsana New"</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                <property name="locale">th_TH</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">b_amount</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
     </body>
     <property name="pageVariables">
         <variable-element name="txtHearder">
